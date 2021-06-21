@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope
+        xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <soap:Body>
+        <GetTransactionViewResponse
+                xmlns="http://tempuri.org/">
+            <GetTransactionViewResult>
+                <Description />
+                <CreatedDate>2021-06-13T13:30:07.9275+03:00</CreatedDate>
+                <UpdateDate>2021-06-13T13:30:07.9275+03:00</UpdateDate>
+                <OwnerSysId>0</OwnerSysId>
+                <SysId>0</SysId>
+                <TranNumber>115166</TranNumber>
+                <OwnerTranNumber>0</OwnerTranNumber>
+                <DeviceTranRference />
+                <TranType>Sale_Tran</TranType>
+                <TranDate>2021-06-13T13:30:04.20875</TranDate>
+                <TranMember>
+                    <Description />
+                    <CreatedDate>2021-06-13T13:30:07.943125+03:00</CreatedDate>
+                    <UpdateDate>2021-06-13T13:30:07.943125+03:00</UpdateDate>
+                    <OwnerSysId>0</OwnerSysId>
+                    <SysId>1181786</SysId>
+                    <Status>ACTIVE</Status>
+                    <Benefits />
+                    <PromoAccums />
+                    <Actions />
+                    <AdditionalContactPersons />
+                    <Comments />
+                    <Name>חבר 1 111</Name>
+                    <ContactData>
+                        <Description />
+                        <CreatedDate>2021-06-13T13:30:07.943125+03:00</CreatedDate>
+                        <UpdateDate>2021-06-13T13:30:07.943125+03:00</UpdateDate>
+                        <OwnerSysId>0</OwnerSysId>
+                        <SysId>0</SysId>
+                        <Comments />
+                        <City />
+                        <Street />
+                        <House />
+                        <ZipCode />
+                        <Phone1 />
+                        <Phone2 />
+                        <Fax />
+                        <PostCell />
+                        <CellPhone />
+                        <EMail />
+                        <ContactPersonName />
+                    </ContactData>
+                    <Id />
+                    <PoolId>0</PoolId>
+                    <GroupId>0</GroupId>
+                    <LevelId>0</LevelId>
+                    <BranchId>0</BranchId>
+                    <IfSendPost>false</IfSendPost>
+                    <IfSendSms>false</IfSendSms>
+                    <IfSendEmail>false</IfSendEmail>
+                    <CardStatus>Acitive</CardStatus>
+                    <ExpDate>0001-01-01T00:00:00</ExpDate>
+                    <UpdateExpDayDate>0001-01-01T00:00:00</UpdateExpDayDate>
+                    <CardNumber>10000001</CardNumber>
+                    <MemberType>Regular</MemberType>
+                    <GroupName />
+                    <BranchName />
+                    <FirstName>חבר 1</FirstName>
+                    <LastName>111</LastName>
+                    <POIComments />
+                    <IsNoExpDate>false</IsNoExpDate>
+                    <GroupPercentDiscount>0</GroupPercentDiscount>
+                    <BirthDayDate>0001-01-01T00:00:00</BirthDayDate>
+                    <WeddingDayDate>0001-01-01T00:00:00</WeddingDayDate>
+                    <ApplicationDownloadDate>0001-01-01T00:00:00</ApplicationDownloadDate>
+                    <Gender>Unknown</Gender>
+                    <FamilyStatus>Unknown</FamilyStatus>
+                    <DefaultBenefitAmount>0</DefaultBenefitAmount>
+                    <LastSaleDate>0001-01-01T00:00:00</LastSaleDate>
+                    <SaleTotal>0</SaleTotal>
+                    <TotalVisits>0</TotalVisits>
+                    <IsAllowShowNegativePoints>false</IsAllowShowNegativePoints>
+                    <SalesCounter>0</SalesCounter>
+                    <OpenAmount>0</OpenAmount>
+                    <AdditionalFields />
+                </TranMember>
+                <OperatorNumber>pos1</OperatorNumber>
+                <SellerNumber />
+                <TranStatus>Complete</TranStatus>
+                <DeviceSysId>438</DeviceSysId>
+                <PositiveCashBack>46.8</PositiveCashBack>
+                <NegativeCashBack>0</NegativeCashBack>
+                <PaidTotal>208</PaidTotal>
+                <DeviceType>DT_POS</DeviceType>
+                <Items>
+                    <TranViewItemData>
+                        <LineNumber>1</LineNumber>
+                        <ItemCode>5</ItemCode>
+                        <ItemBarCode />
+                        <Description>פריט 5</Description>
+                        <Amount>80</Amount>
+                        <BruttoAmount>80</BruttoAmount>
+                        <Price>80</Price>
+                        <Quantity>1</Quantity>
+                        <Discount>0</Discount>
+                        <PromoCode />
+                    </TranViewItemData>
+                    <TranViewItemData>
+                        <LineNumber>2</LineNumber>
+                        <ItemCode>6</ItemCode>
+                        <ItemBarCode />
+                        <Description>פריט 6</Description>
+                        <Amount>68</Amount>
+                        <BruttoAmount>78</BruttoAmount>
+                        <Price>78</Price>
+                        <Quantity>1</Quantity>
+                        <Discount>1000</Discount>
+                        <PromoCode />
+                    </TranViewItemData>
+                    <TranViewItemData>
+                        <LineNumber>3</LineNumber>
+                        <ItemCode>1</ItemCode>
+                        <ItemBarCode />
+                        <Description>פריט 1</Description>
+                        <Amount>50</Amount>
+                        <BruttoAmount>50</BruttoAmount>
+                        <Price>50</Price>
+                        <Quantity>1</Quantity>
+                        <Discount>0</Discount>
+                        <PromoCode />
+                    </TranViewItemData>
+                </Items>
+                <Discounts>
+                    <TranViewDiscountData>
+                        <Description>test 3</Description>
+                        <Amount>11.8</Amount>
+                        <PromoType>NO_TYPE</PromoType>
+                        <PromoID>1717</PromoID>
+                    </TranViewDiscountData>
+                    <TranViewDiscountData>
+                        <Description>test 9.4</Description>
+                        <Amount>10</Amount>
+                        <PromoType>NO_TYPE</PromoType>
+                        <PromoID>1738</PromoID>
+                    </TranViewDiscountData>
+                    <TranViewDiscountData>
+                        <Description>test 9.7</Description>
+                        <Amount>10</Amount>
+                        <PromoType>NO_TYPE</PromoType>
+                        <PromoID>1754</PromoID>
+                    </TranViewDiscountData>
+                    <TranViewDiscountData>
+                        <Description> test 43</Description>
+                        <Amount>5</Amount>
+                        <PromoType>NO_TYPE</PromoType>
+                        <PromoID>1759</PromoID>
+                    </TranViewDiscountData>
+                    <TranViewDiscountData>
+                        <Description>test 9.9</Description>
+                        <Amount>10</Amount>
+                        <PromoType>NO_TYPE</PromoType>
+                        <PromoID>1771</PromoID>
+                    </TranViewDiscountData>
+                </Discounts>
+            </GetTransactionViewResult>
+            <errCode>NoError</errCode>
+        </GetTransactionViewResponse>
+    </soap:Body>
+</soap:Envelope>

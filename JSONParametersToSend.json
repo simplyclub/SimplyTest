@@ -1,0 +1,757 @@
+{
+  "array": [
+    {
+      "TestName": "deal 1",
+      "User": "pos1",
+      "Password": "1pos",
+      "CardNumber": "10000001",
+      "sumAccum":[
+        {"269": "41.8"},
+        {"270": "5.0"}
+
+      ],
+      "TranItems": [
+        {
+          "CategoryCode": "",
+          "PromoCode": "",
+          "GrossPrice": 0,
+          "Cost": 0,
+          "ItemDescription": "פריט 5",
+          "Department": "",
+          "SuggestedPromoId": 0,
+          "PLUClassificationCode3": "",
+          "PLUClassificationCode2": "741258",
+          "PLUClassificationCode1": "",
+          "TrxID": 1,
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ],
+          "Amount": 80,
+          "Quantity": 1,
+          "InputFlags": 2,
+          "Vendor": "",
+          "Code": 5,
+          "SubDept3": "",
+          "SubDept2": "",
+          "SubDept1": "",
+          "UOM": 0,
+          "SysDiscount": 0,
+          "Price": "80",
+          "ItemBarcode": "",
+          "Manufacture": ""
+        },
+        {
+          "CategoryCode": "",
+          "PromoCode": "",
+          "GrossPrice": 0,
+          "Cost": 0,
+          "ItemDescription": "פריט 6",
+          "Department": "",
+          "SuggestedPromoId": 0,
+          "PLUClassificationCode3": "",
+          "PLUClassificationCode2": "741258",
+          "PLUClassificationCode1": "",
+          "TrxID": 2,
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ],
+          "Amount": 78,
+          "Quantity": 1,
+          "InputFlags": 2,
+          "Vendor": "",
+          "Code": 6,
+          "SubDept3": "",
+          "SubDept2": "",
+          "SubDept1": "",
+          "UOM": 0,
+          "SysDiscount": 10,
+          "Price": "78",
+          "ItemBarcode": "",
+          "Manufacture": ""
+        },
+        {
+          "CategoryCode": "",
+          "PromoCode": "",
+          "GrossPrice": 0,
+          "Cost": 0,
+          "ItemDescription": "פריט 1",
+          "Department": "",
+          "SuggestedPromoId": 0,
+          "PLUClassificationCode3": "",
+          "PLUClassificationCode2": "741258",
+          "PLUClassificationCode1": "",
+          "TrxID": 3,
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ],
+          "Amount": 50,
+          "Quantity": 1,
+          "InputFlags": 0,
+          "Vendor": "",
+          "Code": 1,
+          "SubDept3": "",
+          "SubDept2": "",
+          "SubDept1": "",
+          "UOM": 0,
+          "SysDiscount": 0,
+          "Price": "50",
+          "ItemBarcode": "",
+          "Manufacture": ""
+        }
+      ],
+      "Member": [
+        {
+          "GroupName": "קבוצה א",
+          "FirstName": "חבר 1",
+          "LastName": "111",
+          "fieldId": 17,
+          "fieldValue": "10000001",
+          "AllAccums": [
+            {
+              "BenefitName": "נקודות",
+              "BenefitValue": "77065",
+              "BenefitType": 0,
+              "AccID": "269"
+            },
+            {
+              "BenefitName": "כרטיסייה",
+              "BenefitValue": "11097",
+              "BenefitType": 4,
+              "AccID": "270"
+            },
+            {
+              "BenefitName": "קופון זכאות לכולם",
+              "BenefitValue": "2",
+              "BenefitType": 1,
+              "AccID": "271"
+            },
+            {
+              "BenefitName": "קופון זכאות לפי הנפקה",
+              "BenefitValue": "5",
+              "BenefitType": 3,
+              "AccID": "272"
+            },
+            {
+              "BenefitName": "שובר מתנה",
+              "BenefitValue": "868",
+              "BenefitType": 2,
+              "AccID": "273"
+            }
+          ]
+        }
+      ],
+      "Response": [
+        {
+          "CashBackDiscounts": [
+            {
+              "Description": "test 17",
+              "Amount": 19.8,
+              "IsAuto": "false",
+              "PromoId": "1737",
+              "AccumId": 269
+
+            },
+            {
+              "Description": "test 50",
+              "Amount": 1.0,
+              "IsAuto": "false",
+              "PromoId": "1760",
+              "AccumId": 273
+            },
+            {
+              "Description": "test 51",
+              "Amount": 20.0,
+              "IsAuto": "false",
+              "PromoId": "1761",
+              "AccumId": 273
+            },
+            {
+              "Description": "test 54",
+              "Amount": 5.0,
+              "IsAuto": "false",
+              "PromoId": "1783",
+              "AccumId": 273
+            }
+          ]
+        },
+        {  "TotalDiscounts": [
+            {
+              "Description": "test 36",
+              "Amount": 20.0,
+              "IsAuto": "false",
+              "PromoId": "1784",
+              "AllItemsDiscountPercent": 0.0,
+              "AccumId": 270
+            },
+            {
+              "Description": "test 37",
+              "Amount": 15.0,
+              "IsAuto": "false",
+              "PromoId": "1785",
+              "AllItemsDiscountPercent": 0.0,
+              "AccumId": 270
+            },
+            {
+              "Description": "test 38",
+              "Amount": 20.0,
+              "IsAuto": "false",
+              "PromoId": "1786",
+              "AllItemsDiscountPercent": 0.0,
+              "AccumId": 271
+            },
+            {
+              "Description": "test 39",
+              "Amount": 11.8,
+              "IsAuto": "false",
+              "PromoId": "1787",
+              "AllItemsDiscountPercent": 10.0,
+              "AccumId": 271
+
+            },
+            {
+              "Description": "test 39.1",
+              "Amount": 138.0,
+              "IsAuto": "false",
+              "PromoId": "1788",
+              "AllItemsDiscountPercent": 0.0,
+              "AccumId": 271
+            },
+            {
+              "Description": "test 39.2",
+              "Amount": 20.0,
+              "IsAuto": "false",
+              "PromoId": "1789",
+              "AllItemsDiscountPercent": 0.0,
+              "AccumId": 272
+            },
+            {
+              "Description": "test 39.3",
+              "Amount": 19.8,
+              "IsAuto": "false",
+              "PromoId": "1790",
+              "AllItemsDiscountPercent": 10.0,
+              "AccumId": 271
+            },
+            {
+              "Description": "test 39.4",
+              "Amount": 10.0,
+              "IsAuto": "false",
+              "PromoId": "1791",
+              "AllItemsDiscountPercent": 0.0,
+              "AccumId": 271
+            }
+          ]
+
+        },
+        {
+          "Accumulates":[
+            {
+              "Name":"test 3",
+              "Amount" : 11.8,
+              "PromoID" : "1717",
+              "AccumId": 269
+            },
+            {
+              "Name":"test 9.4",
+              "Amount" : 10,
+              "PromoID" : "1738",
+              "AccumId": 269
+            },
+            {
+              "Name":"test 9.7",
+              "Amount" : 10,
+              "PromoID" : "1754",
+              "AccumId": 269
+            },
+            {
+              "Name":"test 43",
+              "Amount" : 5,
+              "PromoID" : "1759",
+              "AccumId": 270
+            },
+            {
+              "Name":"test 9.9",
+              "Amount" : 10,
+              "PromoID" : "1771",
+              "AccumId": 269
+            }
+
+          ]
+        }
+
+
+      ],
+      "DealsToUse" : [
+        {
+          "PromoID": "1737",
+          "Amount" :"19.8",
+          "POSAmount": "0",
+          "Quantity" : "1",
+          "DiscountType": "1",
+          "ReferenceCode": "",
+          "AccumId": "269",
+          "Burned": ""
+        },
+        {
+          "PromoID": "1784",
+          "Amount": "20.0",
+          "POSAmount": "",
+          "Quantity": "1",
+          "DiscountType": "0",
+          "ReferenceCode": "",
+          "AccumId": "270",
+          "Burned": "10"
+        }
+
+      ]
+
+    },
+    {
+      "TestName": "deal 2",
+      "User": "pos1",
+      "Password": "1pos",
+      "CardNumber": "10000001",
+      "sumAccum":[
+
+        {"269": "53.6"},
+        {"270": "35.0"}
+      ],
+      "TranItems": [
+        {
+          "TrxID": 1,
+          "Code": 5,
+          "Price": "80",
+          "GrossPrice": 0,
+          "Amount": 80,
+          "Quantity": 1,
+          "UOM": 0,
+          "Department": "",
+          "SubDept1": "",
+          "SubDept2": "",
+          "SubDept3": "",
+          "Vendor": "",
+          "Manufacture": "",
+          "Cost": 0,
+          "SysDiscount": 10,
+          "ItemDescription": "פריט 5",
+          "ItemBarcode": "",
+          "SuggestedPromoId": 0,
+          "PromoCode": "",
+          "InputFlags": 2,
+          "PLUClassificationCode1": "",
+          "PLUClassificationCode2": "741258",
+          "PLUClassificationCode3": "",
+          "CategoryCode": "",
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ]
+        },
+        {
+          "TrxID": 2,
+          "Code": 6,
+          "Price": "78",
+          "GrossPrice": 0,
+          "Amount": 78,
+          "Quantity": 1,
+          "UOM": 0,
+          "Department": "",
+          "SubDept1": "",
+          "SubDept2": "",
+          "SubDept3": "",
+          "Vendor": "",
+          "Manufacture": "",
+          "Cost": 0,
+          "SysDiscount": 10,
+          "ItemDescription": "פריט 6",
+          "ItemBarcode": "",
+          "SuggestedPromoId": 0,
+          "PromoCode": "",
+          "InputFlags": 2,
+          "PLUClassificationCode1": "",
+          "PLUClassificationCode2": "741258",
+          "PLUClassificationCode3": "",
+          "CategoryCode": "",
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ]
+        },
+        {
+          "TrxID": 3,
+          "Code": 1,
+          "Price": "50",
+          "GrossPrice": 0,
+          "Amount": 50,
+          "Quantity": 1,
+          "UOM": 0,
+          "Department": "",
+          "SubDept1": "",
+          "SubDept2": "",
+          "SubDept3": "",
+          "Vendor": "",
+          "Manufacture": "",
+          "Cost": 0,
+          "SysDiscount": 0,
+          "ItemDescription": "פריט 1",
+          "ItemBarcode": "",
+          "SuggestedPromoId": 0,
+          "PromoCode": "",
+          "InputFlags": 0,
+          "PLUClassificationCode1": "",
+          "PLUClassificationCode2": "741258",
+          "PLUClassificationCode3": "",
+          "CategoryCode": "",
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ]
+        },
+        {
+          "TrxID": 4,
+          "Code": 5,
+          "Price": "80",
+          "GrossPrice": 0,
+          "Amount": 80,
+          "Quantity": 1,
+          "UOM": 0,
+          "Department": "",
+          "SubDept1": "",
+          "SubDept2": "",
+          "SubDept3": "",
+          "Vendor": "",
+          "Manufacture": "",
+          "Cost": 0,
+          "SysDiscount": 10,
+          "ItemDescription": "פריט 5",
+          "ItemBarcode": "",
+          "SuggestedPromoId": 0,
+          "PromoCode": "",
+          "InputFlags": 2,
+          "PLUClassificationCode1": "",
+          "PLUClassificationCode2": "741258",
+          "PLUClassificationCode3": "",
+          "CategoryCode": "",
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ]
+        },
+        {
+          "TrxID": 5,
+          "Code": 6,
+          "Price": "78",
+          "GrossPrice": 0,
+          "Amount": 78,
+          "Quantity": 1,
+          "UOM": 0,
+          "Department": "",
+          "SubDept1": "",
+          "SubDept2": "",
+          "SubDept3": "",
+          "Vendor": "",
+          "Manufacture": "",
+          "Cost": 0,
+          "SysDiscount": 10,
+          "ItemDescription": "פריט 6",
+          "ItemBarcode": "",
+          "SuggestedPromoId": 0,
+          "PromoCode": "",
+          "InputFlags": 2,
+          "PLUClassificationCode1": "",
+          "PLUClassificationCode2": "741258",
+          "PLUClassificationCode3": "",
+          "CategoryCode": "",
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ]
+        },
+        {
+          "TrxID": 6,
+          "Code": 1,
+          "Price": "50",
+          "GrossPrice": 0,
+          "Amount": 50,
+          "Quantity": 1,
+          "UOM": 0,
+          "Department": "",
+          "SubDept1": "",
+          "SubDept2": "",
+          "SubDept3": "",
+          "Vendor": "",
+          "Manufacture": "",
+          "Cost": 0,
+          "SysDiscount": 0,
+          "ItemDescription": "פריט 1",
+          "ItemBarcode": "",
+          "SuggestedPromoId": 0,
+          "PromoCode": "",
+          "InputFlags": 0,
+          "PLUClassificationCode1": "",
+          "PLUClassificationCode2": "741258",
+          "PLUClassificationCode3": "",
+          "CategoryCode": "",
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ]
+        }
+      ],
+      "Member": [
+        {
+          "GroupName": "קבוצה א",
+          "FirstName": "חבר 1",
+          "LastName": "111",
+          "fieldId": 17,
+          "fieldValue": "10000001",
+          "AllAccums": [
+            {
+              "BenefitName": "נקודות",
+              "BenefitValue": "77065",
+              "BenefitType": 0,
+              "AccID": "269"
+            },
+            {
+              "BenefitName": "כרטיסייה",
+              "BenefitValue": "11097",
+              "BenefitType": 4,
+              "AccID": "270"
+            },
+            {
+              "BenefitName": "קופון זכאות לכולם",
+              "BenefitValue": "2",
+              "BenefitType": 1,
+              "AccID": "271"
+            },
+            {
+              "BenefitName": "קופון זכאות לפי הנפקה",
+              "BenefitValue": "5",
+              "BenefitType": 3,
+              "AccID": "272"
+            },
+            {
+              "BenefitName": "שובר מתנה",
+              "BenefitValue": "868",
+              "BenefitType": 2,
+              "AccID": "273"
+            }
+          ]
+        }
+      ],
+      "Response": [
+        {
+          "CashBackDiscounts": [
+            {
+              "Description": "test 16",
+              "Amount": 188.0,
+              "IsAuto": "false",
+              "PromoId": "1730",
+              "AccumId": 269
+            },
+            {
+              "Description": "test 50",
+              "Amount": 1.0,
+              "IsAuto": "false",
+              "PromoId": "1760",
+              "AccumId": 273
+            },
+            {
+              "Description": "test 51",
+              "Amount": 40.0,
+              "IsAuto": "false",
+              "PromoId": "1761",
+              "AccumId": 273
+            },
+            {
+              "Description": "test 52",
+              "Amount": 50.0,
+              "IsAuto": "false",
+              "PromoId": "1762",
+              "AccumId": 273
+            },{
+              "Description": "test 54",
+              "Amount": 5.0,
+              "IsAuto": "false",
+              "PromoId": "1783",
+              "AccumId": 273
+            }
+          ]
+        },
+        {
+          "TotalDiscounts": [
+            {
+              "Description": "test 36",
+              "Amount": 20.0,
+              "IsAuto": "false",
+              "PromoId": "1784",
+              "AllItemsDiscountPercent": 0.0,
+              "AccumId": 270
+            },
+            {
+              "Description": "test 37",
+              "Amount": 15.0,
+              "IsAuto": "false",
+              "PromoId": "1785",
+              "AllItemsDiscountPercent": 0.0,
+              "AccumId": 270
+
+            },
+            {
+              "Description": "test 38",
+              "Amount": 20.0,
+              "IsAuto": "false",
+              "PromoId": "1786",
+              "AllItemsDiscountPercent": 0.0,
+              "AccumId": 271
+            },
+            {
+              "Description": "test 39",
+              "Amount": 23.6,
+              "IsAuto": "false",
+              "PromoId": "1787",
+              "AllItemsDiscountPercent": 10.0,
+              "AccumId": 271
+
+            },
+            {
+              "Description": "test 39.1",
+              "Amount": 316.0,
+              "IsAuto": "false",
+              "PromoId": "1788",
+              "AllItemsDiscountPercent": 0.0,
+              "AccumId": 271
+
+            },
+            {
+              "Description": "test 39.2",
+              "Amount": 40.0,
+              "IsAuto": "false",
+              "PromoId": "1789",
+              "AllItemsDiscountPercent": 0.0,
+              "AccumId": 272
+
+            },
+            {
+              "Description": "test 39.3",
+              "Amount": 37.6,
+              "IsAuto": "false",
+              "PromoId": "1790",
+              "AllItemsDiscountPercent": 10.0,
+              "AccumId": 271
+
+            },
+            {
+              "Description": "test 39.4",
+              "Amount": 20.0,
+              "IsAuto": "false",
+              "PromoId": "1791",
+              "AllItemsDiscountPercent": 0.0,
+              "AccumId": 271
+
+            },
+            {
+              "Description": "test 39.6",
+              "Amount": 23.6,
+              "IsAuto": "false",
+              "PromoId": "1793",
+              "AllItemsDiscountPercent": 10.0,
+              "AccumId": 271
+
+            }
+          ]
+        },
+        {
+          "Accumulates":[
+            {
+              "Name":"test 3",
+              "Amount" : 23.6,
+              "PromoID" : "1717",
+              "AccumId": 269
+            },
+            {
+              "Name":"test 9.4",
+              "Amount" : 10,
+              "PromoID" : "1738",
+              "AccumId": 269
+            },
+            {
+              "Name":"test 9.5",
+              "Amount" : 10,
+              "PromoID" : "1739",
+              "AccumId": 269
+            },
+            {
+              "Name":"test 41",
+              "Amount" : 10,
+              "PromoID" : "1748",
+              "AccumId": 270
+            },
+            {
+              "Name":"test 40",
+              "Amount" : 10,
+              "PromoID" : "1753",
+              "AccumId": 270
+            },
+            {
+              "Name":"test 43",
+              "Amount" : 15,
+              "PromoID" : "1759",
+              "AccumId": 270
+            },
+            {
+              "Name":"test 9.9",
+              "Amount" : 10,
+              "PromoID" : "1771",
+              "AccumId": 269
+            }
+          ]
+        }
+      ],
+      "DealsToUse" : [
+        {
+          "PromoID": "",
+          "Amount" :"",
+          "POSAmount": "",
+          "Quantity" : "",
+          "DiscountType": "",
+          "ReferenceCode": "",
+          "AccumId": "",
+          "Burned": ""
+        },
+        {
+          "PromoID": "",
+          "Amount": "",
+          "POSAmount": "",
+          "Quantity": "",
+          "DiscountType": "",
+          "ReferenceCode": "",
+          "AccumId": "",
+          "Burned": ""
+        }
+
+      ]
+    }
+  ]
+}
