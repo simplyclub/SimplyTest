@@ -299,7 +299,7 @@ public class JSONGetData  {
         JSONArray accum = (JSONArray) sumAccum.get("sumAccum");
         JSONObject x = (JSONObject) accum.get(Aindex);
         Set<String > key = x.keySet();
-        //System.out.println(stringFix(key.toString()));
+
         return stringFix(key.toString());
 
 
@@ -358,6 +358,22 @@ public class JSONGetData  {
         JSONArray dealToUse = (JSONArray) x.get("DealsToUse");
         JSONObject d = (JSONObject) dealToUse.get(DealIndex);
         return d.get("DiscountType").toString();
+
+    }public String getDealsToUseAmount(Object obj,int index,int DealIndex){
+        JSONObject JsonObj = (JSONObject) obj ;
+        JSONArray  tests = (JSONArray) JsonObj.get("array");
+        JSONObject x =  (JSONObject) tests.get(index);
+        JSONArray dealToUse = (JSONArray) x.get("DealsToUse");
+        JSONObject d = (JSONObject) dealToUse.get(DealIndex);
+        return d.get("Amount").toString();
+
+    }public String getDealsToUsePToSValue(Object obj,int index,int DealIndex){
+        JSONObject JsonObj = (JSONObject) obj ;
+        JSONArray  tests = (JSONArray) JsonObj.get("array");
+        JSONObject x =  (JSONObject) tests.get(index);
+        JSONArray dealToUse = (JSONArray) x.get("DealsToUse");
+        JSONObject d = (JSONObject) dealToUse.get(DealIndex);
+        return d.get("PToSValue").toString();
 
     }
 

@@ -30,10 +30,12 @@ public  class BasePage {
     UpdateJSONFile updateJSONFile = new UpdateJSONFile();
     APIHandling.APIPost APIPost = new APIPost();
     JSONGetData JSONGetData = new JSONGetData();
+
     //UserHandling userHandling = new UserHandling();
     ResponseHandling responseHandling = new ResponseHandling();
     UpdateXMLFile updateXMLFile = new UpdateXMLFile();
     NodeList nodeList = null;
+
 
 
 
@@ -55,8 +57,14 @@ public  class BasePage {
 
     //GLOBALS
     public static final  String JSON_TEST_FILE = "C:\\Users\\User\\IdeaProjects\\SimplyTest\\JSONParametersToSend.json";
-   public static HashMap<String ,Double> sumDealPoints = new HashMap<>();
     public static String s = null;
+    public static double sumVal = 0.0;
+
+    //sum
+    public static HashMap<String ,Double> sumDealPoints = new HashMap<>();
+    public static HashMap<String ,Double> sumDealPointsWithUse = new HashMap<>();
+    public static HashMap<String ,Double> sumDealToUsePoints = new HashMap<>();
+
     //pre
     public static HashMap<String,Double> preDeal = new HashMap<>();
 

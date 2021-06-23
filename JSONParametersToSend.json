@@ -299,7 +299,8 @@
           "DiscountType": "1",
           "ReferenceCode": "",
           "AccumId": "269",
-          "Burned": ""
+          "Burned": "",
+          "PToSValue" : "0.5"
         },
         {
           "PromoID": "1784",
@@ -309,7 +310,8 @@
           "DiscountType": "0",
           "ReferenceCode": "",
           "AccumId": "270",
-          "Burned": "10"
+          "Burned": "10",
+          "PToSValue" : ""
         }
 
       ]
@@ -321,7 +323,6 @@
       "Password": "1pos",
       "CardNumber": "10000001",
       "sumAccum":[
-
         {"269": "53.6"},
         {"270": "35.0"}
       ],
@@ -731,24 +732,37 @@
       ],
       "DealsToUse" : [
         {
-          "PromoID": "",
-          "Amount" :"",
+          "PromoID": "1786",
+          "Amount" :"20.0",
           "POSAmount": "",
-          "Quantity" : "",
-          "DiscountType": "",
+          "Quantity" : "1",
+          "DiscountType": "0",
           "ReferenceCode": "",
-          "AccumId": "",
-          "Burned": ""
+          "AccumId": "271",
+          "Burned": "1",
+          "PToSValue" : ""
         },
         {
-          "PromoID": "",
-          "Amount": "",
+          "PromoID": "1789",
+          "Amount": "40.0",
           "POSAmount": "",
-          "Quantity": "",
-          "DiscountType": "",
+          "Quantity": "1",
+          "DiscountType": "0",
           "ReferenceCode": "",
-          "AccumId": "",
-          "Burned": ""
+          "AccumId": "272",
+          "Burned": "1",
+          "PToSValue" : ""
+        },
+        {
+          "PromoID": "1730",
+          "Amount": "20",
+          "POSAmount": "",
+          "Quantity": "1",
+          "DiscountType": "1",
+          "ReferenceCode": "",
+          "AccumId": "269",
+          "Burned": "",
+          "PToSValue" : "2"
         }
 
       ]
