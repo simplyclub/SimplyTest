@@ -70,6 +70,8 @@ public class MainFunction extends BasePage {
         preDeal.clear();
         postDeal.clear();
         sumDealPoints.clear();
+        sumVal = 0.0;
+
 
     }
 }

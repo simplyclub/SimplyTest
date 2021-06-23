@@ -6,20 +6,11 @@ import BaseClass.BaseXML;
 import JSON.UserHandling;
 
 import com.sun.org.glassfish.gmbal.Description;
-import com.sun.xml.internal.org.jvnet.fastinfoset.ExternalVocabulary;
 import io.restassured.response.Response;
-import org.testng.ITestResult;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
-import org.xml.sax.SAXException;
 import utilities.MainFunction;
-
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.text.DecimalFormat;
 
 import static BaseClass.BaseAPI.TEST_API_SYSTEM_URI;
 
@@ -31,11 +22,14 @@ public class AccumulationTest extends BasePage {
         for (int i = 0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++) {
             System.out.println("i: "+i);
             MainFunction.RestGlobals();
+
             //check for points before the deal
             userDataResponse = getUserData(i);
+
             //check that the AccID from the response equal to the AccID from my  test JSON
             getPreDealPointsVouchers(i);
-           // System.out.println(preDeal);
+
+
             //make a deal subTotal+trenEnd
             subTotalResponse = makeDealSubTotal(i);
             trenEndResponse = makeDealTrenEnd(i);
@@ -43,7 +37,7 @@ public class AccumulationTest extends BasePage {
             //check for points after the deal
             userDataResponse = getUserData(i);
             getPostDealVouchers(i);
-          //  System.out.println(postDeal);
+
 
             //get Transaction View, with the data of all Discount Data in the end of the deal
             updateXMLFile.updateGetTransactionView(BaseXML.xmlDocGetTransactionView(), "loginKey", updateXMLFile.getSysLogin());
@@ -60,6 +54,7 @@ public class AccumulationTest extends BasePage {
             discountLoop(i);
             ExReAccumReport.info("Accumulation Test - without Using Points");
             ExReAccumReport.info("sumDealPoints --> " +  sumDealPoints.toString());
+
            // Checks if the amount of points earned, for each of the Accums , is correct and equal to what I expected to receive
             for(String key : sumDealPoints.keySet()){
                 for (int q =0 ;q <= JSONGetData.getArraySizeSumAccum(TestJSONToSend,i);q++){
@@ -67,11 +62,21 @@ public class AccumulationTest extends BasePage {
 
                     //Compares  the Accum from the "sumDealPoints " to the Accum in the Test JSON
                     if(key.equals(JSONGetData.getSumAccumKey(TestJSONToSend,i,q))){
+                        //Corrects the figure to two digits after the decimal point
+                        double d=(postDeal.get(key) - preDeal.get(key));
+                        DecimalFormat df = new DecimalFormat("#.##");
+                        String dx =df.format(d);
+                        d=Double.valueOf(dx);
 
-                        if(sumDealPoints.get(key).toString().equals(JSONGetData.getSumAccumValue(TestJSONToSend,key,i,q)) ){
+                        if(sumDealPoints.get(key).toString().equals(JSONGetData.getSumAccumValue(TestJSONToSend,key,i,q))&& d ==
+                                Double.valueOf( JSONGetData.getSumAccumValue(TestJSONToSend,key,i,q))){
+
                             ExReAccumReport.pass(sumDealPoints.get(key) + " equals to " + JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
+                            ExReAccumReport.pass(d + " equals to " + JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
                         }else{
                             ExReAccumReport.fail("sumDealPoints: "+sumDealPoints.get(key) + " NOT equals to "
+                                    + "Test Json sumAccum: "+JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
+                            ExReAccumReport.fail("(postDeal.get("+key+") - preDeal.get("+key+")): " + d + " NOT equals to "
                                     + "Test Json sumAccum: "+JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
                         }
                         break;
@@ -85,17 +90,15 @@ public class AccumulationTest extends BasePage {
     }// main test end
     @Test(testName = "Accumulation Test - Using Points",priority = 2)
     public void UsingPointsTest() throws TransformerException {
-        // ToDo :   1)  Get pre deal vouchers status - done
-        //          2)  make sub total deal - done
-        //          3)  close the deal with using points - done
-        //          4)  Get post deal vouchers status - done
-        //          5)  Check if the correct number of points decreased depending on the number of points I used
         for (int i = 0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++) {
             MainFunction.RestGlobals();
+
             //check for points before the deal
             userDataResponse = getUserData(i);
+
             //check that the AccID from the response equal to the AccID from my  test JSON
             getPreDealPointsVouchers(i);
+
             //make a deal subTotal+trenEnd
             subTotalResponse = makeDealSubTotal(i);
             trenEndResponse= makeDealWithUsingPointsTrenEnd(i);
@@ -104,29 +107,20 @@ public class AccumulationTest extends BasePage {
             //check for points after the deal
             userDataResponse = getUserData(i);
             getPostDealVouchers(i);
+
             //get Transaction View, with the data of all Discount Data in the end of the deal
             updateXMLFile.updateGetTransactionView(BaseXML.xmlDocGetTransactionView(), "loginKey", updateXMLFile.getSysLogin());
             updateXMLFile.updateGetTransactionView(BaseXML.xmlDocGetTransactionView(), "tranKey", responseHandling.getServiceTranNumber(subTotalResponse, i));
 
             transactionViewResponse = APIPost.postXMLToGetTransactionView(TEST_API_SYSTEM_URI, BaseXML.GET_TREN_FILE_LOCATION);
             System.out.println(transactionViewResponse.getBody().asString());
+
             // "nodeList" is for using in discountLoop
             nodeList = MainFunction.ReadXMLFile(transactionViewResponse.getBody().asString());
+
             //this for loop run on all the Discounts  and sum theme
             discountLoop(i);
-
-
-
-
-
-
-
-
-
-
-
-
-
+            pointUseCalculation(i);
 
 
         }//main for loop end
@@ -174,6 +168,8 @@ public class AccumulationTest extends BasePage {
                             if(sumDealPoints.get(JSONGetData.getAccumID(TestJSONToSend,i,TJIndex,"Accumulates")) != null){
 
                                 String key =JSONGetData.getAccumID(TestJSONToSend,i,TJIndex,"Accumulates");
+                                //           sumDealPoint current amount
+                                //  sunDealPoints = (sumDealPoints) + (Discount Amount from the next promoID)
                                 Double val=sumDealPoints.get(JSONGetData.getAccumID(TestJSONToSend,i,TJIndex,"Accumulates")) +
                                         Double.valueOf(responseHandling.getXmlResponseAmount(nodeList,XRIndex));
                                 sumDealPoints.replace(key,val);
@@ -201,6 +197,7 @@ public class AccumulationTest extends BasePage {
              for (int j=0;j<responseHandling.getAllAccums(userDataResponse).size();j++) {
                  if (s.equals(UserHandling.getVoucher(JSONGetData.getAllAccumsParaJson(TestJSONToSend, i), "AccID", j))) {
                      preDeal.put(s, Double.parseDouble(UserHandling.getVoucher(responseHandling.getAllAccums(userDataResponse), "BenefitValue", j)));
+                     //System.out.println("****preDeal: "+Double.parseDouble(UserHandling.getVoucher(responseHandling.getAllAccums(userDataResponse), "BenefitValue", j)));
                      break;
                  } else if (j >= responseHandling.getAllAccums(userDataResponse).size()) {
                      ExReAccumReport.warning((responseHandling.getAllAccums(userDataResponse)) + ": " + "AccID " + s + " not found!");
@@ -225,6 +222,103 @@ public class AccumulationTest extends BasePage {
 
         }
     }//func end
+        private void pointUseCalculation(int i){
+        Double sumOfKeys = 0.0;
+
+
+        // this loop run on the DealToUse array
+        for(int t=0;t<JSONGetData.getDealsToUse(TestJSONToSend,i).size();t++){
+
+
+                double val =0.0;
+                // this if check if the AccumID is in sumDealToUsePoints and sum it if not she creates one
+                if (sumDealToUsePoints.get(JSONGetData.getDealsToUseAccumId(TestJSONToSend, i, t)) != null) {
+                     val = Double.valueOf(JSONGetData.getDealsToUseAmount(TestJSONToSend,i,t))/
+                            Double.valueOf(JSONGetData.getDealsToUsePToSValue(TestJSONToSend,i,t));
+                    //System.out.println("val"+ val);
+                    sumVal += val;
+
+                    sumDealToUsePoints.replace(JSONGetData.getDealsToUseAccumId(TestJSONToSend, i, t),sumVal);
+
+                }else{
+                    //Security check for  DiscountType
+                    if(JSONGetData.getDealsToUseDiscountType(TestJSONToSend,i,t).equals("1")) {
+                        val = Double.valueOf(JSONGetData.getDealsToUseAmount(TestJSONToSend, i, t)) /
+                                Double.valueOf(JSONGetData.getDealsToUsePToSValue(TestJSONToSend, i, t));
+                    }
+                    sumDealToUsePoints.put(JSONGetData.getDealsToUseAccumId(TestJSONToSend, i, t),val);
+                   // System.out.println("else val : "+val);
+
+                }
+
+
+
+                 for(String key : sumDealToUsePoints.keySet()){
+                     //Security check for  DiscountType
+                     if(JSONGetData.getDealsToUseDiscountType(TestJSONToSend,i,t).equals("1")) {
+
+                         //format the result
+//                         System.out.println(sumDealPoints);
+//                         System.out.println("**key: "+key);
+//                         System.out.println("**t: "+t);
+//                         System.out.println("**sumDealPoints: "+sumDealPoints.get(key));
+
+
+                         //this if check if the Accum belongs to the coupon(Without accumulation of points)
+                         if(sumDealPoints.get(key)!=null) {
+                             double d = preDeal.get(key) + sumDealPoints.get(key) - sumDealToUsePoints.get(key);
+                             DecimalFormat df = new DecimalFormat("#.##");
+                             String dx = df.format(d);
+                             d = Double.valueOf(dx);
+
+
+                             if (postDeal.get(key) == d) {
+                                 System.out.println("ok");
+                                 ExReAccumReport.pass("AccumID: " + key + " pass Accumulation Test - Using Points").assignCategory("Using Points");
+                                 ExReAccumReport.info("AccumID: " + key + "DiscountType = 1");
+                                 //sumDealToUsePoints.remove(key);
+                             }
+                         }else{
+                             double d = preDeal.get(key)  - sumDealToUsePoints.get(key);
+                             DecimalFormat df = new DecimalFormat("#.##");
+                             String dx = df.format(d);
+                             d = Double.valueOf(dx);
+
+
+                             if (postDeal.get(key) == d) {
+                                 System.out.println("ok");
+                                 ExReAccumReport.pass("AccumID: " + key + " pass Accumulation Test - Using Points").assignCategory("Using Points");
+                                 ExReAccumReport.info("AccumID: " + key + "DiscountType = 1");
+                                 //sumDealToUsePoints.remove(key);
+                             }}
+                     }else {
+
+//                         System.out.println("preDeal: "+preDeal.get(key));
+//                         System.out.println("sumDealPoints: "+sumDealPoints.get(key));
+//                         System.out.println("getDealsToUseBurned: "+Double.valueOf(JSONGetData.getDealsToUseBurned(TestJSONToSend,i,t)));
+//                         System.out.println("postDeal: "+postDeal.get(key));
+//                         System.out.println(t);
+//                         System.out.println(key);
+                         if(preDeal.get(key)+sumDealToUsePoints.get(key)-Double.valueOf(JSONGetData.getDealsToUseBurned(TestJSONToSend,i,t))==postDeal.get(key)){
+                             ExReAccumReport.pass("AccumID: "+key +" pass Accumulation Test - Using Points").assignCategory("Using Points");
+                             ExReAccumReport.info("AccumID: "+key + " DiscountType = 0");
+
+                         }
+
+
+
+                     }
+            }//end for loop
+
+
+
+
+        }//end for loop
+
+
+
+
+    }//end func
 
 
 

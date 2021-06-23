@@ -5,13 +5,13 @@
         <listener class-name = "utilities.Listeners"></listener>
     </listeners>
 
-<!--    <test name="test">-->
-<!--        <classes>-->
-<!--            <class name="Tests.SubTotalTest"></class>-->
-<!--            <class name="Tests.AccumulationTest"></class>-->
-<!--        </classes>-->
-<!--    </test>-->
-    <test name="test1">
+    <test name="sub Total">
+        <classes>
+            <class name="Tests.SubTotalTest"></class>
+
+        </classes>
+    </test>
+    <test name="Accumulation">
         <classes>
             <class name="Tests.AccumulationTest"></class>
         </classes>
