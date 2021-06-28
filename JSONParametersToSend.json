@@ -6,9 +6,8 @@
       "Password": "1pos",
       "CardNumber": "10000001",
       "sumAccum":[
-        {"269": "41.8"},
-        {"270": "5.0"}
-
+        {"269": "50.8"},
+        {"270": "20.0"}
       ],
       "TranItems": [
         {
@@ -33,7 +32,7 @@
           "Quantity": 1,
           "InputFlags": 2,
           "Vendor": "",
-          "Code": 5,
+          "Code": "0005",
           "SubDept3": "",
           "SubDept2": "",
           "SubDept1": "",
@@ -65,12 +64,12 @@
           "Quantity": 1,
           "InputFlags": 2,
           "Vendor": "",
-          "Code": 6,
+          "Code": "0006",
           "SubDept3": "",
           "SubDept2": "",
           "SubDept1": "",
           "UOM": 0,
-          "SysDiscount": 10,
+          "SysDiscount": 0,
           "Price": "78",
           "ItemBarcode": "",
           "Manufacture": ""
@@ -97,7 +96,7 @@
           "Quantity": 1,
           "InputFlags": 0,
           "Vendor": "",
-          "Code": 1,
+          "Code": "0001",
           "SubDept3": "",
           "SubDept2": "",
           "SubDept1": "",
@@ -145,6 +144,13 @@
               "BenefitValue": "868",
               "BenefitType": 2,
               "AccID": "273"
+            },
+            {
+              "BenefitName": "קופון זכאות לכולם 2",
+              "BenefitValue": "1",
+              "BenefitType": 1,
+              "AccID": "276"
+
             }
           ]
         }
@@ -154,7 +160,7 @@
           "CashBackDiscounts": [
             {
               "Description": "test 17",
-              "Amount": 19.8,
+              "Amount": 20.8,
               "IsAuto": "false",
               "PromoId": "1737",
               "AccumId": 269
@@ -179,6 +185,27 @@
               "Amount": 5.0,
               "IsAuto": "false",
               "PromoId": "1783",
+              "AccumId": 273
+            },
+            {
+              "Description": "test 21",
+              "Amount": 104.0,
+              "IsAuto": "false",
+              "PromoId": "1776",
+              "AccumId": 269
+            },
+            {
+              "Description": "test 52",
+              "Amount": 50.0,
+              "IsAuto": "false",
+              "PromoId": "1762",
+              "AccumId": 273
+            },
+            {
+              "Description": "test 53",
+              "Amount": 1.0,
+              "IsAuto": "false",
+              "PromoId": "1782",
               "AccumId": 273
             }
           ]
@@ -210,7 +237,7 @@
             },
             {
               "Description": "test 39",
-              "Amount": 11.8,
+              "Amount": 12.8,
               "IsAuto": "false",
               "PromoId": "1787",
               "AllItemsDiscountPercent": 10.0,
@@ -219,7 +246,7 @@
             },
             {
               "Description": "test 39.1",
-              "Amount": 138.0,
+              "Amount": 148.0,
               "IsAuto": "false",
               "PromoId": "1788",
               "AllItemsDiscountPercent": 0.0,
@@ -235,7 +262,7 @@
             },
             {
               "Description": "test 39.3",
-              "Amount": 19.8,
+              "Amount": 20.8,
               "IsAuto": "false",
               "PromoId": "1790",
               "AllItemsDiscountPercent": 10.0,
@@ -256,7 +283,7 @@
           "Accumulates":[
             {
               "Name":"test 3",
-              "Amount" : 11.8,
+              "Amount" : 12.8,
               "PromoID" : "1717",
               "AccumId": 269
             },
@@ -273,16 +300,22 @@
               "AccumId": 269
             },
             {
-              "Name":"test 43",
-              "Amount" : 5,
-              "PromoID" : "1759",
-              "AccumId": 270
-            },
-            {
               "Name":"test 9.9",
               "Amount" : 10,
               "PromoID" : "1771",
               "AccumId": 269
+            },
+            {
+              "Name":"test 9.8",
+              "Amount" : 8,
+              "PromoID" : "1764",
+              "AccumId": 269
+            },
+            {
+              "Name":"test 44",
+              "Amount" : 20,
+              "PromoID" : "1774",
+              "AccumId": 270
             }
 
           ]
@@ -323,13 +356,13 @@
       "Password": "1pos",
       "CardNumber": "10000001",
       "sumAccum":[
-        {"269": "53.6"},
-        {"270": "35.0"}
+        {"269": "71.6"},
+        {"270": "65.0"}
       ],
       "TranItems": [
         {
           "TrxID": 1,
-          "Code": 5,
+          "Code": "0005",
           "Price": "80",
           "GrossPrice": 0,
           "Amount": 80,
@@ -342,7 +375,7 @@
           "Vendor": "",
           "Manufacture": "",
           "Cost": 0,
-          "SysDiscount": 10,
+          "SysDiscount": 0,
           "ItemDescription": "פריט 5",
           "ItemBarcode": "",
           "SuggestedPromoId": 0,
@@ -361,7 +394,7 @@
         },
         {
           "TrxID": 2,
-          "Code": 6,
+          "Code": "0006",
           "Price": "78",
           "GrossPrice": 0,
           "Amount": 78,
@@ -374,7 +407,7 @@
           "Vendor": "",
           "Manufacture": "",
           "Cost": 0,
-          "SysDiscount": 10,
+          "SysDiscount": 0,
           "ItemDescription": "פריט 6",
           "ItemBarcode": "",
           "SuggestedPromoId": 0,
@@ -393,7 +426,7 @@
         },
         {
           "TrxID": 3,
-          "Code": 1,
+          "Code": "0001",
           "Price": "50",
           "GrossPrice": 0,
           "Amount": 50,
@@ -425,7 +458,7 @@
         },
         {
           "TrxID": 4,
-          "Code": 5,
+          "Code": "0005",
           "Price": "80",
           "GrossPrice": 0,
           "Amount": 80,
@@ -438,7 +471,7 @@
           "Vendor": "",
           "Manufacture": "",
           "Cost": 0,
-          "SysDiscount": 10,
+          "SysDiscount": 0,
           "ItemDescription": "פריט 5",
           "ItemBarcode": "",
           "SuggestedPromoId": 0,
@@ -457,7 +490,7 @@
         },
         {
           "TrxID": 5,
-          "Code": 6,
+          "Code": "0006",
           "Price": "78",
           "GrossPrice": 0,
           "Amount": 78,
@@ -470,7 +503,7 @@
           "Vendor": "",
           "Manufacture": "",
           "Cost": 0,
-          "SysDiscount": 10,
+          "SysDiscount": 0,
           "ItemDescription": "פריט 6",
           "ItemBarcode": "",
           "SuggestedPromoId": 0,
@@ -489,7 +522,7 @@
         },
         {
           "TrxID": 6,
-          "Code": 1,
+          "Code": "0001",
           "Price": "50",
           "GrossPrice": 0,
           "Amount": 50,
@@ -557,6 +590,13 @@
               "BenefitValue": "868",
               "BenefitType": 2,
               "AccID": "273"
+            },
+            {
+              "BenefitName": "קופון זכאות לכולם 2",
+              "BenefitValue": "1",
+              "BenefitType": 1,
+              "AccID": "276"
+
             }
           ]
         }
@@ -566,7 +606,7 @@
           "CashBackDiscounts": [
             {
               "Description": "test 16",
-              "Amount": 188.0,
+              "Amount": 208.0,
               "IsAuto": "false",
               "PromoId": "1730",
               "AccumId": 269
@@ -587,15 +627,30 @@
             },
             {
               "Description": "test 52",
-              "Amount": 50.0,
+              "Amount": 100.0,
               "IsAuto": "false",
               "PromoId": "1762",
               "AccumId": 273
-            },{
+            },
+            {
               "Description": "test 54",
               "Amount": 5.0,
               "IsAuto": "false",
               "PromoId": "1783",
+              "AccumId": 273
+            },
+            {
+              "Description": "test 21",
+              "Amount": 208.0,
+              "IsAuto": "false",
+              "PromoId": "1776",
+              "AccumId": 273
+            },
+            {
+              "Description": "test 53",
+              "Amount": 1.0,
+              "IsAuto": "false",
+              "PromoId": "1782",
               "AccumId": 273
             }
           ]
@@ -629,7 +684,7 @@
             },
             {
               "Description": "test 39",
-              "Amount": 23.6,
+              "Amount": 25.6,
               "IsAuto": "false",
               "PromoId": "1787",
               "AllItemsDiscountPercent": 10.0,
@@ -638,7 +693,7 @@
             },
             {
               "Description": "test 39.1",
-              "Amount": 316.0,
+              "Amount": 356.0,
               "IsAuto": "false",
               "PromoId": "1788",
               "AllItemsDiscountPercent": 0.0,
@@ -656,7 +711,7 @@
             },
             {
               "Description": "test 39.3",
-              "Amount": 37.6,
+              "Amount": 41.6,
               "IsAuto": "false",
               "PromoId": "1790",
               "AllItemsDiscountPercent": 10.0,
@@ -665,7 +720,7 @@
             },
             {
               "Description": "test 39.4",
-              "Amount": 20.0,
+              "Amount": 10.0,
               "IsAuto": "false",
               "PromoId": "1791",
               "AllItemsDiscountPercent": 0.0,
@@ -674,7 +729,7 @@
             },
             {
               "Description": "test 39.6",
-              "Amount": 23.6,
+              "Amount": 25.6,
               "IsAuto": "false",
               "PromoId": "1793",
               "AllItemsDiscountPercent": 10.0,
@@ -687,7 +742,7 @@
           "Accumulates":[
             {
               "Name":"test 3",
-              "Amount" : 23.6,
+              "Amount" : 25.6,
               "PromoID" : "1717",
               "AccumId": 269
             },
@@ -717,7 +772,7 @@
             },
             {
               "Name":"test 43",
-              "Amount" : 15,
+              "Amount" : 5,
               "PromoID" : "1759",
               "AccumId": 270
             },
@@ -726,6 +781,18 @@
               "Amount" : 10,
               "PromoID" : "1771",
               "AccumId": 269
+            },
+            {
+              "Name":"test 9.8",
+              "Amount" : 16,
+              "PromoID" : "1764",
+              "AccumId": 269
+            },
+            {
+              "Name":"test 44",
+              "Amount" : 40,
+              "PromoID" : "1774",
+              "AccumId": 270
             }
           ]
         }

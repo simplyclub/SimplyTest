@@ -13,11 +13,6 @@ public class JSONCompare extends BasePage {
     String TBPromoId = null;
     int  flag1 = 0 ;
 
-
-
-
-
-
     public void responVSTestJson (int arrayIndex,Response response){
 
         // this loop will run on the respone "CashBackDiscounts"
@@ -36,7 +31,7 @@ public class JSONCompare extends BasePage {
                     System.out.println("CashBackDiscounts:");
                     System.out.println("response: "+CBPromoId+ ", test JSON: " + temp+", Index "+ j);
                     flag1 = 1;
-                    ExReApiTestReport.info("CashBackDiscounts:");
+                    ExReApiTestReport.info("CashBackDiscounts:"+i);
                     ExReApiTestReport.info("Response promoID: "+ CBPromoId + "Test JSON promoID: " + temp ).assignCategory("responVSTestJson");
 
 
@@ -55,8 +50,8 @@ public class JSONCompare extends BasePage {
 
             }
             if( flag1 == 0 ){
-                // TODO : Create a new JSON file of the response
                 ExReApiTestReport.warning("PromoId: " + CBPromoId + " not found in the \"Test JSON \"").assignCategory("responVSTestJson");
+               // ExReApiTestReport.info(response.getBody().asString());
 
 
             }
@@ -78,7 +73,7 @@ public class JSONCompare extends BasePage {
                     flag1 = 1 ;
                     System.out.println("TotalDiscounts:");
                     System.out.println("response: "+TBPromoId+ ", test JSON: " + temp+", Index "+ j);
-                    ExReApiTestReport.info("TotalDiscounts:");
+                    ExReApiTestReport.info("TotalDiscounts:"+i);
                     ExReApiTestReport.info("Response promoID: "+ TBPromoId + "Test JSON promoID: " + temp ).assignCategory("responVSTestJson");
                     softAssertion.assertEquals(responseHandling.getAmount(response,"TotalDiscounts",i),
                             JSONGetData.getAmount(TestJSONToSend,arrayIndex,j,"TotalDiscounts")
@@ -98,14 +93,14 @@ public class JSONCompare extends BasePage {
 
             }
             if( flag1 == 0 ){
-                // TODO : Create a new JSON file of the response
                 ExReApiTestReport.warning("12PromoId: " + TBPromoId + " not found in the \"Test JSON \"").assignCategory("responVSTestJson");
+               // ExReApiTestReport.info(response.getBody().asString());
 
             }
 
         }
 
-// TODO : Think about adding a type of return that indicates that the test was successful
+
         //return  ;
     }
 
@@ -147,8 +142,9 @@ public class JSONCompare extends BasePage {
                 }
             }
             if( flag1 == 0 ){
-                // TODO : Create a new JSON file of the response
+
                 ExReApiTestReport.warning("PromoId: " + CBPromoId + " not found in the response ").assignCategory("TestJSONVSResponse");
+               // ExReApiTestReport.info(response.getBody().asString());
 
 
             }
@@ -190,8 +186,9 @@ public class JSONCompare extends BasePage {
             }
 
             if( flag1 == 0 ){
-                // TODO : Create a new JSON file of the response
+
                 ExReApiTestReport.warning("PromoId: " + TBPromoId + " not found in the response ").assignCategory("TestJSONVSResponse");
+               // ExReApiTestReport.info(response.getBody().asString());
 
 
             }
@@ -199,96 +196,6 @@ public class JSONCompare extends BasePage {
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*
-    public void expectedResultVSResponse(int arrayIndex,Response response) {
-
-        //compere cash back
-        // Go over all the wanted promos
-       for (int CBIndex = 0; CBIndex <
-                JSONGetData.getArraySizeCashBackDiscounts
-                        (JSONGetData.getCashBackDiscounts(subTotalJSONObj, arrayIndex)); CBIndex++) {
-
-          String CBPromoId = responseHandling.getPromoId( response, "CashBackDiscounts",CBIndex );
-          String temp = JSONGetData.getPromoId(subTotalJSONObj, arrayIndex ,CBIndex,"CashBackDiscounts");
-
-            if (CBPromoId.equals(temp)) {
-                System.out.println("response: "+CBPromoId+ ", test JSON: " + temp+", CBIndex "+CBIndex);
-
-                    softAssertion.assertEquals(
-                            responseHandling.getDescription(response, "CashBackDiscounts", CBIndex),
-                            JSONGetData.getDescription(subTotalJSONObj, arrayIndex, CBIndex, "CashBackDiscounts")
-                    );
-                    softAssertion.assertEquals(
-                            responseHandling.getAmount(response, "CashBackDiscounts", CBIndex),
-                            JSONGetData.getAmount(subTotalJSONObj, arrayIndex, CBIndex, "CashBackDiscounts")
-                    );
-                    softAssertion.assertEquals(
-                            responseHandling.getIsAuto(response, "CashBackDiscounts", CBIndex),
-                            JSONGetData.getIsAuto(subTotalJSONObj, arrayIndex, CBIndex, "CashBackDiscounts")
-                    );
-
-
-
-                softAssertion.assertAll();
-
-
-            }
-
-
-        }
-        for ( int TDIndex = 0 ;TDIndex<
-                JSONGetData.getArraySizeTotalDiscounts(
-                        JSONGetData.getTotalDiscounts(subTotalJSONObj,arrayIndex) ); TDIndex++) {
-            String CBPromoId = responseHandling.getPromoId( response, "TotalDiscounts",TDIndex );
-            String temp = JSONGetData.getPromoId(subTotalJSONObj, arrayIndex ,TDIndex,"TotalDiscounts");
-
-            if (CBPromoId.equals(temp)) {
-                System.out.println(CBPromoId + "  " + temp + ", TDIndex " + TDIndex);
-
-                softAssertion.assertEquals(
-                        responseHandling.getDescription(response,"TotalDiscounts",TDIndex),
-                        JSONGetData.getDescription(subTotalJSONObj,arrayIndex,TDIndex,"TotalDiscounts")
-                );
-                softAssertion.assertEquals(
-                        responseHandling.getAmount(response,"TotalDiscounts",TDIndex),
-                        JSONGetData.getAmount(subTotalJSONObj,arrayIndex,TDIndex,"TotalDiscounts")
-                );
-                softAssertion.assertEquals(
-                        responseHandling.getIsAuto(response,"TotalDiscounts",TDIndex),
-                        JSONGetData.getIsAuto(subTotalJSONObj,arrayIndex,TDIndex,"TotalDiscounts")
-                );
-                softAssertion.assertEquals(
-                        responseHandling.getAllItemsDiscountPercent(response,TDIndex),
-                        JSONGetData.getAllItemsDiscountPercent(subTotalJSONObj,arrayIndex,TDIndex,"TotalDiscounts")
-                );
-                softAssertion.assertAll();
-            }
-        }
-
-
-    }*/
-
-
 
 }
 

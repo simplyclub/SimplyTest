@@ -12,9 +12,15 @@ public class JSONGetData  {
 
 
     public Integer getArraySize (Object obj){
-        JSONObject JSONObj = (JSONObject) obj ;
-        JSONArray tests = (JSONArray) JSONObj.get("array");
-        return  tests.size();
+        try {
+            JSONObject JSONObj = (JSONObject) obj;
+            JSONArray tests = (JSONArray) JSONObj.get("array");
+            return  tests.size();
+        }catch (NullPointerException e){
+            System.out.println("ERROR -- problem with array in Test Json");
+        }
+        return null;
+
     }
     public Integer getArraySizeCashBackDiscounts (JSONObject obj){
         JSONObject JSONObj =  obj ;
@@ -279,7 +285,7 @@ public class JSONGetData  {
 
 
     }
-    public JSONArray getAllAccumsParaJson (Object obj ,Integer index){
+    public JSONArray getAllAccumsArray(Object obj , Integer index){
         JSONObject jsonObj = (JSONObject) obj ;
         JSONArray  tests = (JSONArray) jsonObj.get("array");
         JSONObject member =  (JSONObject) tests.get(index);

@@ -19,29 +19,12 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.List;
 
-// TODO :
-//  1)  change all the get function not to be only on "cashBackDiscounts"
-//      i need to make them more General
-//  2) make all the function get an index for the array
-//  3) make all the function return the correct value
+
 
 public class ResponseHandling  {
     BaseJSON baseJSON = new BaseJSON();
     BaseXML baseXML = new BaseXML();
 
-    // TODO : make this function bring all the data in CashBackDiscounts
-    //       from the response
-    public void getCashBackDiscounts(Response response, int index){
-
-
-
-
-    }
-    // TODO : make this function bring all the data in TotalDiscounts
-    //       from the response
-    public void getTotalDiscounts(Response response){
-
-    }
 
 
     public  String getAmount(Response response , String discountsType, int index){
@@ -106,6 +89,11 @@ public class ResponseHandling  {
 
     }
 
+    /**
+     * get the array of the "all accums" from the user data response
+     * @param response - user "get data" response
+     * @return JSONArray with  "AllAccums" array
+     */
     public JSONArray getAllAccums (Response response){
         String s = response.getBody().asString();
         JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(s);

@@ -5,6 +5,13 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public  class UserHandling extends BasePage {
+    /**
+     *
+     * @param arr  "AllAccums" array
+     * @param st what you whant to get from the array
+     * @param index the index of the obj in the array
+     * @return String with the Data
+     */
 
     public static String getVoucher(JSONArray arr, String st,int index){
         JSONObject PointsVoucher = (JSONObject) arr.get(index);

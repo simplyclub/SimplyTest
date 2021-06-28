@@ -59,6 +59,7 @@ public class MainFunction extends BasePage {
 
 
         }
+
         catch (Exception e)
         {
             e.printStackTrace();
@@ -70,6 +71,7 @@ public class MainFunction extends BasePage {
         preDeal.clear();
         postDeal.clear();
         sumDealPoints.clear();
+        sumDealToUsePoints.clear();
         sumVal = 0.0;
 
 

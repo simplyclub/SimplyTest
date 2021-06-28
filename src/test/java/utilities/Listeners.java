@@ -16,7 +16,7 @@ public class Listeners extends BasePage implements ITestListener  {
 
     @Override
     public void onFinish(ITestContext arg0) {
-        // TODO Auto-generated method stub
+
 
     }
 
@@ -27,7 +27,6 @@ public class Listeners extends BasePage implements ITestListener  {
     }
     @Override
     public void onTestSuccess(ITestResult arg0) {
-        // TODO Auto-generated method stub
         String str = arg0.getName();
         if (str.equals("subTotalTest")) {
             ExReApiTestReport.pass(arg0.getName() + " Test passed");
@@ -38,13 +37,13 @@ public class Listeners extends BasePage implements ITestListener  {
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult arg0) {
-        // TODO Auto-generated method stub
+
 
     }
 
     @Override
     public void onTestFailure(ITestResult arg0) {
-        // TODO Auto-generated method stub
+
         if (arg0.getName().equals( "subTotalTest")) {
             ExReApiTestReport.fail(arg0.getName() + "Test fail");
         }else if (arg0.getName().equals("pointTest")){
@@ -56,14 +55,14 @@ public class Listeners extends BasePage implements ITestListener  {
 
     @Override
     public void onTestSkipped(ITestResult arg0) {
-        // TODO Auto-generated method stub
+
 
 
     }
 
     @Override
     public void onTestStart(ITestResult arg0) {
-        // TODO Auto-generated method stub
+
         System.out.println(arg0.getName()+" test case started");
 
     }
