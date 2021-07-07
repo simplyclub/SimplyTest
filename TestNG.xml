@@ -11,9 +11,9 @@
 
         </classes>
     </test>
-    <test name="Accumulation">
+    <test name="TranEnd">
         <classes>
-            <class name="Tests.AccumulationTest"></class>
+            <class name="Tests.TranEndTest"></class>
         </classes>
     </test>
 
