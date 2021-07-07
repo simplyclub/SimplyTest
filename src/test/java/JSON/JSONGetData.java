@@ -365,7 +365,17 @@ public class JSONGetData  {
         JSONObject d = (JSONObject) dealToUse.get(DealIndex);
         return d.get("DiscountType").toString();
 
-    }public String getDealsToUseAmount(Object obj,int index,int DealIndex){
+
+    }
+
+    /**
+     *
+     * @param obj TestJsonToSend
+     * @param index  the index for what deal test is runing
+     * @param DealIndex location inside the array of DealsToUse
+     * @return String
+     */
+    public String getDealsToUseAmount(Object obj,int index,int DealIndex){
         JSONObject JsonObj = (JSONObject) obj ;
         JSONArray  tests = (JSONArray) JsonObj.get("array");
         JSONObject x =  (JSONObject) tests.get(index);
@@ -382,6 +392,39 @@ public class JSONGetData  {
         return d.get("PToSValue").toString();
 
     }
+
+    /**
+     *
+     * @param obj TestJsonToSend
+     * @param index the index for what deal test is runing
+     * @param DealIndex location inside the array of DealsToUse
+     * @return String
+     */
+    public String getDealsToUsePromoID(Object obj,int index,int DealIndex){
+        JSONObject JsonObj = (JSONObject) obj ;
+        JSONArray  tests = (JSONArray) JsonObj.get("array");
+        JSONObject x =  (JSONObject) tests.get(index);
+        JSONArray dealToUse = (JSONArray) x.get("DealsToUse");
+        JSONObject d = (JSONObject) dealToUse.get(DealIndex);
+        return d.get("PromoID").toString();
+
+    }
+
+    public String getAccoundID (Object obj , int index){
+        JSONObject JSONObj = (JSONObject) obj ;
+        JSONArray  tests = (JSONArray) JSONObj.get("array");
+        JSONObject  PasswordJSONObj = (JSONObject) tests.get(index);
+        return   PasswordJSONObj.get("AccoundID").toString();
+
+    }
+    public String getTotalDealAmount (Object obj , int index){
+        JSONObject JSONObj = (JSONObject) obj ;
+        JSONArray  tests = (JSONArray) JSONObj.get("array");
+        JSONObject  DealAmountJSONObj = (JSONObject) tests.get(index);
+        return   DealAmountJSONObj.get("TotalDealAmount").toString();
+
+    }
+
 
 
 

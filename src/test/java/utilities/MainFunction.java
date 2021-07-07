@@ -40,33 +40,8 @@ public class MainFunction extends BasePage {
 
     }
     //temp
-    public static NodeList ReadXMLFile(String xml){
-        try
-        {
-//creating a constructor of file class and parsing an XML file
-           // File file = new File("C:\\Users\\User\\IdeaProjects\\SimplyTest\\response.xml");
-
-//an instance of factory that gives a document builder
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-//an instance of builder to parse the specified xml file
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            InputSource is = new InputSource(new StringReader(xml));
-            Document doc = db.parse(is);
-            doc.getDocumentElement().normalize();
-
-            NodeList nodeList = doc.getElementsByTagName("TranViewDiscountData");
-            return nodeList;
 
 
-        }
-
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return null;
-
-    }
     public static void RestGlobals(){
         preDeal.clear();
         postDeal.clear();
@@ -74,6 +49,16 @@ public class MainFunction extends BasePage {
         sumDealToUsePoints.clear();
         sumVal = 0.0;
 
+
+    }
+    public static Node[] convertNodeListToNodeArray(NodeList list){
+        int length = list.getLength();
+        Node[] copy = new Node[length];
+
+        for (int n = 0; n < length; ++n)
+            copy[n] = list.item(n);
+
+        return copy;
 
     }
 }

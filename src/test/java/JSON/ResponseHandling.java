@@ -9,11 +9,14 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.StringReader;
@@ -124,10 +127,19 @@ public class ResponseHandling  {
 
 
     }
+    public String getErrorCodeStatusJson(Response response){
+        String s = response.getBody().asString();
+        JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(s);
+        //System.out.println(responseObj.get("ErrorCode"));
+      return responseObj.get("ErrorCode").toString();
 
 
 
+    }
 
+
+
+//********************************XML******************************
     public String getXmlResponseDescription(NodeList nodeList, int i){
         Node node = nodeList.item(i);
         if (node.getNodeType() == Node.ELEMENT_NODE){
@@ -137,7 +149,7 @@ public class ResponseHandling  {
         return null;
 
     }
-    public String getXmlResponseAmount(NodeList nodeList, int i){
+    public String getXMLResponseAmount(NodeList nodeList, int i){
         Node node = nodeList.item(i);
         if (node.getNodeType() == Node.ELEMENT_NODE){
             Element eElement = (Element) node;
@@ -146,8 +158,10 @@ public class ResponseHandling  {
         return null;
 
     }
-    public String getXmlResponsePromoID(NodeList nodeList, int i){
-        Node node = nodeList.item(i);
+
+
+    public String getXMLResponsePromoID(NodeList nodeList, int NLindexl){
+        Node node = nodeList.item(NLindexl);
         if (node.getNodeType() == Node.ELEMENT_NODE){
             Element eElement = (Element) node;
             return eElement.getElementsByTagName("PromoID").item(0).getTextContent();
@@ -155,57 +169,93 @@ public class ResponseHandling  {
         return null;
 
     }
+    public static NodeList getXMLFileTranViewDiscountData(String xml){
+        try
+        {
+            //creating a constructor of file class and parsing an XML file
+            // File file = new File("C:\\Users\\User\\IdeaProjects\\SimplyTest\\response.xml");
+
+            //an instance of factory that gives a document builder
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            //an instance of builder to parse the specified xml file
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            InputSource is = new InputSource(new StringReader(xml));
+            Document doc = db.parse(is);
+            doc.getDocumentElement().normalize();
+
+            NodeList nodeList = doc.getElementsByTagName("TranViewDiscountData");
+            return nodeList;
 
 
+        }
 
-//    public void getTranViewDiscountData(Response response , int i) throws ParserConfigurationException, IOException, SAXException {
-//        Document doc = baseXML.convertStringToXMLDocument(response);
-//        NodeList list =doc.getElementsByTagName("PromoID");
-//        Node q = list.item(0);
-//        System.out.println(q.getNodeValue());
-//        System.out.println(q.getFirstChild().getNodeValue());
-//        System.out.println(q.getUserData("TranViewDiscountData"));
-
-
-
-
-
-
-//        NodeList x = doc.getElementsByTagName("Description");
-//        System.out.println(x.item(0).getNodeValue());
-//
-//        Node discounts = doc.getElementsByTagName("Discounts").item(i);
-        //System.out.println(discounts.getFirstChild().getNodeValue());
-
-
-
-        //Node x = NL.item(i);
-       // System.out.println(x.getNodeValue());
-       // getDiscountPromoID(x);
-
-
-
-
-
-//}
-
-    public void getDiscountPromoID(Node NPromoID){
-
-
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
 
     }
 
-    private NodeList getDiscountsTransactionView(Document doc) throws ParserConfigurationException, IOException, SAXException {
-        NodeList x = doc.getElementsByTagName("Discounts");
-       //System.out.println(x.item(0).getNodeValue());
+    //todo: test this new function
+    public static String getXMLFileNegativeCashBack(String xml){
+        try
+        {
+            //creating a constructor of file class and parsing an XML file
+            // File file = new File("C:\\Users\\User\\IdeaProjects\\SimplyTest\\response.xml");
 
-        return x;
+            //an instance of factory that gives a document builder
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            //an instance of builder to parse the specified xml file
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            InputSource is = new InputSource(new StringReader(xml));
+            Document doc = db.parse(is);
+            doc.getDocumentElement().normalize();
 
+            Node node = doc.getElementsByTagName("NegativeCashBack").item(0);
+            return node.getTextContent();
 
+        }
 
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
 
+    }//todo: test this new function
+    public static String getXMLFilePaidTotal(String xml){
+        try
+        {
+            //creating a constructor of file class and parsing an XML file
+            // File file = new File("C:\\Users\\User\\IdeaProjects\\SimplyTest\\response.xml");
+
+            //an instance of factory that gives a document builder
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            //an instance of builder to parse the specified xml file
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            InputSource is = new InputSource(new StringReader(xml));
+            Document doc = db.parse(is);
+            doc.getDocumentElement().normalize();
+
+            Node node = doc.getElementsByTagName("PaidTotal").item(0);
+            return node.getTextContent();
+
+        }
+
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
 
     }
+
+
+
+
+
+
 
 
 

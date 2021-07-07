@@ -17,10 +17,12 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import utilities.EmailHandling;
 import utilities.MainFunction;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public  class BasePage {
@@ -45,9 +47,10 @@ public  class BasePage {
     Response trenEndResponse = null ;
     Response userDataResponse = null;
     Response transactionViewResponse = null;
+    ArrayList<Node> xmlResponseDiscountList = new ArrayList<>();
 
     // extent report
-    public static ExtentReports exReport = new ExtentReports();
+    public static  ExtentReports exReport = new ExtentReports();
     public static  ExtentSparkReporter spark = new ExtentSparkReporter("index.html");
     public static  ExtentTest ExReApiTestReport ;
     public static  ExtentTest ExReAccumReport ;
@@ -102,6 +105,10 @@ public  class BasePage {
         if (userDataResponse!=null){
 
             userDataResponse=null;
+        }
+        if (xmlResponseDiscountList!=null){
+
+            xmlResponseDiscountList=null;
         }
 
     }
