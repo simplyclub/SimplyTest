@@ -74,7 +74,7 @@ public class TranEndTest extends BasePage {
 
                 //get Transaction View, with the data of all Discount Data in the end of the deal
                 updateXMLFile.updateGetTransactionView(BaseXML.xmlDocGetTransactionView(), "loginKey", updateXMLFile.getSysLogin());
-                updateXMLFile.updateGetTransactionView(BaseXML.xmlDocGetTransactionView(), "tranKey", responseHandling.getServiceTranNumber(subTotalResponse, i));
+                updateXMLFile.updateGetTransactionView(BaseXML.xmlDocGetTransactionView(), "tranKey", responseHandling.getServiceTranNumber(subTotalResponse));
 
                 transactionViewResponse = APIPost.postXMLToGetTransactionView(TEST_API_SYSTEM_URI, BaseXML.GET_TREN_FILE_LOCATION);
                 if(!(transactionViewResponse.getStatusCode()==200)){
@@ -158,7 +158,7 @@ public class TranEndTest extends BasePage {
 
                 //get Transaction View, with the data of all Discount Data in the end of the deal
                 updateXMLFile.updateGetTransactionView(BaseXML.xmlDocGetTransactionView(), "loginKey", updateXMLFile.getSysLogin());
-                updateXMLFile.updateGetTransactionView(BaseXML.xmlDocGetTransactionView(), "tranKey", responseHandling.getServiceTranNumber(subTotalResponse, i));
+                updateXMLFile.updateGetTransactionView(BaseXML.xmlDocGetTransactionView(), "tranKey", responseHandling.getServiceTranNumber(subTotalResponse));
 
                 transactionViewResponse = APIPost.postXMLToGetTransactionView(TEST_API_SYSTEM_URI, BaseXML.GET_TREN_FILE_LOCATION);
                 if(!(transactionViewResponse.getStatusCode()==200)){
@@ -198,124 +198,7 @@ public class TranEndTest extends BasePage {
 
 
 
-/*
-    @Test(testName = "Accumulation Test - without Using Points", priority = 1)
-    @Description("Will run on each of the accumulators  ")
-    public void withoutUsingPointsTest() throws TransformerException {
-        for (int i = 0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++) {
-            System.out.println("i: " + i);
-            MainFunction.RestGlobals();
 
-            //check for points before the deal
-            userDataResponse = getUserData(i);
-
-            //check that the AccID from the response equal to the AccID from my  test JSON
-            getPreDealPointsVouchers(i);
-
-
-            //make a deal subTotal+trenEnd
-            subTotalResponse = makeDealSubTotal(i);
-            trenEndResponse = makeDealTrenEnd(i);
-
-            //check for points after the deal
-            userDataResponse = getUserData(i);
-            getPostDealVouchers(i);
-
-
-            //get Transaction View, with the data of all Discount Data in the end of the deal
-            updateXMLFile.updateGetTransactionView(BaseXML.xmlDocGetTransactionView(), "loginKey", updateXMLFile.getSysLogin());
-            updateXMLFile.updateGetTransactionView(BaseXML.xmlDocGetTransactionView(), "tranKey", responseHandling.getServiceTranNumber(subTotalResponse, i));
-
-            transactionViewResponse = APIPost.postXMLToGetTransactionView(TEST_API_SYSTEM_URI, BaseXML.GET_TREN_FILE_LOCATION);
-            System.out.println(transactionViewResponse.getBody().asString());
-            // "nodeList" is for using in discountLoop
-            nodeList = MainFunction.ReadXMLFile(transactionViewResponse.getBody().asString());
-
-            //System.out.println("node list size : "+ nodeList.getLength());
-
-            //this for loop run on all the Discounts  and sum theme(sumDealPoints)
-            discountLoop(i);
-            ExReAccumReport.info("Accumulation Test - without Using Points");
-            ExReAccumReport.info("sumDealPoints --> " + sumDealPoints.toString());
-
-            // Checks if the amount of points earned, for each of the Accums , is correct and equal to what I expected to receive
-            for (String key : sumDealPoints.keySet()) {
-                for (int q = 0; q <= JSONGetData.getArraySizeSumAccum(TestJSONToSend, i); q++) {
-
-
-                    //Compares  the Accum from the "sumDealPoints " to the Accum in the Test JSON
-                    if (key.equals(JSONGetData.getSumAccumKey(TestJSONToSend, i, q))) {
-                        //Corrects the figure to two digits after the decimal point
-                        double d = (postDeal.get(key) - preDeal.get(key));
-                        DecimalFormat df = new DecimalFormat("#.##");
-                        String dx = df.format(d);
-                        d = Double.valueOf(dx);
-
-                        if (sumDealPoints.get(key).toString().equals(JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q)) && d ==
-                                Double.valueOf(JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q))) {
-
-                            ExReAccumReport.pass(sumDealPoints.get(key) + " equals to " + JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
-                            ExReAccumReport.pass(d + " equals to " + JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
-                        } else {
-                            ExReAccumReport.fail("*sumDealPoints: " + sumDealPoints.get(key) + " NOT equals to "
-                                    + "Test Json sumAccum: " + JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
-                            ExReAccumReport.fail("(postDeal.get(" + key + ") - preDeal.get(" + key + ")): " + d + " NOT equals to "
-                                    + "Test Json sumAccum: " + JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
-                        }
-                        break;
-                    }
-
-                }
-
-            }
-
-        }//end main for loop
-    }// main test end
-
-    @Test(testName = "Accumulation Test - Using Points", priority = 2)
-    @Description("Will run on each of the accumulators  ")
-    public void UsingPointsTest() throws TransformerException {
-        for (int i = 0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++) {
-            MainFunction.RestGlobals();
-
-            //check for points before the deal
-            userDataResponse = getUserData(i);
-
-            //check that the AccID from the response equal to the AccID from my  test JSON
-            getPreDealPointsVouchers(i);
-
-            //make a deal subTotal+trenEnd
-            subTotalResponse = makeDealSubTotal(i);
-            trenEndResponse = makeDealWithUsingPointsTrenEnd(i);
-            System.out.println(trenEndResponse.getBody().asString());
-
-            //check for points after the deal
-            userDataResponse = getUserData(i);
-            getPostDealVouchers(i);
-
-            //get Transaction View, with the data of all Discount Data in the end of the deal
-            updateXMLFile.updateGetTransactionView(BaseXML.xmlDocGetTransactionView(), "loginKey", updateXMLFile.getSysLogin());
-            updateXMLFile.updateGetTransactionView(BaseXML.xmlDocGetTransactionView(), "tranKey", responseHandling.getServiceTranNumber(subTotalResponse, i));
-
-            transactionViewResponse = APIPost.postXMLToGetTransactionView(TEST_API_SYSTEM_URI, BaseXML.GET_TREN_FILE_LOCATION);
-            System.out.println(transactionViewResponse.getBody().asString());
-
-            // "nodeList" is for using in discountLoop
-            nodeList = MainFunction.ReadXMLFile(transactionViewResponse.getBody().asString());
-            System.out.println(nodeList);
-
-
-            //this for loop run on all the Discounts  and sum theme
-            discountLoop(i);
-
-
-            pointUseCalculation(i);
-            sumDealToUsePointsCheck(i);
-
-
-        }//main for loop end
-    }
-*/
     /**
      * this function will check and coumper the discounts in the "DealToUse"
      * @param nodeList
@@ -424,13 +307,13 @@ public class TranEndTest extends BasePage {
 
     }//func end
     private Response makeDealTrenEnd(int i) {
-        updateJSONFile.upDateTranEndJSON(responseHandling.getServiceTranNumber(subTotalResponse, i), JSONGetData.getAccoundID(TestJSONToSend, i),
+        updateJSONFile.upDateTranEndJSON(responseHandling.getServiceTranNumber(subTotalResponse), JSONGetData.getAccoundID(TestJSONToSend, i),
                 JSONGetData.getTranItems(TestJSONToSend, i), null, baseJSON.jsonToSend);
         return APIPost.postTranEnd(BaseAPI.TEST_REST_API_URI, baseJSON.JSON_TO_SEND);
 
     }//func end
     private Response makeDealWithUsingPointsTrenEnd(int i) {
-        updateJSONFile.upDateTranEndJSON(responseHandling.getServiceTranNumber(subTotalResponse, i), JSONGetData.getAccoundID(TestJSONToSend, i),
+        updateJSONFile.upDateTranEndJSON(responseHandling.getServiceTranNumber(subTotalResponse), JSONGetData.getAccoundID(TestJSONToSend, i),
                 JSONGetData.getTranItems(TestJSONToSend, i), JSONGetData.getDealsToUse(TestJSONToSend, i), baseJSON.jsonToSend);
         return APIPost.postTranEnd(BaseAPI.TEST_REST_API_URI, BaseJSON.JSON_TO_SEND);
 
@@ -515,41 +398,20 @@ public class TranEndTest extends BasePage {
         for (int index = 0; index < (responseHandling.getAllAccums(userDataResponse)).size(); index++) {
             s = UserHandling.getVoucher(responseHandling.getAllAccums(userDataResponse), "AccID", index);
 
-            // this if is for Security check, to see if  the AllAccums array size is ok
-            if(responseHandling.getAllAccums(userDataResponse).size() == JSONGetData.getAllAccumsArray(TestJSONToSend,i).size()) {
-                for (int j = 0; j < responseHandling.getAllAccums(userDataResponse).size(); j++) {
-
-                    if (s.equals(UserHandling.getVoucher(JSONGetData.getAllAccumsArray(TestJSONToSend, i), "AccID", j))) {
-                        preDeal.put(s, Double.parseDouble(UserHandling.getVoucher(responseHandling.getAllAccums(userDataResponse), "BenefitValue", j)));
-                        //System.out.println("****preDeal: "+Double.parseDouble(UserHandling.getVoucher(responseHandling.getAllAccums(userDataResponse), "BenefitValue", j)));
-                        break;
-                    } else if (j >= responseHandling.getAllAccums(userDataResponse).size()) {
-                        ExReAccumReport.warning((responseHandling.getAllAccums(userDataResponse)) + ": " + "AccID " + s + " not found!");
-                    }
-                }//end 2nd for loop (j)
-            }else {
-                System.out.println("ERROR -- Response AllAccums array is not equal to Test JSON  AllAccums array size");
-                ExReAccumReport.warning("ERROR -- Response AllAccums array is not equal to Test JSON  AllAccums array size");
-                break;
-            }//end of if/else Security check
-
+            preDeal.put(s, Double.parseDouble(UserHandling.getVoucher(responseHandling.getAllAccums(userDataResponse), "BenefitValue",index)));
         }
+
+
     }//func end
     private void getPostDealVouchers(int i) {
-
+//fixme : to fix that
         //this function will add all the post deal vouchers value to the pre deal HaseMap
         for (int index = 0; index < (responseHandling.getAllAccums(userDataResponse)).size(); index++) {
             s = UserHandling.getVoucher(responseHandling.getAllAccums(userDataResponse), "AccID", index);
-            for (int j = 0; j < responseHandling.getAllAccums(userDataResponse).size(); j++) {
-                if (s.equals(UserHandling.getVoucher(JSONGetData.getAllAccumsArray(TestJSONToSend, i), "AccID", j))) {
-                    postDeal.put(s, Double.parseDouble(UserHandling.getVoucher(responseHandling.getAllAccums(userDataResponse), "BenefitValue", j)));
-                    break;
-                } else if (j >= responseHandling.getAllAccums(userDataResponse).size()) {
-                    ExReAccumReport.warning((responseHandling.getAllAccums(userDataResponse)) + ": " + "AccID " + s + " not found!");
-                }
+            postDeal.put(s, Double.parseDouble(UserHandling.getVoucher(responseHandling.getAllAccums(userDataResponse), "BenefitValue", index)));
             }
 
-        }
+
     }//func end
     private void pointUseCalculation(int i) {
 

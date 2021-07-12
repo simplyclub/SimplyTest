@@ -36,6 +36,20 @@ public class SubTotalTest extends BasePage {
                 System.out.println(subTotalResponse.getBody().asString());
                 JSONCompare.responVSTestJson(i, subTotalResponse);
                 JSONCompare.TestJSONVSResponse(i, subTotalResponse);
+                //cancel of a deal
+                Object x= updateJSONFile.upDateTrenCancelJSONFile(JSONGetData.getAccoundID(TestJSONToSend, i),JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),
+                        responseHandling.getServiceTranNumber(subTotalResponse));
+                //System.out.println(x.toString());
+                trenCancelResponse = APIPost.postTrenCancel(BaseAPI.TEST_REST_API_URI,BaseJSON.TREN_CONCEL_JSON);
+                //System.out.println(trenCancelResponse.getBody().asString());
+                if (trenCancelResponse.getStatusCode()!= 200 && !(responseHandling.getErrorCodeStatusJson(trenCancelResponse).equals("0"))){
+                    System.out.println("ERROR --- the deal "+responseHandling.getServiceTranNumber(subTotalResponse)+ " did not cancel");
+                    ExReApiTestReport.warning("ERROR --- the deal "+responseHandling.getServiceTranNumber(subTotalResponse)+ " did not cancel").assignCategory("warning");
+
+                }
+
+
+
             }else{
                 System.out.println("ERROR --- status code is not 200 or ErrorCodeStatus is not 0 ");
                 ExReApiTestReport.fail("ERROR --- status code is not 200"+"("+subTotalResponse.getStatusCode()+")" +" or ErrorCodeStatus is not 0 "+"("+

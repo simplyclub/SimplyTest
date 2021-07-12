@@ -85,7 +85,7 @@ public class ResponseHandling  {
         return allItemsDiscountPercent.get("AllItemsDiscountPercent").toString();
 
     }
-    public String getServiceTranNumber(Response response,int index){
+    public String getServiceTranNumber(Response response){
         String s = response.getBody().asString();
         JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(s);
         return responseObj.get("ServiceTranNumber").toString();

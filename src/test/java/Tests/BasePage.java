@@ -47,6 +47,7 @@ public  class BasePage {
     Response trenEndResponse = null ;
     Response userDataResponse = null;
     Response transactionViewResponse = null;
+    Response trenCancelResponse = null ;
     ArrayList<Node> xmlResponseDiscountList = new ArrayList<>();
 
     // extent report
@@ -109,6 +110,10 @@ public  class BasePage {
         if (xmlResponseDiscountList!=null){
 
             xmlResponseDiscountList=null;
+        }
+        if (trenCancelResponse!=null){
+
+            trenCancelResponse=null;
         }
 
     }
