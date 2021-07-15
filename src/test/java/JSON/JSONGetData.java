@@ -37,7 +37,7 @@ public class JSONGetData  {
         JSONArray tests = (JSONArray) JSONObj.get("Accumulates");
         return  tests.size();
     }
-    public Integer getArraySizeSumAccum (Object obj,int index){
+    public static Integer getArraySizeSumAccum(Object obj, int index){
         JSONObject JSONObj = (JSONObject) obj ;
         JSONArray  tests = (JSONArray) JSONObj.get("array");
         JSONObject sumAccum = (JSONObject) tests.get(index);
@@ -298,7 +298,7 @@ public class JSONGetData  {
     }
 
 
-    public String   getSumAccumKey(Object obj, int index,int Aindex){
+    public static String   getSumAccumKey(Object obj, int index, int Aindex){
         JSONObject jsonObj = (JSONObject) obj ;
         JSONArray  tests = (JSONArray) jsonObj.get("array");
         JSONObject sumAccum = (JSONObject) tests.get(index);
@@ -311,12 +311,12 @@ public class JSONGetData  {
 
     }
 
-    private String stringFix(String str){
+    private static String stringFix(String str){
         String str1 =str.replace("[","");
         String str2 =str1.replace("]","");
         return str2;
     }
-    public String getSumAccumValue(Object obj , String key, int index ,int Aindex ){
+    public static String getSumAccumValue(Object obj, String key, int index, int Aindex){
         JSONObject JsonObj = (JSONObject) obj ;
         JSONArray  tests = (JSONArray) JsonObj.get("array");
         JSONObject sumAccum = (JSONObject) tests.get(index);

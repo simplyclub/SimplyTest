@@ -8,6 +8,7 @@ import FunctionsClass.UpdateXMLFile;
 import JSON.JSONGetData;
 import JSON.ResponseHandling;
 
+import Tests.TestFunctions.TranEndFunctions;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
@@ -32,6 +33,7 @@ public  class BasePage {
     UpdateJSONFile updateJSONFile = new UpdateJSONFile();
     APIHandling.APIPost APIPost = new APIPost();
     JSONGetData JSONGetData = new JSONGetData();
+
 
     //UserHandling userHandling = new UserHandling();
     ResponseHandling responseHandling = new ResponseHandling();
@@ -68,6 +70,8 @@ public  class BasePage {
     public static HashMap<String ,Double> sumDealPoints = new HashMap<>();
     public static HashMap<String ,Double> sumDealPointsWithUse = new HashMap<>();
     public static HashMap<String ,Double> sumDealToUsePoints = new HashMap<>();
+    public static HashMap<String ,Double> sumBurnd = new HashMap<>();
+
 
     //pre
     public static HashMap<String,Double> preDeal = new HashMap<>();

@@ -4,7 +4,9 @@ import BaseClass.BaseAPI;
 import BaseClass.BaseJSON;
 import BaseClass.BaseXML;
 import JSON.UserHandling;
+import Tests.TestFunctions.TranEndFunctions;
 
+import Tests.TestFunctions.TranEndFunctions;
 import com.sun.org.glassfish.gmbal.Description;
 import io.restassured.response.Response;
 import org.json.simple.JSONArray;
@@ -17,16 +19,24 @@ import utilities.MainFunction;
 import javax.xml.transform.TransformerException;
 import java.text.DecimalFormat;
 
+
 import static BaseClass.BaseAPI.TEST_API_SYSTEM_URI;
 import static java.lang.Math.abs;
 
 public class TranEndTest extends BasePage {
 
+
     @Test(testName = "TrenEnd Test ", priority = 1)
     @Description("Will run on each of the accumulators  ")
     public void tranEndTest() throws TransformerException {
-        for (int i = 0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++){
+        TranEndFunctions tranEndFunctions = new TranEndFunctions();
+
+        for (int i = 0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++) {
+            ExReAccumReport.info("~~~~~~~~~~~~~~~~~~~~~~Deal: "+ (i+1)+"~~~~~~~~~~~~~~~~~~~~~~");
             MainFunction.RestGlobals();
+
+
+
 
             // resat the base json  that i send in the infrastructure
             baseJSON.BaseJSONCopy();
@@ -41,32 +51,32 @@ public class TranEndTest extends BasePage {
 
             //make a deal subTotal+trenEnd
             subTotalResponse = makeDealSubTotal(i);
-            if(!(subTotalResponse.getStatusCode() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse).equals("0"))) {
+            if (!(subTotalResponse.getStatusCode() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse).equals("0"))) {
                 System.out.println("ERROR --- status code is not 200 or ErrorCodeStatus is not 0 ");
-                ExReApiTestReport.fail("ERROR --- status code is not 200"+"("+subTotalResponse.getStatusCode()+")" +" or ErrorCodeStatus is not 0 "+"("+
-                        responseHandling.getErrorCodeStatusJson(subTotalResponse)+")");
+                ExReApiTestReport.fail("ERROR --- status code is not 200" + "(" + subTotalResponse.getStatusCode() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                        responseHandling.getErrorCodeStatusJson(subTotalResponse) + ")");
                 break;
             }
 
 
             //this if check if we are using  points or vouchers
-            if(JSONGetData.getDealsToUse(TestJSONToSend,i).size()== 0){
-                //****deal without Using Points*****
+            if (JSONGetData.getDealsToUse(TestJSONToSend, i).size() == 0) {
+                //****************************************************************deal without Using Points****************************************************************
 
                 trenEndResponse = makeDealTrenEnd(i);
-                if(!(trenEndResponse.getStatusCode() == 200 && responseHandling.getErrorCodeStatusJson(trenEndResponse).equals("0"))) {
+                if (!(trenEndResponse.getStatusCode() == 200 && responseHandling.getErrorCodeStatusJson(trenEndResponse).equals("0"))) {
                     System.out.println("ERROR --- status code is not 200 or ErrorCodeStatus is not 0 ");
-                    ExReApiTestReport.fail("ERROR --- status code is not 200"+"("+subTotalResponse.getStatusCode()+")" +" or ErrorCodeStatus is not 0 "+"("+
-                            responseHandling.getErrorCodeStatusJson(subTotalResponse)+")");
+                    ExReApiTestReport.fail("ERROR --- status code is not 200" + "(" + subTotalResponse.getStatusCode() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                            responseHandling.getErrorCodeStatusJson(subTotalResponse) + ")");
                     break;
                 }
 
                 //check for points after the deal
                 userDataResponse = getUserData(i);
-                if(!(userDataResponse.getStatusCode() == 200 && responseHandling.getErrorCodeStatusJson(userDataResponse).equals("0"))) {
+                if (!(userDataResponse.getStatusCode() == 200 && responseHandling.getErrorCodeStatusJson(userDataResponse).equals("0"))) {
                     System.out.println("ERROR --- status code is not 200 or ErrorCodeStatus is not 0 ");
-                    ExReApiTestReport.fail("ERROR --- status code is not 200"+"("+subTotalResponse.getStatusCode()+")" +" or ErrorCodeStatus is not 0 "+"("+
-                            responseHandling.getErrorCodeStatusJson(subTotalResponse)+")");
+                    ExReApiTestReport.fail("ERROR --- status code is not 200" + "(" + subTotalResponse.getStatusCode() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                            responseHandling.getErrorCodeStatusJson(subTotalResponse) + ")");
                     break;
                 }
                 getPostDealVouchers(i);
@@ -77,9 +87,9 @@ public class TranEndTest extends BasePage {
                 updateXMLFile.updateGetTransactionView(BaseXML.xmlDocGetTransactionView(), "tranKey", responseHandling.getServiceTranNumber(subTotalResponse));
 
                 transactionViewResponse = APIPost.postXMLToGetTransactionView(TEST_API_SYSTEM_URI, BaseXML.GET_TREN_FILE_LOCATION);
-                if(!(transactionViewResponse.getStatusCode()==200)){
+                if (!(transactionViewResponse.getStatusCode() == 200)) {
                     System.out.println("ERROR xml--- status code is not 200 ");
-                    ExReApiTestReport.fail("ERROR xml--- status code is not 200"+"("+subTotalResponse.getStatusCode()+")");
+                    ExReApiTestReport.fail("ERROR xml--- status code is not 200" + "(" + subTotalResponse.getStatusCode() + ")");
                     break;
 
                 }
@@ -94,64 +104,29 @@ public class TranEndTest extends BasePage {
                 ExReAccumReport.info("sumDealPoints --> " + sumDealPoints.toString());
 
                 // Checks if the amount of points earned, for each of the Accums , is correct and equal to what I expected to receive
-                for (String key : sumDealPoints.keySet()) {
-                    for (int q = 0; q <= JSONGetData.getArraySizeSumAccum(TestJSONToSend, i); q++) {
+                tranEndFunctions.earnedChecks(i);
 
 
-                        //Compares  the Accum from the "sumDealPoints " to the Accum in the Test JSON
-                        if (key.equals(JSONGetData.getSumAccumKey(TestJSONToSend, i, q))) {
-
-                            //Corrects the figure to two digits after the decimal point
-                            double d = (postDeal.get(key) - preDeal.get(key));
-                            DecimalFormat df = new DecimalFormat("#.##");
-                            String dx = df.format(d);
-                            d = Double.valueOf(dx);
+                totalDealPaidCalculation(responseHandling.getXMLFilePaidTotal(transactionViewResponse.getBody().asString()), i);
 
 
-                            String sumDeal =sumDealPoints.get(key).toString();
-                            dx = df.format(Double.valueOf(sumDeal));
-                            sumDeal = Double.valueOf(dx).toString();
-
-                            String SumAccumValue=JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q);
-
-                            double m = Double.valueOf(JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
-                            dx = df.format(m);
-                            m = Double.valueOf(dx);
-
-                            if (sumDeal.equals(SumAccumValue) && d == m ) {
-
-                                ExReAccumReport.pass(sumDeal + " equals to " + SumAccumValue);
-                                ExReAccumReport.pass(d + " equals to " + JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
-                            } else {
-                                ExReAccumReport.fail("*sumDealPoints: " + df.format(sumDealPoints.get(key)) + " NOT equals to "
-                                        + "Test Json sumAccum: " + JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
-                                ExReAccumReport.fail("(postDeal.get(" + key + ") - preDeal.get(" + key + ")): " + d + " NOT equals to "
-                                        + "Test Json sumAccum: " + JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
-                            }
-                            break;
-                        }
-                    }
-                }
-                totalDealPaidCalculation(responseHandling.getXMLFilePaidTotal(transactionViewResponse.getBody().asString()),i);
-
-
-            }else{
-                //*******deal Using Points*******
+            } else {
+                //****************************************************************deal Using Points****************************************************************
                 trenEndResponse = makeDealWithUsingPointsTrenEnd(i);
-                if(!(trenEndResponse.getStatusCode() == 200 && responseHandling.getErrorCodeStatusJson(trenEndResponse).equals("0"))) {
+                if (!(trenEndResponse.getStatusCode() == 200 && responseHandling.getErrorCodeStatusJson(trenEndResponse).equals("0"))) {
                     System.out.println("ERROR --- status code is not 200 or ErrorCodeStatus is not 0 ");
-                    ExReApiTestReport.fail("ERROR --- status code is not 200"+"("+subTotalResponse.getStatusCode()+")" +" or ErrorCodeStatus is not 0 "+"("+
-                            responseHandling.getErrorCodeStatusJson(subTotalResponse)+")");
+                    ExReApiTestReport.fail("ERROR --- status code is not 200" + "(" + subTotalResponse.getStatusCode() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                            responseHandling.getErrorCodeStatusJson(subTotalResponse) + ")");
                     break;
                 }
                 System.out.println(trenEndResponse.getBody().asString());
 
                 //check for points after the deal
                 userDataResponse = getUserData(i);
-                if(!(userDataResponse.getStatusCode() == 200 && responseHandling.getErrorCodeStatusJson(userDataResponse).equals("0"))) {
+                if (!(userDataResponse.getStatusCode() == 200 && responseHandling.getErrorCodeStatusJson(userDataResponse).equals("0"))) {
                     System.out.println("ERROR --- status code is not 200 or ErrorCodeStatus is not 0 ");
-                    ExReApiTestReport.fail("ERROR --- status code is not 200"+"("+subTotalResponse.getStatusCode()+")" +" or ErrorCodeStatus is not 0 "+"("+
-                            responseHandling.getErrorCodeStatusJson(subTotalResponse)+")");
+                    ExReApiTestReport.fail("ERROR --- status code is not 200" + "(" + subTotalResponse.getStatusCode() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                            responseHandling.getErrorCodeStatusJson(subTotalResponse) + ")");
                     break;
                 }
                 getPostDealVouchers(i);
@@ -161,9 +136,9 @@ public class TranEndTest extends BasePage {
                 updateXMLFile.updateGetTransactionView(BaseXML.xmlDocGetTransactionView(), "tranKey", responseHandling.getServiceTranNumber(subTotalResponse));
 
                 transactionViewResponse = APIPost.postXMLToGetTransactionView(TEST_API_SYSTEM_URI, BaseXML.GET_TREN_FILE_LOCATION);
-                if(!(transactionViewResponse.getStatusCode()==200)){
+                if (!(transactionViewResponse.getStatusCode() == 200)) {
                     System.out.println("ERROR xml--- status code is not 200 ");
-                    ExReApiTestReport.fail("ERROR xml--- status code is not 200"+"("+subTotalResponse.getStatusCode()+")");
+                    ExReApiTestReport.fail("ERROR xml--- status code is not 200" + "(" + subTotalResponse.getStatusCode() + ")");
                     break;
 
                 }
@@ -171,22 +146,26 @@ public class TranEndTest extends BasePage {
 
                 // "nodeList" is for using in discountLoop
                 nodeList = responseHandling.getXMLFileTranViewDiscountData(transactionViewResponse.getBody().asString());
-                System.out.println(nodeList);
+                System.out.println("*"+transactionViewResponse.getBody().asString());
 
 
                 //this for loop run on all the Discounts  and sum theme
                 discountLoop(i);
+
+
+                sumBurnd(i);
                 pointUseCalculation(i);
                 sumDealToUsePointsCheck(i);
-                DiscountConfirmTest(nodeList,i);
-                totalDealPaidCalculation(responseHandling.getXMLFilePaidTotal(transactionViewResponse.getBody().asString()),i);
 
+                // Checks if the amount of points earned, for each of the Accums , is correct and equal to what I expected to receive
+                tranEndFunctions.earnedChecks(i);
+                DiscountConfirmTest(nodeList, i);
+                totalDealPaidCalculation(responseHandling.getXMLFilePaidTotal(transactionViewResponse.getBody().asString()), i);
 
 
             }
 
-
-
+            AccumsNotInUse();
 
 
 
@@ -194,6 +173,24 @@ public class TranEndTest extends BasePage {
         }//end main for loop
 
     }//end ot test
+
+    private void  AccumsNotInUse(){
+        String accID=null ;
+        for(int i=0 ; i<responseHandling.getAllAccums(userDataResponse).size() ; i++) {
+
+            accID = UserHandling.getVoucher(responseHandling.getAllAccums(userDataResponse), "AccID",i);
+
+            if(sumDealPoints.get(accID)== null && sumDealToUsePoints.get(accID)== null){
+                if(preDeal.get(accID).equals(postDeal.get(accID))) {
+                    //System.out.println("*-*aacID: " + accID);
+                    ExReAccumReport.pass("AccumID: "+ accID +"is not change ").assignCategory("AccumsNotInUse");
+                    ExReAccumReport.info("preDeal: "+preDeal.get(accID) + " postDeal: "+postDeal.get(accID)).assignCategory("AccumsNotInUse");
+                }
+
+            }
+
+        }//end  main for loop
+    }//end function
 
 
 
@@ -215,6 +212,7 @@ public class TranEndTest extends BasePage {
                     Node xrdl = nodeList.item(q);
                     if (xrdl.getNodeType() == Node.ELEMENT_NODE) {
                         Element eElement = (Element) xrdl;
+
 
                         //this for loop run on the "DealToUse" array and check if the promoID of a Discount from
                         //the xml is in the TestJson DealToUse
@@ -245,7 +243,8 @@ public class TranEndTest extends BasePage {
 
                                             ExReAccumReport.fail("xmlTotalAmount: " + xmlTotalAmount + " jsonTotalAmount: " + jsonTotalAmount)
                                                     .assignCategory("Confirm Discounts Amount");
-                                            ExReAccumReport.info("additional information : test number("+i+")"+" xmlPromoID("+xmlPromoID+")"+" jsonDealToUsePromoID("+DealToUsePromoID+")")
+                                            ExReAccumReport.info("additional information : test number("+i+")"+" xmlPromoID("+xmlPromoID+")"+" jsonDealToUsePromoID("+DealToUsePromoID+")"+
+                                                    "Please note, this \"buy-get\" Discounts IS ALL OR NOTHING")
                                                     .assignCategory("Confirm Discounts Amount");
                                             break;
 
@@ -299,7 +298,6 @@ public class TranEndTest extends BasePage {
         return APIPost.postUserGetData(BaseAPI.TEST_REST_API_URI, baseJSON.USER_JSON_TO_SEND);
 
     }//func end
-
     private Response makeDealSubTotal(int i) {
         updateJSONFile.upDateBaseJSONFile(JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),
                 JSONGetData.getAccoundID(TestJSONToSend, i), JSONGetData.getTranItems(TestJSONToSend, i));
@@ -403,9 +401,9 @@ public class TranEndTest extends BasePage {
 
 
     }//func end
+
     private void getPostDealVouchers(int i) {
-//fixme : to fix that
-        //this function will add all the post deal vouchers value to the pre deal HaseMap
+        //this function will add all the post deal vouchers value to the post deal HaseMap
         for (int index = 0; index < (responseHandling.getAllAccums(userDataResponse)).size(); index++) {
             s = UserHandling.getVoucher(responseHandling.getAllAccums(userDataResponse), "AccID", index);
             postDeal.put(s, Double.parseDouble(UserHandling.getVoucher(responseHandling.getAllAccums(userDataResponse), "BenefitValue", index)));
@@ -486,12 +484,12 @@ public class TranEndTest extends BasePage {
                         //coupon
                         if (sumDealPoints.get(key) == null) {
                             try {
-                                double d = preDeal.get(key) - Double.valueOf(getBurned(key, i));
+                                double d = preDeal.get(key) - sumBurnd.get(key);
                                 DecimalFormat df = new DecimalFormat("#.##");
                                 String dx = df.format(d);
                                 d = Double.valueOf(dx);
 
-
+                                System.out.println(postDeal);
                             if (postDeal.get(key) == d) {
                                // System.out.println("ok2");
                                 ExReAccumReport.pass("AccumID: " + key + " pass Accumulation Test - Using Points").assignCategory("Using Points");
@@ -594,6 +592,26 @@ public class TranEndTest extends BasePage {
 
         }
         return null;
+    }
+//todo : this \/
+    private void sumBurnd (int i){
+        double sumVal = 0.0 ;
+        double d = 0.0 ;
+        JSONArray arr = JSONGetData.getDealsToUse(TestJSONToSend, i);
+        for (int q = 0; q < arr.size(); q++) {
+            JSONObject x = (JSONObject) arr.get(q);
+            String key = x.get("AccumId").toString();
+            if(!(x.get("Burned").equals("0")) && !(x.get("Burned").equals(""))) {
+                d = Double.valueOf(x.get("Burned").toString());
+                if (sumBurnd.get(key) != null) {
+                    sumVal = sumBurnd.get(key) +  d ;
+                    sumBurnd.replace(key, sumVal);
+                } else {
+                    sumBurnd.put(key,d);
+                }
+            }
+        }
+            System.out.println(sumBurnd);
     }
 
 

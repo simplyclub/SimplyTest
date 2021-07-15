@@ -47,6 +47,7 @@ public class MainFunction extends BasePage {
         postDeal.clear();
         sumDealPoints.clear();
         sumDealToUsePoints.clear();
+        sumBurnd.clear();
         sumVal = 0.0;
 
 

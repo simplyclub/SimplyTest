@@ -197,7 +197,7 @@ public class ResponseHandling  {
 
     }
 
-    //todo: test this new function
+
     public static String getXMLFileNegativeCashBack(String xml){
         try
         {
@@ -223,7 +223,7 @@ public class ResponseHandling  {
         }
         return null;
 
-    }//todo: test this new function
+    }
     public static String getXMLFilePaidTotal(String xml){
         try
         {
