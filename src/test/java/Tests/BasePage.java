@@ -2,6 +2,7 @@ package Tests;
 
 import APIHandling.APIPost;
 import BaseClass.BaseJSON;
+import BaseClass.BaseXML;
 import BaseClass.WebDriverSetUp;
 import FunctionsClass.UpdateJSONFile;
 import FunctionsClass.UpdateXMLFile;
@@ -29,10 +30,12 @@ import java.util.HashMap;
 public  class BasePage {
 
     //declaration
-    BaseJSON baseJSON = new BaseJSON();
+    public BaseJSON baseJSON = new BaseJSON();
     UpdateJSONFile updateJSONFile = new UpdateJSONFile();
     APIHandling.APIPost APIPost = new APIPost();
     JSONGetData JSONGetData = new JSONGetData();
+    BaseXML baseXML = new BaseXML();
+
 
 
     //UserHandling userHandling = new UserHandling();
@@ -65,10 +68,10 @@ public  class BasePage {
     public static final  String JSON_TEST_FILE = "C:\\Users\\User\\IdeaProjects\\SimplyTest\\JSONParametersToSend.json";
     public static String s = null;
     public static double sumVal = 0.0;
+    public static final String LOG_FILE_DIRECTORY = "C:\\Users\\User\\IdeaProjects\\SimplyTest\\LogFile";
 
     //sum
     public static HashMap<String ,Double> sumDealPoints = new HashMap<>();
-    public static HashMap<String ,Double> sumDealPointsWithUse = new HashMap<>();
     public static HashMap<String ,Double> sumDealToUsePoints = new HashMap<>();
     public static HashMap<String ,Double> sumBurnd = new HashMap<>();
 

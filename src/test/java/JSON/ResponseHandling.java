@@ -85,9 +85,9 @@ public class ResponseHandling  {
         return allItemsDiscountPercent.get("AllItemsDiscountPercent").toString();
 
     }
-    public String getServiceTranNumber(Response response){
+    public static String getServiceTranNumber(Response response){
         String s = response.getBody().asString();
-        JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(s);
+        JSONObject responseObj = (JSONObject) BaseJSON.convertStringToJSONObj(s);
         return responseObj.get("ServiceTranNumber").toString();
 
     }
@@ -97,9 +97,9 @@ public class ResponseHandling  {
      * @param response - user "get data" response
      * @return JSONArray with  "AllAccums" array
      */
-    public JSONArray getAllAccums (Response response){
+    public static JSONArray getAllAccums(Response response){
         String s = response.getBody().asString();
-        JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(s);
+        JSONObject responseObj = (JSONObject) BaseJSON.convertStringToJSONObj(s);
         JSONObject member = (JSONObject) responseObj.get("Member");
         JSONArray AllAccums = (JSONArray) member.get("AllAccums");
 
@@ -149,7 +149,7 @@ public class ResponseHandling  {
         return null;
 
     }
-    public String getXMLResponseAmount(NodeList nodeList, int i){
+    public static String getXMLResponseAmount(NodeList nodeList, int i){
         Node node = nodeList.item(i);
         if (node.getNodeType() == Node.ELEMENT_NODE){
             Element eElement = (Element) node;
@@ -160,7 +160,7 @@ public class ResponseHandling  {
     }
 
 
-    public String getXMLResponsePromoID(NodeList nodeList, int NLindexl){
+    public static String getXMLResponsePromoID(NodeList nodeList, int NLindexl){
         Node node = nodeList.item(NLindexl);
         if (node.getNodeType() == Node.ELEMENT_NODE){
             Element eElement = (Element) node;

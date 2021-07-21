@@ -27,9 +27,10 @@ public class SubTotalTest extends BasePage {
 
         //this loop run on the the tests in the "test JSON to send"
         for (int i = 0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++) {
+            ExReApiTestReport.info("~~~~~~~~~~~~~~~~~~~~~~~~ Deal "+(i+1)+" ~~~~~~~~~~~~~~~~~~~~~~~~");
 
             updateJSONFile.upDateBaseJSONFile(JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),
-                    JSONGetData.getAccoundID(TestJSONToSend, i), JSONGetData.getTranItems(TestJSONToSend, i));
+                    JSONGetData.getAccoundID(TestJSONToSend, i), JSONGetData.getTranItems(TestJSONToSend, i),JSONGetData.getCardNumber(TestJSONToSend, i));
 
             subTotalResponse = APIPost.postSubTotal(BaseAPI.TEST_REST_API_URI, BaseJSON.JSON_TO_SEND);
             if(subTotalResponse.getStatusCode() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse).equals("0")) {
@@ -43,8 +44,8 @@ public class SubTotalTest extends BasePage {
                 trenCancelResponse = APIPost.postTrenCancel(BaseAPI.TEST_REST_API_URI,BaseJSON.TREN_CONCEL_JSON);
                 //System.out.println(trenCancelResponse.getBody().asString());
                 if (trenCancelResponse.getStatusCode()!= 200 && !(responseHandling.getErrorCodeStatusJson(trenCancelResponse).equals("0"))){
-                    System.out.println("ERROR --- the deal "+responseHandling.getServiceTranNumber(subTotalResponse)+ " did not cancel");
-                    ExReApiTestReport.warning("ERROR --- the deal "+responseHandling.getServiceTranNumber(subTotalResponse)+ " did not cancel").assignCategory("warning");
+                    System.out.println("ERROR --- the deal "+responseHandling.getServiceTranNumber(trenCancelResponse)+ " did not cancel");
+                    ExReApiTestReport.warning("ERROR --- the deal "+responseHandling.getServiceTranNumber(trenCancelResponse)+ " did not cancel").assignCategory("warning");
 
                 }
 

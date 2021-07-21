@@ -22,7 +22,7 @@ public class Listeners extends BasePage implements ITestListener  {
 
     @Override
     public void onStart(ITestContext arg0) {
-        System.out.println("*********************~~~~~~**********************");
+       // System.out.println("*********************~~~~~~**********************");
 
     }
     @Override
