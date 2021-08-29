@@ -9,11 +9,9 @@ import FunctionsClass.UpdateXMLFile;
 import JSON.JSONGetData;
 import JSON.ResponseHandling;
 
-import Tests.TestFunctions.TranEndFunctions;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.aventstack.extentreports.reporter.configuration.Theme;
 import io.restassured.response.Response;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
@@ -21,7 +19,6 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import utilities.EmailHandling;
 import utilities.MainFunction;
 
 import java.util.ArrayList;
@@ -32,7 +29,7 @@ public  class BasePage {
     //declaration
     public BaseJSON baseJSON = new BaseJSON();
     UpdateJSONFile updateJSONFile = new UpdateJSONFile();
-    APIHandling.APIPost APIPost = new APIPost();
+    public APIPost APIPost = new APIPost();
     JSONGetData JSONGetData = new JSONGetData();
     BaseXML baseXML = new BaseXML();
 
@@ -40,8 +37,8 @@ public  class BasePage {
 
     //UserHandling userHandling = new UserHandling();
     ResponseHandling responseHandling = new ResponseHandling();
-    UpdateXMLFile updateXMLFile = new UpdateXMLFile();
-    NodeList nodeList = null;
+    public UpdateXMLFile updateXMLFile = new UpdateXMLFile();
+    public NodeList nodeList = null;
 
 
 
@@ -52,6 +49,7 @@ public  class BasePage {
     Response trenEndResponse = null ;
     Response userDataResponse = null;
     Response transactionViewResponse = null;
+    public static Response getMemberBenefitListResponse = null;
     Response trenCancelResponse = null ;
     ArrayList<Node> xmlResponseDiscountList = new ArrayList<>();
 
@@ -60,6 +58,7 @@ public  class BasePage {
     public static  ExtentSparkReporter spark = new ExtentSparkReporter("index.html");
     public static  ExtentTest ExReApiTestReport ;
     public static  ExtentTest ExReAccumReport ;
+    public static  ExtentTest ExRePointsValiditReport;
 
 
 
@@ -93,6 +92,7 @@ public  class BasePage {
         // Extent report tests titles
         ExReApiTestReport = exReport.createTest("Sub Total Test").assignCategory("Transaction");// give the name of the test title  in the report
         ExReAccumReport = exReport.createTest("Accumulation Test").assignCategory("Transaction");// give the name of the test title  in the report
+        ExRePointsValiditReport = exReport.createTest("Points Validit Test").assignCategory("Transaction");// give the name of the test title  in the report
 
     }
 
@@ -121,6 +121,11 @@ public  class BasePage {
         if (trenCancelResponse!=null){
 
             trenCancelResponse=null;
+
+        }
+        if (getMemberBenefitListResponse !=null){
+
+            getMemberBenefitListResponse =null;
         }
 
     }

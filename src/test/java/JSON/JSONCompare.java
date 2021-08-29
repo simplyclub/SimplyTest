@@ -31,8 +31,7 @@ public class JSONCompare extends BasePage {
                    // System.out.println("CashBackDiscounts:");
                    // System.out.println("response: "+CBPromoId+ ", test JSON: " + temp+", Index "+ j);
                     flag1 = 1;
-                    ExReApiTestReport.info("CashBackDiscounts: "+arrayIndex);
-                    ExReApiTestReport.info("Response promoID: "+ CBPromoId + "Test JSON promoID: " + temp ).assignCategory("responVSTestJson");
+
 
 
                     if (responseHandling.getAmount(response,"CashBackDiscounts",i).equals(
@@ -44,6 +43,8 @@ public class JSONCompare extends BasePage {
 
                         ExReApiTestReport.fail("response amount: "+responseHandling.getAmount(response,"CashBackDiscounts",i)+" is NOT equals to " +
                                 "Test JSON amount: "+JSONGetData.getAmount(TestJSONToSend,arrayIndex,j,"CashBackDiscounts"));
+                        ExReApiTestReport.info("CashBackDiscounts: "+ arrayIndex);
+                        ExReApiTestReport.info("Response promoID: "+ CBPromoId + "Test JSON promoID: " + temp ).assignCategory("responVSTestJson");
                     }
 
 
@@ -99,8 +100,7 @@ public class JSONCompare extends BasePage {
                 if(TBPromoId.equals(temp)){
                     flag1 = 1 ;
 
-                    ExReApiTestReport.info("TotalDiscounts:"+arrayIndex);
-                    ExReApiTestReport.info("Response promoID: "+ TBPromoId + "Test JSON promoID: " + temp ).assignCategory("responVSTestJson");
+
 
                     if (responseHandling.getAmount(response,"TotalDiscounts",i).equals(
                             JSONGetData.getAmount(TestJSONToSend,arrayIndex,j,"TotalDiscounts"))){
@@ -111,6 +111,8 @@ public class JSONCompare extends BasePage {
 
                         ExReApiTestReport.fail("response amount: "+responseHandling.getAmount(response,"TotalDiscounts",i)+" is NOT equals to " +
                                 "Test JSON amount: "+JSONGetData.getAmount(TestJSONToSend,arrayIndex,j,"TotalDiscounts"));
+                        ExReApiTestReport.info("TotalDiscounts:"+arrayIndex);
+                        ExReApiTestReport.info("Response promoID: "+ TBPromoId + "Test JSON promoID: " + temp ).assignCategory("responVSTestJson");
                     }
 
 
@@ -212,24 +214,6 @@ public class JSONCompare extends BasePage {
 
                 if(TBPromoId.equals(temp)){
                     flag1 = 1 ;
-
-//                    System.out.println("TotalDiscounts:");
-//                    System.out.println("response: "+TBPromoId+ ", test JSON: " + temp+", Index "+ j);
-//                    ExReApiTestReport.info("TotalDiscounts:");
-//                    ExReApiTestReport.info("Test JSON promoID: "+ temp + " Response  promoID: " + TBPromoId ).assignCategory("TestJSONVSResponse");
-//
-//
-//                    softAssertion.assertEquals(responseHandling.getAmount(response,"TotalDiscounts",j),
-//                            JSONGetData.getAmount(TestJSONToSend,arrayIndex,i,"TotalDiscounts")
-//                    );
-//                    softAssertion.assertEquals(responseHandling.getDescription(response,"TotalDiscounts",j),
-//                            JSONGetData.getDescription(TestJSONToSend,arrayIndex,i,"TotalDiscounts")
-//                    );
-//                    softAssertion.assertEquals(responseHandling.getAllItemsDiscountPercent(response,j),
-//                            JSONGetData.getAllItemsDiscountPercent(TestJSONToSend,arrayIndex,i,"TotalDiscounts")
-//                    );
-//
-//                    softAssertion.assertAll();
                     break;
 
                 }

@@ -19,8 +19,11 @@ public class TranEndTest extends BasePage {
     public void tranEndTest() throws TransformerException, IOException {
         TranEndFunctions tranEndFunctions = new TranEndFunctions();
 
+
         for (int i = 0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++) {
+            //TODO : add a "if " to check the "DealTypeFlag" after the loop start all deals in this test need to be DealTypeFlag = 0
             ExReAccumReport.info("~~~~~~~~~~~~~~~~~~~~~~Deal: "+ (i+1)+"~~~~~~~~~~~~~~~~~~~~~~");
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~Deal: "+ (i+1)+"~~~~~~~~~~~~~~~~~~~~~~");
             MainFunction.RestGlobals();
 
             // resat the base json  that i send in the infrastructure
@@ -32,7 +35,7 @@ public class TranEndTest extends BasePage {
             //check that the AccID from the response equal to the AccID from my  test JSON
             tranEndFunctions.getPreDealPointsAccums(i,userDataResponse);
 
-            //make a deal subTotal+trenEnd
+            //make a deal subTotal
             subTotalResponse = tranEndFunctions.makeDealSubTotal(i);
             System.out.println("subTotalResponse: "+subTotalResponse.getBody().asString());
             if (!(subTotalResponse.getStatusCode() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse).equals("0"))) {
@@ -41,8 +44,6 @@ public class TranEndTest extends BasePage {
                         responseHandling.getErrorCodeStatusJson(subTotalResponse) + ")");
                 LogFileHandling.createLogFile(baseJSON.getString(baseJSON.JSON_TO_SEND),LOG_FILE_DIRECTORY,"subTotalCall");
                 LogFileHandling.createLogFile(subTotalResponse.asString(),LOG_FILE_DIRECTORY,"subTotalResponse");
-
-
                 break;
             }
 
@@ -76,8 +77,8 @@ public class TranEndTest extends BasePage {
 
 
                 //get Transaction View, with the data of all Discount Data in the end of the deal
-                updateXMLFile.updateGetTransactionView(BaseXML.xmlDocGetTransactionView(), "loginKey", updateXMLFile.getSysLogin());
-                updateXMLFile.updateGetTransactionView(BaseXML.xmlDocGetTransactionView(), "tranKey", responseHandling.getServiceTranNumber(subTotalResponse));
+                updateXMLFile.updateGetTransactionView(BaseXML.xmlToDocGetTransactionView(), "loginKey", updateXMLFile.getSysLogin());
+                updateXMLFile.updateGetTransactionView(BaseXML.xmlToDocGetTransactionView(), "tranKey", responseHandling.getServiceTranNumber(subTotalResponse));
 
                 transactionViewResponse = APIPost.postXMLToGetTransactionView(TEST_API_SYSTEM_URI, BaseXML.GET_TREN_FILE_LOCATION);
                 if (!(transactionViewResponse.getStatusCode() == 200)) {
@@ -142,8 +143,8 @@ public class TranEndTest extends BasePage {
                 tranEndFunctions.getPostDealVouchers(i,userDataResponse);
 
                 //get Transaction View, with the data of all Discount Data in the end of the deal
-                updateXMLFile.updateGetTransactionView(BaseXML.xmlDocGetTransactionView(), "loginKey", updateXMLFile.getSysLogin());
-                updateXMLFile.updateGetTransactionView(BaseXML.xmlDocGetTransactionView(), "tranKey", responseHandling.getServiceTranNumber(subTotalResponse));
+                updateXMLFile.updateGetTransactionView(BaseXML.xmlToDocGetTransactionView(), "loginKey", updateXMLFile.getSysLogin());
+                updateXMLFile.updateGetTransactionView(BaseXML.xmlToDocGetTransactionView(), "tranKey", responseHandling.getServiceTranNumber(subTotalResponse));
 
                 transactionViewResponse = APIPost.postXMLToGetTransactionView(TEST_API_SYSTEM_URI, BaseXML.GET_TREN_FILE_LOCATION);
                 if (!(transactionViewResponse.getStatusCode() == 200)) {

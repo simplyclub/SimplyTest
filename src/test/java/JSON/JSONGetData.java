@@ -8,9 +8,15 @@ import org.openqa.selenium.json.Json;
 import java.util.Set;
 
 public class JSONGetData  {
+    public static void getDealsToUseAccumId(Object testJSONToSend, int t) {
+    }
     //this class is for gating data from the "JSON_TEST_FILE" for comparing
-
-
+// todo: Combine all the "getArraySize..." to one function
+    /**
+     * Thos function returns the size of  the TestJson
+     * @param obj TestJSONToSend
+     * @return
+     */
     public Integer getArraySize (Object obj){
         try {
             JSONObject JSONObj = (JSONObject) obj;
@@ -34,10 +40,21 @@ public class JSONGetData  {
         JSONArray tests = (JSONArray) JSONObj.get("TotalDiscounts");
         return  tests.size();
     }
-    public static Integer getArraySizeAccumulates(JSONObject obj){
-        JSONObject JSONObj =  obj ;
-        JSONArray tests = (JSONArray) JSONObj.get("Accumulates");
-        return  tests.size();
+
+    /**
+     * get the size of  Accumulates array
+     * @param obj TestJSONToSend
+     * @param index i
+     * @return
+     */
+    public static Integer getArraySizeAccumulates(Object obj,int index){
+        JSONObject JSONObj = (JSONObject) obj ;
+        JSONArray  tests = (JSONArray) JSONObj.get("array");
+        JSONObject z = (JSONObject) tests.get(index);
+        JSONArray response = (JSONArray) z.get("Response");
+        JSONObject Accumulates = (JSONObject) response.get(2);
+        JSONArray t = (JSONArray) Accumulates.get("Accumulates");
+        return  t.size();
     }
     public static Integer getArraySizeSumAccum(Object obj, int index){
         JSONObject JSONObj = (JSONObject) obj ;
@@ -112,6 +129,7 @@ public class JSONGetData  {
         return totalDiscounts;
 
     }
+
     public String getDescription(Object obj , int arrayIndex,int index,String discountsType){
         if (discountsType.equals("CashBackDiscounts")){
             JSONObject x = getCashBackDiscounts(obj,arrayIndex);
@@ -131,22 +149,31 @@ public class JSONGetData  {
         return null;
 
     }
-    public static String getPromoId(Object obj, int arrayIndex, int index, String discountsType){
+
+    /**
+     * this function return the promoId from the Test Json Response : CashBackDiscounts / TotalDiscounts / Accumulates
+     * @param obj
+     * @param dealIndex   deal index
+     * @param index the index inside the array
+     * @param discountsType CashBackDiscounts / TotalDiscounts / Accumulates
+     * @return
+     */
+    public static String getPromoId(Object obj, int dealIndex, int index, String discountsType){
         if (discountsType.equals("CashBackDiscounts")){
-            JSONObject x = getCashBackDiscounts(obj,arrayIndex);
+            JSONObject x = getCashBackDiscounts(obj,dealIndex);
             JSONArray x2 = (JSONArray) x.get("CashBackDiscounts");
             JSONObject description = (JSONObject) x2.get(index);
             return  description.get("PromoId").toString();
 
         }else
             if(discountsType.equals("TotalDiscounts")){
-                JSONObject x = getTotalDiscounts(obj,arrayIndex);
+                JSONObject x = getTotalDiscounts(obj,dealIndex);
                 JSONArray x2 = (JSONArray) x.get("TotalDiscounts");
                 JSONObject description = (JSONObject) x2.get(index);
                 return  description.get("PromoId").toString();
 
         }else if(discountsType.equals("Accumulates")){
-                JSONObject x = getTotalAccumulates(obj,arrayIndex);
+                JSONObject x = getTotalAccumulates(obj,dealIndex);
                 JSONArray x2 = (JSONArray) x.get("Accumulates");
                 JSONObject description = (JSONObject) x2.get(index);
                 return  description.get("PromoID").toString();
@@ -343,10 +370,10 @@ public class JSONGetData  {
 
     }
 
-    public static String getDealsToUseAccumId(Object obj, int index, int DealIndex){
+    public static String getDealsToUseAccumId(Object obj, int i, int DealIndex){
         JSONObject JsonObj = (JSONObject) obj ;
         JSONArray  tests = (JSONArray) JsonObj.get("array");
-        JSONObject x =  (JSONObject) tests.get(index);
+        JSONObject x =  (JSONObject) tests.get(i);
         JSONArray dealToUse = (JSONArray) x.get("DealsToUse");
         JSONObject d = (JSONObject) dealToUse.get(DealIndex);
         return d.get("AccumId").toString();
@@ -431,6 +458,14 @@ public class JSONGetData  {
         JSONArray  tests = (JSONArray) JSONObj.get("array");
         JSONObject  DealAmountJSONObj = (JSONObject) tests.get(index);
         return   DealAmountJSONObj.get("CardNumber").toString();
+
+    }
+
+    public static String getDealTypeFlag (Object obj, int index){
+        JSONObject JSONObj = (JSONObject) obj ;
+        JSONArray  tests = (JSONArray) JSONObj.get("array");
+        JSONObject  DealAmountJSONObj = (JSONObject) tests.get(index);
+        return   DealAmountJSONObj.get("DealTypeFlag").toString();
 
     }
 

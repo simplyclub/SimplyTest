@@ -6,20 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
-import org.w3c.dom.Element;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.StringReader;
+import java.text.DecimalFormat;
+
 
 public class MainFunction extends BasePage {
 
@@ -60,6 +51,16 @@ public class MainFunction extends BasePage {
             copy[n] = list.item(n);
 
         return copy;
+    }
+
+    public static String converToDoubleAsString(String str ){
+
+        double d = Double.parseDouble(str);
+        DecimalFormat df = new DecimalFormat("#.##");
+        String dx = df.format(d);
+        d = Double.valueOf(dx);
+
+        return Double.toString(d);
 
     }
 }

@@ -92,6 +92,13 @@ public class ResponseHandling  {
 
     }
 
+    public String getTrenEndTranReferenceNumber(Response response){
+        String s = response.getBody().asString();
+        JSONObject responseObj = (JSONObject) BaseJSON.convertStringToJSONObj(s);
+        return responseObj.get("TranReferenceNumber").toString();
+
+    }
+
     /**
      * get the array of the "all accums" from the user data response
      * @param response - user "get data" response
@@ -184,6 +191,39 @@ public class ResponseHandling  {
             doc.getDocumentElement().normalize();
 
             NodeList nodeList = doc.getElementsByTagName("TranViewDiscountData");
+            return nodeList;
+
+
+        }
+
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+    /**
+     * this function get the TranViewMemberBenefitData list from GetMemberBenefitList
+     * @param xml response body as a string
+     * @return
+     */
+    public  NodeList getXMLFileTranViewMemberBenefitData(String xml){
+        try
+        {
+            //creating a constructor of file class and parsing an XML file
+            // File file = new File("C:\\Users\\User\\IdeaProjects\\SimplyTest\\response.xml");
+
+            //an instance of factory that gives a document builder
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            //an instance of builder to parse the specified xml file
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            InputSource is = new InputSource(new StringReader(xml));
+            Document doc = db.parse(is);
+            doc.getDocumentElement().normalize();
+
+            NodeList nodeList = doc.getElementsByTagName("TranViewMemberBenefitData");
             return nodeList;
 
 
