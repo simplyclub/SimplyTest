@@ -468,6 +468,29 @@ public class JSONGetData  {
         return   DealAmountJSONObj.get("DealTypeFlag").toString();
 
     }
+    public static String getPVFlag (Object obj, int index){
+        JSONObject JSONObj = (JSONObject) obj ;
+        JSONArray  tests = (JSONArray) JSONObj.get("array");
+        JSONObject  DealAmountJSONObj = (JSONObject) tests.get(index);
+        return DealAmountJSONObj.get("PVFlag").toString();
+
+    }
+    public static String getDaysToStart (Object obj, int index){
+        JSONObject JSONObj = (JSONObject) obj ;
+        JSONArray  tests = (JSONArray) JSONObj.get("array");
+        JSONObject  DealAmountJSONObj = (JSONObject) tests.get(index);
+        return DealAmountJSONObj.get("DaysToStart").toString();
+
+    }
+
+ public static String getDaysToEnd (Object obj, int index){
+        JSONObject JSONObj = (JSONObject) obj ;
+        JSONArray  tests = (JSONArray) JSONObj.get("array");
+        JSONObject  DealAmountJSONObj = (JSONObject) tests.get(index);
+        return DealAmountJSONObj.get("DaysToEnd").toString();
+
+    }
+
 
 
 

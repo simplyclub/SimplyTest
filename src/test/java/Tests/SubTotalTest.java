@@ -46,7 +46,6 @@ public class SubTotalTest extends BasePage {
                 if (trenCancelResponse.getStatusCode()!= 200 && !(responseHandling.getErrorCodeStatusJson(trenCancelResponse).equals("0"))){
                     System.out.println("ERROR --- the deal "+responseHandling.getServiceTranNumber(trenCancelResponse)+ " did not cancel");
                     ExReApiTestReport.warning("ERROR --- the deal "+responseHandling.getServiceTranNumber(trenCancelResponse)+ " did not cancel").assignCategory("warning");
-
                 }
 
 

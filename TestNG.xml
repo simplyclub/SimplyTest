@@ -18,7 +18,7 @@
     </test>
     <test name="Point validity">
         <classes>
-            <class name="Tests.TranEndTest"></class>
+            <class name="Tests.PointsValidityTest"></class>
         </classes>
     </test>
 

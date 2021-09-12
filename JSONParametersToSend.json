@@ -6462,6 +6462,9 @@
     {
       "TestName": "deal 14 - בדיקת תוקף נקודות  ",
       "DealTypeFlag" : "1",
+      "PVFlag": 36,
+      "DaysToStart": "",
+      "DaysToEnd" : "29",
       "User": "pos11",
       "Password": "11pos",
       "AccoundID": "2828",
@@ -6801,6 +6804,9 @@
     {
       "TestName": "deal 15 - בדיקת תוקף נקודות  ",
       "DealTypeFlag" : "1",
+      "PVFlag": 2,
+      "DaysToStart": "7",
+      "DaysToEnd" : "",
       "User": "pos11",
       "Password": "11pos",
       "AccoundID": "2828",
@@ -7135,6 +7141,9 @@
     {
       "TestName": "deal 16 - בדיקת תוקף נקודות  ",
       "DealTypeFlag" : "1",
+      "PVFlag": 32,
+      "DaysToStart": "7",
+      "DaysToEnd" : "29",
       "User": "pos11",
       "Password": "11pos",
       "AccoundID": "2828",
@@ -7464,6 +7473,9 @@
     {
       "TestName": "deal 17 - בדיקת תוקף נקודות  ",
       "DealTypeFlag" : "1",
+      "PVFlag": 47,
+      "DaysToStart": "0",
+      "DaysToEnd" : "60",
       "User": "pos11",
       "Password": "11pos",
       "AccoundID": "2828",
@@ -7771,6 +7783,9 @@
     {
       "TestName": "deal 18 - בדיקת תוקף נקודות  ",
       "DealTypeFlag" : "1",
+      "PVFlag": 40,
+      "DaysToStart": "",
+      "DaysToEnd" : "2",
       "User": "pos11",
       "Password": "11pos",
       "AccoundID": "2828",
@@ -8092,6 +8107,9 @@
     {
       "TestName": "deal 19 - בדיקת תוקף נקודות  ",
       "DealTypeFlag" : "1",
+      "PVFlag": 12,
+      "DaysToStart": "",
+      "DaysToEnd" : "",
       "User": "pos11",
       "Password": "11pos",
       "AccoundID": "2828",
@@ -8420,6 +8438,648 @@
             {
               "Name":"צבירה לכרטייסייה - קנה ב 100 צבור 5 על 2 פריטים",
               "Amount" : 15.0,
+              "PromoID" : "1851",
+              "AccumId": 283
+            }
+          ]
+        }
+      ],
+      "DealsToUse" : []
+    },
+    {
+      "TestName": "deal 20 - בדיקת תוקף נקודות  ",
+      "DealTypeFlag" : "1",
+      "PVFlag": 18,
+      "DaysToStart": "",
+      "DaysToEnd" : "",
+      "User": "pos11",
+      "Password": "11pos",
+      "AccoundID": "2828",
+      "CardNumber": "1000000",
+      "TotalDealAmount": "208.0",
+      "PointsExpirationTimeToStart" : "",
+      "PointsExpirationTimeToEnd" : "",
+      "sumAccum":[
+        {"282": "148.8"},
+        {"283": "1580.0"}
+      ],
+      "TranItems": [
+        {
+          "CategoryCode": "1",
+          "PromoCode": "",
+          "GrossPrice": 0,
+          "Cost": 0,
+          "ItemDescription": "פריט 8",
+          "Department": "",
+          "SuggestedPromoId": 0,
+          "PLUClassificationCode3": "",
+          "PLUClassificationCode2": "",
+          "PLUClassificationCode1": "",
+          "TrxID": 1,
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ],
+          "Amount": 32.8,
+          "Quantity": 1,
+          "InputFlags": 2,
+          "Vendor": "",
+          "Code": "0008",
+          "SubDept3": "",
+          "SubDept2": "",
+          "SubDept1": "",
+          "UOM": 0,
+          "SysDiscount": 0,
+          "Price": "32.8",
+          "ItemBarcode": "",
+          "Manufacture": ""
+        },
+        {
+          "CategoryCode": "1",
+          "PromoCode": "",
+          "GrossPrice": 0,
+          "Cost": 0,
+          "ItemDescription": "פריט 8",
+          "Department": "",
+          "SuggestedPromoId": 0,
+          "PLUClassificationCode3": "",
+          "PLUClassificationCode2": "",
+          "PLUClassificationCode1": "",
+          "TrxID": 2,
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ],
+          "Amount": 32.8,
+          "Quantity": 1,
+          "InputFlags": 2,
+          "Vendor": "",
+          "Code": "0008",
+          "SubDept3": "",
+          "SubDept2": "",
+          "SubDept1": "",
+          "UOM": 0,
+          "SysDiscount": 0,
+          "Price": "32.8",
+          "ItemBarcode": "",
+          "Manufacture": ""
+        },
+        {
+          "CategoryCode": "1",
+          "PromoCode": "",
+          "GrossPrice": 0,
+          "Cost": 0,
+          "ItemDescription": "פריט 8",
+          "Department": "",
+          "SuggestedPromoId": 0,
+          "PLUClassificationCode3": "",
+          "PLUClassificationCode2": "",
+          "PLUClassificationCode1": "",
+          "TrxID": 3,
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ],
+          "Amount": 32.8,
+          "Quantity": 1,
+          "InputFlags": 2,
+          "Vendor": "",
+          "Code": "0008",
+          "SubDept3": "",
+          "SubDept2": "",
+          "SubDept1": "",
+          "UOM": 0,
+          "SysDiscount": 0,
+          "Price": "32.8",
+          "ItemBarcode": "",
+          "Manufacture": ""
+        }
+
+      ],
+      "Member": [
+        {
+          "GroupName": "קבוצה א",
+          "FirstName": "חבר 1",
+          "LastName": "111",
+          "fieldId": 17,
+          "AllAccums": [
+            {
+              "BenefitName": "נקודות",
+              "BenefitValue": "77065",
+              "BenefitType": 0,
+              "AccID": "269"
+            },
+            {
+              "BenefitName": "כרטיסייה",
+              "BenefitValue": "11097",
+              "BenefitType": 4,
+              "AccID": "270"
+            },
+            {
+              "BenefitName": "קופון זכאות לכולם",
+              "BenefitValue": "2",
+              "BenefitType": 1,
+              "AccID": "271"
+            },
+            {
+              "BenefitName": "קופון זכאות לפי הנפקה",
+              "BenefitValue": "5",
+              "BenefitType": 3,
+              "AccID": "272"
+            },
+            {
+              "BenefitName": "שובר מתנה",
+              "BenefitValue": "868",
+              "BenefitType": 2,
+              "AccID": "273"
+            },
+            {
+              "BenefitName": "קופון זכאות לכולם 2",
+              "BenefitValue": "1",
+              "BenefitType": 1,
+              "AccID": "276"
+
+            }
+          ]
+        }
+      ],
+      "Response": [
+        {
+          "CashBackDiscounts": [
+            {
+              "Description": "מימוש נקודות - קנה בסכום 1 קבל 1:0.2 על 50%מהעיסקה 100% מהצבירה",
+              "Amount": 49.2,
+              "IsAuto": "false",
+              "PromoId": "1839",
+              "AccumId": 282
+            },
+            {
+              "Description": "מימוש נקודות - קנה בכמות של 3 עד 5 קבל 1:0.5 עד 10% מהעיסקה 100% מהצבירה",
+              "Amount": 9.84,
+              "IsAuto": "false",
+              "PromoId": "1841",
+              "AccumId": 282
+            },
+            {
+              "Description": "מימוש פרטי מתנה -  קנה בכמות 1 קבל שווי 1 סהכ שימושים1  בעיסקה 2",
+              "Amount": 1.0,
+              "IsAuto": "false",
+              "PromoId": "1853",
+              "AccumId": 286
+            },
+            {
+              "Description": "מימוש פרטי מתנה - קנה בכמות 2 קבל שווי 20 סהכ שימושים 2 בעיסקה 2",
+              "Amount": 20.0,
+              "IsAuto": "false",
+              "PromoId": "1854",
+              "AccumId": 286
+            },
+            {
+              "Description": "מימוש פרטי מתנה - קנה בכמות 3 קבל שווי 5 מקסימום בעיסקה 1",
+              "Amount": 5.0,
+              "IsAuto": "false",
+              "PromoId": "1856",
+              "AccumId": 286
+            }
+          ]
+        },
+        {  "TotalDiscounts": [
+          {
+            "Description": "קנה קבל - קנה בכמות 2 קבל 50% הנחה",
+            "Amount": 49.2,
+            "IsAuto": "false",
+            "PromoId": "1828",
+            "AllItemsDiscountPercent": 50.0,
+            "AccumId": 0
+          },
+          {
+            "Description": "קנה קבל - קנה כמות 1 קבל הנחה כספית 20 על 2 פריטים",
+            "Amount": 20.0,
+            "IsAuto": "false",
+            "PromoId": "1829",
+            "AllItemsDiscountPercent": 0.0,
+            "AccumId": 283
+          },
+          {
+            "Description": "קנה קבל - קנה בכמות 2 קבל 10% הנחה",
+            "Amount": 6.56,
+            "IsAuto": "false",
+            "PromoId": "1831",
+            "AllItemsDiscountPercent": 10.0,
+            "AccumId": 284
+          },
+          {
+            "Description": "קנה קבל - קנה ב 50 קבל מחיר קבוע 20",
+            "Amount": 12.8,
+            "IsAuto": "false",
+            "PromoId": "1832",
+            "AllItemsDiscountPercent": 0.0,
+            "AccumId": 284
+
+          },
+          {
+            "Description": "קנה קבל - קנה בכמות 2 קבל הנחה כספית 20",
+            "Amount": 40.0,
+            "IsAuto": "false",
+            "PromoId": "1833",
+            "AllItemsDiscountPercent": 0.0,
+            "AccumId": 285
+          },
+          {
+            "Description": "קנה קבל - קנה בסכום 20 קבל 10% על 2 פריטים",
+            "Amount": 9.84,
+            "IsAuto": "false",
+            "PromoId": "1834",
+            "AllItemsDiscountPercent": 10.0,
+            "AccumId": 284
+          },
+          {
+            "Description": "קנה קבל - קנה בכמות 2 קבל הנחה כספית 10",
+            "Amount": 20.0,
+            "IsAuto": "false",
+            "PromoId": "1835",
+            "AllItemsDiscountPercent": 0.0,
+            "AccumId": 284
+
+          },
+          {
+            "Description": "קנה קבל - קנה בסכום 20 קבל 10% הנחה",
+            "Amount": 9.84,
+            "IsAuto": "false",
+            "PromoId": "1837",
+            "AllItemsDiscountPercent": 10.0,
+            "AccumId": 284
+
+          }
+        ]
+
+        },
+        {
+          "Accumulates":[
+            {
+              "Name":"צבירת נקודת - קנה בכמות של 2 קבל הנחה כספית של 10",
+              "Amount" : 10.0,
+              "PromoID" : "1822",
+              "AccumId": 282
+            },
+            {
+              "Name":"צבירת נקודות - קנה בכמות של 2 קבל מחיר קבוע 10 על 2 פריטים",
+              "Amount" : 55.6,
+              "PromoID" : "1824",
+              "AccumId": 282
+            },
+            {
+              "Name":"צבירת נקודות - תוקף מיידי ועד סוף החודש,רק על פריט 8",
+              "Amount" : 4.92,
+              "PromoID" : "1883",
+              "AccumId": 287
+            },
+            {
+              "Name":"צבירת נקודות - קנה בכמות 1 קבל הנחה כספית 10 על 2 פריטים",
+              "Amount" : 10.0,
+              "PromoID" : "1827",
+              "AccumId": 282
+            }
+          ]
+        }
+      ],
+      "DealsToUse" : []
+    },
+    {
+      "TestName": "deal 21 - בדיקת תוקף נקודות  ",
+      "DealTypeFlag" : "1",
+      "PVFlag": 24,
+      "DaysToStart": "",
+      "DaysToEnd" : "",
+      "User": "pos11",
+      "Password": "11pos",
+      "AccoundID": "2828",
+      "CardNumber": "1000000",
+      "TotalDealAmount": "208.0",
+      "PointsExpirationTimeToStart" : "",
+      "PointsExpirationTimeToEnd" : "",
+      "sumAccum":[
+        {"282": "148.8"},
+        {"283": "1580.0"}
+      ],
+      "TranItems": [
+        {
+          "CategoryCode": "1",
+          "PromoCode": "",
+          "GrossPrice": 0,
+          "Cost": 0,
+          "ItemDescription": "פריט 7",
+          "Department": "ב",
+          "SuggestedPromoId": 0,
+          "PLUClassificationCode3": "66654",
+          "PLUClassificationCode2": "",
+          "PLUClassificationCode1": "",
+          "TrxID": 1,
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ],
+          "Amount": 70.6,
+          "Quantity": 1,
+          "InputFlags": 2,
+          "Vendor": "wayne enterprises",
+          "Code": "0007",
+          "SubDept3": "",
+          "SubDept2": "",
+          "SubDept1": "",
+          "UOM": 0,
+          "SysDiscount": 0,
+          "Price": "70.6",
+          "ItemBarcode": "",
+          "Manufacture": ""
+        },
+        {
+          "CategoryCode": "1",
+          "PromoCode": "",
+          "GrossPrice": 0,
+          "Cost": 0,
+          "ItemDescription": "פריט 7",
+          "Department": "ב",
+          "SuggestedPromoId": 0,
+          "PLUClassificationCode3": "66654",
+          "PLUClassificationCode2": "",
+          "PLUClassificationCode1": "",
+          "TrxID": 2,
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ],
+          "Amount": 70.6,
+          "Quantity": 1,
+          "InputFlags": 2,
+          "Vendor": "wayne enterprises",
+          "Code": "0007",
+          "SubDept3": "",
+          "SubDept2": "",
+          "SubDept1": "",
+          "UOM": 0,
+          "SysDiscount": 0,
+          "Price": "70.6",
+          "ItemBarcode": "",
+          "Manufacture": ""
+        },
+        {
+          "CategoryCode": "1",
+          "PromoCode": "",
+          "GrossPrice": 0,
+          "Cost": 0,
+          "ItemDescription": "פריט 7",
+          "Department": "ב",
+          "SuggestedPromoId": 0,
+          "PLUClassificationCode3": "66654",
+          "PLUClassificationCode2": "",
+          "PLUClassificationCode1": "",
+          "TrxID": 3,
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ],
+          "Amount": 70.6,
+          "Quantity": 1,
+          "InputFlags": 2,
+          "Vendor": "wayne enterprises",
+          "Code": "0007",
+          "SubDept3": "",
+          "SubDept2": "",
+          "SubDept1": "",
+          "UOM": 0,
+          "SysDiscount": 0,
+          "Price": "70.6",
+          "ItemBarcode": "",
+          "Manufacture": ""
+        }
+      ],
+      "Member": [
+        {
+          "GroupName": "קבוצה א",
+          "FirstName": "חבר 1",
+          "LastName": "111",
+          "fieldId": 17,
+          "AllAccums": [
+            {
+              "BenefitName": "נקודות",
+              "BenefitValue": "77065",
+              "BenefitType": 0,
+              "AccID": "269"
+            },
+            {
+              "BenefitName": "כרטיסייה",
+              "BenefitValue": "11097",
+              "BenefitType": 4,
+              "AccID": "270"
+            },
+            {
+              "BenefitName": "קופון זכאות לכולם",
+              "BenefitValue": "2",
+              "BenefitType": 1,
+              "AccID": "271"
+            },
+            {
+              "BenefitName": "קופון זכאות לפי הנפקה",
+              "BenefitValue": "5",
+              "BenefitType": 3,
+              "AccID": "272"
+            },
+            {
+              "BenefitName": "שובר מתנה",
+              "BenefitValue": "868",
+              "BenefitType": 2,
+              "AccID": "273"
+            },
+            {
+              "BenefitName": "קופון זכאות לכולם 2",
+              "BenefitValue": "1",
+              "BenefitType": 1,
+              "AccID": "276"
+
+            }
+          ]
+        }
+      ],
+      "Response": [
+        {
+          "CashBackDiscounts": [
+            {
+              "Description": "מימוש נקודות - קנה בין 200 ל  400 קבל 1:1 על 50% מהעיסקה 100% מהצבירה",
+              "Amount": 105.9,
+              "IsAuto": "false",
+              "PromoId": "1838",
+              "AccumId": 282
+            },
+            {
+              "Description": "מימוש נקודות - קנה בסכום 1 קבל 1:0.2 על 50%מהעיסקה 100% מהצבירה",
+              "Amount": 105.9,
+              "IsAuto": "false",
+              "PromoId": "1839",
+              "AccumId": 282
+            },
+            {
+              "Description": "מימוש נקודות - קנה בכמות של 3 עד 5 קבל 1:0.5 עד 10% מהעיסקה 100% מהצבירה",
+              "Amount": 21.18,
+              "IsAuto": "false",
+              "PromoId": "1841",
+              "AccumId": 282
+            },
+            {
+              "Description": "מימוש פרטי מתנה -  קנה בכמות 1 קבל שווי 1 סהכ שימושים1  בעיסקה 2",
+              "Amount": 1.0,
+              "IsAuto": "false",
+              "PromoId": "1853",
+              "AccumId": 286
+            },
+            {
+              "Description": "מימוש פרטי מתנה - קנה בכמות 2 קבל שווי 20 סהכ שימושים 2 בעיסקה 2",
+              "Amount": 20.0,
+              "IsAuto": "false",
+              "PromoId": "1854",
+              "AccumId": 286
+            },
+            {
+              "Description": "מימוש פרטי מתנה - קנה בכמות 3 קבל שווי 5 מקסימום בעיסקה 1",
+              "Amount": 5.0,
+              "IsAuto": "false",
+              "PromoId": "1856",
+              "AccumId": 286
+            }
+          ]
+        },
+        {  "TotalDiscounts": [
+          {
+            "Description": "קנה קבל - קנה בכמות 2 קבל 50% הנחה",
+            "Amount": 105.9,
+            "IsAuto": "false",
+            "PromoId": "1828",
+            "AllItemsDiscountPercent": 50.0,
+            "AccumId": 0
+          },
+          {
+            "Description": "קנה קבל - קנה כמות 1 קבל הנחה כספית 20 על 2 פריטים",
+            "Amount": 20.0,
+            "IsAuto": "false",
+            "PromoId": "1829",
+            "AllItemsDiscountPercent": 0.0,
+            "AccumId": 283
+          },
+          {
+            "Description": "קנה  קבל - קנה בסכום 10 קבל הנחה כספית 20",
+            "Amount": 60.0,
+            "IsAuto": "false",
+            "PromoId": "1830",
+            "AllItemsDiscountPercent": 0.0,
+            "AccumId": 283
+          },
+          {
+            "Description": "קנה קבל - קנה בכמות 2 קבל 10% הנחה",
+            "Amount": 14.12,
+            "IsAuto": "false",
+            "PromoId": "1831",
+            "AllItemsDiscountPercent": 10.0,
+            "AccumId": 284
+          },
+          {
+            "Description": "קנה קבל - קנה ב 50 קבל מחיר קבוע 20",
+            "Amount": 151.8,
+            "IsAuto": "false",
+            "PromoId": "1832",
+            "AllItemsDiscountPercent": 0.0,
+            "AccumId": 284
+
+          },
+          {
+            "Description": "קנה קבל - קנה בכמות 2 קבל הנחה כספית 20",
+            "Amount": 40.0,
+            "IsAuto": "false",
+            "PromoId": "1833",
+            "AllItemsDiscountPercent": 0.0,
+            "AccumId": 285
+          },
+          {
+            "Description": "קנה קבל - קנה בסכום 20 קבל 10% על 2 פריטים",
+            "Amount": 21.18,
+            "IsAuto": "false",
+            "PromoId": "1834",
+            "AllItemsDiscountPercent": 10.0,
+            "AccumId": 284
+          },
+          {
+            "Description": "קנה קבל - קנה בכמות 2 קבל הנחה כספית 10",
+            "Amount": 20.0,
+            "IsAuto": "false",
+            "PromoId": "1835",
+            "AllItemsDiscountPercent": 0.0,
+            "AccumId": 284
+
+          },
+          {
+            "Description": "קנה קבל - קנה בסכום 20 קבל 10% הנחה",
+            "Amount": 21.18,
+            "IsAuto": "false",
+            "PromoId": "1837",
+            "AllItemsDiscountPercent": 10.0,
+            "AccumId": 284
+
+          }
+        ]
+
+        },
+        {
+          "Accumulates":[
+            {
+              "Name":"צבירת נקודות - קנה ב מינ' 100 קבל 10% על פריט 1",
+              "Amount" : 14.12,
+              "PromoID" : "1820",
+              "AccumId": 282
+            },
+            {
+              "Name":"צבירת נקודות - קנה בסכום בין 200 ל 300 קבל מחיר קבוע 100",
+              "Amount" : 111.8,
+              "PromoID" : "1821",
+              "AccumId": 282
+            },
+            {
+              "Name":"צבירת נקודת - קנה בכמות של 2 קבל הנחה כספית של 10",
+              "Amount" : 10.0,
+              "PromoID" : "1822",
+              "AccumId": 282
+            },
+            {
+              "Name":"צבירת נקודות - קנה בכמות של 2 קבל מחיר קבוע 10 על 2 פריטים",
+              "Amount" : 131.2,
+              "PromoID" : "1824",
+              "AccumId": 282
+            },
+            {
+              "Name":"צבירת נקודות - תוקף מיידי ועד סוף השבוע ,רק על פריט 7",
+              "Amount" : 10.59,
+              "PromoID" : "1884",
+              "AccumId": 287
+            },
+            {
+              "Name":"צבירת נקודות - קנה בכמות 1 קבל הנחה כספית 10 על 2 פריטים",
+              "Amount" : 10.0,
+              "PromoID" : "1827",
+              "AccumId": 282
+            },
+            {
+              "Name":"צבירה לכרטייסייה - קנה ב 100 צבור 5 על 2 פריטים",
+              "Amount" : 10.0,
               "PromoID" : "1851",
               "AccumId": 283
             }
