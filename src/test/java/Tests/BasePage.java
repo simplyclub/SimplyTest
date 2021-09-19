@@ -13,6 +13,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.restassured.response.Response;
+import okhttp3.OkHttpClient;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -23,6 +24,7 @@ import utilities.MainFunction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public  class BasePage {
 
@@ -45,12 +47,17 @@ public  class BasePage {
 
     // response names
 
-    Response subTotalResponse = null ;
-    Response trenEndResponse = null ;
-    Response userDataResponse = null;
-    Response transactionViewResponse = null;
+    public okhttp3.Response subTotalResponse = null ;
+    public String subTotalResponse_String = null ;
+    public okhttp3.Response trenEndResponse = null ;
+    public String trenEndResponse_String = null;
+    public okhttp3.Response userDataResponse = null;
+    public String userDataResponse_String = null ;
+    public Response transactionViewResponse = null;
     public static Response getMemberBenefitListResponse = null;
-    Response trenCancelResponse = null ;
+    public okhttp3.Response trenCancelResponse = null ;
+    public okhttp3.Response trenRefundResponse = null ;
+    public String trenRefundResponse_String = null ;
     ArrayList<Node> xmlResponseDiscountList = new ArrayList<>();
 
     // extent report
@@ -59,6 +66,7 @@ public  class BasePage {
     public static  ExtentTest ExReApiTestReport ;
     public static  ExtentTest ExReAccumReport ;
     public static  ExtentTest ExRePointsValiditReport;
+    public static  ExtentTest ExReTernRefundReport;
 
 
 
@@ -75,11 +83,14 @@ public  class BasePage {
     public static HashMap<String ,Double> sumBurnd = new HashMap<>();
 
 
+
     //pre
     public static HashMap<String,Double> preDeal = new HashMap<>();
+    public static HashMap<String ,Double> preAllAccumsPoints = new HashMap<>();
 
     //post
     public static HashMap<String,Double> postDeal = new HashMap<>();
+    public static HashMap<String ,Double> postAllAccumsPoints = new HashMap<>();
 
     //Globals json objects
     public  Object TestJSONToSend = baseJSON.getObj(JSON_TEST_FILE)  ;
@@ -93,13 +104,15 @@ public  class BasePage {
         ExReApiTestReport = exReport.createTest("Sub Total Test").assignCategory("Transaction");// give the name of the test title  in the report
         ExReAccumReport = exReport.createTest("Accumulation Test").assignCategory("Transaction");// give the name of the test title  in the report
         ExRePointsValiditReport = exReport.createTest("Points Validit Test").assignCategory("Transaction");// give the name of the test title  in the report
+        ExReTernRefundReport = exReport.createTest("Refund  Test").assignCategory("Refund");// give the name of the test title  in the report
+
 
     }
 
 
     @BeforeTest
     public void beforeTest (){
-        WebDriverSetUp.initBrowser();
+        //WebDriverSetUp.initBrowser();
 
 
         if(subTotalResponse != null) {
@@ -125,7 +138,12 @@ public  class BasePage {
         }
         if (getMemberBenefitListResponse !=null){
 
-            getMemberBenefitListResponse =null;
+            getMemberBenefitListResponse = null;
+
+        }
+        if (trenRefundResponse !=null){
+
+            trenRefundResponse = null;
         }
 
     }
@@ -133,6 +151,7 @@ public  class BasePage {
     @AfterClass
     public  void endTest()
     {
+
 
 
     }

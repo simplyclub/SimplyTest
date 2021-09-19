@@ -21,5 +21,10 @@
             <class name="Tests.PointsValidityTest"></class>
         </classes>
     </test>
+    <test name="refund test">
+        <classes>
+            <class name="Tests.TranRefundTest"></class>
+        </classes>
+    </test>
 
 </suite>

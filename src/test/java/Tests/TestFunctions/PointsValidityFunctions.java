@@ -1,6 +1,5 @@
 package Tests.TestFunctions;
 
-import APIHandling.APIPost;
 import BaseClass.BaseXML;
 import BaseClass.BaseAPI;
 import BaseClass.BaseJSON;
@@ -10,9 +9,9 @@ import JSON.ResponseHandling;
 import Tests.BasePage;
 import XML.XMLGetData;
 import io.restassured.response.Response;
-import net.bytebuddy.asm.Advice;
 import org.w3c.dom.NodeList;
 
+import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -47,18 +46,18 @@ public class PointsValidityFunctions extends BasePage {
     //////
 
 
-    public Response makeDealSubTotal(int i) {
+    public okhttp3.Response makeDealSubTotal(int i) throws IOException {
         updateJSONFile.upDateBaseJSONFile(JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),
                 JSONGetData.getAccoundID(TestJSONToSend, i), JSONGetData.getTranItems(TestJSONToSend, i), JSONGetData.getCardNumber(TestJSONToSend, i));
-        return APIPost.postSubTotal(BaseAPI.TEST_REST_API_URI, BaseJSON.JSON_TO_SEND);
+        return APIPost.postSubTotal_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.JSON_TO_SEND);
 
     }//func end
 
-    public Response makeDealTrenEnd(int i, Response subTotalResponse) {
+    public okhttp3.Response makeDealTrenEnd(int i, String subTotalResponse) throws IOException {
         updateJSONFile.upDateTranEndJSON(ResponseHandling.getServiceTranNumber(subTotalResponse), JSONGetData.getAccoundID(TestJSONToSend, i), JSONGetData.getUser(TestJSONToSend, i),
                 JSONGetData.getPassword(TestJSONToSend, i), JSONGetData.getCardNumber(TestJSONToSend, i),
                 JSONGetData.getTranItems(TestJSONToSend, i), JSONGetData.getDealsToUse(TestJSONToSend, i), baseJSON.jsonToSend);
-        return APIPost.postTranEnd(BaseAPI.TEST_REST_API_URI, baseJSON.JSON_TO_SEND);
+        return APIPost.postTranEnd_OkHttp(BaseAPI.TEST_REST_API_URI, baseJSON.JSON_TO_SEND);
     }//func end
 
     public Response getMemberBenefitList() {

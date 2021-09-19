@@ -2,6 +2,8 @@ package utilities;
 
 import Tests.BasePage;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,6 +11,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 
 
@@ -62,6 +65,15 @@ public class MainFunction extends BasePage {
 
         return Double.toString(d);
 
+    }
+
+
+    public static String convertOkHttpResponseToString(Response response) throws IOException {
+        ResponseBody body = response.peekBody(Long.MAX_VALUE);
+        String content = body.string();
+        body.close();
+        body.string();
+        return content;
     }
 }
 

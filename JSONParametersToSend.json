@@ -2,7 +2,8 @@
   "array": [
     {
       "TestName": "deal 1",
-      "DealTypeFlag" : "",
+      "DealTypeFlag" : "0",
+      "IfToCancelFlag" : "1",
       "User": "pos11",
       "AccoundID": "2828",
       "Password": "11pos",
@@ -339,6 +340,7 @@
     {
       "TestName": "deal 2",
       "DealTypeFlag" : "0",
+      "IfToCancelFlag" : "0",
       "User": "pos11",
       "Password": "11pos",
       "AccoundID": "2828",
@@ -835,6 +837,7 @@
     {
       "TestName": "deal 3  ",
       "DealTypeFlag" : "0",
+      "IfToCancelFlag" : "1",
       "User": "pos11",
       "Password": "11pos",
       "AccoundID": "2828",
@@ -1373,6 +1376,7 @@
     {
       "TestName": "deal 4  ",
       "DealTypeFlag" : "0",
+      "IfToCancelFlag" : "0",
       "User": "pos11",
       "Password": "11pos",
       "AccoundID": "2828",
@@ -1943,6 +1947,7 @@
     {
       "TestName": "deal 5  ",
       "DealTypeFlag" : "0",
+      "IfToCancelFlag" : "0",
       "User": "pos11",
       "Password": "11pos",
       "AccoundID": "2828",
@@ -2442,6 +2447,7 @@
     {
       "TestName": "deal 6  ",
       "DealTypeFlag" : "0",
+      "IfToCancelFlag" : "0",
       "User": "pos11",
       "Password": "11pos",
       "AccoundID": "2828",
@@ -2920,6 +2926,7 @@
     {
       "TestName": "deal 7  ",
       "DealTypeFlag" : "0",
+      "IfToCancelFlag" : "0",
       "User": "pos11",
       "Password": "11pos",
       "AccoundID": "2828",
@@ -3414,6 +3421,7 @@
     {
       "TestName": "deal 8 ",
       "DealTypeFlag" : "0",
+      "IfToCancelFlag" : "1",
       "User": "pos11",
       "Password": "11pos",
       "AccoundID": "2828",
@@ -3761,6 +3769,7 @@
     {
       "TestName": "deal 9  ",
       "DealTypeFlag" : "0",
+      "IfToCancelFlag" : "0",
       "User": "pos11",
       "Password": "11pos",
       "AccoundID": "2828",
@@ -4323,6 +4332,7 @@
     {
       "TestName": "deal 10  ",
       "DealTypeFlag" : "0",
+      "IfToCancelFlag" : "0",
       "User": "pos11",
       "Password": "11pos",
       "AccoundID": "2828",
@@ -4885,6 +4895,7 @@
     {
       "TestName": "deal 11  ",
       "DealTypeFlag" : "0",
+      "IfToCancelFlag" : "0",
       "User": "pos11",
       "Password": "11pos",
       "AccoundID": "2828",
@@ -5437,6 +5448,7 @@
     {
       "TestName": "deal 12  ",
       "DealTypeFlag" : "0",
+      "IfToCancelFlag" : "0",
       "User": "pos11",
       "Password": "11pos",
       "AccoundID": "2828",
@@ -6108,6 +6120,7 @@
     {
       "TestName": "deal 13  ",
       "DealTypeFlag" : "0",
+      "IfToCancelFlag" : "0",
       "User": "pos11",
       "Password": "11pos",
       "AccoundID": "2828",
@@ -6462,6 +6475,7 @@
     {
       "TestName": "deal 14 - בדיקת תוקף נקודות  ",
       "DealTypeFlag" : "1",
+      "IfToCancelFlag" : "0",
       "PVFlag": 36,
       "DaysToStart": "",
       "DaysToEnd" : "29",
@@ -6804,6 +6818,7 @@
     {
       "TestName": "deal 15 - בדיקת תוקף נקודות  ",
       "DealTypeFlag" : "1",
+      "IfToCancelFlag" : "0",
       "PVFlag": 2,
       "DaysToStart": "7",
       "DaysToEnd" : "",
@@ -7141,6 +7156,7 @@
     {
       "TestName": "deal 16 - בדיקת תוקף נקודות  ",
       "DealTypeFlag" : "1",
+      "IfToCancelFlag" : "0",
       "PVFlag": 32,
       "DaysToStart": "7",
       "DaysToEnd" : "29",
@@ -7473,6 +7489,7 @@
     {
       "TestName": "deal 17 - בדיקת תוקף נקודות  ",
       "DealTypeFlag" : "1",
+      "IfToCancelFlag" : "0",
       "PVFlag": 47,
       "DaysToStart": "0",
       "DaysToEnd" : "60",
@@ -7783,6 +7800,7 @@
     {
       "TestName": "deal 18 - בדיקת תוקף נקודות  ",
       "DealTypeFlag" : "1",
+      "IfToCancelFlag" : "0",
       "PVFlag": 40,
       "DaysToStart": "",
       "DaysToEnd" : "2",
@@ -8107,6 +8125,7 @@
     {
       "TestName": "deal 19 - בדיקת תוקף נקודות  ",
       "DealTypeFlag" : "1",
+      "IfToCancelFlag" : "0",
       "PVFlag": 12,
       "DaysToStart": "",
       "DaysToEnd" : "",
@@ -8449,6 +8468,7 @@
     {
       "TestName": "deal 20 - בדיקת תוקף נקודות  ",
       "DealTypeFlag" : "1",
+      "IfToCancelFlag" : "0",
       "PVFlag": 18,
       "DaysToStart": "",
       "DaysToEnd" : "",
@@ -8754,6 +8774,7 @@
     {
       "TestName": "deal 21 - בדיקת תוקף נקודות  ",
       "DealTypeFlag" : "1",
+      "IfToCancelFlag" : "0",
       "PVFlag": 24,
       "DaysToStart": "",
       "DaysToEnd" : "",

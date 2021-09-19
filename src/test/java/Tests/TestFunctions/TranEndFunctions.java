@@ -17,6 +17,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import utilities.MainFunction;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 
 import static java.lang.Math.abs;
@@ -98,7 +99,7 @@ public class TranEndFunctions extends BasePage {
 
 
 
-    public static void  AccumsNotInUse(Response userDataResponse ){
+    public static void  AccumsNotInUse(String userDataResponse ) throws IOException {
         String accID=null ;
         for(int i = 0; i< ResponseHandling.getAllAccums(userDataResponse).size() ; i++) {
 
@@ -135,36 +136,36 @@ public class TranEndFunctions extends BasePage {
         }
         return null;
     }
-    public  Response getUserData(int i) {
+    public  okhttp3.Response getUserData(int i) throws IOException {
         updateJSONFile.upDateUserJSONFile(
                 JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),
                 JSONGetData.getFieldId(TestJSONToSend, i), JSONGetData.getCardNumber(TestJSONToSend, i)
         );
-        return APIHandling.APIPost.postUserGetData(BaseAPI.TEST_REST_API_URI, BaseJSON.USER_JSON_TO_SEND);
+        return APIPost.postUserGetData_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.USER_JSON_TO_SEND);
 
     }//func end
-    public Response makeDealSubTotal(int i) {
+    public okhttp3.Response makeDealSubTotal(int i) throws IOException {
         updateJSONFile.upDateBaseJSONFile(JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),
                 JSONGetData.getAccoundID(TestJSONToSend, i), JSONGetData.getTranItems(TestJSONToSend, i),JSONGetData.getCardNumber(TestJSONToSend, i));
-        return APIPost.postSubTotal(BaseAPI.TEST_REST_API_URI, BaseJSON.JSON_TO_SEND);
+        return APIPost.postSubTotal_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.JSON_TO_SEND);
 
     }//func end
     //todo:     change JSONGetData.getDealsToUse(TestJSONToSend, i) --> null
     //          Need to check with future dells without using points if it works.
     //          if it works i can  delete the second function "makeDealWithUsingPointsTrenEnd"
-    public Response makeDealTrenEnd(int i,Response subTotalResponse) {
+    public okhttp3.Response makeDealTrenEnd(int i,String subTotalResponse) throws IOException {
         updateJSONFile.upDateTranEndJSON(ResponseHandling.getServiceTranNumber(subTotalResponse), JSONGetData.getAccoundID(TestJSONToSend, i),JSONGetData.getUser(TestJSONToSend, i),
                 JSONGetData.getPassword(TestJSONToSend, i),JSONGetData.getCardNumber(TestJSONToSend, i),
                 JSONGetData.getTranItems(TestJSONToSend, i), JSONGetData.getDealsToUse(TestJSONToSend, i), baseJSON.jsonToSend);
-        return APIPost.postTranEnd(BaseAPI.TEST_REST_API_URI, baseJSON.JSON_TO_SEND);
+        return APIPost.postTranEnd_OkHttp(BaseAPI.TEST_REST_API_URI, baseJSON.JSON_TO_SEND);
 
     }//func end
 
-    public Response makeDealWithUsingPointsTrenEnd(int i,Response subTotalResponse) {
+    public okhttp3.Response makeDealWithUsingPointsTrenEnd(int i,String  subTotalResponse) throws IOException {
         updateJSONFile.upDateTranEndJSON(ResponseHandling.getServiceTranNumber(subTotalResponse), JSONGetData.getAccoundID(TestJSONToSend, i),
                 JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),JSONGetData.getCardNumber(TestJSONToSend, i),
                 JSONGetData.getTranItems(TestJSONToSend, i), JSONGetData.getDealsToUse(TestJSONToSend, i), baseJSON.jsonToSend);
-        return APIPost.postTranEnd(BaseAPI.TEST_REST_API_URI, BaseJSON.JSON_TO_SEND);
+        return APIPost.postTranEnd_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.JSON_TO_SEND);
 
     }//func end
 
@@ -456,7 +457,7 @@ public class TranEndFunctions extends BasePage {
          * this function will add all the pre deal accums value to the pre deal HaseMap
          * @param i
          */
-        public void getPreDealPointsAccums ( int i, Response userDataResponse){
+        public void getPreDealPointsAccums ( int i, String  userDataResponse) throws IOException {
             //first loop run on the size of array, from the response of the user benefit status
             for (int index = 0; index < (ResponseHandling.getAllAccums(userDataResponse)).size(); index++) {
                 s = UserHandling.getVoucher(ResponseHandling.getAllAccums(userDataResponse), "AccID", index);
@@ -467,7 +468,7 @@ public class TranEndFunctions extends BasePage {
 
         }//func end
 
-        public void getPostDealVouchers ( int i, Response userDataResponse){
+        public void getPostDealVouchers ( int i, String userDataResponse) throws IOException {
             //this function will add all the post deal vouchers value to the post deal HaseMap
             for (int index = 0; index < (ResponseHandling.getAllAccums(userDataResponse)).size(); index++) {
                 s = UserHandling.getVoucher(ResponseHandling.getAllAccums(userDataResponse), "AccID", index);

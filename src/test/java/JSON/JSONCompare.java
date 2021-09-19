@@ -5,6 +5,8 @@ import org.testng.asserts.SoftAssert;
 
 import io.restassured.response.Response;
 
+import java.io.IOException;
+
 public class JSONCompare extends BasePage {
     SoftAssert softAssertion = new SoftAssert();
     ResponseHandling responseHandling = new ResponseHandling();
@@ -13,7 +15,7 @@ public class JSONCompare extends BasePage {
     String TBPromoId = null;
     int  flag1 = 0 ;
 
-    public void responVSTestJson (int arrayIndex,Response response){
+    public void responVSTestJson (int arrayIndex, String response) throws IOException {
 
         // this loop will run on the respone "CashBackDiscounts"
         for (int i=0 ,flag1 = 0 ; i < responseHandling.getCaseBackDiscountsArrSize(response);i++,flag1 = 0){
@@ -172,7 +174,7 @@ public class JSONCompare extends BasePage {
 
 
 
-    public void TestJSONVSResponse (int arrayIndex,Response response){
+    public void TestJSONVSResponse (int arrayIndex,String  response) throws IOException {
 
         // this loop will run on the Test JSON "CashBackDiscounts"
         for (int i=0 ,flag1 = 0; i<JSONGetData.getArraySizeCashBackDiscounts(

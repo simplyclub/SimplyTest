@@ -475,6 +475,13 @@ public class JSONGetData  {
         return DealAmountJSONObj.get("PVFlag").toString();
 
     }
+    public static String GetIfToCancelFlag (Object obj, int index){
+        JSONObject JSONObj = (JSONObject) obj ;
+        JSONArray  tests = (JSONArray) JSONObj.get("array");
+        JSONObject  DealAmountJSONObj = (JSONObject) tests.get(index);
+        return DealAmountJSONObj.get("IfToCancelFlag").toString();
+
+    }
     public static String getDaysToStart (Object obj, int index){
         JSONObject JSONObj = (JSONObject) obj ;
         JSONArray  tests = (JSONArray) JSONObj.get("array");

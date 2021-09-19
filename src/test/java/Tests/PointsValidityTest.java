@@ -9,6 +9,8 @@ import utilities.MainFunction;
 
 import java.io.IOException;
 
+//FIXME : Wait for the correction of the date, of up to a week
+
 
 public class PointsValidityTest extends BasePage {
     PointsValidityFunctions pointsValidityFunctions = new PointsValidityFunctions();
@@ -31,12 +33,14 @@ public class PointsValidityTest extends BasePage {
                 //make a deal subTotal
                 try {
                     subTotalResponse = pointsValidityFunctions.makeDealSubTotal(i);
-                    if (!(subTotalResponse.getStatusCode() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse).equals("0"))) {
-                        System.out.println("*ERROR --- status code is not 200" + "(" + subTotalResponse.getStatusCode() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(trenEndResponse) + ")");
-                        ExRePointsValiditReport.fail("ERROR --- status code is not 200" + "(" + subTotalResponse.getStatusCode() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
-                                responseHandling.getErrorCodeStatusJson(subTotalResponse) + ")");
+                    subTotalResponse_String = MainFunction.convertOkHttpResponseToString(subTotalResponse);
+                    if (!(subTotalResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse_String).equals("0"))) {
+                        System.out.println("*ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(subTotalResponse_String) + ")");
+                        ExRePointsValiditReport.fail("ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                                responseHandling.getErrorCodeStatusJson(subTotalResponse_String) + ")");
                         LogFileHandling.createLogFile(baseJSON.getString(baseJSON.JSON_TO_SEND), LOG_FILE_DIRECTORY, "subTotalCall");
-                        LogFileHandling.createLogFile(subTotalResponse.asString(), LOG_FILE_DIRECTORY, "subTotalResponse");
+                        LogFileHandling.createLogFile(subTotalResponse.toString(), LOG_FILE_DIRECTORY, "subTotalResponse");
+                        subTotalResponse.body().close();
                         break;
                     }
                 }catch (NullPointerException e){
@@ -45,14 +49,16 @@ public class PointsValidityTest extends BasePage {
 
                 //make trenEnd deal
                 try {
-                    trenEndResponse = pointsValidityFunctions.makeDealTrenEnd(i, subTotalResponse);
-                    if (!(trenEndResponse.getStatusCode() == 200 && responseHandling.getErrorCodeStatusJson(trenEndResponse).equals("0"))) {
+                    trenEndResponse = pointsValidityFunctions.makeDealTrenEnd(i, subTotalResponse_String);
+                    trenEndResponse_String = MainFunction.convertOkHttpResponseToString(trenEndResponse);
+                    if (!(trenEndResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(trenEndResponse_String).equals("0"))) {
                         System.out.println("**ERROR" +
-                                "  --- status code is not 200" + "(" + subTotalResponse.getStatusCode() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(trenEndResponse) + ")");
-                        ExRePointsValiditReport.fail("ERROR --- status code is not 200" + "(" + trenEndResponse.getStatusCode() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
-                                responseHandling.getErrorCodeStatusJson(trenEndResponse) + ")");
+                                "  --- status code is not 200" + "(" + trenEndResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(trenEndResponse_String) + ")");
+                        ExRePointsValiditReport.fail("ERROR --- status code is not 200" + "(" + trenEndResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                                responseHandling.getErrorCodeStatusJson(trenEndResponse_String) + ")");
                         LogFileHandling.createLogFile(baseJSON.getString(baseJSON.JSON_TO_SEND), LOG_FILE_DIRECTORY, "trenEndCall");
-                        LogFileHandling.createLogFile(trenEndResponse.asString(), LOG_FILE_DIRECTORY, "trenEndResponse");
+                        LogFileHandling.createLogFile(trenEndResponse.toString(), LOG_FILE_DIRECTORY, "trenEndResponse");
+                        trenEndResponse.body().close();
                         break;
                     }
                 }catch (NullPointerException e){
@@ -80,7 +86,7 @@ public class PointsValidityTest extends BasePage {
                 for (int NLIndex = 0; NLIndex < nodeList.getLength(); NLIndex++){
 
                     // 1st "if" : check for the TrxNumber = TrenEndTranReferenceNumber
-                    if(responseHandling.getTrenEndTranReferenceNumber(trenEndResponse).equals(XMLGetData.getXmlMBLSysTrxNumber(nodeList,NLIndex))){
+                    if(responseHandling.getTrenEndTranReferenceNumber(trenEndResponse_String).equals(XMLGetData.getXmlMBLSysTrxNumber(nodeList,NLIndex))){
 
                         //2nd "if" : check for promoId in the XML response vs TestJsonToSend
                         for(int accumulatIndex = 0 ; accumulatIndex < JSONGetData.getArraySizeAccumulates(TestJSONToSend,i); accumulatIndex++){
@@ -115,9 +121,14 @@ public class PointsValidityTest extends BasePage {
 
 
 
-
+                subTotalResponse.body().close();
+                trenEndResponse.body().close();
 
             }//end main if
+
+
+            //subTotalResponse.close();
+            //trenEndResponse.close();
         }//end main for loop
 
     }//end of test

@@ -8,9 +8,13 @@ import JSON.ResponseHandling;
 
 
 import com.sun.org.glassfish.gmbal.Description;
+import okhttp3.ResponseBody;
+import org.json.simple.JSONObject;
 import org.testng.annotations.Test;
+import utilities.MainFunction;
 
-
+import java.io.IOException;
+import java.util.StringTokenizer;
 
 
 public class SubTotalTest extends BasePage {
@@ -19,7 +23,7 @@ public class SubTotalTest extends BasePage {
 
     @Test(testName = "SubTotalTest")
     @Description("Sub Total Test")
-    public void subTotalTest() {
+    public void subTotalTest() throws IOException {
         BasePage.ExReApiTestReport.info("basic API Test");
 
         // this test check sub total
@@ -32,33 +36,36 @@ public class SubTotalTest extends BasePage {
             updateJSONFile.upDateBaseJSONFile(JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),
                     JSONGetData.getAccoundID(TestJSONToSend, i), JSONGetData.getTranItems(TestJSONToSend, i),JSONGetData.getCardNumber(TestJSONToSend, i));
 
-            subTotalResponse = APIPost.postSubTotal(BaseAPI.TEST_REST_API_URI, BaseJSON.JSON_TO_SEND);
-            if(subTotalResponse.getStatusCode() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse).equals("0")) {
-                System.out.println(subTotalResponse.getBody().asString());
-                JSONCompare.responVSTestJson(i, subTotalResponse);
-                JSONCompare.TestJSONVSResponse(i, subTotalResponse);
+            subTotalResponse = APIPost.postSubTotal_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.JSON_TO_SEND);
+            subTotalResponse_String = MainFunction.convertOkHttpResponseToString(subTotalResponse);
+            if(subTotalResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse_String).equals("0")) {
+
+                JSONCompare.responVSTestJson(i, subTotalResponse_String);
+                JSONCompare.TestJSONVSResponse(i, subTotalResponse_String);
                 //cancel of a deal
                 Object x= updateJSONFile.upDateTrenCancelJSONFile(JSONGetData.getAccoundID(TestJSONToSend, i),JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),
-                        responseHandling.getServiceTranNumber(subTotalResponse));
+                        responseHandling.getServiceTranNumber(subTotalResponse_String));
                 //System.out.println(x.toString());
-                trenCancelResponse = APIPost.postTrenCancel(BaseAPI.TEST_REST_API_URI,BaseJSON.TREN_CONCEL_JSON);
+                trenCancelResponse = APIPost.postTrenCancel_OkHttp(BaseAPI.TEST_REST_API_URI,BaseJSON.TREN_CONCEL_JSON);
+                String trenCancelResponse_string = MainFunction.convertOkHttpResponseToString(trenCancelResponse);
                 //System.out.println(trenCancelResponse.getBody().asString());
-                if (trenCancelResponse.getStatusCode()!= 200 && !(responseHandling.getErrorCodeStatusJson(trenCancelResponse).equals("0"))){
-                    System.out.println("ERROR --- the deal "+responseHandling.getServiceTranNumber(trenCancelResponse)+ " did not cancel");
-                    ExReApiTestReport.warning("ERROR --- the deal "+responseHandling.getServiceTranNumber(trenCancelResponse)+ " did not cancel").assignCategory("warning");
+                if (trenCancelResponse.code()!= 200 && !(responseHandling.getErrorCodeStatusJson(trenCancelResponse_string).equals("0"))){
+                    System.out.println("ERROR --- the deal "+responseHandling.getServiceTranNumber(trenCancelResponse_string)+ " did not cancel");
+                    ExReApiTestReport.warning("ERROR --- the deal "+responseHandling.getServiceTranNumber(trenCancelResponse_string)+ " did not cancel").assignCategory("warning");
                 }
 
 
 
             }else{
                 System.out.println("ERROR --- status code is not 200 or ErrorCodeStatus is not 0 ");
-                ExReApiTestReport.fail("ERROR --- status code is not 200"+"("+subTotalResponse.getStatusCode()+")" +" or ErrorCodeStatus is not 0 "+"("+
-                        responseHandling.getErrorCodeStatusJson(subTotalResponse)+")");
+                ExReApiTestReport.fail("ERROR --- status code is not 200"+"("+subTotalResponse.code()+")" +" or ErrorCodeStatus is not 0 "+"("+
+                        responseHandling.getErrorCodeStatusJson(subTotalResponse_String)+")");
               break;
             }
 
-
-        }
+            subTotalResponse.body().close();
+            trenCancelResponse.body().close();
+        }//end main for loop
 
     }
 

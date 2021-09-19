@@ -2,7 +2,6 @@ package JSON;
 
 import BaseClass.BaseJSON;
 import BaseClass.BaseXML;
-import io.restassured.response.Response;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.w3c.dom.Document;
@@ -10,17 +9,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.List;
+
 
 
 
@@ -30,8 +24,8 @@ public class ResponseHandling  {
 
 
 
-    public  String getAmount(Response response , String discountsType, int index){
-        String s = response.getBody().asString();
+    public  String getAmount( String s, String discountsType, int index) throws IOException {
+        //String s = response.body().string();
         JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(s);
         JSONArray discounts = (JSONArray) responseObj.get(discountsType);
 
@@ -40,8 +34,8 @@ public class ResponseHandling  {
         return amount.get("Amount").toString();
     }
 
-    public String getIsAuto (Response response, String discountsType, int index){
-        String s = response.getBody().asString();
+    public String getIsAuto (String s, String discountsType, int index) throws IOException {
+        //String s = response.body().string();
         JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(s);
         JSONArray discounts = (JSONArray) responseObj.get(discountsType);
 
@@ -50,8 +44,8 @@ public class ResponseHandling  {
         return isAuto.get("IsAuto").toString();
 
     }
-    public String getPromoId (Response response, String discountsType, int index){
-        String s = response.getBody().asString();
+    public String getPromoId (String s, String discountsType, int index) throws IOException {
+        //String s = response.body().string();
         //System.out.println(s);
         JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(s);
 
@@ -63,9 +57,9 @@ public class ResponseHandling  {
 
     }
 
-    public String getDescription (Response response, String discountsType, int index){
+    public String getDescription (String s, String discountsType, int index) throws IOException {
         //System.out.println("ResponseHandling "+index);
-        String s = response.getBody().asString();
+        //String s = response.body().string();
         JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(s);
         JSONArray discounts = (JSONArray) responseObj.get(discountsType);
 
@@ -74,8 +68,8 @@ public class ResponseHandling  {
         return  description.get("Description").toString();
 
     }
-    public String getAllItemsDiscountPercent (Response response,int index){
-        String s = response.getBody().asString();
+    public String getAllItemsDiscountPercent (String s ,int index) throws IOException {
+        //String s = response.body().string();
         JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(s);
         JSONArray totalDiscounts = (JSONArray) responseObj.get("TotalDiscounts");
 
@@ -85,15 +79,15 @@ public class ResponseHandling  {
         return allItemsDiscountPercent.get("AllItemsDiscountPercent").toString();
 
     }
-    public static String getServiceTranNumber(Response response){
-        String s = response.getBody().asString();
+    public static String getServiceTranNumber(String s) throws IOException {
+       // String s = response.body().string();
         JSONObject responseObj = (JSONObject) BaseJSON.convertStringToJSONObj(s);
         return responseObj.get("ServiceTranNumber").toString();
 
     }
 
-    public String getTrenEndTranReferenceNumber(Response response){
-        String s = response.getBody().asString();
+    public String getTrenEndTranReferenceNumber(String s ) throws IOException {
+       // String s = response.body().string();
         JSONObject responseObj = (JSONObject) BaseJSON.convertStringToJSONObj(s);
         return responseObj.get("TranReferenceNumber").toString();
 
@@ -101,11 +95,11 @@ public class ResponseHandling  {
 
     /**
      * get the array of the "all accums" from the user data response
-     * @param response - user "get data" response
+     * @param s - user "get data" response
      * @return JSONArray with  "AllAccums" array
      */
-    public static JSONArray getAllAccums(Response response){
-        String s = response.getBody().asString();
+    public static JSONArray getAllAccums(String s) throws IOException {
+       // String s = response.body().string();
         JSONObject responseObj = (JSONObject) BaseJSON.convertStringToJSONObj(s);
         JSONObject member = (JSONObject) responseObj.get("Member");
         JSONArray AllAccums = (JSONArray) member.get("AllAccums");
@@ -117,15 +111,15 @@ public class ResponseHandling  {
     }
 
 
-    public int getCaseBackDiscountsArrSize (Response response) {
-        String s = response.getBody().asString();
+    public int getCaseBackDiscountsArrSize (String s) throws IOException {
+        //String s = response.body().string();
         JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(s);
         JSONArray caseBack = (JSONArray) responseObj.get("CashBackDiscounts");
         return caseBack.size();
     }
 
-    public int getTotalDiscountsArrSize (Response response){
-        String s = response.getBody().asString();
+    public int getTotalDiscountsArrSize (String s) throws IOException {
+       // String s = response.body().string();
         JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(s);
         JSONArray totalDiscounts = (JSONArray) responseObj.get("TotalDiscounts");
         return totalDiscounts.size();
@@ -134,8 +128,8 @@ public class ResponseHandling  {
 
 
     }
-    public String getErrorCodeStatusJson(Response response){
-        String s = response.getBody().asString();
+    public String getErrorCodeStatusJson(String s) throws IOException {
+        //String s = response.peekBody(2042).string();
         JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(s);
         //System.out.println(responseObj.get("ErrorCode"));
       return responseObj.get("ErrorCode").toString();
