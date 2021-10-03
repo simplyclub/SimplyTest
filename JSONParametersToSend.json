@@ -5456,7 +5456,7 @@
       "TotalDealAmount": "694.8",
       "sumAccum":[
         {"282":"496.92"},
-        {"283": "1645.0"}
+        {"283":"1645.0"}
       ],
       "TranItems": [
         {
@@ -6487,8 +6487,8 @@
       "PointsExpirationTimeToStart" : "0",
       "PointsExpirationTimeToEnd" : "30",
       "sumAccum":[
-        {"282": "148.8"},
-        {"283": "1580.0"}
+        {"282": "315.6"},
+        {"283": "2340.0"}
       ],
       "TranItems": [
         {
@@ -6830,8 +6830,8 @@
       "PointsExpirationTimeToStart" : "",
       "PointsExpirationTimeToEnd" : "",
       "sumAccum":[
-        {"282": "148.8"},
-        {"283": "1580.0"}
+        {"282": "190.0"},
+        {"283": "2400.0"}
       ],
       "TranItems": [
         {
@@ -7168,8 +7168,8 @@
       "PointsExpirationTimeToStart" : "",
       "PointsExpirationTimeToEnd" : "",
       "sumAccum":[
-        {"282": "148.8"},
-        {"283": "1580.0"}
+        {"282": "118.0"},
+        {"283": "5.0"}
       ],
       "TranItems": [
         {
@@ -7501,8 +7501,8 @@
       "PointsExpirationTimeToStart" : "",
       "PointsExpirationTimeToEnd" : "",
       "sumAccum":[
-        {"282": "148.8"},
-        {"283": "1580.0"}
+        {"282": "25.0"},
+        {"283": "5.0"}
       ],
       "TranItems": [
         {
@@ -7812,8 +7812,8 @@
       "PointsExpirationTimeToStart" : "",
       "PointsExpirationTimeToEnd" : "",
       "sumAccum":[
-        {"282": "148.8"},
-        {"283": "1580.0"}
+        {"282": "136.0"},
+        {"283": "5.0"}
       ],
       "TranItems": [
         {
@@ -8137,8 +8137,8 @@
       "PointsExpirationTimeToStart" : "",
       "PointsExpirationTimeToEnd" : "",
       "sumAccum":[
-        {"282": "148.8"},
-        {"283": "1580.0"}
+        {"282": "470.0"},
+        {"283": "15.0"}
       ],
       "TranItems": [
         {
@@ -8480,7 +8480,7 @@
       "PointsExpirationTimeToStart" : "",
       "PointsExpirationTimeToEnd" : "",
       "sumAccum":[
-        {"282": "148.8"},
+        {"282": "75.6"},
         {"283": "1580.0"}
       ],
       "TranItems": [
@@ -8786,8 +8786,8 @@
       "PointsExpirationTimeToStart" : "",
       "PointsExpirationTimeToEnd" : "",
       "sumAccum":[
-        {"282": "148.8"},
-        {"283": "1580.0"}
+        {"282": "277.12"},
+        {"283": "10.0"}
       ],
       "TranItems": [
         {

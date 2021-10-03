@@ -2,6 +2,7 @@ package utilities;
 
 import Tests.BasePage;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +14,8 @@ import org.w3c.dom.Node;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class MainFunction extends BasePage {
@@ -43,6 +46,10 @@ public class MainFunction extends BasePage {
         sumDealToUsePoints.clear();
         sumBurnd.clear();
         sumVal = 0.0;
+      //  avgTimeSubTotal.clear();
+      //  avgTimetrenCancel.clear();
+      //  avgTimeTrenEnd.clear();
+        // avgTimeTrenEndOnePhase.clear();
 
 
     }
@@ -75,6 +82,23 @@ public class MainFunction extends BasePage {
         body.string();
         return content;
     }
+
+    public static int getAvgTime(ArrayList arrayList){
+        int avg=0;
+
+
+        for (int s=0 ; s < arrayList.size();s++){
+            //System.out.println("s "+s);
+           avg =  Math.toIntExact((Long) arrayList.get(s))+ avg;
+
+        }
+
+        return avg / arrayList.size();
+    }
+
+
+
+
 }
 
 

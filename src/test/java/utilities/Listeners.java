@@ -19,6 +19,7 @@ public class Listeners extends BasePage implements ITestListener  {
 
     @Override
     public void onFinish(ITestContext arg0) {
+        MainFunction.RestGlobals();
 
 
     }

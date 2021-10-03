@@ -26,5 +26,10 @@
             <class name="Tests.TranRefundTest"></class>
         </classes>
     </test>
+    <test name="Tren End One Phase">
+        <classes>
+            <class name="Tests.TrenEndOnePhaseTest"></class>
+        </classes>
+    </test>
 
 </suite>

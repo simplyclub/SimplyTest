@@ -3,7 +3,6 @@ package Tests;
 import APIHandling.APIPost;
 import BaseClass.BaseJSON;
 import BaseClass.BaseXML;
-import BaseClass.WebDriverSetUp;
 import FunctionsClass.UpdateJSONFile;
 import FunctionsClass.UpdateXMLFile;
 import JSON.JSONGetData;
@@ -13,7 +12,6 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.restassured.response.Response;
-import okhttp3.OkHttpClient;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -24,7 +22,6 @@ import utilities.MainFunction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
 public  class BasePage {
 
@@ -56,8 +53,11 @@ public  class BasePage {
     public Response transactionViewResponse = null;
     public static Response getMemberBenefitListResponse = null;
     public okhttp3.Response trenCancelResponse = null ;
+    public String trenCancelResponse_string = null ;
     public okhttp3.Response trenRefundResponse = null ;
     public String trenRefundResponse_String = null ;
+    public okhttp3.Response trenEndOnePhaseResponse = null ;
+    public String trenEndOnePhaseResponse_String = null ;
     ArrayList<Node> xmlResponseDiscountList = new ArrayList<>();
 
     // extent report
@@ -67,6 +67,7 @@ public  class BasePage {
     public static  ExtentTest ExReAccumReport ;
     public static  ExtentTest ExRePointsValiditReport;
     public static  ExtentTest ExReTernRefundReport;
+    public static  ExtentTest ExReTrenEndOnePhaseReport;
 
 
 
@@ -81,6 +82,13 @@ public  class BasePage {
     public static HashMap<String ,Double> sumDealPoints = new HashMap<>();
     public static HashMap<String ,Double> sumDealToUsePoints = new HashMap<>();
     public static HashMap<String ,Double> sumBurnd = new HashMap<>();
+
+
+    //avg time globals
+    public static ArrayList<Long> avgTimeSubTotal = new ArrayList<Long>();
+    public static ArrayList<Long> avgTimeTrenEnd = new ArrayList<Long>();
+    public static ArrayList<Long> avgTimeTrenEndOnePhase = new ArrayList<Long>();
+    public static ArrayList<Long> avgTimetrenRedund = new ArrayList<Long>();
 
 
 
@@ -105,6 +113,7 @@ public  class BasePage {
         ExReAccumReport = exReport.createTest("Accumulation Test").assignCategory("Transaction");// give the name of the test title  in the report
         ExRePointsValiditReport = exReport.createTest("Points Validit Test").assignCategory("Transaction");// give the name of the test title  in the report
         ExReTernRefundReport = exReport.createTest("Refund  Test").assignCategory("Refund");// give the name of the test title  in the report
+        ExReTrenEndOnePhaseReport = exReport.createTest("Tren End One Phase Test").assignCategory("Transaction");// give the name of the test title  in the report
 
 
     }
@@ -144,6 +153,9 @@ public  class BasePage {
         if (trenRefundResponse !=null){
 
             trenRefundResponse = null;
+        }if (trenEndOnePhaseResponse !=null){
+
+            trenEndOnePhaseResponse = null;
         }
 
     }

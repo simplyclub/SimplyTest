@@ -1,5 +1,6 @@
 package Tests;
 
+import BaseClass.BaseAPI;
 import Tests.TestFunctions.PointsValidityCases;
 import Tests.TestFunctions.PointsValidityFunctions;
 import Utilities.LogFileHandling;
@@ -16,10 +17,11 @@ public class PointsValidityTest extends BasePage {
     PointsValidityFunctions pointsValidityFunctions = new PointsValidityFunctions();
     PointsValidityCases pointsValidityCases = new PointsValidityCases();
 
+
     @Test
     public void pointsValidityTest() throws IOException {
         for (int i = 0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++) {
-
+            MainFunction.RestGlobals();
             // this if  check for deal type flag = 1
             if (JSONGetData.getDealTypeFlag(TestJSONToSend, i).equals("1")) {
                 //make a deal subtotal + trenend notusing points
@@ -42,6 +44,9 @@ public class PointsValidityTest extends BasePage {
                         LogFileHandling.createLogFile(subTotalResponse.toString(), LOG_FILE_DIRECTORY, "subTotalResponse");
                         subTotalResponse.body().close();
                         break;
+                    }else{
+                        avgTimeSubTotal.add(BaseAPI.getResponseTime_OkHttp(subTotalResponse));
+
                     }
                 }catch (NullPointerException e){
                     System.out.println("ERROE (subTotalResponse) --- The server is currently busy, please try again later ");
@@ -60,6 +65,9 @@ public class PointsValidityTest extends BasePage {
                         LogFileHandling.createLogFile(trenEndResponse.toString(), LOG_FILE_DIRECTORY, "trenEndResponse");
                         trenEndResponse.body().close();
                         break;
+                    }else{
+                        avgTimeTrenEnd.add(BaseAPI.getResponseTime_OkHttp(trenEndResponse));
+
                     }
                 }catch (NullPointerException e){
                     System.out.println("ERROE (trenEndResponse) --- The server is currently busy, please try again later ");
@@ -130,6 +138,11 @@ public class PointsValidityTest extends BasePage {
             //subTotalResponse.close();
             //trenEndResponse.close();
         }//end main for loop
+        System.out.println(avgTimeSubTotal);
+        System.out.println(avgTimeTrenEnd);
+        ExRePointsValiditReport.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+                .info("avgTimeSubTotal: "+ (MainFunction.getAvgTime(avgTimeSubTotal)+"ms"))
+                .info("avgTimeTrenEnd: "+MainFunction.getAvgTime(avgTimeTrenEnd) +"ms");
 
     }//end of test
 

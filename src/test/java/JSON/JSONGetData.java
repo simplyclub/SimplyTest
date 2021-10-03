@@ -11,7 +11,7 @@ public class JSONGetData  {
     public static void getDealsToUseAccumId(Object testJSONToSend, int t) {
     }
     //this class is for gating data from the "JSON_TEST_FILE" for comparing
-// todo: Combine all the "getArraySize..." to one function
+
     /**
      * Thos function returns the size of  the TestJson
      * @param obj TestJSONToSend

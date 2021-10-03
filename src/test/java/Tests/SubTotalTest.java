@@ -8,13 +8,10 @@ import JSON.ResponseHandling;
 
 
 import com.sun.org.glassfish.gmbal.Description;
-import okhttp3.ResponseBody;
-import org.json.simple.JSONObject;
 import org.testng.annotations.Test;
 import utilities.MainFunction;
 
 import java.io.IOException;
-import java.util.StringTokenizer;
 
 
 public class SubTotalTest extends BasePage {
@@ -40,8 +37,12 @@ public class SubTotalTest extends BasePage {
             subTotalResponse_String = MainFunction.convertOkHttpResponseToString(subTotalResponse);
             if(subTotalResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse_String).equals("0")) {
 
+                ExReApiTestReport.info("subTotalResponse Time : "+BaseAPI.getResponseTime_OkHttp(subTotalResponse) + "ms");
+                BasePage.avgTimeSubTotal.add(BaseAPI.getResponseTime_OkHttp(subTotalResponse));
+
                 JSONCompare.responVSTestJson(i, subTotalResponse_String);
                 JSONCompare.TestJSONVSResponse(i, subTotalResponse_String);
+
                 //cancel of a deal
                 Object x= updateJSONFile.upDateTrenCancelJSONFile(JSONGetData.getAccoundID(TestJSONToSend, i),JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),
                         responseHandling.getServiceTranNumber(subTotalResponse_String));
@@ -49,9 +50,16 @@ public class SubTotalTest extends BasePage {
                 trenCancelResponse = APIPost.postTrenCancel_OkHttp(BaseAPI.TEST_REST_API_URI,BaseJSON.TREN_CONCEL_JSON);
                 String trenCancelResponse_string = MainFunction.convertOkHttpResponseToString(trenCancelResponse);
                 //System.out.println(trenCancelResponse.getBody().asString());
+
                 if (trenCancelResponse.code()!= 200 && !(responseHandling.getErrorCodeStatusJson(trenCancelResponse_string).equals("0"))){
                     System.out.println("ERROR --- the deal "+responseHandling.getServiceTranNumber(trenCancelResponse_string)+ " did not cancel");
                     ExReApiTestReport.warning("ERROR --- the deal "+responseHandling.getServiceTranNumber(trenCancelResponse_string)+ " did not cancel").assignCategory("warning");
+                }else{
+                    ExReApiTestReport.info("trenCancelResponse Time : "+ BaseAPI.getResponseTime_OkHttp(trenCancelResponse)+"ms");
+                    BasePage.avgTimetrenRedund.add(BaseAPI.getResponseTime_OkHttp(trenCancelResponse));
+
+
+
                 }
 
 
@@ -66,6 +74,15 @@ public class SubTotalTest extends BasePage {
             subTotalResponse.body().close();
             trenCancelResponse.body().close();
         }//end main for loop
+        System.out.println(avgTimeSubTotal);
+        System.out.println(avgTimetrenRedund);
+        System.out.println(MainFunction.getAvgTime(avgTimeSubTotal));
+        System.out.println(MainFunction.getAvgTime(avgTimetrenRedund));
+        ExReApiTestReport.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+                .info("avgTimeSubTotal: "+ (MainFunction.getAvgTime(avgTimeSubTotal)+"ms"))
+                .info("avgTimetrenCancel: "+MainFunction.getAvgTime(avgTimetrenRedund) +"ms");
+
+
 
     }
 

@@ -36,42 +36,30 @@ public class JSONCompare extends BasePage {
 
 
 
-                    if (responseHandling.getAmount(response,"CashBackDiscounts",i).equals(
-                            JSONGetData.getAmount(TestJSONToSend,arrayIndex,j,"CashBackDiscounts"))){
-
-                        ExReApiTestReport.pass("response amount: "+responseHandling.getAmount(response,"CashBackDiscounts",i)+"equals to " +
-                                "Test JSON amount: "+JSONGetData.getAmount(TestJSONToSend,arrayIndex,j,"CashBackDiscounts"));
-                    }else{
-
+                    if (!(responseHandling.getAmount(response,"CashBackDiscounts",i).equals(
+                            JSONGetData.getAmount(TestJSONToSend,arrayIndex,j,"CashBackDiscounts")))){
                         ExReApiTestReport.fail("response amount: "+responseHandling.getAmount(response,"CashBackDiscounts",i)+" is NOT equals to " +
                                 "Test JSON amount: "+JSONGetData.getAmount(TestJSONToSend,arrayIndex,j,"CashBackDiscounts"));
                         ExReApiTestReport.info("CashBackDiscounts: "+ arrayIndex);
                         ExReApiTestReport.info("Response promoID: "+ CBPromoId + "Test JSON promoID: " + temp ).assignCategory("responVSTestJson");
+
                     }
 
 
 
-                    if (responseHandling.getDescription(response,"CashBackDiscounts",i).equals(
-                            JSONGetData.getDescription(TestJSONToSend,arrayIndex,j,"CashBackDiscounts"))){
-
-                        ExReApiTestReport.pass("response Description: "+responseHandling.getDescription(response,"CashBackDiscounts",i)+"equals to " +
-                                "Test JSON Description: "+JSONGetData.getDescription(TestJSONToSend,arrayIndex,j,"CashBackDiscounts"));
-
-                    }else{
+                    if (!(responseHandling.getDescription(response,"CashBackDiscounts",i).equals(
+                            JSONGetData.getDescription(TestJSONToSend,arrayIndex,j,"CashBackDiscounts")))){
                         ExReApiTestReport.fail("response Description: "+responseHandling.getDescription(response,"CashBackDiscounts",i)+"is NOT equals to " +
                                 "Test JSON Description: "+JSONGetData.getDescription(TestJSONToSend,arrayIndex,j,"CashBackDiscounts"));
+
+
                     }
 
 
-                    if (responseHandling.getIsAuto(response,"CashBackDiscounts",i).equals(
-                            JSONGetData.getIsAuto(TestJSONToSend,arrayIndex,j,"CashBackDiscounts"))){
-
-                        ExReApiTestReport.pass("response IsAuto: "+responseHandling.getIsAuto(response,"CashBackDiscounts",i)+"equals to " +
-                                "Test JSON IsAuto: "+JSONGetData.getIsAuto(TestJSONToSend,arrayIndex,j,"CashBackDiscounts"));
-                    }else{
+                    if (!(responseHandling.getIsAuto(response,"CashBackDiscounts",i).equals(
+                            JSONGetData.getIsAuto(TestJSONToSend,arrayIndex,j,"CashBackDiscounts")))){
                         ExReApiTestReport.fail("response Description: "+responseHandling.getIsAuto(response,"CashBackDiscounts",i)+"is NOT equals to " +
                                 "Test JSON Description: "+JSONGetData.getIsAuto(TestJSONToSend,arrayIndex,j,"CashBackDiscounts"));
-
                     }
 
 
@@ -104,13 +92,8 @@ public class JSONCompare extends BasePage {
 
 
 
-                    if (responseHandling.getAmount(response,"TotalDiscounts",i).equals(
-                            JSONGetData.getAmount(TestJSONToSend,arrayIndex,j,"TotalDiscounts"))){
-
-                        ExReApiTestReport.pass("response amount: "+responseHandling.getAmount(response,"TotalDiscounts",i)+"equals to " +
-                                "Test JSON amount: "+JSONGetData.getAmount(TestJSONToSend,arrayIndex,j,"TotalDiscounts"));
-                    }else{
-
+                    if (!(responseHandling.getAmount(response,"TotalDiscounts",i).equals(
+                            JSONGetData.getAmount(TestJSONToSend,arrayIndex,j,"TotalDiscounts")))){
                         ExReApiTestReport.fail("response amount: "+responseHandling.getAmount(response,"TotalDiscounts",i)+" is NOT equals to " +
                                 "Test JSON amount: "+JSONGetData.getAmount(TestJSONToSend,arrayIndex,j,"TotalDiscounts"));
                         ExReApiTestReport.info("TotalDiscounts:"+arrayIndex);
@@ -118,41 +101,30 @@ public class JSONCompare extends BasePage {
                     }
 
 
-                    if (responseHandling.getDescription(response,"TotalDiscounts",i).equals(
-                            JSONGetData.getDescription(TestJSONToSend,arrayIndex,j,"TotalDiscounts"))){
-
-                        ExReApiTestReport.pass("response Description: "+responseHandling.getDescription(response,"TotalDiscounts",i)+"equals to " +
-                                "Test JSON Description: "+JSONGetData.getDescription(TestJSONToSend,arrayIndex,j,"TotalDiscounts"));
-
-                    }else{
+                    if (!(responseHandling.getDescription(response,"TotalDiscounts",i).equals(
+                            JSONGetData.getDescription(TestJSONToSend,arrayIndex,j,"TotalDiscounts")))){
                         ExReApiTestReport.fail("response Description: "+responseHandling.getDescription(response,"TotalDiscounts",i)+"is NOT equals to " +
                                 "Test JSON Description: "+JSONGetData.getDescription(TestJSONToSend,arrayIndex,j,"TotalDiscounts"));
+
                     }
 
 
 
-                    if (responseHandling.getAllItemsDiscountPercent(response,i).equals(
-                            JSONGetData.getAllItemsDiscountPercent(TestJSONToSend,arrayIndex,j,"TotalDiscounts"))){
-
-                        ExReApiTestReport.pass("response ItemsDiscountPercent: "+responseHandling.getAllItemsDiscountPercent(response,i)+"equals to " +
-                                "Test JSON ItemsDiscountPercent: "+JSONGetData.getAllItemsDiscountPercent(TestJSONToSend,arrayIndex,j,"TotalDiscounts"));
-
-                    }else{
+                    if (!(responseHandling.getAllItemsDiscountPercent(response,i).equals(
+                            JSONGetData.getAllItemsDiscountPercent(TestJSONToSend,arrayIndex,j,"TotalDiscounts")))){
                         ExReApiTestReport.fail("response ItemsDiscountPercent: "+responseHandling.getAllItemsDiscountPercent(response,i)+"is NOT equals to " +
                                 "Test JSON ItemsDiscountPercent: "+JSONGetData.getAllItemsDiscountPercent(TestJSONToSend,arrayIndex,j,"TotalDiscounts"));
+
                     }
 
 
-                    if (responseHandling.getIsAuto(response,"TotalDiscounts",i).equals(
-                            JSONGetData.getIsAuto(TestJSONToSend,arrayIndex,j,"TotalDiscounts"))){
+                    if (!(responseHandling.getIsAuto(response,"TotalDiscounts",i).equals(
+                            JSONGetData.getIsAuto(TestJSONToSend,arrayIndex,j,"TotalDiscounts")))) {
+                        ExReApiTestReport.fail("response IsAuto: " + responseHandling.getIsAuto(response, "TotalDiscounts", i) + "is NOT equals to " +
+                                "Test JSON IsAuto: " + JSONGetData.getIsAuto(TestJSONToSend, arrayIndex, j, "TotalDiscounts"));
 
-                    ExReApiTestReport.pass("response IsAuto: "+responseHandling.getIsAuto(response,"TotalDiscounts",i)+"equals to " +
-                            "Test JSON IsAuto: "+JSONGetData.getIsAuto(TestJSONToSend,arrayIndex,j,"TotalDiscounts"));
 
-                }else{
-                    ExReApiTestReport.fail("response IsAuto: "+responseHandling.getIsAuto(response,"TotalDiscounts",i)+"is NOT equals to " +
-                            "Test JSON IsAuto: "+JSONGetData.getIsAuto(TestJSONToSend,arrayIndex,j,"TotalDiscounts"));
-                }
+                    }
 
                     break;
 
