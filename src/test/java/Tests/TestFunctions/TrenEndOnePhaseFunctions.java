@@ -22,13 +22,15 @@ public class TrenEndOnePhaseFunctions extends BasePage {
                 JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),
                 JSONGetData.getFieldId(TestJSONToSend, i), JSONGetData.getCardNumber(TestJSONToSend, i)
         );
-        return APIPost.postUserGetData_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.USER_JSON_TO_SEND);
+        return APIPost.postUserGetData_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.MEMBER_JSON_TO_SEND);
 
     }
     public okhttp3.Response makeTrenEndOnePhase(int i) throws IOException {
         updateJSONFile.upDateTranEndOnePhase(jsonGetData.getAccoundID(TestJSONToSend,i),jsonGetData.getUser(TestJSONToSend,i),jsonGetData.getPassword(TestJSONToSend,i),
-                jsonGetData.getCardNumber(TestJSONToSend,i),jsonGetData.getTranItems(TestJSONToSend,i), baseJSON.jsonToSend);
-       return APIPost.postTranEndOnePhase_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.TREN_END_ONE_PHASE);
+                jsonGetData.getCardNumber(TestJSONToSend,i),jsonGetData.getTranItems(TestJSONToSend,i), baseJSON.tranEndOnePhaseToSend);
+
+
+       return APIPost.postTrenEndOnePhase_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.TREN_END_ONE_PHASE);
 
     }
 
@@ -73,7 +75,12 @@ public class TrenEndOnePhaseFunctions extends BasePage {
 
     }//func end
 
-    public void earnedChecks(int i){
+    /**
+     * this function will chack that the points you get from the Deal are equal  to TestJSON
+     * @param i
+     */
+
+    public void EarnedChecks(int i){
         for (String key : sumDealPoints.keySet()) {
             for (int q = 0; q < JSONGetData.getArraySizeSumAccum(TestJSONToSend, i); q++) {
                 //System.out.println(q);
@@ -87,6 +94,8 @@ public class TrenEndOnePhaseFunctions extends BasePage {
                     double d = 0.0 ;
 
 
+                    System.out.println(postDeal.get(key));
+                    System.out.println(preDeal.get(key));
                     d = (postDeal.get(key) - preDeal.get(key) );
                     dx = df.format(d);
                     d = Double.valueOf(dx);
@@ -103,9 +112,10 @@ public class TrenEndOnePhaseFunctions extends BasePage {
                     m = Double.valueOf(dx);
 
                     if (sumDeal.equals(SumAccumValue) && d == m) {
-
-                        ExReTrenEndOnePhaseReport.pass(sumDeal + " equals to " + SumAccumValue);
-                        ExReTrenEndOnePhaseReport.pass(d + " equals to " + JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
+                        ExReTrenEndOnePhaseReport.pass("EarnedChecks Accum("+ key +"),transaction "+(i+1) + " ---- as PASS");
+                        //ExReTrenEndOnePhaseReport.pass(sumDeal + " equals to " + SumAccumValue);
+                        //ExReTrenEndOnePhaseReport.pass(d + " equals to " + JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
+                        break;
                     } else {
                         ExReTrenEndOnePhaseReport.fail("*sumDealPoints: " + df.format(sumDealPoints.get(key)) + " NOT equals to "
                                 + "Test Json sumAccum: " + JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
@@ -115,6 +125,7 @@ public class TrenEndOnePhaseFunctions extends BasePage {
                     break;
                 }
             }
+            //break;
         }
 
     }
@@ -131,7 +142,14 @@ public class TrenEndOnePhaseFunctions extends BasePage {
             preDeal.put(s, Double.parseDouble(UserHandling.getVoucher(ResponseHandling.getAllAccums(userDataResponse), "BenefitValue", index)));
         }
 
+    }//func end
+    public void getPostDealPointsAccums ( int i, String  userDataResponse) throws IOException {
+        //first loop run on the size of array, from the response of the user benefit status
+        for (int index = 0; index < (ResponseHandling.getAllAccums(userDataResponse)).size(); index++) {
 
+            s = UserHandling.getVoucher(ResponseHandling.getAllAccums(userDataResponse), "AccID", index);
+            postDeal.put(s, Double.parseDouble(UserHandling.getVoucher(ResponseHandling.getAllAccums(userDataResponse), "BenefitValue", index)));
+        }
     }//func end
 
     public void getPostDealVouchers ( int i, String userDataResponse) throws IOException {

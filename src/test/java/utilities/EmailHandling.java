@@ -45,7 +45,7 @@ public class EmailHandling {
 
                     protected PasswordAuthentication getPasswordAuthentication() {
 
-                        return new PasswordAuthentication("michael@simplyClub.co.il", "michaelyav114");
+                        return new PasswordAuthentication("qaautomation@simplyclub.co.il", "T7SVhyJabM6wW2n");
 
                     }
 
@@ -57,10 +57,10 @@ public class EmailHandling {
             Message message = new MimeMessage(session);
 
             // Set the from address
-            message.setFrom(new InternetAddress("michael@simplyClub.co.il"));
+            message.setFrom(new InternetAddress("qaautomation@simplyclub.co.il"));
 
             // Set the recipient address
-            message.setRecipients(Message.RecipientType.TO,InternetAddress.parse("michael@simplyClub.co.il"));
+            message.setRecipients(Message.RecipientType.TO,InternetAddress.parse("rnd@simplyclub.co.il"));
 
             // Add the subject link
             message.setSubject("Testing Subject");

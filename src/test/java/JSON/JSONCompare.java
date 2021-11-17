@@ -134,6 +134,7 @@ public class JSONCompare extends BasePage {
             }
             if( flag1 == 0 ){
                 ExReApiTestReport.warning("12PromoId: " + TBPromoId + " not found in the \"Test JSON \"").assignCategory("responVSTestJson");
+                System.out.println(baseJSON.jsonToSend.toString());
                // ExReApiTestReport.info(response.getBody().asString());
 
             }

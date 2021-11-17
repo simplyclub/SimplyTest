@@ -490,11 +490,42 @@ public class JSONGetData  {
 
     }
 
- public static String getDaysToEnd (Object obj, int index){
+    public static String getDaysToEnd (Object obj, int index){
         JSONObject JSONObj = (JSONObject) obj ;
         JSONArray  tests = (JSONArray) JSONObj.get("array");
         JSONObject  DealAmountJSONObj = (JSONObject) tests.get(index);
         return DealAmountJSONObj.get("DaysToEnd").toString();
+
+    }
+
+    public static JSONArray getJoinOrRenewItems(String itemType , Object obj){
+
+        if(itemType.equals("JoinItem")){
+            JSONObject JSONObj = (JSONObject) obj ;
+            JSONArray arr = (JSONArray) JSONObj.get("array");
+            JSONObject join = (JSONObject) arr.get(1);
+            System.out.println("join: "+ join);
+            JSONArray joinItem = (JSONArray) join.get("JoinItem");
+            System.out.println(joinItem.toString());
+
+
+
+            return joinItem;
+
+        }
+
+        if (itemType.equals("RenewItem")){
+            JSONObject JSONObj = (JSONObject) obj ;
+            JSONArray arr = (JSONArray) JSONObj.get("array");
+            JSONObject renew = (JSONObject) arr.get(0);
+            JSONArray renewItem = (JSONArray) renew.get("RenewItem");
+            System.out.println(renewItem.toString());
+
+
+            return renewItem;
+        }
+
+        return null;
 
     }
 
@@ -518,4 +549,6 @@ public class JSONGetData  {
 
 
 
-}
+
+
+}//End Class

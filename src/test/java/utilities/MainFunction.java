@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 
 public class MainFunction extends BasePage {
@@ -29,6 +30,7 @@ public class MainFunction extends BasePage {
         String dir = System.getProperty("user.dir");
         driver.get("file:///" + dir + "\\nullExtentReportResults.html");
     }
+
     public static void extentReportInit(){
         BasePage.exReport.attachReporter(spark);
         spark.config().setTheme(Theme.DARK);
@@ -46,13 +48,15 @@ public class MainFunction extends BasePage {
         sumDealToUsePoints.clear();
         sumBurnd.clear();
         sumVal = 0.0;
-      //  avgTimeSubTotal.clear();
-      //  avgTimetrenCancel.clear();
-      //  avgTimeTrenEnd.clear();
-        // avgTimeTrenEndOnePhase.clear();
-
 
     }
+    public static void RestTimeGlobals(){
+        avgTimeSubTotal.clear();
+        avgTimeTrenEnd.clear();
+        avgTimeTrenEndOnePhase.clear();
+
+    }
+
     public static Node[] convertNodeListToNodeArray(NodeList list){
         int length = list.getLength();
         Node[] copy = new Node[length];
@@ -83,6 +87,11 @@ public class MainFunction extends BasePage {
         return content;
     }
 
+    /**
+     * This function, calculates the average times for any given Time array
+     * @param arrayList avg Time Array
+     * @return avg
+     */
     public static int getAvgTime(ArrayList arrayList){
         int avg=0;
 
@@ -96,6 +105,29 @@ public class MainFunction extends BasePage {
         return avg / arrayList.size();
     }
 
+    public static int SearchWordInString (String WordToSearch , String str) {
+            String strOrig = str ;
+
+        int intIndex = strOrig.indexOf(WordToSearch);
+
+            if(intIndex == -1 ) {
+                System.out.println(WordToSearch +" not found in string");
+                return 0;
+            } else {
+                System.out.println("Found "+WordToSearch+ " in the String");
+                return 1;
+            }
+    }
+
+    public static String RandomNumber(){
+        Random rand = new Random(); //instance of random class
+        int upperbound = 9999999;
+        //generate random values from 0-9999999
+        int int_random = rand.nextInt(upperbound);
+        String int_random_string = Integer.toString(int_random);
+
+        return int_random_string;
+    }
 
 
 

@@ -81,11 +81,11 @@ public class TranEndFunctions extends BasePage {
                     m = Double.valueOf(dx);
 
                     if (sumDeal.equals(SumAccumValue) && d == m) {
-
-                        ExReAccumReport.pass(sumDeal + " equals to " + SumAccumValue);
-                        ExReAccumReport.pass(d + " equals to " + JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
+                        ExReAccumReport.pass("Accumulation Check Deal num "+ (i+1) +" ---->Accum("+key+") as pass");
+                        //ExReAccumReport.info("sumDealPoints: "+sumDeal + " equals to " +" Test Json sumAccum: "+ SumAccumValue);
+                        //ExReAccumReport.pass(d + " equals to " + "Test Json sumAccum: " + JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
                     } else {
-                        ExReAccumReport.fail("*sumDealPoints: " + df.format(sumDealPoints.get(key)) + " NOT equals to "
+                        ExReAccumReport.fail("sumDealPoints: " + df.format(sumDealPoints.get(key)) + " NOT equals to "
                                 + "Test Json sumAccum: " + JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
                         ExReAccumReport.fail("(postDeal.get(" + key + ") - preDeal.get(" + key + ")): " + d + " NOT equals to "
                                 + "Test Json sumAccum: " + JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
@@ -101,6 +101,7 @@ public class TranEndFunctions extends BasePage {
 
     public static void  AccumsNotInUse(String userDataResponse ) throws IOException {
         String accID=null ;
+        ExReAccumReport.info("~~~~~~~~ .AccumsNotInUse ~~~~~~~~ ");
         for(int i = 0; i< ResponseHandling.getAllAccums(userDataResponse).size() ; i++) {
 
             accID = UserHandling.getVoucher(ResponseHandling.getAllAccums(userDataResponse), "AccID",i);
@@ -108,8 +109,8 @@ public class TranEndFunctions extends BasePage {
             if(sumDealPoints.get(accID)== null && sumDealToUsePoints.get(accID)== null){
                 if(preDeal.get(accID).equals(postDeal.get(accID))) {
                     //System.out.println("*-*aacID: " + accID);
-                    ExReAccumReport.pass("AccumID: "+ accID +"is not change ").assignCategory("AccumsNotInUse");
-                    ExReAccumReport.info("preDeal: "+preDeal.get(accID) + " postDeal: "+postDeal.get(accID)).assignCategory("AccumsNotInUse");
+                    ExReAccumReport.pass("AccumID: "+ accID +" is not change ").assignCategory("AccumsNotInUse");
+                   // ExReAccumReport.info("preDeal: "+preDeal.get(accID) + " postDeal: "+postDeal.get(accID)).assignCategory("AccumsNotInUse");
                 }
 
             }
@@ -141,7 +142,7 @@ public class TranEndFunctions extends BasePage {
                 JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),
                 JSONGetData.getFieldId(TestJSONToSend, i), JSONGetData.getCardNumber(TestJSONToSend, i)
         );
-        return APIPost.postUserGetData_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.USER_JSON_TO_SEND);
+        return APIPost.postUserGetData_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.MEMBER_JSON_TO_SEND);
 
     }//func end
     public okhttp3.Response makeDealSubTotal(int i) throws IOException {
@@ -153,6 +154,7 @@ public class TranEndFunctions extends BasePage {
     //todo:     change JSONGetData.getDealsToUse(TestJSONToSend, i) --> null
     //          Need to check with future dells without using points if it works.
     //          if it works i can  delete the second function "makeDealWithUsingPointsTrenEnd"
+
     public okhttp3.Response makeDealTrenEnd(int i,String subTotalResponse) throws IOException {
         updateJSONFile.upDateTranEndJSON(ResponseHandling.getServiceTranNumber(subTotalResponse), JSONGetData.getAccoundID(TestJSONToSend, i),JSONGetData.getUser(TestJSONToSend, i),
                 JSONGetData.getPassword(TestJSONToSend, i),JSONGetData.getCardNumber(TestJSONToSend, i),
@@ -161,10 +163,28 @@ public class TranEndFunctions extends BasePage {
 
     }//func end
 
+    /**
+     * this function will fill the form of trenEnd and them send it to TrenEndCheck using
+     * the Post to TrenEndCheck
+     * @param i
+     * @param subTotalResponse
+     * @return response
+     * @throws IOException
+     */
+
+    public okhttp3.Response makeTrenEndCheck(int i,String subTotalResponse) throws IOException {
+        updateJSONFile.upDateTranEndJSON(ResponseHandling.getServiceTranNumber(subTotalResponse), JSONGetData.getAccoundID(TestJSONToSend, i), JSONGetData.getUser(TestJSONToSend, i),
+                JSONGetData.getPassword(TestJSONToSend, i), JSONGetData.getCardNumber(TestJSONToSend, i),
+                JSONGetData.getTranItems(TestJSONToSend, i), JSONGetData.getDealsToUse(TestJSONToSend, i), baseJSON.jsonToSend);
+
+        return APIPost.postTrenEndCheck_OkHttp(BaseAPI.TEST_REST_API_URI, baseJSON.JSON_TO_SEND);
+    }
+
     public okhttp3.Response makeDealWithUsingPointsTrenEnd(int i,String  subTotalResponse) throws IOException {
         updateJSONFile.upDateTranEndJSON(ResponseHandling.getServiceTranNumber(subTotalResponse), JSONGetData.getAccoundID(TestJSONToSend, i),
                 JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),JSONGetData.getCardNumber(TestJSONToSend, i),
                 JSONGetData.getTranItems(TestJSONToSend, i), JSONGetData.getDealsToUse(TestJSONToSend, i), baseJSON.jsonToSend);
+
         return APIPost.postTranEnd_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.JSON_TO_SEND);
 
     }//func end
@@ -207,10 +227,10 @@ public class TranEndFunctions extends BasePage {
                 if (postDeal.get(key) == d) {
                     //System.out.println("ok");
                     ExReAccumReport.pass("*AccumID: " + key + " pass Accumulation Test - Using Points").assignCategory("Using Points");
-                    ExReAccumReport.info("AccumID: " + key + " DiscountType = 1");
+                    //ExReAccumReport.info("AccumID: " + key + " DiscountType = cashBack Discount(1)");
                     //sumDealToUsePoints.remove(key);
                 } else {
-                    ExReAccumReport.fail("*AccumID: " + key + " did NOT pass Accumulation Test - Using Points, Deal number: " + i).assignCategory("fail");
+                    ExReAccumReport.fail("*AccumID: " + key + " did NOT pass Accumulation Test - Using Points, Deal number: " + (i+1)).assignCategory("fail");
                     ExReAccumReport.info(" preDeal: " + preDeal.get(key) +
                             " sumDealToUsePoints: " + sumDealToUsePoints.get(key) +
                             " postDeal: " + postDeal.get(key));
@@ -242,10 +262,10 @@ public class TranEndFunctions extends BasePage {
                                     if (postDeal.get(key) == d) {
                                         // System.out.println("ok2");
                                         ExReAccumReport.pass("AccumID: " + key + " pass Accumulation Test - Using Points").assignCategory("Using Points");
-                                        ExReAccumReport.info("AccumID: " + key + "DiscountType = 1 , coupon");
+                                        //ExReAccumReport.info("AccumID: " + key + "DiscountType = cashBack Discount(1) , coupon");
 
                                     } else {
-                                        ExReAccumReport.fail("**AccumID: " + key + " did NOT pass Accumulation Test - Using Points, Deal number: " + i).assignCategory("fail");
+                                        ExReAccumReport.fail("**AccumID: " + key + " did NOT pass Accumulation Test - Using Points, Deal number: " + (i+1)).assignCategory("fail");
                                         ExReAccumReport.info(" coupon: preDeal: " + preDeal.get(key) +
                                                 " sumDealToUsePoints: " + sumDealToUsePoints.get(key) +
                                                 " postDeal: " + postDeal.get(key));
@@ -266,10 +286,10 @@ public class TranEndFunctions extends BasePage {
                             if (preDeal.get(key) + sumDealPoints.get(key) - Double.valueOf(getBurned(key, i)) == postDeal.get(key)) {
                                 //System.out.println("ok3");
                                 ExReAccumReport.pass("AccumID: " + key + " pass Accumulation Test - Using Points").assignCategory("Using Points");
-                                ExReAccumReport.info("AccumID: " + key + " DiscountType = 0");
+                                //ExReAccumReport.info("AccumID: " + key + " DiscountType = Total Discount(0)");
 
                             } else {
-                                ExReAccumReport.fail("***AccumID: " + key + " did NOT pass Accumulation Test - Using Points, Deal number: " + i).assignCategory("fail");
+                                ExReAccumReport.fail("***AccumID: " + key + " did NOT pass Accumulation Test - Using Points, Deal number: " + (i+1)).assignCategory("fail");
                                 ExReAccumReport.info(" preDeal: " + preDeal.get(key) +
                                         " sumDealToUsePoints: " + sumDealToUsePoints.get(key) +
                                         " Burned: " + Double.valueOf(getBurned(key, i)) +
@@ -286,8 +306,10 @@ public class TranEndFunctions extends BasePage {
         }//func end
 
         /**
-         * this function will check and coumper the discounts in the "DealToUse"
-         * @param nodeList
+         * this function will check and compere the discounts in the "DealToUse" that are in thr TestJSONToSend
+         * to the one in the TransactionView(XML).
+         *
+         * @param nodeList from the TransactionView(XML)
          * @param i the index for the deal in the "TestJson"
          */
         public void DiscountConfirmTest (NodeList nodeList ,int i){
@@ -329,14 +351,14 @@ public class TranEndFunctions extends BasePage {
 
 
                                     if (_xmlTotalAmount.equals(_jsonTotalAmount)) {
-                                        ExReAccumReport.pass("xmlPromoID " + xmlPromoID + " found in TestJSON");
-                                        ExReAccumReport.info("xmlTotalAmount: " + xmlTotalAmount + " jsonTotalAmount: " + jsonTotalAmount)
-                                                .assignCategory("Confirm Discounts Amount");
+                                        ExReAccumReport.pass("Post transaction xmlPromoID " + xmlPromoID + " found in TestJSON ");
+                                        //ExReAccumReport.info("xmlTotalAmount: " + xmlTotalAmount + " jsonTotalAmount: " + jsonTotalAmount)
+                                        //        .assignCategory("Confirm Discounts Amount");
                                         break;
 
                                     } else {
 
-                                        ExReAccumReport.fail("xmlTotalAmount: " + xmlTotalAmount + " jsonTotalAmount: " + jsonTotalAmount)
+                                        ExReAccumReport.fail("Post transaction xmlTotalAmount: " + xmlTotalAmount + " jsonTotalAmount: " + jsonTotalAmount)
                                                 .assignCategory("Confirm Discounts Amount");
                                         ExReAccumReport.info("*additional information : test number(" + i + ")" + " xmlPromoID(" + xmlPromoID + ")" + " jsonDealToUsePromoID(" + DealToUsePromoID + ")" +
                                                 "Please note, this \"buy-get\" Discounts IS ALL OR NOTHING")
@@ -365,13 +387,13 @@ public class TranEndFunctions extends BasePage {
                                 String _xmlTotalAmount = df.format(xmlTotalAmount);
 
                                 if (_xmlTotalAmount.equals(_jsonTotalAmount)) {
-                                    ExReAccumReport.pass("xmlPromoID " + xmlPromoID + " found in TestJSON");
-                                    ExReAccumReport.info("xmlTotalAmount: " + xmlTotalAmount + " jsonTotalAmount: " + _jsonTotalAmount)
-                                            .assignCategory("Confirm Discounts Amount");
+                                    ExReAccumReport.pass("Post transaction xmlPromoID " + xmlPromoID + " found in TestJSON");
+                                  //  ExReAccumReport.info("xmlTotalAmount: " + xmlTotalAmount + " jsonTotalAmount: " + _jsonTotalAmount)
+                                  //          .assignCategory("Confirm Discounts Amount");
                                     break;
 
                                 } else {
-                                    ExReAccumReport.fail("xmlTotalAmount: " + xmlTotalAmount + " jsonTotalAmount: " + _jsonTotalAmount)
+                                    ExReAccumReport.fail("Post transaction xmlTotalAmount: " + xmlTotalAmount + " jsonTotalAmount: " + _jsonTotalAmount)
                                             .assignCategory("Confirm Discounts Amount");
                                     ExReAccumReport.info("additional information : test number(" + i + ")" + " xmlPromoID(" + xmlPromoID + ")" + " jsonDealToUsePromoID(" + DealToUsePromoID + ")")
                                             .assignCategory("Confirm Discounts Amount");
@@ -438,14 +460,13 @@ public class TranEndFunctions extends BasePage {
 
 
             if (_paidTotal == Double.valueOf(JSONGetData.getTotalDealAmount(TestJSONToSend, i))) {
-                ExReAccumReport.info("----------------------------------------------------------------------");
-                ExReAccumReport.pass("Total Deal Paid Calculation -- pass" + " deal number: " + i);
-                ExReAccumReport.info("----------------------------------------------------------------------");
+
+                ExReAccumReport.pass("Total Transaction Paid Calculation -- pass" + " Transaction number: " + (i+1));
 
 
             } else {
                 ExReAccumReport.info("----------------------------------------------------------------------");
-                ExReAccumReport.fail("Total Deal Paid Calculation-- fail roung total amount " + " deal number: " + i).assignCategory("fail");
+                ExReAccumReport.fail("Total Transaction Paid Calculation-- fail roung total amount " + " Transaction number: " + (i+1)).assignCategory("fail");
                 ExReAccumReport.info("_paidTotal: " + _paidTotal + " Json TotalDealAmount: " + JSONGetData.getTotalDealAmount(TestJSONToSend, i));
                 ExReAccumReport.info("----------------------------------------------------------------------");
             }

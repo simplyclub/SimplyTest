@@ -59,7 +59,7 @@ public okhttp3.Response makeTranRefund (int i,String TrenEndResponse ) throws IO
                 JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),
                 JSONGetData.getFieldId(TestJSONToSend, i), JSONGetData.getCardNumber(TestJSONToSend, i)
         );
-        return (APIPost.postUserGetData(BaseAPI.TEST_REST_API_URI, BaseJSON.USER_JSON_TO_SEND)).getBody().asString();
+        return (APIPost.postUserGetData(BaseAPI.TEST_REST_API_URI, BaseJSON.MEMBER_JSON_TO_SEND)).getBody().asString();
 
 
     }//func end

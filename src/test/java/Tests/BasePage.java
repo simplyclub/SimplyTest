@@ -18,6 +18,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import utilities.EmailHandling;
 import utilities.MainFunction;
 
 import java.util.ArrayList;
@@ -58,6 +59,16 @@ public  class BasePage {
     public String trenRefundResponse_String = null ;
     public okhttp3.Response trenEndOnePhaseResponse = null ;
     public String trenEndOnePhaseResponse_String = null ;
+    public okhttp3.Response memberAddResponse = null;
+    public String memberAddResponse_String =null;
+    public okhttp3.Response memberSearchResponse = null;
+    public String memberSearchResponse_String =null;
+    public okhttp3.Response memberUpdateResponse = null;
+    public String memberUpdateResponse_String =null;
+    public okhttp3.Response memberSwitchRecognitionResponse = null;
+    public String memberSwitchRecognitionResponse_String =null;
+    public okhttp3.Response memberSwitchStatusResponse = null;
+    public String memberSwitchStatusResponse_String =null;
     ArrayList<Node> xmlResponseDiscountList = new ArrayList<>();
 
     // extent report
@@ -68,12 +79,14 @@ public  class BasePage {
     public static  ExtentTest ExRePointsValiditReport;
     public static  ExtentTest ExReTernRefundReport;
     public static  ExtentTest ExReTrenEndOnePhaseReport;
+    public static  ExtentTest ExReNewMemberTestReport;
 
 
 
 
     //GLOBALS
     public static final  String JSON_TEST_FILE = "C:\\Users\\User\\IdeaProjects\\SimplyTest\\JSONParametersToSend.json";
+    public static final  String JSON_JOIN_RENEW = "C:\\Users\\User\\IdeaProjects\\SimplyTest\\JoinRenewClubItemsJson.json";
     public static String s = null;
     public static double sumVal = 0.0;
     public static final String LOG_FILE_DIRECTORY = "C:\\Users\\User\\IdeaProjects\\SimplyTest\\LogFile";
@@ -102,6 +115,76 @@ public  class BasePage {
 
     //Globals json objects
     public  Object TestJSONToSend = baseJSON.getObj(JSON_TEST_FILE)  ;
+    public  Object JoinRenewClubJSONToSend = baseJSON.getObj(JSON_JOIN_RENEW)  ;
+
+
+    //FieldID globals
+    public static final String FIRST_NAME = "0";
+    public static final String LAST_NAME = "1";
+    public static final String LAST_SALE_DATE = "2";
+    public static final String BIRTHDAY = "3";
+    public static final String WEDDING_DAY = "4";
+    public static final String EMAIL = "5";
+    public static final String PHONE = "6";
+    public static final String CELL_PHONE = "7";
+    public static final String TOTAL_SALE = "8";
+    public static final String EXPIRATION_DATE = "9";
+    public static final String GENDER = "10";
+    public static final String CITY = "11";
+    public static final String STREET = "12";
+    public static final String REFERNCE_FIELD = "13";
+    public static final String ACCUM_FIELD = "14";
+    public static final String BRANCH_FIELD = "15";
+    public static final String GROUP_FIELD = "16";
+    public static final String CARD_FIELD = "17";
+    public static final String CREATED_DATE = "18";
+    public static final String SYS_ID = "19";
+    public static final String PERSONAL_ID = "20";
+    public static final String TOTAL_ACC = "21";
+    public static final String TOTAL_VISITS = "22";
+//Stat
+    public static final String TODAY = "23";
+    public static final String YESTERDAY = "24";
+    public static final String HTML_STATISTICS = "25";
+    public static final String SMS_STATISTICS = "26";
+    public static final String BY_PURCHASE = "27";
+    public static final String LAST_WEEK = "28";
+    public static final String LAST_MONTH = "29";
+    public static final String ACCOUNT_NAME = "30";
+    public static final String TOTAL_MEMBERS = "31";
+    public static final String REMOVALEMAIL = "32";
+    public static final String RREMOVALSMS = "33";
+    public static final String MIKUD = "34";
+    public static final String HOUSE_NUM = "35";
+    public static final String APP_NUM = "36";
+    public static final String APPLICATION_DOWNLOAD = "37";
+    public static final String UDF = "38";
+    public static final String ENCRYPT_MEMBERID = "39";
+
+    //FieldOperatorType
+
+    public static final String Equal = "0";
+    public static final String NotEqual = "1";
+    public static final String GreatEqual = "2";
+    public static final String LessEqual = "3";
+    public static final String Greate ="4";
+    public static final String Less = "5";
+    public static final String Between = "6";
+    public static final String NotBetween = "7";
+    public static final String Contains = "8";
+    public static final String NotContains = "9";
+    public static final String StartWith = "10";
+    public static final String EndWith = "11";
+    public static final String Blank = "12";
+    public static final String NotBlank = "13";
+
+    //member status globals
+
+    public static final String MEMBER_STATUS_ACTIVE = "0";
+    public static final String MEMBER_STATUS_NOT_ACTIVE = "1";
+
+
+
 
 
     @BeforeSuite
@@ -110,10 +193,11 @@ public  class BasePage {
 
         // Extent report tests titles
         ExReApiTestReport = exReport.createTest("Sub Total Test").assignCategory("Transaction");// give the name of the test title  in the report
-        ExReAccumReport = exReport.createTest("Accumulation Test").assignCategory("Transaction");// give the name of the test title  in the report
-        ExRePointsValiditReport = exReport.createTest("Points Validit Test").assignCategory("Transaction");// give the name of the test title  in the report
+        ExReAccumReport = exReport.createTest("TrenEnd promos Test").assignCategory("Transaction");// give the name of the test title  in the report
+        ExRePointsValiditReport = exReport.createTest("Points Validity Test").assignCategory("Transaction");// give the name of the test title  in the report
         ExReTernRefundReport = exReport.createTest("Refund  Test").assignCategory("Refund");// give the name of the test title  in the report
         ExReTrenEndOnePhaseReport = exReport.createTest("Tren End One Phase Test").assignCategory("Transaction");// give the name of the test title  in the report
+        ExReNewMemberTestReport = exReport.createTest(" New Member Tests").assignCategory("NewMember");// give the name of the test title  in the report
 
 
     }
@@ -153,9 +237,30 @@ public  class BasePage {
         if (trenRefundResponse !=null){
 
             trenRefundResponse = null;
-        }if (trenEndOnePhaseResponse !=null){
+        }
+        if (trenEndOnePhaseResponse !=null){
 
             trenEndOnePhaseResponse = null;
+        }
+        if (memberAddResponse !=null){
+
+            memberAddResponse = null;
+        }
+        if (memberSearchResponse !=null){
+
+            memberSearchResponse = null;
+        }
+        if (memberUpdateResponse !=null){
+
+            memberUpdateResponse = null;
+        }
+        if (memberSwitchRecognitionResponse !=null){
+
+            memberSwitchRecognitionResponse = null;
+        }
+        if (memberSwitchStatusResponse !=null){
+
+            memberSwitchStatusResponse = null;
         }
 
     }

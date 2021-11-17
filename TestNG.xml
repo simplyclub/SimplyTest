@@ -8,7 +8,6 @@
     <test name="Sub Total">
         <classes>
             <class name="Tests.SubTotalTest"></class>
-
         </classes>
     </test>
     <test name="TranEnd">
@@ -29,6 +28,10 @@
     <test name="Tren End One Phase">
         <classes>
             <class name="Tests.TrenEndOnePhaseTest"></class>
+        </classes>
+    </test><test name="New member test">
+        <classes>
+            <class name="Tests.NewMemberTests"></class>
         </classes>
     </test>
 

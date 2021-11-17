@@ -60,12 +60,26 @@ public class PointsValidityFunctions extends BasePage {
         return APIPost.postTranEnd_OkHttp(BaseAPI.TEST_REST_API_URI, baseJSON.JSON_TO_SEND);
     }//func end
 
-    public Response getMemberBenefitList() {
+    /**
+     *
+     * @param memberId Sys member ID
+     * @return
+     */
+
+    public Response getMemberBenefitList(String memberId) {
         updateXMLFile.updateXMLGetMemberBenefitList(BaseXML.xmlToDocGetMemberBenefitList(), "loginKey", updateXMLFile.getSysLogin());
-        updateXMLFile.updateXMLGetMemberBenefitList(BaseXML.xmlToDocGetMemberBenefitList(), "memberId", "1181924");
+        updateXMLFile.updateXMLGetMemberBenefitList(BaseXML.xmlToDocGetMemberBenefitList(), "memberId",memberId );
         updateXMLFile.updateXMLGetMemberBenefitList(BaseXML.xmlToDocGetMemberBenefitList(), "accountId", "287");
         return APIPost.postXMLGetMemberBenefitList(TEST_API_SYSTEM_URI, BaseXML.GET_TREN_FILE_LOCATION);
     }//func end
+
+    public   okhttp3.Response getUserData(int i,String CardNumber) throws IOException {
+        updateJSONFile.upDateUserJSONFile(
+                JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),
+                JSONGetData.getFieldId(TestJSONToSend, i),CardNumber);
+        return APIPost.postUserGetData_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.MEMBER_JSON_TO_SEND);
+
+    }
 
 
     public int calcDaysUntilEnd(NodeList nodeList, int NLIndex, int i) {
@@ -206,15 +220,20 @@ public class PointsValidityFunctions extends BasePage {
 
         endDate = XMLGetData.getXmlMBLEndDate(nodeList, NLIndex);
         dateAfter = LocalDate.parse(endDate, formatter);
+        System.out.println(endDate);
+        System.out.println(dateAfter);
 
 
 
         DayOfWeek day = dateAfter.getDayOfWeek();
-        System.out.println(day.getValue());
+        //System.out.println(day.getValue());
+        //System.out.println(day);
 
-        if(day.getValue() == 5){
+        if(day.getValue()==6){
+            System.out.println("return 1");
             return 1;
         }else {
+            System.out.println("return 0");
             return 0;
         }
 

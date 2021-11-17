@@ -10,6 +10,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.IOException;
@@ -94,7 +95,7 @@ public class ResponseHandling  {
     }
 
     /**
-     * get the array of the "all accums" from the user data response
+     * Get the array of the "all accums" from the user data response
      * @param s - user "get data" response
      * @return JSONArray with  "AllAccums" array
      */
@@ -136,6 +137,66 @@ public class ResponseHandling  {
 
 
 
+    }
+
+    /**
+     * this function will return the card number from the response of "Member Add "
+     * @param s response as a String
+     * @param ApiCAllType what type of response  memberSearchResponse / memberAddResponse
+     * @return CardNumber
+     */
+    public String getCardNumber (String s,String ApiCAllType){
+        System.out.println(ApiCAllType+": "+s);
+        JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(s);
+
+        if(ApiCAllType.equals("memberAddResponse")){
+            JSONObject member = (JSONObject) responseObj.get("Member");
+            //System.out.println(member);
+            return member.get("CardNumber").toString();
+        }
+        if(ApiCAllType.equals("memberSearchResponse")){
+            JSONArray member = (JSONArray) responseObj.get("Members");
+            JSONObject x = (JSONObject) member.get(0);
+            //System.out.println(member);
+            return x.get("CardNumber").toString();
+
+        }
+        return null ;
+    }
+
+
+    public String getMemberStatus(String s){
+        JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(s);
+        JSONObject member = (JSONObject) responseObj.get("Member");
+
+        return member.get("Status").toString();
+
+
+
+
+    }
+
+
+
+    public  String getUserDetailsExpDate (String s){
+        JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(s);
+        JSONObject member = (JSONObject) responseObj.get("Member");
+        //System.out.println(member);
+        String ExpDate = member.get("ExpDate").toString();
+
+        return ExpDate;
+
+
+
+    }
+
+    public String getSysId(String s){
+        JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(s);
+        JSONObject member = (JSONObject) responseObj.get("Member");
+
+        String SysId = member.get("SysId").toString();
+
+        return SysId;
     }
 
 
@@ -284,6 +345,8 @@ public class ResponseHandling  {
         return null;
 
     }
+
+
 
 
 

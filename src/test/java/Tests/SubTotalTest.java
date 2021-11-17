@@ -27,14 +27,17 @@ public class SubTotalTest extends BasePage {
         //Sending a transaction, checking that the correct deals have appeared and then closing the transaction without using points
 
         //this loop run on the the tests in the "test JSON to send"
-        for (int i = 0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++) {
-            ExReApiTestReport.info("~~~~~~~~~~~~~~~~~~~~~~~~ Deal "+(i+1)+" ~~~~~~~~~~~~~~~~~~~~~~~~");
+        for (int i =0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++) {
+            ExReApiTestReport.info("~~~~~~~~~~~~~~~~~~~~~~~~ Transaction "+(i+1)+" ~~~~~~~~~~~~~~~~~~~~~~~~");
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~ Deal "+(i+1)+" ~~~~~~~~~~~~~~~~~~~~~~~~");
 
             updateJSONFile.upDateBaseJSONFile(JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),
                     JSONGetData.getAccoundID(TestJSONToSend, i), JSONGetData.getTranItems(TestJSONToSend, i),JSONGetData.getCardNumber(TestJSONToSend, i));
-
+            System.out.println(BaseJSON.JSON_TO_SEND.toString());
             subTotalResponse = APIPost.postSubTotal_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.JSON_TO_SEND);
             subTotalResponse_String = MainFunction.convertOkHttpResponseToString(subTotalResponse);
+
+
             if(subTotalResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse_String).equals("0")) {
 
                 ExReApiTestReport.info("subTotalResponse Time : "+BaseAPI.getResponseTime_OkHttp(subTotalResponse) + "ms");
@@ -52,8 +55,8 @@ public class SubTotalTest extends BasePage {
                 //System.out.println(trenCancelResponse.getBody().asString());
 
                 if (trenCancelResponse.code()!= 200 && !(responseHandling.getErrorCodeStatusJson(trenCancelResponse_string).equals("0"))){
-                    System.out.println("ERROR --- the deal "+responseHandling.getServiceTranNumber(trenCancelResponse_string)+ " did not cancel");
-                    ExReApiTestReport.warning("ERROR --- the deal "+responseHandling.getServiceTranNumber(trenCancelResponse_string)+ " did not cancel").assignCategory("warning");
+                    System.out.println("ERROR --- the Transaction "+responseHandling.getServiceTranNumber(trenCancelResponse_string)+ " did not cancel");
+                    ExReApiTestReport.warning("ERROR --- the Transaction "+responseHandling.getServiceTranNumber(trenCancelResponse_string)+ " did not cancel").assignCategory("warning");
                 }else{
                     ExReApiTestReport.info("trenCancelResponse Time : "+ BaseAPI.getResponseTime_OkHttp(trenCancelResponse)+"ms");
                     BasePage.avgTimetrenRedund.add(BaseAPI.getResponseTime_OkHttp(trenCancelResponse));
@@ -81,7 +84,6 @@ public class SubTotalTest extends BasePage {
         ExReApiTestReport.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
                 .info("avgTimeSubTotal: "+ (MainFunction.getAvgTime(avgTimeSubTotal)+"ms"))
                 .info("avgTimetrenCancel: "+MainFunction.getAvgTime(avgTimetrenRedund) +"ms");
-
 
 
     }
