@@ -7,6 +7,7 @@ import Utilities.LogFileHandling;
 import XML.XMLGetData;
 import org.testng.annotations.Test;
 import utilities.MainFunction;
+import utilities.RetryAnalyzer;
 
 import java.io.IOException;
 
@@ -18,7 +19,7 @@ public class PointsValidityTest extends BasePage {
     PointsValidityCases pointsValidityCases = new PointsValidityCases();
 
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void pointsValidityTest() throws IOException {
         for (int i = 0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++) {
             MainFunction.RestGlobals();

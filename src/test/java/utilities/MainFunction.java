@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import org.testng.IRetryAnalyzer;
+import org.testng.ITestResult;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 
@@ -50,6 +52,7 @@ public class MainFunction extends BasePage {
         sumVal = 0.0;
 
     }
+
     public static void RestTimeGlobals(){
         avgTimeSubTotal.clear();
         avgTimeTrenEnd.clear();
@@ -77,7 +80,6 @@ public class MainFunction extends BasePage {
         return Double.toString(d);
 
     }
-
 
     public static String convertOkHttpResponseToString(Response response) throws IOException {
         ResponseBody body = response.peekBody(Long.MAX_VALUE);
@@ -130,8 +132,7 @@ public class MainFunction extends BasePage {
     }
 
 
-
-}
+}//End Class
 
 
 

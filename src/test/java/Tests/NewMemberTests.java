@@ -9,6 +9,7 @@ import Utilities.LogFileHandling;
 import com.sun.org.glassfish.gmbal.Description;
 import org.testng.annotations.Test;
 import utilities.MainFunction;
+import utilities.RetryAnalyzer;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -27,7 +28,7 @@ public class NewMemberTests extends NewMemberAPIFunctions {
     BaseAPI baseAPI = new BaseAPI();
 
 
-    @Test(priority = 1)
+    @Test(priority = 1,retryAnalyzer = RetryAnalyzer.class)
     @Description("this test will Create a new member, search  for it, and then make an update ")
     public void MemberTest1 ()  throws IOException  {
 
@@ -53,8 +54,8 @@ public class NewMemberTests extends NewMemberAPIFunctions {
 
 
 
-            //member Search
-            memberSearchResponse = MemberSearch(MEMBER_CARD_NUMBER, 0);
+            //member Search by card number
+            memberSearchResponse = MemberSearch(MEMBER_CARD_NUMBER, 0,CARD_FIELD);
             memberSearchResponse_String = MainFunction.convertOkHttpResponseToString(memberSearchResponse);
 
             if(!(memberSearchResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(memberSearchResponse_String).equals("0"))){
@@ -76,12 +77,40 @@ public class NewMemberTests extends NewMemberAPIFunctions {
             if (MEMBER_CARD_NUMBER.equals(responseHandling.getCardNumber(memberSearchResponse_String, "memberSearchResponse"))) {
                 ExReNewMemberTestReport.pass("Member Add -- PASS").assignCategory("NewMemberTest");
                 memberAddCheck(memberAddResponse_String,ID_RANDOM_NUMBER,INT_RANDOM_NUMBER);
-                ExReNewMemberTestReport.pass("Member Search -- PASS").assignCategory("NewMemberTest");
+                ExReNewMemberTestReport.pass("Member Search(by card number) -- PASS").assignCategory("NewMemberTest");
 
 
                 System.out.println("1");
             } else {
                 ExReNewMemberTestReport.fail(" New Member Not created ");
+
+            }
+
+            //member search by phone
+            memberSearchResponse = MemberSearch(INT_RANDOM_NUMBER, 0,CELL_PHONE);
+            memberSearchResponse_String = MainFunction.convertOkHttpResponseToString(memberSearchResponse);
+
+            if(!(memberSearchResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(memberSearchResponse_String).equals("0"))){
+                System.out.println("*ERROR --- status code is not 200" + "(" + memberSearchResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" +
+                        responseHandling.getErrorCodeStatusJson(memberSearchResponse_String) + ")");
+                ExReNewMemberTestReport.fail("ERROR --- status code is not 200" + "(" + memberSearchResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                        responseHandling.getErrorCodeStatusJson(memberSearchResponse_String) + ")");
+                LogFileHandling.createLogFile(baseJSON.getString(BaseJSON.MEMBER_SERACH_JSON), LOG_FILE_DIRECTORY, "memberSearch",0);
+                LogFileHandling.createLogFile(memberSearchResponse_String, LOG_FILE_DIRECTORY, "memberSearchResponse",0);
+                memberAddResponse.body().close();
+
+            }
+
+
+            //System.out.println(baseJSON.memberSerachJsonToSend);
+            //System.out.println(memberSearchResponse_String);
+
+
+            if (INT_RANDOM_NUMBER.equals(responseHandling.getMemberField(memberSearchResponse_String,"cell_number",0))) {
+                ExReNewMemberTestReport.pass("Member Search(by phone) -- PASS").assignCategory("NewMemberTest");
+
+            } else {
+                ExReNewMemberTestReport.fail("Member Search(by phone) -- FAIL").assignCategory("NewMemberTest");
 
             }
 
@@ -92,8 +121,28 @@ public class NewMemberTests extends NewMemberAPIFunctions {
             //System.out.println(x);
             INT_RANDOM_NUMBER = MainFunction.RandomNumber();
             System.out.println(baseJSON.memberUpdateJsonToSend);
-            memberUpdateResponse = MemberUpdate(0,MEMBER_CARD_NUMBER,INT_RANDOM_NUMBER,ID_RANDOM_NUMBER_2);
-            memberUpdateResponse_String = MainFunction.convertOkHttpResponseToString(memberUpdateResponse);
+            try {
+                memberUpdateResponse = MemberUpdate(0,MEMBER_CARD_NUMBER,INT_RANDOM_NUMBER,ID_RANDOM_NUMBER_2,CARD_FIELD);
+                memberUpdateResponse_String = MainFunction.convertOkHttpResponseToString(memberUpdateResponse);
+
+            }catch (NullPointerException e){
+                System.out.println("ERROR(memberUpdateResponse) --- NullPointerException ");
+                ExReNewMemberTestReport.fail("ERROR(memberUpdateResponse) --- NullPointerException ");
+
+
+            }
+
+            if(!(memberUpdateResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(memberUpdateResponse_String).equals("0"))){
+                System.out.println("*ERROR --- status code is not 200" + "(" + memberUpdateResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" +
+                        responseHandling.getErrorCodeStatusJson(memberUpdateResponse_String) + ")");
+                ExReNewMemberTestReport.fail("ERROR --- status code is not 200" + "(" + memberUpdateResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                        responseHandling.getErrorCodeStatusJson(memberUpdateResponse_String) + ")");
+                LogFileHandling.createLogFile(baseJSON.getString(BaseJSON.MEMBER_UPDATE_JSON), LOG_FILE_DIRECTORY, "memberSearch",0);
+                LogFileHandling.createLogFile(memberUpdateResponse_String, LOG_FILE_DIRECTORY, "memberSearchResponse",0);
+                memberUpdateResponse.body().close();
+
+            }
+
             System.out.println("memberUpdateResponse: "+memberUpdateResponse_String);
             //System.out.println("memberUpdatePOST: "+  baseJSON.memberUpdateJsonToSend.toString());
 
@@ -127,8 +176,8 @@ public class NewMemberTests extends NewMemberAPIFunctions {
 
     }//End Test 1
 
-    @Test(priority = 2)
-    @Description("this test will , switch recognition(card number) and search it using \"get details\" ")
+    @Test(priority = 2,retryAnalyzer = RetryAnalyzer.class)
+    @Description("this test will , switch recognition (card number) and search it using \"get details\" ")
     public void MemberTest2 () throws IOException {
         //temp
         //MEMBER_CARD_NUMBER="1000067";
@@ -163,7 +212,7 @@ public class NewMemberTests extends NewMemberAPIFunctions {
 
     }//End Test 2
 
-    @Test(priority = 3)
+    @Test(priority = 3,retryAnalyzer = RetryAnalyzer.class)
     @Description("This test will, check if the joining benefits have been activated")
     public void MemberTest3 () throws IOException {
         //NEW_MEMBER_CARD_NUMBER="1000070";
@@ -176,7 +225,7 @@ public class NewMemberTests extends NewMemberAPIFunctions {
 
     }//End Test 3
 
-    @Test(priority = 4)
+    @Test(priority = 4,retryAnalyzer = RetryAnalyzer.class)
     @Description("This test will, Make subTotal & TranEnd , TranEndOnePhase and And will measure times ")
     public void MemberTest4 () throws IOException {
         //NEW_MEMBER_CARD_NUMBER="1000071";
@@ -242,8 +291,8 @@ try {
     }//End Test 4
 
 
-    @Test(priority =  5)
-    @Description("This test will check: Buy a joining item and a membership renewal item in the club and check that the date has been updated correctl")
+    @Test(priority =  5,retryAnalyzer = RetryAnalyzer.class)
+    @Description("This test will check: Buy a joining item and a membership renewal item in the club and check that the date has been updated correctly")
     public void MemberTest5() throws IOException {
         //NEW_MEMBER_CARD_NUMBER="1000071";
         baseJSON.ResatTreEndOnePhase();
@@ -264,7 +313,7 @@ try {
 
     }
 
-    @Test(priority = 6)
+    @Test(priority = 6,retryAnalyzer = RetryAnalyzer.class)
     @Description("this test will, change the member stats from active to nun active")
     public void MemberTest6 () throws IOException {
         memberSwitchStatusResponse =  changeMemberStatus(0,NEW_MEMBER_CARD_NUMBER,MEMBER_STATUS_NOT_ACTIVE);
@@ -293,8 +342,8 @@ try {
     }//End Test 6
 
 
-    @Test(priority = 7)
-    @Description("")
+    @Test(priority = 7,retryAnalyzer = RetryAnalyzer.class)
+    @Description("This test will check member add with  manual card number and then change stats to nun active")
     public void MemberTest7() throws IOException {
 
         MANUAL_CARD_NUMBER= makeManualMemberCard();
@@ -308,7 +357,6 @@ try {
             System.out.println(memberAddResponse_String);
 
             if((memberAddResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(memberAddResponse_String).equals("0"))){
-                System.out.println("3333");
 
                 memberSwitchStatusResponse =  changeMemberStatus(0,MANUAL_CARD_NUMBER,MEMBER_STATUS_NOT_ACTIVE);
                 memberSwitchStatusResponse_String = MainFunction.convertOkHttpResponseToString(memberSwitchStatusResponse);
@@ -327,13 +375,13 @@ try {
                             +" and NOT -->"+MEMBER_STATUS_NOT_ACTIVE);
                 }
 
-
             }
 
 
 
         }else{
-            //todo : Exreport for fail Test
+
+            ExReNewMemberTestReport.fail("MANUAL_CARD_NUMBER("+MANUAL_CARD_NUMBER+") is null");
         }
 
 
@@ -342,6 +390,25 @@ try {
 
 
     }//End Test 7
+
+    @Test(priority = 8,retryAnalyzer = RetryAnalyzer.class)
+    @Description("This test will do a fail test, will search for  a member that is  does not exist ")
+    public void MemberTest8() throws IOException {
+        memberSearchResponse = MemberSearch("1234",0,CARD_FIELD);
+        System.out.println(baseJSON.memberSerachJsonToSend.toString());
+        memberSearchResponse_String= MainFunction.convertOkHttpResponseToString(memberSearchResponse);
+        System.out.println(memberSearchResponse_String);
+        if(responseHandling.getMembersArraySize(memberSearchResponse_String)== 0){
+            System.out.println(responseHandling.getErrorCodeStatusJson(memberSearchResponse_String));
+            ExReNewMemberTestReport.pass("Member fail search  -- PASS");
+            memberAddResponse.body().close();
+
+        }else{
+            ExReNewMemberTestReport.fail("Member fail search  -- FAIL");
+            memberAddResponse.body().close();
+
+        }
+    }
 
 
 

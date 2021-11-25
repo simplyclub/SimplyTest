@@ -8736,6 +8736,15 @@
             "AllItemsDiscountPercent": 10.0,
             "AccumId": 284
 
+          },
+          {
+            "Description": "קנה  קבל - קנה בסכום 10 קבל הנחה כספית 20",
+            "Amount": 60.0,
+            "IsAuto": "false",
+            "PromoId": "1830",
+            "AllItemsDiscountPercent": 0.0,
+            "AccumId": 284
+
           }
         ]
 

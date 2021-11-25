@@ -524,6 +524,16 @@ public class JSONGetData  {
 
             return renewItem;
         }
+        if (itemType.equals("RenewItem2")){
+            JSONObject JSONObj = (JSONObject) obj ;
+            JSONArray arr = (JSONArray) JSONObj.get("array");
+            JSONObject renew = (JSONObject) arr.get(2);
+            JSONArray renewItem = (JSONArray) renew.get("RenewItem2");
+            System.out.println(renewItem.toString());
+
+
+            return renewItem;
+        }
 
         return null;
 

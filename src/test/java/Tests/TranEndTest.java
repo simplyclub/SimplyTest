@@ -7,6 +7,8 @@ import Utilities.LogFileHandling;
 import com.sun.org.glassfish.gmbal.Description;
 import org.testng.annotations.Test;
 import utilities.MainFunction;
+import utilities.RetryAnalyzer;
+
 import javax.xml.transform.TransformerException;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -17,16 +19,16 @@ import static BaseClass.BaseAPI.TEST_API_SYSTEM_URI;
 public class TranEndTest extends BasePage {
 
 
-    @Test(testName = "TrenEnd Test ")
+    @Test(testName = "TrenEnd Test ", retryAnalyzer = RetryAnalyzer.class)
     @Description("Will run on each of the accumulators  ")
     public void tranEndTest() throws TransformerException, IOException {
         TranEndFunctions tranEndFunctions = new TranEndFunctions();
 
 
-        try{
+
             for (int i = 0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++) {
+                try{
                 if (JSONGetData.getDealTypeFlag(TestJSONToSend, i).equals("0")) {
-                    //TODO : add a "if " to check the "DealTypeFlag" after the loop start all deals in this test need to be DealTypeFlag = 0
                     ExReAccumReport.info("~~~~~~~~~~~~~~~~~~~~~~ Transaction: " + (i + 1) + " ~~~~~~~~~~~~~~~~~~~~~~");
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~Deal: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
                     MainFunction.RestGlobals();
@@ -239,14 +241,15 @@ public class TranEndTest extends BasePage {
 
 
                 }//end of DealTypeFlag "if"
+                    }catch (SocketTimeoutException e){
+                    ExReAccumReport.warning("ERROR---- Socket Timeout Exception  ");
+
+
+                    }
 
             }//end main for loop
 
-             }catch (SocketTimeoutException e){
-            ExReAccumReport.warning("ERROR---- Socket Timeout Exception  ");
 
-
-        }
         System.out.println(avgTimeSubTotal);
         System.out.println(avgTimeTrenEnd);
         ExReAccumReport.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")

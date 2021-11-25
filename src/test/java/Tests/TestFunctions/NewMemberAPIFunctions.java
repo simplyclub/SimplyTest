@@ -37,16 +37,16 @@ public class NewMemberAPIFunctions extends BasePage {
         return APIPost.postMemberAdd_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.MEMBER_ADD_JSON);
     }
 
-    protected okhttp3.Response MemberSearch(String cardNumber, int i) throws IOException {
+    protected okhttp3.Response MemberSearch(String cardNumber, int i,String cardFilde) throws IOException {
         updateJSONFile.upDateMemberSerachJSONFile(jsonGetData.getAccoundID(TestJSONToSend,i),
-                jsonGetData.getUser(TestJSONToSend,i),jsonGetData.getPassword(TestJSONToSend,i),CARD_FIELD,Equal,cardNumber);
+                jsonGetData.getUser(TestJSONToSend,i),jsonGetData.getPassword(TestJSONToSend,i),cardFilde,Equal,cardNumber);
 
         return APIPost.postMemberSearch_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.MEMBER_SERACH_JSON);
     }
 
-    protected okhttp3.Response MemberUpdate(int i,String CardNumber, String int_random_string,String id_random_string) throws IOException {
+    protected okhttp3.Response MemberUpdate(int i,String CardNumber, String int_random_string,String id_random_string,String cardFilde) throws IOException {
         updateJSONFile.upDateMemberUpdateJSONFile(jsonGetData.getAccoundID(TestJSONToSend,i),
-                jsonGetData.getUser(TestJSONToSend,i),jsonGetData.getPassword(TestJSONToSend,i),CARD_FIELD,CardNumber,int_random_string
+                jsonGetData.getUser(TestJSONToSend,i),jsonGetData.getPassword(TestJSONToSend,i),cardFilde,CardNumber,int_random_string
                 ,id_random_string);
 
         return APIPost.postMemberUpdate_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.MEMBER_UPDATE_JSON);
@@ -666,9 +666,9 @@ public class NewMemberAPIFunctions extends BasePage {
 
         if (Year_pre+1 == Year_post&& Mount_pre == Mount_post && Day_pre == Day_post){
 
-            ExReNewMemberTestReport.pass("Member Buy Renew item -- PASS");
+            ExReNewMemberTestReport.pass("Member Buy Renew item2 -- PASS");
         }else{
-            ExReNewMemberTestReport.fail("Member Buy Renew item -- FAIL");
+            ExReNewMemberTestReport.fail("Member Buy Renew item2 -- FAIL");
             ExReNewMemberTestReport.info("year_pre: "+ Year_pre);
             ExReNewMemberTestReport.info("Mount_pre: "+ Mount_pre);
             ExReNewMemberTestReport.info("Day_pre: "+ Day_pre);

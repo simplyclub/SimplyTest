@@ -69,6 +69,12 @@ public  class BasePage {
     public String memberSwitchRecognitionResponse_String =null;
     public okhttp3.Response memberSwitchStatusResponse = null;
     public String memberSwitchStatusResponse_String =null;
+    public okhttp3.Response joinSmsResponse = null;
+    public String joinSmsResponse_String =null;
+    public okhttp3.Response memberGetDetailsAndCodeResponse = null;
+    public String memberGetDetailsAndCodeResponse_String =null;
+    public okhttp3.Response memberGetDetailsResponse = null;
+    public String memberGetDetailsResponse_String =null;
     ArrayList<Node> xmlResponseDiscountList = new ArrayList<>();
 
     // extent report
@@ -80,6 +86,7 @@ public  class BasePage {
     public static  ExtentTest ExReTernRefundReport;
     public static  ExtentTest ExReTrenEndOnePhaseReport;
     public static  ExtentTest ExReNewMemberTestReport;
+    public static  ExtentTest ExReJoinSmsReport;
 
 
 
@@ -198,6 +205,7 @@ public  class BasePage {
         ExReTernRefundReport = exReport.createTest("Refund  Test").assignCategory("Refund");// give the name of the test title  in the report
         ExReTrenEndOnePhaseReport = exReport.createTest("Tren End One Phase Test").assignCategory("Transaction");// give the name of the test title  in the report
         ExReNewMemberTestReport = exReport.createTest(" New Member Tests").assignCategory("NewMember");// give the name of the test title  in the report
+        ExReJoinSmsReport = exReport.createTest(" Send Join SMS Test").assignCategory("JoinSms");// give the name of the test title  in the report
 
 
     }
@@ -261,6 +269,9 @@ public  class BasePage {
         if (memberSwitchStatusResponse !=null){
 
             memberSwitchStatusResponse = null;
+        }if (joinSmsResponse !=null){
+
+            joinSmsResponse = null;
         }
 
     }
@@ -275,7 +286,7 @@ public  class BasePage {
     @AfterSuite
     public  void endSuite(){
         exReport.flush();
-        //EmailHandling.sendEnmail();
+        EmailHandling.sendEnmail();
 
 
 

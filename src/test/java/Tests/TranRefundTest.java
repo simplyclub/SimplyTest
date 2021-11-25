@@ -7,6 +7,7 @@ import Tests.TestFunctions.TranRefundFunctions;
 import Utilities.LogFileHandling;
 import org.testng.annotations.Test;
 import utilities.MainFunction;
+import utilities.RetryAnalyzer;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -18,7 +19,7 @@ public class TranRefundTest extends BasePage {
 
 
 
-    @Test(testName = "TranRefundTest")
+    @Test(testName = "TranRefundTest",retryAnalyzer = RetryAnalyzer.class)
     public void tranRefundTest () throws IOException {
         for(int i = 0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++){
 

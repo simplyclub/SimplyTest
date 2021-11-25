@@ -10,6 +10,7 @@ import JSON.ResponseHandling;
 import com.sun.org.glassfish.gmbal.Description;
 import org.testng.annotations.Test;
 import utilities.MainFunction;
+import utilities.RetryAnalyzer;
 
 import java.io.IOException;
 
@@ -18,7 +19,7 @@ public class SubTotalTest extends BasePage {
     JSONCompare JSONCompare = new JSONCompare();
     ResponseHandling responseHandling = new ResponseHandling();
 
-    @Test(testName = "SubTotalTest")
+    @Test(testName = "SubTotalTest",retryAnalyzer = RetryAnalyzer.class)
     @Description("Sub Total Test")
     public void subTotalTest() throws IOException {
         BasePage.ExReApiTestReport.info("basic API Test");

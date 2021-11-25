@@ -7,20 +7,21 @@ import Tests.TestFunctions.TrenEndOnePhaseFunctions;
 import Utilities.LogFileHandling;
 import org.testng.annotations.Test;
 import utilities.MainFunction;
+import utilities.RetryAnalyzer;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 
 import static BaseClass.BaseAPI.TEST_API_SYSTEM_URI;
 
-public class TrenEndOnePhaseTest extends BasePage {
+public class TranEndOnePhaseTest extends BasePage {
     JSONGetData jsonGetData = new JSONGetData();
     TrenEndOnePhaseFunctions trenEndOnePhaseFunctions = new TrenEndOnePhaseFunctions();
 
 
 //
-    @Test
-    public void trenEndOnePhaseTest() throws IOException {
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void tranEndOnePhaseTest() throws IOException {
        for (int i = 0; i <=jsonGetData.getArraySize(TestJSONToSend) - 1; i++) {
            ExReTrenEndOnePhaseReport.info("~~~~~~~~~~~~~~~~~~~~~~Transaction: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
            MainFunction.RestGlobals();

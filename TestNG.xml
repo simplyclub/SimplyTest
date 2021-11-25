@@ -27,11 +27,17 @@
     </test>
     <test name="Tren End One Phase">
         <classes>
-            <class name="Tests.TrenEndOnePhaseTest"></class>
+            <class name="Tests.TranEndOnePhaseTest"></class>
         </classes>
-    </test><test name="New member test">
+    </test>
+    <test name="New member test">
         <classes>
             <class name="Tests.NewMemberTests"></class>
+        </classes>
+    </test>
+    <test name="Join SMS test">
+        <classes>
+            <class name="Tests.JoinSmsTest"></class>
         </classes>
     </test>
 

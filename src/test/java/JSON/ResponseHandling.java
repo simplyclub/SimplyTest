@@ -137,7 +137,17 @@ public class ResponseHandling  {
 
 
 
+    }public int getMembersArraySize(String s) throws IOException {
+        //String s = response.peekBody(2042).string();
+        JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(s);
+        //System.out.println(responseObj.get("ErrorCode"));
+        JSONArray x =(JSONArray) responseObj.get("Members");
+      return x.size();
+
+
+
     }
+
 
     /**
      * this function will return the card number from the response of "Member Add "
@@ -198,6 +208,69 @@ public class ResponseHandling  {
 
         return SysId;
     }
+
+    public String getMemberField(String response ,String field,int memberIndex){
+        JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(response);
+        JSONArray members = (JSONArray) responseObj.get("Members");
+        JSONObject memberFields = (JSONObject) members.get(memberIndex);
+        JSONArray fields = (JSONArray) memberFields.get("MemberFields") ;
+
+        //System.out.println("memberFields: "+memberFields);
+        for(int s = 0 ; s<fields.size();s++){
+            JSONObject fildeId = (JSONObject)  fields.get(s);
+
+
+            if (field.equals(fildeId.get("FieldId"))){
+                System.out.println("FieldId: "+fildeId.get("FieldId"));
+                System.out.println("FieldValue: "+fildeId.get("FieldValue"));
+                return fildeId.get("FieldValue").toString();
+            }
+
+        }
+        return null ;
+
+
+
+    }
+    public String getResultCode(String response){
+        JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(response);
+
+        return responseObj.get("ResultCode").toString();
+
+    }
+
+    /**
+     *
+     * @param response memberGetDetailsAndCodeResponse
+     * @return
+     */
+    public String getCode(String response){
+        JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(response);
+        System.out.println("responseObj: " + responseObj);
+
+        return responseObj.get("Code").toString();
+
+    }
+
+
+    public String getAdditionalInfo(String response , String Field_Id_Or_Value ){
+        JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(response);
+        JSONArray additionalInfo = (JSONArray) responseObj.get("AdditionalInfo");
+
+        if(Field_Id_Or_Value.equals("FieldId")){
+            JSONObject x = (JSONObject) additionalInfo.get(0);
+            return x.get("FieldId").toString();
+
+        }
+        if(Field_Id_Or_Value.equals("FieldValue")){
+            JSONObject x = (JSONObject) additionalInfo.get(0);
+            return x.get("FieldValue").toString();
+
+        }
+
+        return null;
+    }
+
 
 
 
