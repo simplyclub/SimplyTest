@@ -5,15 +5,39 @@
         <listener class-name = "utilities.Listeners"></listener>
     </listeners>
 
-    <test name="sub Total">
+    <test name="Sub Total">
         <classes>
             <class name="Tests.SubTotalTest"></class>
-
         </classes>
     </test>
-    <test name="Accumulation">
+    <test name="TranEnd">
         <classes>
-            <class name="Tests.AccumulationTest"></class>
+            <class name="Tests.TranEndTest"></class>
+        </classes>
+    </test>
+    <test name="Point validity">
+        <classes>
+            <class name="Tests.PointsValidityTest"></class>
+        </classes>
+    </test>
+    <test name="refund test">
+        <classes>
+            <class name="Tests.TranRefundTest"></class>
+        </classes>
+    </test>
+    <test name="Tren End One Phase">
+        <classes>
+            <class name="Tests.TranEndOnePhaseTest"></class>
+        </classes>
+    </test>
+    <test name="New member test">
+        <classes>
+            <class name="Tests.NewMemberTests"></class>
+        </classes>
+    </test>
+    <test name="Join SMS test">
+        <classes>
+            <class name="Tests.JoinSmsTest"></class>
         </classes>
     </test>
 

@@ -2,24 +2,26 @@ package utilities;
 
 import Tests.BasePage;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
+import org.testng.IRetryAnalyzer;
+import org.testng.ITestResult;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
-import org.w3c.dom.Element;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.StringReader;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Random;
+
 
 public class MainFunction extends BasePage {
 
@@ -32,6 +34,7 @@ public class MainFunction extends BasePage {
         String dir = System.getProperty("user.dir");
         driver.get("file:///" + dir + "\\nullExtentReportResults.html");
     }
+
     public static void extentReportInit(){
         BasePage.exReport.attachReporter(spark);
         spark.config().setTheme(Theme.DARK);
@@ -40,43 +43,106 @@ public class MainFunction extends BasePage {
 
     }
     //temp
-    public static NodeList ReadXMLFile(String xml){
-        try
-        {
-//creating a constructor of file class and parsing an XML file
-           // File file = new File("C:\\Users\\User\\IdeaProjects\\SimplyTest\\response.xml");
-
-//an instance of factory that gives a document builder
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-//an instance of builder to parse the specified xml file
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            InputSource is = new InputSource(new StringReader(xml));
-            Document doc = db.parse(is);
-            doc.getDocumentElement().normalize();
-
-            NodeList nodeList = doc.getElementsByTagName("TranViewDiscountData");
-            return nodeList;
 
 
-        }
-
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return null;
-
-    }
     public static void RestGlobals(){
         preDeal.clear();
         postDeal.clear();
         sumDealPoints.clear();
         sumDealToUsePoints.clear();
+        sumBurnd.clear();
         sumVal = 0.0;
 
+    }
+
+    public static void RestTimeGlobals(){
+        avgTimeSubTotal.clear();
+        avgTimeTrenEnd.clear();
+        avgTimeTrenEndOnePhase.clear();
 
     }
-}
+
+    public static Node[] convertNodeListToNodeArray(NodeList list){
+        int length = list.getLength();
+        Node[] copy = new Node[length];
+
+        for (int n = 0; n < length; ++n)
+            copy[n] = list.item(n);
+
+        return copy;
+    }
+
+    public static String converToDoubleAsString(String str ){
+
+        double d = Double.parseDouble(str);
+        DecimalFormat df = new DecimalFormat("#.##");
+        String dx = df.format(d);
+        d = Double.valueOf(dx);
+
+        return Double.toString(d);
+
+    }
+
+    public static String convertOkHttpResponseToString(Response response) throws IOException {
+        ResponseBody body = response.peekBody(Long.MAX_VALUE);
+        String content = body.string();
+        body.close();
+        body.string();
+        return content;
+    }
+
+    /**
+     * This function, calculates the average times for any given Time array
+     * @param arrayList avg Time Array
+     * @return avg
+     */
+    public static int getAvgTime(ArrayList arrayList){
+        int avg=0;
+
+
+        for (int s=0 ; s < arrayList.size();s++){
+            //System.out.println("s "+s);
+           avg =  Math.toIntExact((Long) arrayList.get(s))+ avg;
+
+        }
+
+        return avg / arrayList.size();
+    }
+
+    public static int SearchWordInString (String WordToSearch , String str) {
+            String strOrig = str ;
+
+        int intIndex = strOrig.indexOf(WordToSearch);
+
+            if(intIndex == -1 ) {
+                System.out.println(BaseLogStringFunc()+WordToSearch +" not found in string");
+                return 0;
+            } else {
+                System.out.println(BaseLogStringFunc()+"Found "+WordToSearch+ " in the String");
+                return 1;
+            }
+    }
+
+    public static String RandomNumber(){
+        Random rand = new Random(); //instance of random class
+        int upperbound = 9999999;
+        //generate random values from 0-9999999
+        int int_random = rand.nextInt(upperbound);
+        String int_random_string = Integer.toString(int_random);
+
+        return int_random_string;
+    }
+
+    public static String BaseLogStringFunc(){
+         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss:SSS");
+         Date date = new Date();
+           String BaseLogString = "[Log "+formatter.format(date)+" ] : ";
+           return BaseLogString;
+
+    }
+
+
+}//End Class
 
 
 

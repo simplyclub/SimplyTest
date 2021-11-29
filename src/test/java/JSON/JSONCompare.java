@@ -5,6 +5,8 @@ import org.testng.asserts.SoftAssert;
 
 import io.restassured.response.Response;
 
+import java.io.IOException;
+
 public class JSONCompare extends BasePage {
     SoftAssert softAssertion = new SoftAssert();
     ResponseHandling responseHandling = new ResponseHandling();
@@ -13,7 +15,7 @@ public class JSONCompare extends BasePage {
     String TBPromoId = null;
     int  flag1 = 0 ;
 
-    public void responVSTestJson (int arrayIndex,Response response){
+    public void responVSTestJson (int arrayIndex, String response) throws IOException {
 
         // this loop will run on the respone "CashBackDiscounts"
         for (int i=0 ,flag1 = 0 ; i < responseHandling.getCaseBackDiscountsArrSize(response);i++,flag1 = 0){
@@ -28,22 +30,39 @@ public class JSONCompare extends BasePage {
                 String temp = JSONGetData.getPromoId(TestJSONToSend, arrayIndex ,j,"CashBackDiscounts");
 
                 if(CBPromoId.equals(temp)){
-                    System.out.println("CashBackDiscounts:");
-                    System.out.println("response: "+CBPromoId+ ", test JSON: " + temp+", Index "+ j);
+                   // System.out.println("CashBackDiscounts:");
+                   // System.out.println("response: "+CBPromoId+ ", test JSON: " + temp+", Index "+ j);
                     flag1 = 1;
-                    ExReApiTestReport.info("CashBackDiscounts:"+i);
-                    ExReApiTestReport.info("Response promoID: "+ CBPromoId + "Test JSON promoID: " + temp ).assignCategory("responVSTestJson");
 
 
-                    softAssertion.assertEquals(responseHandling.getAmount(response,"CashBackDiscounts",i),
-                            JSONGetData.getAmount(TestJSONToSend,arrayIndex,j,"CashBackDiscounts")
-                    );
-                    softAssertion.assertEquals(responseHandling.getDescription(response,"CashBackDiscounts",i),
-                            JSONGetData.getDescription(TestJSONToSend,arrayIndex,j,"CashBackDiscounts")
-                    );
+
+                    if (!(responseHandling.getAmount(response,"CashBackDiscounts",i).equals(
+                            JSONGetData.getAmount(TestJSONToSend,arrayIndex,j,"CashBackDiscounts")))){
+                        ExReApiTestReport.fail("response amount: "+responseHandling.getAmount(response,"CashBackDiscounts",i)+" is NOT equals to " +
+                                "Test JSON amount: "+JSONGetData.getAmount(TestJSONToSend,arrayIndex,j,"CashBackDiscounts"));
+                        ExReApiTestReport.info("CashBackDiscounts: "+ arrayIndex);
+                        ExReApiTestReport.info("Response promoID: "+ CBPromoId + "Test JSON promoID: " + temp ).assignCategory("responVSTestJson");
+
+                    }
 
 
-                    softAssertion.assertAll();
+
+                    if (!(responseHandling.getDescription(response,"CashBackDiscounts",i).equals(
+                            JSONGetData.getDescription(TestJSONToSend,arrayIndex,j,"CashBackDiscounts")))){
+                        ExReApiTestReport.fail("response Description: "+responseHandling.getDescription(response,"CashBackDiscounts",i)+"is NOT equals to " +
+                                "Test JSON Description: "+JSONGetData.getDescription(TestJSONToSend,arrayIndex,j,"CashBackDiscounts"));
+
+
+                    }
+
+
+                    if (!(responseHandling.getIsAuto(response,"CashBackDiscounts",i).equals(
+                            JSONGetData.getIsAuto(TestJSONToSend,arrayIndex,j,"CashBackDiscounts")))){
+                        ExReApiTestReport.fail("response Description: "+responseHandling.getIsAuto(response,"CashBackDiscounts",i)+"is NOT equals to " +
+                                "Test JSON Description: "+JSONGetData.getIsAuto(TestJSONToSend,arrayIndex,j,"CashBackDiscounts"));
+                    }
+
+
 
                     break;
                 }
@@ -58,33 +77,54 @@ public class JSONCompare extends BasePage {
 
         }
         // this loop will run on the respone "TotalDiscounts"
-        for (int i=0 , flag1 = 0 ; i < responseHandling.getCaseBackDiscountsArrSize(response);i++, flag1 = 0){
+        for (int i=0 , flag1 = 0 ; i < responseHandling.getTotalDiscountsArrSize(response);i++, flag1 = 0){
 
             TBPromoId = responseHandling.getPromoId(response,"TotalDiscounts",i);
 
             //this loop run on the "TestJSON" TotalDiscounts arr and check if CBPromoId is in this list
 
-            for (int j=0; j< JSONGetData.getArraySizeCashBackDiscounts
-                    (JSONGetData.getCashBackDiscounts(TestJSONToSend, arrayIndex)) ;j++,flag1 = 0){
+            for (int j=0; j < JSONGetData.getArraySizeTotalDiscounts(JSONGetData.getTotalDiscounts(TestJSONToSend, arrayIndex));j++,flag1 = 0){
 
                 String temp = JSONGetData.getPromoId(TestJSONToSend, arrayIndex ,j,"TotalDiscounts");
 
                 if(TBPromoId.equals(temp)){
                     flag1 = 1 ;
-                    System.out.println("TotalDiscounts:");
-                    System.out.println("response: "+TBPromoId+ ", test JSON: " + temp+", Index "+ j);
-                    ExReApiTestReport.info("TotalDiscounts:"+i);
-                    ExReApiTestReport.info("Response promoID: "+ TBPromoId + "Test JSON promoID: " + temp ).assignCategory("responVSTestJson");
-                    softAssertion.assertEquals(responseHandling.getAmount(response,"TotalDiscounts",i),
-                            JSONGetData.getAmount(TestJSONToSend,arrayIndex,j,"TotalDiscounts")
-                    );
-                    softAssertion.assertEquals(responseHandling.getDescription(response,"TotalDiscounts",i),
-                            JSONGetData.getDescription(TestJSONToSend,arrayIndex,j,"TotalDiscounts")
-                    );
-                    softAssertion.assertEquals(responseHandling.getAllItemsDiscountPercent(response,i),
-                            JSONGetData.getAllItemsDiscountPercent(TestJSONToSend,arrayIndex,j,"TotalDiscounts")
-                    );
-                    softAssertion.assertAll();
+
+
+
+                    if (!(responseHandling.getAmount(response,"TotalDiscounts",i).equals(
+                            JSONGetData.getAmount(TestJSONToSend,arrayIndex,j,"TotalDiscounts")))){
+                        ExReApiTestReport.fail("response amount: "+responseHandling.getAmount(response,"TotalDiscounts",i)+" is NOT equals to " +
+                                "Test JSON amount: "+JSONGetData.getAmount(TestJSONToSend,arrayIndex,j,"TotalDiscounts"));
+                        ExReApiTestReport.info("TotalDiscounts:"+arrayIndex);
+                        ExReApiTestReport.info("Response promoID: "+ TBPromoId + "Test JSON promoID: " + temp ).assignCategory("responVSTestJson");
+                    }
+
+
+                    if (!(responseHandling.getDescription(response,"TotalDiscounts",i).equals(
+                            JSONGetData.getDescription(TestJSONToSend,arrayIndex,j,"TotalDiscounts")))){
+                        ExReApiTestReport.fail("response Description: "+responseHandling.getDescription(response,"TotalDiscounts",i)+"is NOT equals to " +
+                                "Test JSON Description: "+JSONGetData.getDescription(TestJSONToSend,arrayIndex,j,"TotalDiscounts"));
+
+                    }
+
+
+
+                    if (!(responseHandling.getAllItemsDiscountPercent(response,i).equals(
+                            JSONGetData.getAllItemsDiscountPercent(TestJSONToSend,arrayIndex,j,"TotalDiscounts")))){
+                        ExReApiTestReport.fail("response ItemsDiscountPercent: "+responseHandling.getAllItemsDiscountPercent(response,i)+"is NOT equals to " +
+                                "Test JSON ItemsDiscountPercent: "+JSONGetData.getAllItemsDiscountPercent(TestJSONToSend,arrayIndex,j,"TotalDiscounts"));
+
+                    }
+
+
+                    if (!(responseHandling.getIsAuto(response,"TotalDiscounts",i).equals(
+                            JSONGetData.getIsAuto(TestJSONToSend,arrayIndex,j,"TotalDiscounts")))) {
+                        ExReApiTestReport.fail("response IsAuto: " + responseHandling.getIsAuto(response, "TotalDiscounts", i) + "is NOT equals to " +
+                                "Test JSON IsAuto: " + JSONGetData.getIsAuto(TestJSONToSend, arrayIndex, j, "TotalDiscounts"));
+
+
+                    }
 
                     break;
 
@@ -94,6 +134,7 @@ public class JSONCompare extends BasePage {
             }
             if( flag1 == 0 ){
                 ExReApiTestReport.warning("12PromoId: " + TBPromoId + " not found in the \"Test JSON \"").assignCategory("responVSTestJson");
+                System.out.println(baseJSON.jsonToSend.toString());
                // ExReApiTestReport.info(response.getBody().asString());
 
             }
@@ -106,7 +147,7 @@ public class JSONCompare extends BasePage {
 
 
 
-    public void TestJSONVSResponse (int arrayIndex,Response response){
+    public void TestJSONVSResponse (int arrayIndex,String  response) throws IOException {
 
         // this loop will run on the Test JSON "CashBackDiscounts"
         for (int i=0 ,flag1 = 0; i<JSONGetData.getArraySizeCashBackDiscounts(
@@ -119,23 +160,7 @@ public class JSONCompare extends BasePage {
             for (int j=0; j< responseHandling.getCaseBackDiscountsArrSize(response) ;j++){
                 String temp = responseHandling.getPromoId(response,"CashBackDiscounts",j);
                 if (temp.equals(CBPromoId)){
-                    System.out.println("CashBackDiscounts:");
-                    System.out.println("response: "+CBPromoId+ ", test JSON: " + temp+", Index "+ j);
-                    ExReApiTestReport.info("CashBackDiscounts:");
-                    ExReApiTestReport.info("Test JSON promoID: "+ temp + " Response  promoID: " + CBPromoId ).assignCategory("TestJSONVSResponse");
                     flag1 = 1 ;
-
-
-
-                    softAssertion.assertEquals(responseHandling.getAmount(response,"CashBackDiscounts",j),
-                            JSONGetData.getAmount(TestJSONToSend,arrayIndex,i,"CashBackDiscounts")
-                    );
-                    softAssertion.assertEquals(responseHandling.getDescription(response,"CashBackDiscounts",j),
-                            JSONGetData.getDescription(TestJSONToSend,arrayIndex,i,"CashBackDiscounts")
-                    );
-
-
-                    softAssertion.assertAll();
 
                     break;
 
@@ -151,35 +176,19 @@ public class JSONCompare extends BasePage {
         }
 
 
-        for (int i=0,flag1 = 0 ; i < JSONGetData.getArraySizeCashBackDiscounts
-                (JSONGetData.getCashBackDiscounts(TestJSONToSend, arrayIndex));i++,flag1 = 0){
+        for (int i=0,flag1 = 0 ; i < JSONGetData.getArraySizeTotalDiscounts(JSONGetData.getTotalDiscounts(TestJSONToSend, arrayIndex));i++,flag1 = 0){
 
-            TBPromoId = responseHandling.getPromoId(response,"TotalDiscounts",i);
+
+            TBPromoId = JSONGetData.getPromoId(TestJSONToSend, arrayIndex ,i,"TotalDiscounts");
 
             //this loop run on the "TestJSON" TotalDiscounts arr and check if CBPromoId is in this list
 
-            for (int j=0; j<responseHandling.getCaseBackDiscountsArrSize(response) ; j++ ){
+            for (int j=0; j<responseHandling.getTotalDiscountsArrSize(response) ; j++ ){
 
-                String temp = JSONGetData.getPromoId(TestJSONToSend, arrayIndex ,j,"TotalDiscounts");
+                String temp = responseHandling.getPromoId(response,"TotalDiscounts",j);
 
                 if(TBPromoId.equals(temp)){
-                    System.out.println("TotalDiscounts:");
-                    System.out.println("response: "+TBPromoId+ ", test JSON: " + temp+", Index "+ j);
-                    ExReApiTestReport.info("TotalDiscounts:");
-                    ExReApiTestReport.info("Test JSON promoID: "+ temp + " Response  promoID: " + TBPromoId ).assignCategory("TestJSONVSResponse");
                     flag1 = 1 ;
-
-                    softAssertion.assertEquals(responseHandling.getAmount(response,"TotalDiscounts",j),
-                            JSONGetData.getAmount(TestJSONToSend,arrayIndex,i,"TotalDiscounts")
-                    );
-                    softAssertion.assertEquals(responseHandling.getDescription(response,"TotalDiscounts",j),
-                            JSONGetData.getDescription(TestJSONToSend,arrayIndex,i,"TotalDiscounts")
-                    );
-                    softAssertion.assertEquals(responseHandling.getAllItemsDiscountPercent(response,j),
-                            JSONGetData.getAllItemsDiscountPercent(TestJSONToSend,arrayIndex,i,"TotalDiscounts")
-                    );
-
-                    softAssertion.assertAll();
                     break;
 
                 }
