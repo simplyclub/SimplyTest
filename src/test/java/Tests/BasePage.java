@@ -21,7 +21,9 @@ import org.w3c.dom.NodeList;
 import utilities.EmailHandling;
 import utilities.MainFunction;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public  class BasePage {
@@ -73,6 +75,7 @@ public  class BasePage {
     public String joinSmsResponse_String =null;
     public okhttp3.Response memberGetDetailsAndCodeResponse = null;
     public String memberGetDetailsAndCodeResponse_String =null;
+
     public okhttp3.Response memberGetDetailsResponse = null;
     public String memberGetDetailsResponse_String =null;
     ArrayList<Node> xmlResponseDiscountList = new ArrayList<>();
@@ -194,6 +197,11 @@ public  class BasePage {
 
 
 
+
+
+
+
+
     @BeforeSuite
     public void init (){
         MainFunction.extentReportInit();
@@ -235,12 +243,10 @@ public  class BasePage {
         if (trenCancelResponse!=null){
 
             trenCancelResponse=null;
-
         }
         if (getMemberBenefitListResponse !=null){
 
             getMemberBenefitListResponse = null;
-
         }
         if (trenRefundResponse !=null){
 
@@ -287,9 +293,6 @@ public  class BasePage {
     public  void endSuite(){
         exReport.flush();
         EmailHandling.sendEnmail();
-
-
-
 
     }
 }

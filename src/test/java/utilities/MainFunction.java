@@ -16,7 +16,9 @@ import org.w3c.dom.Node;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -113,10 +115,10 @@ public class MainFunction extends BasePage {
         int intIndex = strOrig.indexOf(WordToSearch);
 
             if(intIndex == -1 ) {
-                System.out.println(WordToSearch +" not found in string");
+                System.out.println(BaseLogStringFunc()+WordToSearch +" not found in string");
                 return 0;
             } else {
-                System.out.println("Found "+WordToSearch+ " in the String");
+                System.out.println(BaseLogStringFunc()+"Found "+WordToSearch+ " in the String");
                 return 1;
             }
     }
@@ -129,6 +131,14 @@ public class MainFunction extends BasePage {
         String int_random_string = Integer.toString(int_random);
 
         return int_random_string;
+    }
+
+    public static String BaseLogStringFunc(){
+         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss:SSS");
+         Date date = new Date();
+           String BaseLogString = "[Log "+formatter.format(date)+" ] : ";
+           return BaseLogString;
+
     }
 
 
