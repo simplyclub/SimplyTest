@@ -102,7 +102,7 @@ public class NewMemberAPIFunctions extends BasePage {
             switch (x.get("AccID").toString()) {
                 case "282":
                     s=x.get("BenefitValue").toString();
-                    System.out.println("case 282: "+s);
+                    System.out.println(MainFunction.BaseLogStringFunc()+"case 282: "+s);
 
 
                     if (!(s.equals("100.0"))){
@@ -113,7 +113,7 @@ public class NewMemberAPIFunctions extends BasePage {
 
                 case "284":
                     s=x.get("BenefitValue").toString();
-                    System.out.println("case 284: "+s);
+                    System.out.println(MainFunction.BaseLogStringFunc()+"case 284: "+s);
 
 
                     if (!(s.equals("50.0"))){
@@ -123,7 +123,7 @@ public class NewMemberAPIFunctions extends BasePage {
                     break;
                 case "285":
                     s=x.get("BenefitValue").toString();
-                    System.out.println("case 285: "+s);
+                    System.out.println(MainFunction.BaseLogStringFunc()+"case 285: "+s);
 
 
                     if (!(s.equals("25.2"))){
@@ -133,7 +133,7 @@ public class NewMemberAPIFunctions extends BasePage {
                     break;
                 case "286":
                     s=x.get("BenefitValue").toString();
-                    System.out.println("case 286: "+s);
+                    System.out.println(MainFunction.BaseLogStringFunc()+"case 286: "+s);
 
 
                     if (!(s.equals("40.7"))){

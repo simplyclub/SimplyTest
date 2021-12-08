@@ -28,14 +28,14 @@ public class TranRefundTest extends BasePage {
                 ExReTernRefundReport.info("~~~~~~~~~~~~~~~~~~~~~~~~ Transaction "+(i+1)+" ~~~~~~~~~~~~~~~~~~~~~~~~");
 
                 tranRefundFunctions.fillPreAllAccumsPoints(i);
-                System.out.println(preAllAccumsPoints);
+                System.out.println(MainFunction.BaseLogStringFunc()+preAllAccumsPoints);
 
                 try {
                 subTotalResponse = tranRefundFunctions.makeDealSubTotal(i);
                 subTotalResponse_String = MainFunction.convertOkHttpResponseToString(subTotalResponse);
 
                     if (!(subTotalResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse_String).equals("0"))) {
-                        System.out.println("*ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(subTotalResponse_String) + ")");
+                        System.out.println(MainFunction.BaseLogStringFunc()+"*ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(subTotalResponse_String) + ")");
                         ExReTernRefundReport.fail("ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                                 responseHandling.getErrorCodeStatusJson(subTotalResponse_String) + ")");
                         LogFileHandling.createLogFile(baseJSON.jsonToSend.toString(), LOG_FILE_DIRECTORY, "subTotalCall",i+1);
@@ -44,10 +44,10 @@ public class TranRefundTest extends BasePage {
                         continue;
                     }
                 }catch (NullPointerException e){
-                    System.out.println("ERROE (subTotalResponse) --- The server is currently busy, please try again later ");
+                    System.out.println(MainFunction.BaseLogStringFunc()+"ERROE (subTotalResponse) --- The server is currently busy, please try again later ");
                     continue;
                 }catch (SocketTimeoutException e){
-                    System.out.println("ERROE (subTotalResponse) --- timeout ");
+                    System.out.println(MainFunction.BaseLogStringFunc()+"ERROE (subTotalResponse) --- timeout ");
                     continue;
 
                 }
@@ -89,7 +89,7 @@ public class TranRefundTest extends BasePage {
                         LogFileHandling.createLogFile(trenRefundResponse_String, LOG_FILE_DIRECTORY, "trenEndResponse",i+1);
                         break;
                     }else{
-                        avgTimetrenRedund.add(BaseAPI.getResponseTime_OkHttp(trenRefundResponse));
+                        avgTimeTranRefund.add(BaseAPI.getResponseTime_OkHttp(trenRefundResponse));
 
                     }
                 }catch (NullPointerException e){
@@ -124,7 +124,7 @@ public class TranRefundTest extends BasePage {
             }//main if for IfToCancelFlag check
 
         }//main for loop end
-        ExReTernRefundReport.info("avgTimetrenRedund: "+ MainFunction.getAvgTime(avgTimetrenRedund)+"ms");
+        ExReTernRefundReport.info("avgTimetrenRedund: "+ MainFunction.getAvgTime(avgTimeTranRefund)+"ms");
 
     }//test end
 

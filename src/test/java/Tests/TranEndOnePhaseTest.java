@@ -26,7 +26,7 @@ public class TranEndOnePhaseTest extends BasePage {
            ExReTrenEndOnePhaseReport.info("~~~~~~~~~~~~~~~~~~~~~~Transaction: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
            MainFunction.RestGlobals();
 
-           System.out.println("i: " + i);
+           System.out.println(MainFunction.BaseLogStringFunc()+"i: " + i);
 
 
 //get the pre deal points

@@ -8,10 +8,12 @@ import FunctionsClass.UpdateXMLFile;
 import JSON.JSONGetData;
 import JSON.ResponseHandling;
 
+import Utilities.LogFileHandling;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.restassured.response.Response;
+import org.testng.TestNG ;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -21,6 +23,7 @@ import org.w3c.dom.NodeList;
 import utilities.EmailHandling;
 import utilities.MainFunction;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -111,7 +114,7 @@ public  class BasePage {
     public static ArrayList<Long> avgTimeSubTotal = new ArrayList<Long>();
     public static ArrayList<Long> avgTimeTrenEnd = new ArrayList<Long>();
     public static ArrayList<Long> avgTimeTrenEndOnePhase = new ArrayList<Long>();
-    public static ArrayList<Long> avgTimetrenRedund = new ArrayList<Long>();
+    public static ArrayList<Long> avgTimeTranRefund = new ArrayList<Long>();
 
 
 
@@ -203,7 +206,7 @@ public  class BasePage {
 
 
     @BeforeSuite
-    public void init (){
+    public void init () throws IOException {
         MainFunction.extentReportInit();
 
         // Extent report tests titles
@@ -214,6 +217,8 @@ public  class BasePage {
         ExReTrenEndOnePhaseReport = exReport.createTest("Tren End One Phase Test").assignCategory("Transaction");// give the name of the test title  in the report
         ExReNewMemberTestReport = exReport.createTest(" New Member Tests").assignCategory("NewMember");// give the name of the test title  in the report
         ExReJoinSmsReport = exReport.createTest(" Send Join SMS Test").assignCategory("JoinSms");// give the name of the test title  in the report
+        LogFileHandling.DeleteFile("EmailLog");
+        LogFileHandling.CreateFile("EmailLog");
 
 
     }
@@ -290,8 +295,10 @@ public  class BasePage {
 
     }
     @AfterSuite
-    public  void endSuite(){
+    public  void endSuite() throws IOException, InterruptedException {
         exReport.flush();
+//        MainFunction.convertFileEncoding(
+//                "C:\\Users\\User\\IdeaProjects\\SimplyTest\\index.html","C:\\Users\\User\\IdeaProjects\\SimplyTest","UTF-8");
         EmailHandling.sendEnmail();
 
     }

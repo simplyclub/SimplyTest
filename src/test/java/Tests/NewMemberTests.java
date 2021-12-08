@@ -40,7 +40,7 @@ public class NewMemberTests extends NewMemberAPIFunctions {
             memberAddResponse_String = MainFunction.convertOkHttpResponseToString(memberAddResponse);
 
             if(!(memberAddResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(memberAddResponse_String).equals("0"))){
-                System.out.println("*ERROR --- status code is not 200" + "(" + memberAddResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" +
+                System.out.println(MainFunction.BaseLogStringFunc()+"*ERROR --- status code is not 200" + "(" + memberAddResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" +
                         responseHandling.getErrorCodeStatusJson(memberAddResponse_String) + ")");
                 ExReNewMemberTestReport.fail("ERROR --- status code is not 200" + "(" + memberAddResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                         responseHandling.getErrorCodeStatusJson(memberAddResponse_String) + ")");
@@ -59,7 +59,7 @@ public class NewMemberTests extends NewMemberAPIFunctions {
             memberSearchResponse_String = MainFunction.convertOkHttpResponseToString(memberSearchResponse);
 
             if(!(memberSearchResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(memberSearchResponse_String).equals("0"))){
-                System.out.println("*ERROR --- status code is not 200" + "(" + memberSearchResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" +
+                System.out.println(MainFunction.BaseLogStringFunc()+"*ERROR --- status code is not 200" + "(" + memberSearchResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" +
                         responseHandling.getErrorCodeStatusJson(memberSearchResponse_String) + ")");
                 ExReNewMemberTestReport.fail("ERROR --- status code is not 200" + "(" + memberSearchResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                         responseHandling.getErrorCodeStatusJson(memberSearchResponse_String) + ")");
@@ -80,7 +80,7 @@ public class NewMemberTests extends NewMemberAPIFunctions {
                 ExReNewMemberTestReport.pass("Member Search(by card number) -- PASS").assignCategory("NewMemberTest");
 
 
-                System.out.println("1");
+                System.out.println(MainFunction.BaseLogStringFunc()+"1");
             } else {
                 ExReNewMemberTestReport.fail(" New Member Not created ");
 
@@ -91,7 +91,7 @@ public class NewMemberTests extends NewMemberAPIFunctions {
             memberSearchResponse_String = MainFunction.convertOkHttpResponseToString(memberSearchResponse);
 
             if(!(memberSearchResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(memberSearchResponse_String).equals("0"))){
-                System.out.println("*ERROR --- status code is not 200" + "(" + memberSearchResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" +
+                System.out.println(MainFunction.BaseLogStringFunc()+"*ERROR --- status code is not 200" + "(" + memberSearchResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" +
                         responseHandling.getErrorCodeStatusJson(memberSearchResponse_String) + ")");
                 ExReNewMemberTestReport.fail("ERROR --- status code is not 200" + "(" + memberSearchResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                         responseHandling.getErrorCodeStatusJson(memberSearchResponse_String) + ")");

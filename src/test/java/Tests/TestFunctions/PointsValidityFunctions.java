@@ -10,6 +10,7 @@ import Tests.BasePage;
 import XML.XMLGetData;
 import io.restassured.response.Response;
 import org.w3c.dom.NodeList;
+import utilities.MainFunction;
 
 import java.io.IOException;
 import java.time.DayOfWeek;
@@ -95,10 +96,10 @@ public class PointsValidityFunctions extends BasePage {
 
         daysBetween = DAYS.between(dateBefore, dateAfter);
 
-        if ((int) daysBetween == Integer.parseInt(JSON.JSONGetData.getDaysToEnd(TestJSONToSend, i))) {
+        if (((int) daysBetween - Integer.parseInt(JSON.JSONGetData.getDaysToEnd(TestJSONToSend, i))) <= 1) {
             return 1;
         } else {
-            System.out.println("daysToEnd: " + daysBetween);
+            System.out.println(MainFunction.BaseLogStringFunc()+"daysToEnd: " + daysBetween);
             return 0;
         }
 

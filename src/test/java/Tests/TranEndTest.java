@@ -4,7 +4,7 @@ import BaseClass.BaseAPI;
 import BaseClass.BaseXML;
 import Tests.TestFunctions.TranEndFunctions;
 import Utilities.LogFileHandling;
-import com.sun.org.glassfish.gmbal.Description;
+import com.sun.org.glassfish.gmbal.*;
 import org.testng.annotations.Test;
 import utilities.MainFunction;
 import utilities.RetryAnalyzer;
@@ -25,12 +25,12 @@ public class TranEndTest extends BasePage {
         TranEndFunctions tranEndFunctions = new TranEndFunctions();
 
 
-
-            for (int i = 0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++) {
+// i <= JSONGetData.getArraySize(TestJSONToSend) - 1
+            for (int i = 0;i<1; i++) {
                 try{
                 if (JSONGetData.getDealTypeFlag(TestJSONToSend, i).equals("0")) {
                     ExReAccumReport.info("~~~~~~~~~~~~~~~~~~~~~~ Transaction: " + (i + 1) + " ~~~~~~~~~~~~~~~~~~~~~~");
-                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~Deal: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
+                    System.out.println(MainFunction.BaseLogStringFunc()+"~~~~~~~~~~~~~~~~~~~~~~Deal: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
                     MainFunction.RestGlobals();
 
                     // resat the base json  that i send in the infrastructure

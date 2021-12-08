@@ -104,10 +104,10 @@ public okhttp3.Response makeTranRefund (int i,String TrenEndResponse ) throws IO
         if(postAllAccumsPoints.size() == preAllAccumsPoints.size()){
 
             if (preAllAccumsPoints.equals(postAllAccumsPoints)){
-                System.out.println("preAllAccumsPoints is equal to postAllAccumsPoints ");
+                System.out.println(MainFunction.BaseLogStringFunc()+"preAllAccumsPoints is equal to postAllAccumsPoints ");
                 ExReTernRefundReport.pass("preAllAccumsPoints is equal to postAllAccumsPoints");
             }else{
-                System.out.println("preAllAccumsPoints is NOT equal to postAllAccumsPoints ");
+                System.out.println(MainFunction.BaseLogStringFunc()+"preAllAccumsPoints is NOT equal to postAllAccumsPoints ");
                 ExReTernRefundReport.fail("preAllAccumsPoints is NOT equal to postAllAccumsPoints");
                 ExReTernRefundReport.info("preAllAccumsPoints: "+ preAllAccumsPoints).info("postAllAccumsPoints: "+ postAllAccumsPoints);
 
@@ -115,7 +115,7 @@ public okhttp3.Response makeTranRefund (int i,String TrenEndResponse ) throws IO
 
 
         }else {
-            System.out.println("preAllAccumsPoints size is not equal to postAllAccumsPoints size");
+            System.out.println(MainFunction.BaseLogStringFunc()+"preAllAccumsPoints size is not equal to postAllAccumsPoints size");
             ExReTernRefundReport.fail("preAllAccumsPoints size is not equal to postAllAccumsPoints size");
             ExReTernRefundReport.info("postAllAccumsPoints size: "+ postAllAccumsPoints.size()).info("preAllAccumsPoints size: "+ preAllAccumsPoints.size());
 

@@ -28,6 +28,7 @@ public class SubTotalTest extends BasePage {
         //Sending a transaction, checking that the correct deals have appeared and then closing the transaction without using points
 
         //this loop run on the the tests in the "test JSON to send"
+        //i <= JSONGetData.getArraySize(TestJSONToSend) - 1
         for (int i =0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++) {
             ExReApiTestReport.info("~~~~~~~~~~~~~~~~~~~~~~~~ Transaction "+(i+1)+" ~~~~~~~~~~~~~~~~~~~~~~~~");
             System.out.println(MainFunction.BaseLogStringFunc()+"~~~~~~~~~~~~~~~~~~~~~~~~ Deal "+(i+1)+" ~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -60,7 +61,7 @@ public class SubTotalTest extends BasePage {
                     ExReApiTestReport.warning("ERROR --- the Transaction "+responseHandling.getServiceTranNumber(trenCancelResponse_string)+ " did not cancel").assignCategory("warning");
                 }else{
                     ExReApiTestReport.info("trenCancelResponse Time : "+ BaseAPI.getResponseTime_OkHttp(trenCancelResponse)+"ms");
-                    BasePage.avgTimetrenRedund.add(BaseAPI.getResponseTime_OkHttp(trenCancelResponse));
+                    BasePage.avgTimeTranRefund.add(BaseAPI.getResponseTime_OkHttp(trenCancelResponse));
 
 
 
@@ -79,12 +80,12 @@ public class SubTotalTest extends BasePage {
             trenCancelResponse.body().close();
         }//end main for loop
         System.out.println(MainFunction.BaseLogStringFunc()+avgTimeSubTotal);
-        System.out.println(MainFunction.BaseLogStringFunc()+avgTimetrenRedund);
+        System.out.println(MainFunction.BaseLogStringFunc()+ avgTimeTranRefund);
         System.out.println(MainFunction.BaseLogStringFunc()+MainFunction.getAvgTime(avgTimeSubTotal));
-        System.out.println(MainFunction.BaseLogStringFunc()+MainFunction.getAvgTime(avgTimetrenRedund));
+        System.out.println(MainFunction.BaseLogStringFunc()+MainFunction.getAvgTime(avgTimeTranRefund));
         ExReApiTestReport.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
                 .info("avgTimeSubTotal: "+ (MainFunction.getAvgTime(avgTimeSubTotal)+"ms"))
-                .info("avgTimetrenCancel: "+MainFunction.getAvgTime(avgTimetrenRedund) +"ms");
+                .info("avgTimetrenCancel: "+MainFunction.getAvgTime(avgTimeTranRefund) +"ms");
 
 
     }

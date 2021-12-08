@@ -27,7 +27,7 @@ public class PointsValidityTest extends BasePage {
             if (JSONGetData.getDealTypeFlag(TestJSONToSend, i).equals("1")) {
                 //make a deal subtotal + trenend notusing points
                 ExRePointsValiditReport.info("~~~~~~~~~~~~~~~~~~~~~~Transaction: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
-                System.out.println("~~~~~~~~~~~~~~~~~~~~~~Deal: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
+                System.out.println(MainFunction.BaseLogStringFunc()+"~~~~~~~~~~~~~~~~~~~~~~Deal: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
                 MainFunction.RestGlobals();
 
                 // resat the base json  that i send in the infrastructure
@@ -38,7 +38,7 @@ public class PointsValidityTest extends BasePage {
                     subTotalResponse = pointsValidityFunctions.makeDealSubTotal(i);
                     subTotalResponse_String = MainFunction.convertOkHttpResponseToString(subTotalResponse);
                     if (!(subTotalResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse_String).equals("0"))) {
-                        System.out.println("*ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(subTotalResponse_String) + ")");
+                        System.out.println(MainFunction.BaseLogStringFunc()+"*ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(subTotalResponse_String) + ")");
                         ExRePointsValiditReport.fail("ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                                 responseHandling.getErrorCodeStatusJson(subTotalResponse_String) + ")");
                         LogFileHandling.createLogFile(baseJSON.getString(baseJSON.JSON_TO_SEND), LOG_FILE_DIRECTORY, "subTotalCall",i+1);
@@ -50,7 +50,7 @@ public class PointsValidityTest extends BasePage {
 
                     }
                 }catch (NullPointerException e){
-                    System.out.println("ERROE (subTotalResponse) --- The server is currently busy, please try again later ");
+                    System.out.println(MainFunction.BaseLogStringFunc()+"ERROE (subTotalResponse) --- The server is currently busy, please try again later ");
                 }
 
                 //make trenEnd deal
@@ -58,7 +58,7 @@ public class PointsValidityTest extends BasePage {
                     trenEndResponse = pointsValidityFunctions.makeDealTrenEnd(i, subTotalResponse_String);
                     trenEndResponse_String = MainFunction.convertOkHttpResponseToString(trenEndResponse);
                     if (!(trenEndResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(trenEndResponse_String).equals("0"))) {
-                        System.out.println("**ERROR" +
+                        System.out.println(MainFunction.BaseLogStringFunc()+"**ERROR" +
                                 "  --- status code is not 200" + "(" + trenEndResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(trenEndResponse_String) + ")");
                         ExRePointsValiditReport.fail("ERROR --- status code is not 200" + "(" + trenEndResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                                 responseHandling.getErrorCodeStatusJson(trenEndResponse_String) + ")");
@@ -71,20 +71,20 @@ public class PointsValidityTest extends BasePage {
 
                     }
                 }catch (NullPointerException e){
-                    System.out.println("ERROE (trenEndResponse) --- The server is currently busy, please try again later ");
+                    System.out.println(MainFunction.BaseLogStringFunc()+"ERROE (trenEndResponse) --- The server is currently busy, please try again later ");
                 }
                 try {
                     userDataResponse = pointsValidityFunctions.getUserData(i, JSONGetData.getCardNumber(TestJSONToSend, i));
                     userDataResponse_String = MainFunction.convertOkHttpResponseToString(userDataResponse);
                 }catch (Exception e){
-                    System.out.println("ERROR ---  userDataResponse Exception");
+                    System.out.println(MainFunction.BaseLogStringFunc()+"ERROR ---  userDataResponse Exception");
 
                 }
 
                 // post to API and get a response with Member benefit list
                 getMemberBenefitListResponse = pointsValidityFunctions.getMemberBenefitList(responseHandling.getSysId(userDataResponse_String));
                 if (!(getMemberBenefitListResponse.getStatusCode() == 200)) {
-                    System.out.println("****ERROR xml--- status code is not 200 ");
+                    System.out.println(MainFunction.BaseLogStringFunc()+"****ERROR xml--- status code is not 200 ");
                     ExRePointsValiditReport.fail("ERROR xml--- status code is not 200" + "(" + getMemberBenefitListResponse.getStatusCode() + ")");
                     LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
                             LOG_FILE_DIRECTORY,"XmlMemberBenefitListcall",i+1);
@@ -127,7 +127,7 @@ public class PointsValidityTest extends BasePage {
 
 
                     }else {
-                        System.out.println("NLIndex: "+NLIndex);
+                        System.out.println(MainFunction.BaseLogStringFunc()+"NLIndex: "+NLIndex);
                         break;
                     }
 
@@ -146,8 +146,8 @@ public class PointsValidityTest extends BasePage {
             //subTotalResponse.close();
             //trenEndResponse.close();
         }//end main for loop
-        System.out.println("avgTimeSubTotal: "+avgTimeSubTotal);
-        System.out.println("avgTimeTrenEnd: "+avgTimeTrenEnd);
+        System.out.println(MainFunction.BaseLogStringFunc()+"avgTimeSubTotal: "+avgTimeSubTotal);
+        System.out.println(MainFunction.BaseLogStringFunc()+"avgTimeTrenEnd: "+avgTimeTrenEnd);
         ExRePointsValiditReport.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
                 .info("avgTimeSubTotal: "+ (MainFunction.getAvgTime(avgTimeSubTotal)+"ms"))
                 .info("avgTimeTrenEnd: "+MainFunction.getAvgTime(avgTimeTrenEnd) +"ms");
