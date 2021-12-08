@@ -1,4 +1,6 @@
 package utilities;
+import Utilities.LogFileHandling;
+
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -74,7 +76,7 @@ public class EmailHandling {
             //BodyPart messageBodyPart1_2 = new MimeBodyPart();
 
             // Set the body of email
-            messageBodyPart1.setText("This is an automated report");
+            messageBodyPart1.setText(LogFileHandling.ReadFile("EmailLog"));
             //messageBodyPart1_2.setText("This is an Run log");
 
             // Create another object to add another content
@@ -117,7 +119,7 @@ public class EmailHandling {
             Transport.send(message);
             //Transport.send(message2);
 
-            System.out.println("=====Email Sent=====");
+            System.out.println(MainFunction.BaseLogStringFunc()+"=====Email Sent=====");
 
         } catch (MessagingException e) {
 

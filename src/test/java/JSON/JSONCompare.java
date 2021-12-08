@@ -1,14 +1,15 @@
 package JSON;
 import Tests.BasePage;
 
-import org.testng.asserts.SoftAssert;
+
 
 import io.restassured.response.Response;
+import utilities.MainFunction;
 
 import java.io.IOException;
 
 public class JSONCompare extends BasePage {
-    SoftAssert softAssertion = new SoftAssert();
+    //SoftAssert softAssertion = new SoftAssert();
     ResponseHandling responseHandling = new ResponseHandling();
     JSONGetData JSONGetData = new JSONGetData();
     String CBPromoId = null;
@@ -134,7 +135,7 @@ public class JSONCompare extends BasePage {
             }
             if( flag1 == 0 ){
                 ExReApiTestReport.warning("12PromoId: " + TBPromoId + " not found in the \"Test JSON \"").assignCategory("responVSTestJson");
-                System.out.println(baseJSON.jsonToSend.toString());
+                System.out.println(MainFunction.BaseLogStringFunc()+baseJSON.jsonToSend.toString());
                // ExReApiTestReport.info(response.getBody().asString());
 
             }

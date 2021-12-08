@@ -2,9 +2,11 @@ package utilities;
 
 import Tests.BasePage;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import com.sun.org.apache.xerces.internal.impl.io.UTF8Reader;
 import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import okio.Utf8;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,13 +16,12 @@ import org.testng.ITestResult;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 
 
 public class MainFunction extends BasePage {
@@ -35,11 +36,49 @@ public class MainFunction extends BasePage {
         driver.get("file:///" + dir + "\\nullExtentReportResults.html");
     }
 
-    public static void extentReportInit(){
-        BasePage.exReport.attachReporter(spark);
+    public static void extentReportInit() throws IOException {
+        spark.config().setEncoding("UTF-8");
         spark.config().setTheme(Theme.DARK);
         spark.config().setDocumentTitle("Automation report");
         spark.config().setReportName("Simply Tests");
+        BasePage.exReport.attachReporter(spark);
+//        spark.loadXMLConfig(new File("C:\\Users\\User\\IdeaProjects\\SimplyTest\\extentconfig.xml"));
+
+
+    }
+    public static void convertFileEncoding(String sourcePath, String targetPath , String targetEncoding) throws IOException, InterruptedException{
+
+        // Wait for file to exist - 10 seconds
+        for (int i=0; i<20 ; i++) {
+            if(!Files.exists(Paths.get(sourcePath)))
+                Thread.sleep(500);
+            else
+                break;
+        }
+
+        File infile = new File(sourcePath);
+
+       // String trgtPath = targetPath.orElse(sourcePath + "Temp") ;
+        String trgtPath = targetPath+"Temp";
+        String trgtEncoding = targetEncoding;
+        File outfile = new File(trgtPath);
+
+        // Convert
+        InputStreamReader fis = new InputStreamReader(new FileInputStream(infile));
+        Reader in = new InputStreamReader(new FileInputStream(infile),fis.getEncoding());
+        Writer out = new OutputStreamWriter(new FileOutputStream(outfile), trgtEncoding);
+        int c;
+        while ((c = in.read()) != -1){
+            out.write(c);}
+        in.close();
+        out.close();
+        fis.close();
+        // if target path not specified - change the original file to target file
+        if (true) {
+            infile.delete();
+            outfile.renameTo(new File(sourcePath));
+        }
+
 
     }
     //temp

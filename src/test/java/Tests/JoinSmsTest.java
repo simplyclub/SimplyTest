@@ -18,7 +18,7 @@ public class JoinSmsTest extends  BasePage{
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     @Description("")
-    public void JoinSms () throws IOException, InterruptedException {
+    public void JoinSmsTest() throws IOException, InterruptedException {
 
 
         joinSmsResponse = joinSmsTeatFunction.sendJoinSms(CELL_PHONE,Equal,"0534320757");
@@ -39,7 +39,7 @@ public class JoinSmsTest extends  BasePage{
 
         if(responseHandling.getResultCode(joinSmsResponse_String).equals("0")){
             ExReJoinSmsReport.pass(" Send Join SMS --- PASS");
-            System.out.println(MainFunction.BaseLogStringFunc()+" Send Join SMS2 --- PASS");
+            System.out.println(MainFunction.BaseLogStringFunc()+" Send Join SMS --- PASS");
         }
 
 
@@ -49,7 +49,7 @@ public class JoinSmsTest extends  BasePage{
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     @Description("")
-    public void JoinSms2 () throws IOException, InterruptedException {
+    public void JoinSms2Test() throws IOException, InterruptedException {
         Thread.sleep(10000);
         joinSmsResponse = joinSmsTeatFunction.sendJoinSms2(CELL_PHONE,Equal,"0534320757");
         joinSmsResponse_String = MainFunction.convertOkHttpResponseToString(joinSmsResponse);
@@ -113,7 +113,7 @@ public class JoinSmsTest extends  BasePage{
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     @Description("|")
-    public void MemberGetDetails() throws IOException {
+    public void MemberGetDetailsTest() throws IOException {
         baseJSON.ResatMemberGetDetails();
         String num ="0534320757";
 

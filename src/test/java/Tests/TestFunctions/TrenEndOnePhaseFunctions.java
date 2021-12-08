@@ -84,7 +84,7 @@ public class TrenEndOnePhaseFunctions extends BasePage {
         for (String key : sumDealPoints.keySet()) {
             for (int q = 0; q < JSONGetData.getArraySizeSumAccum(TestJSONToSend, i); q++) {
                 //System.out.println(q);
-                System.out.println(sumDealPoints);
+                System.out.println(MainFunction.BaseLogStringFunc()+sumDealPoints);
 
 
                 //Compares  the Accum from the "sumDealPoints " to the Accum in the Test JSON
@@ -94,8 +94,8 @@ public class TrenEndOnePhaseFunctions extends BasePage {
                     double d = 0.0 ;
 
 
-                    System.out.println(postDeal.get(key));
-                    System.out.println(preDeal.get(key));
+                    System.out.println(MainFunction.BaseLogStringFunc()+postDeal.get(key));
+                    System.out.println(MainFunction.BaseLogStringFunc()+preDeal.get(key));
                     d = (postDeal.get(key) - preDeal.get(key) );
                     dx = df.format(d);
                     d = Double.valueOf(dx);

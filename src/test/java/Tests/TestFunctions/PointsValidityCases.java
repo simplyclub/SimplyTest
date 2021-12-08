@@ -1,6 +1,7 @@
 package Tests.TestFunctions;
 
 import org.w3c.dom.NodeList;
+import utilities.MainFunction;
 
 public class PointsValidityCases extends PointsValidityFunctions {
     PointsValidityFunctions pointsValidityFunctions = new PointsValidityFunctions();
@@ -10,7 +11,7 @@ public class PointsValidityCases extends PointsValidityFunctions {
         switch (x) {
             case 36 :
                 //from: Immediately , Until: Several days
-                System.out.println("from: Immediately , Until: Several days");
+                System.out.println(MainFunction.BaseLogStringFunc()+"from: Immediately , Until: Several days");
                 if(pointsValidityFunctions.calcDaysUntilEnd(nodeList,NLIndex,i) == 1){
                     ExRePointsValiditReport.pass("Transaction : "+(i+1)+" case "+ x +" pass");
                     ExRePointsValiditReport.info("from: Immediately , Until: Several days");
@@ -23,7 +24,7 @@ public class PointsValidityCases extends PointsValidityFunctions {
 
             case 2 :
                 //from: Several days  , Until: Unlimited
-                System.out.println("from: Several days  , Until: Unlimited");
+                System.out.println(MainFunction.BaseLogStringFunc()+"from: Several days  , Until: Unlimited");
                 if (pointsValidityFunctions.calcDaysUntilStart(nodeList,NLIndex,i) == 1){
                     ExRePointsValiditReport.pass("Transaction : "+(i+1)+" case "+ x +" pass");
                     ExRePointsValiditReport.info("from: Several days  , Until: Unlimited");
