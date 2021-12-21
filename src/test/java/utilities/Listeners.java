@@ -75,6 +75,10 @@ public class Listeners extends BasePage implements ITestListener  {
         if (str.equals("MemberTest4")) {
             ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed");
+            LogFileHandling.WriteToFile("EmailLog","    avgTimeSubTotal NewMember: "+ MainFunction.getAvgTime(avgTimeSubTotal));
+            LogFileHandling.WriteToFile("EmailLog","    avgTimeTrenEnd NewMember: "+ MainFunction.getAvgTime(avgTimeTrenEnd));
+            LogFileHandling.WriteToFile("EmailLog","    avgTimeTrenEndOnePhase NewMember: "+ MainFunction.getAvgTime(avgTimeTrenEndOnePhase));
+
         }
         if (str.equals("MemberTest5")) {
             ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
@@ -108,6 +112,31 @@ public class Listeners extends BasePage implements ITestListener  {
             ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed");
         }
+        if (str.equals("Stage6Deal1Test")) {
+            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed");
+        }
+        if (str.equals("Stage6Deal2Test")) {
+            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed");
+        }
+        if (str.equals("Stage6Deal3Test")) {
+            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed");
+        }
+        if (str.equals("Stage6Deal4Test")) {
+            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed");
+        }
+        if (str.equals("Stage6Deal5Test")) {
+            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed");
+        }
+        if (str.equals("Stage6Deal6Test")) {
+            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed");
+        }
+
     }
 
     @Override
@@ -137,7 +166,7 @@ public class Listeners extends BasePage implements ITestListener  {
             LogFileHandling.WriteToFile("EmailLog","X-"+arg0.getName() + " Test fail");
 
         }
-        if (str.equals("trenEndOnePhaseTest")) {
+        if (str.equals("tranEndOnePhaseTest")) {
             ExReTrenEndOnePhaseReport.fail(arg0.getName() + " Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+arg0.getName() + " Test fail");
 
@@ -154,6 +183,31 @@ public class Listeners extends BasePage implements ITestListener  {
             ExRePointsValiditReport.fail(arg0.getName() + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+arg0.getName() + " Test fail");
         }
+        if (str.equals("Stage6Deal1Test")) {
+            ExRePointsValiditReport.fail(arg0.getName() + "Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+arg0.getName() + " Test fail");
+        }
+        if (str.equals("Stage6Deal2Test")) {
+            ExRePointsValiditReport.fail(arg0.getName() + "Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+arg0.getName() + " Test fail");
+        }
+        if (str.equals("Stage6Deal3Test")) {
+            ExRePointsValiditReport.fail(arg0.getName() + "Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+arg0.getName() + " Test fail");
+        }
+        if (str.equals("Stage6Deal4Test")) {
+            ExRePointsValiditReport.fail(arg0.getName() + "Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+arg0.getName() + " Test fail");
+        }
+        if (str.equals("Stage6Deal5Test")) {
+            ExRePointsValiditReport.fail(arg0.getName() + "Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+arg0.getName() + " Test fail");
+        }
+        if (str.equals("Stage6Deal6Test")) {
+            ExRePointsValiditReport.fail(arg0.getName() + "Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+arg0.getName() + " Test fail");
+        }
+
 
 
 

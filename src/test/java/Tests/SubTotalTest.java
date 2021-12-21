@@ -7,7 +7,6 @@ import JSON.ResponseHandling;
 
 
 
-import com.sun.org.glassfish.gmbal.Description;
 import org.testng.annotations.Test;
 import utilities.MainFunction;
 import utilities.RetryAnalyzer;
@@ -20,9 +19,9 @@ public class SubTotalTest extends BasePage {
     ResponseHandling responseHandling = new ResponseHandling();
 
     @Test(testName = "SubTotalTest",retryAnalyzer = RetryAnalyzer.class)
-    @Description("Sub Total Test")
     public void subTotalTest() throws IOException {
         BasePage.ExReApiTestReport.info("basic API Test");
+        int SFFlag = 0;
 
         // this test check sub total
         //Sending a transaction, checking that the correct deals have appeared and then closing the transaction without using points
@@ -45,7 +44,9 @@ public class SubTotalTest extends BasePage {
                 ExReApiTestReport.info("subTotalResponse Time : "+BaseAPI.getResponseTime_OkHttp(subTotalResponse) + "ms");
                 BasePage.avgTimeSubTotal.add(BaseAPI.getResponseTime_OkHttp(subTotalResponse));
 
-                JSONCompare.responVSTestJson(i, subTotalResponse_String);
+                if(!JSONCompare.responVSTestJson(i, subTotalResponse_String)){
+                    SFFlag = 1 ;
+                }
                 JSONCompare.TestJSONVSResponse(i, subTotalResponse_String);
 
                 //cancel of a deal
@@ -59,6 +60,7 @@ public class SubTotalTest extends BasePage {
                 if (trenCancelResponse.code()!= 200 && !(responseHandling.getErrorCodeStatusJson(trenCancelResponse_string).equals("0"))){
                     System.out.println(MainFunction.BaseLogStringFunc()+"ERROR --- the Transaction "+responseHandling.getServiceTranNumber(trenCancelResponse_string)+ " did not cancel");
                     ExReApiTestReport.warning("ERROR --- the Transaction "+responseHandling.getServiceTranNumber(trenCancelResponse_string)+ " did not cancel").assignCategory("warning");
+                     SFFlag=1;
                 }else{
                     ExReApiTestReport.info("trenCancelResponse Time : "+ BaseAPI.getResponseTime_OkHttp(trenCancelResponse)+"ms");
                     BasePage.avgTimeTranRefund.add(BaseAPI.getResponseTime_OkHttp(trenCancelResponse));
@@ -73,6 +75,7 @@ public class SubTotalTest extends BasePage {
                 System.out.println(MainFunction.BaseLogStringFunc()+"ERROR --- status code is not 200 or ErrorCodeStatus is not 0 ");
                 ExReApiTestReport.fail("ERROR --- status code is not 200"+"("+subTotalResponse.code()+")" +" or ErrorCodeStatus is not 0 "+"("+
                         responseHandling.getErrorCodeStatusJson(subTotalResponse_String)+")");
+                 SFFlag=1;
               break;
             }
 
@@ -83,6 +86,9 @@ public class SubTotalTest extends BasePage {
         System.out.println(MainFunction.BaseLogStringFunc()+ avgTimeTranRefund);
         System.out.println(MainFunction.BaseLogStringFunc()+MainFunction.getAvgTime(avgTimeSubTotal));
         System.out.println(MainFunction.BaseLogStringFunc()+MainFunction.getAvgTime(avgTimeTranRefund));
+        if(SFFlag == 1) {
+            MainFunction.onTestFailure("subTotalTest");
+        }
         ExReApiTestReport.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
                 .info("avgTimeSubTotal: "+ (MainFunction.getAvgTime(avgTimeSubTotal)+"ms"))
                 .info("avgTimetrenCancel: "+MainFunction.getAvgTime(avgTimeTranRefund) +"ms");

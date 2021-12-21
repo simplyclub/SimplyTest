@@ -90,6 +90,7 @@ public class ResponseHandling  {
     public String getTrenEndTranReferenceNumber(String s ) throws IOException {
        // String s = response.body().string();
         JSONObject responseObj = (JSONObject) BaseJSON.convertStringToJSONObj(s);
+        System.out.println(responseObj.get("TranReferenceNumber").toString());
         return responseObj.get("TranReferenceNumber").toString();
 
     }

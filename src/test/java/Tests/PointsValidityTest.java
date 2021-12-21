@@ -11,7 +11,7 @@ import utilities.RetryAnalyzer;
 
 import java.io.IOException;
 
-//FIXME : Wait for the correction of the date, of up to a week
+
 
 
 public class PointsValidityTest extends BasePage {
@@ -25,7 +25,7 @@ public class PointsValidityTest extends BasePage {
             MainFunction.RestGlobals();
             // this if  check for deal type flag = 1
             if (JSONGetData.getDealTypeFlag(TestJSONToSend, i).equals("1")) {
-                //make a deal subtotal + trenend notusing points
+                //make a deal subtotal + tranEnd not using points
                 ExRePointsValiditReport.info("~~~~~~~~~~~~~~~~~~~~~~Transaction: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
                 System.out.println(MainFunction.BaseLogStringFunc()+"~~~~~~~~~~~~~~~~~~~~~~Deal: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
                 MainFunction.RestGlobals();
@@ -44,6 +44,7 @@ public class PointsValidityTest extends BasePage {
                         LogFileHandling.createLogFile(baseJSON.getString(baseJSON.JSON_TO_SEND), LOG_FILE_DIRECTORY, "subTotalCall",i+1);
                         LogFileHandling.createLogFile(subTotalResponse.toString(), LOG_FILE_DIRECTORY, "subTotalResponse",i+1);
                         subTotalResponse.body().close();
+                        MainFunction.onTestFailure("pointsValidityTest");
                         continue;
                     }else{
                         avgTimeSubTotal.add(BaseAPI.getResponseTime_OkHttp(subTotalResponse));
@@ -65,6 +66,7 @@ public class PointsValidityTest extends BasePage {
                         LogFileHandling.createLogFile(baseJSON.getString(baseJSON.JSON_TO_SEND), LOG_FILE_DIRECTORY, "trenEndCall",i+1);
                         LogFileHandling.createLogFile(trenEndResponse.toString(), LOG_FILE_DIRECTORY, "trenEndResponse",i+1);
                         trenEndResponse.body().close();
+                        MainFunction.onTestFailure("pointsValidityTest");
                         continue;
                     }else{
                         avgTimeTrenEnd.add(BaseAPI.getResponseTime_OkHttp(trenEndResponse));
@@ -83,13 +85,14 @@ public class PointsValidityTest extends BasePage {
 
                 // post to API and get a response with Member benefit list
                 getMemberBenefitListResponse = pointsValidityFunctions.getMemberBenefitList(responseHandling.getSysId(userDataResponse_String));
+
                 if (!(getMemberBenefitListResponse.getStatusCode() == 200)) {
                     System.out.println(MainFunction.BaseLogStringFunc()+"****ERROR xml--- status code is not 200 ");
                     ExRePointsValiditReport.fail("ERROR xml--- status code is not 200" + "(" + getMemberBenefitListResponse.getStatusCode() + ")");
                     LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
                             LOG_FILE_DIRECTORY,"XmlMemberBenefitListcall",i+1);
                     LogFileHandling.createLogFile(getMemberBenefitListResponse.asString(), LOG_FILE_DIRECTORY,"XmlMemberBenefitListResponse",i+1);
-
+                    MainFunction.onTestFailure("pointsValidityTest");
                     continue;
 
                 }

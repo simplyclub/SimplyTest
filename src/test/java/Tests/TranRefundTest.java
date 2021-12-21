@@ -41,6 +41,7 @@ public class TranRefundTest extends BasePage {
                         LogFileHandling.createLogFile(baseJSON.jsonToSend.toString(), LOG_FILE_DIRECTORY, "subTotalCall",i+1);
                         LogFileHandling.createLogFile(subTotalResponse_String, LOG_FILE_DIRECTORY, "subTotalResponse",i+1);
                         subTotalResponse.body().close();
+                        MainFunction.onTestFailure("tranRefundTest");
                         continue;
                     }
                 }catch (NullPointerException e){
@@ -66,6 +67,7 @@ public class TranRefundTest extends BasePage {
                         LogFileHandling.createLogFile(baseJSON.jsonToSend.toString(), LOG_FILE_DIRECTORY, "trenEndCall",i+1);
                         LogFileHandling.createLogFile(trenEndResponse_String, LOG_FILE_DIRECTORY, "trenEndResponse",i+1);
                         trenEndResponse.body().close();
+                        MainFunction.onTestFailure("tranRefundTest");
                         continue;
                     }
                 }catch (NullPointerException e){
@@ -87,6 +89,7 @@ public class TranRefundTest extends BasePage {
                                 responseHandling.getErrorCodeStatusJson(trenEndResponse_String) + ")");
                         LogFileHandling.createLogFile(baseJSON.tranRefundToSend.toString(), LOG_FILE_DIRECTORY, "trenEndCall",i+1);
                         LogFileHandling.createLogFile(trenRefundResponse_String, LOG_FILE_DIRECTORY, "trenEndResponse",i+1);
+                        MainFunction.onTestFailure("tranRefundTest");
                         break;
                     }else{
                         avgTimeTranRefund.add(BaseAPI.getResponseTime_OkHttp(trenRefundResponse));

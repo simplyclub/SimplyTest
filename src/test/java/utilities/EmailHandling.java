@@ -18,6 +18,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import static Tests.BasePage.HOME_DIRECTORY;
+
 public class EmailHandling {
 
     public static void sendEnmail() {
@@ -84,7 +86,7 @@ public class EmailHandling {
            // MimeBodyPart messageBodyPart2_2 = new MimeBodyPart();
 
             // Mention the file which you want to send
-            String filename = "C:\\Users\\User\\IdeaProjects\\SimplyTest\\index.html";
+            String filename = HOME_DIRECTORY+"SimplyTest\\index.html";
             //String LogFileName = "C:\\Users\\User\\IdeaProjects\\SimplyTest\\IntelJRunLog\\RunLog.html";
 
             // Create data source and pass the filename

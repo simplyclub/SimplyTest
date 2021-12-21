@@ -22,8 +22,10 @@ public class TranEndOnePhaseTest extends BasePage {
 //
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void tranEndOnePhaseTest() throws IOException {
+        //i <=jsonGetData.getArraySize(TestJSONToSend) - 1
        for (int i = 0; i <=jsonGetData.getArraySize(TestJSONToSend) - 1; i++) {
            ExReTrenEndOnePhaseReport.info("~~~~~~~~~~~~~~~~~~~~~~Transaction: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
+           System.out.println("~~~~~~~~~~~~~~~~~~~~~~Transaction: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
            MainFunction.RestGlobals();
 
            System.out.println(MainFunction.BaseLogStringFunc()+"i: " + i);
@@ -46,12 +48,15 @@ public class TranEndOnePhaseTest extends BasePage {
                     ExReTrenEndOnePhaseReport.info(
                             LogFileHandling.createLogFile(baseJSON.memberJsonToSend.toString(),LOG_FILE_DIRECTORY,"userDataPost",i+1));
                     userDataResponse.body().close();
+                    MainFunction.onTestFailure("tranEndOnePhaseTest");
                     continue;
 
 
                 }
            if(userDataResponse == null){
                ExReTrenEndOnePhaseReport.fail("ERROR -- post userDataResponse is NULL");
+               MainFunction.onTestFailure("tranEndOnePhaseTest");
+
                continue;
 
 
@@ -66,6 +71,7 @@ public class TranEndOnePhaseTest extends BasePage {
                    ExReTrenEndOnePhaseReport.info(
                            LogFileHandling.createLogFile(userDataResponse_String, LOG_FILE_DIRECTORY, "userDataResponse",i+1));
                    userDataResponse.body().close();
+                   MainFunction.onTestFailure("tranEndOnePhaseTest");
                    continue;
 
 
@@ -78,7 +84,7 @@ public class TranEndOnePhaseTest extends BasePage {
                     trenEndOnePhaseResponse = trenEndOnePhaseFunctions.makeTrenEndOnePhase(i);
                     trenEndOnePhaseResponse_String = MainFunction.convertOkHttpResponseToString(trenEndOnePhaseResponse);
                     avgTimeTrenEndOnePhase.add(BaseAPI.getResponseTime_OkHttp(trenEndOnePhaseResponse));
-                    //System.out.println(trenEndOnePhaseResponse_String);
+                    System.out.println(MainFunction.BaseLogStringFunc()+trenEndOnePhaseResponse_String);
                     trenEndOnePhaseResponse.body().close();
 
 
@@ -89,12 +95,14 @@ public class TranEndOnePhaseTest extends BasePage {
                     ExReTrenEndOnePhaseReport.info(
                             LogFileHandling.createLogFile(baseJSON.tranEndOnePhaseToSend.toString(),LOG_FILE_DIRECTORY,"trenEndOnePhasePost",i+1));
                     trenEndOnePhaseResponse.close();
+                    MainFunction.onTestFailure("tranEndOnePhaseTest");
                     continue;
 
                 }
                 //response null check
                 if(trenEndOnePhaseResponse == null){
                     ExReTrenEndOnePhaseReport.fail("ERROR -- trenEndOnePhaseResponse is NULL");
+                    MainFunction.onTestFailure("tranEndOnePhaseTest");
                     continue;
 
                 }else {
@@ -108,6 +116,7 @@ public class TranEndOnePhaseTest extends BasePage {
                         ExReTrenEndOnePhaseReport.info(
                                 LogFileHandling.createLogFile(trenEndOnePhaseResponse_String, LOG_FILE_DIRECTORY, "trenEndOnePhaseResponse",i+1));
                         userDataResponse.body().close();
+                        MainFunction.onTestFailure("tranEndOnePhaseTest");
                         continue;
 
                     }
@@ -132,12 +141,14 @@ public class TranEndOnePhaseTest extends BasePage {
                            LogFileHandling.createLogFile(userDataResponse_String,LOG_FILE_DIRECTORY,"userDataResponse",i+1));
                    ExReTrenEndOnePhaseReport.info(
                            LogFileHandling.createLogFile(baseJSON.memberJsonToSend.toString(),LOG_FILE_DIRECTORY,"userDataPost",i+1));
+                   MainFunction.onTestFailure("tranEndOnePhaseTest");
 
 
                }
                //response Null check
                if(userDataResponse == null){
                    ExReTrenEndOnePhaseReport.fail("ERROR -- post userDataResponse is NULL");
+                   MainFunction.onTestFailure("tranEndOnePhaseTest");
 
                }else {
                    if (!(userDataResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(userDataResponse_String).equals("0"))) {
@@ -150,6 +161,7 @@ public class TranEndOnePhaseTest extends BasePage {
                        ExReTrenEndOnePhaseReport.info(
                                LogFileHandling.createLogFile(userDataResponse_String, LOG_FILE_DIRECTORY, "userDataResponse",i+1));
                        userDataResponse.body().close();
+                       MainFunction.onTestFailure("tranEndOnePhaseTest");
 
 
                    }
@@ -171,11 +183,11 @@ public class TranEndOnePhaseTest extends BasePage {
                            LOG_FILE_DIRECTORY, "XmlTransactionViewcall",i+1));
                    ExReTrenEndOnePhaseReport.info(
                            LogFileHandling.createLogFile(transactionViewResponse.asString(), LOG_FILE_DIRECTORY, "XmlTransactionViewResponse",i+1));
-
+                   MainFunction.onTestFailure("tranEndOnePhaseTest");
 
 
                }
-               //System.out.println(transactionViewResponse.getBody().asString());
+               System.out.println(MainFunction.BaseLogStringFunc()+transactionViewResponse.getBody().asString());
 
                // "nodeList" is for using in discountLoop
                nodeList = responseHandling.getXMLFileTranViewDiscountData(transactionViewResponse.getBody().asString());
@@ -185,7 +197,9 @@ public class TranEndOnePhaseTest extends BasePage {
                trenEndOnePhaseFunctions.discountLoop(i, nodeList);
 
 
-               trenEndOnePhaseFunctions.EarnedChecks(i);
+               if(!trenEndOnePhaseFunctions.EarnedChecks(i)){
+                   MainFunction.onTestFailure("tranEndOnePhaseTest");
+               }
 
 
 

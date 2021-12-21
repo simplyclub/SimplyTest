@@ -86,6 +86,7 @@ public class JSONGetData  {
         JSONArray  tests = (JSONArray) JSONObj.get("array");
         JSONObject  tranItemsJSONObj = (JSONObject) tests.get(index);
         JSONArray x = (JSONArray)tranItemsJSONObj.get("TranItems");
+        System.out.println(x.toString());
         return x;
 
     }

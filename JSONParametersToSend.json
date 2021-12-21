@@ -7501,7 +7501,7 @@
       "PointsExpirationTimeToStart" : "",
       "PointsExpirationTimeToEnd" : "",
       "sumAccum":[
-        {"282": "25.0"},
+        {"282": "130.0"},
         {"283": "5.0"}
       ],
       "TranItems": [
@@ -7600,6 +7600,38 @@
           "Price": "50",
           "ItemBarcode": "",
           "Manufacture": ""
+        },
+        {
+          "CategoryCode": "1",
+          "PromoCode": "",
+          "GrossPrice": 0,
+          "Cost": 0,
+          "ItemDescription": "פריט 1",
+          "Department": "ב",
+          "SuggestedPromoId": 0,
+          "PLUClassificationCode3": "",
+          "PLUClassificationCode2": "25896",
+          "PLUClassificationCode1": "",
+          "TrxID": 4,
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ],
+          "Amount": 50,
+          "Quantity": 1,
+          "InputFlags": 0,
+          "Vendor": "stark industries",
+          "Code": "0001",
+          "SubDept3": "",
+          "SubDept2": "",
+          "SubDept1": "",
+          "UOM": 0,
+          "SysDiscount": 0,
+          "Price": "50",
+          "ItemBarcode": "",
+          "Manufacture": ""
         }
       ],
       "Member": [
@@ -7654,14 +7686,14 @@
           "CashBackDiscounts": [
             {
               "Description": "מימוש נקודות - קנה בסכום 1 קבל 1:0.2 על 50%מהעיסקה 100% מהצבירה",
-              "Amount": 75.0,
+              "Amount": 100.0,
               "IsAuto": "false",
               "PromoId": "1839",
               "AccumId": 282
             },
             {
               "Description": "מימוש נקודות - קנה בכמות של 3 עד 5 קבל 1:0.5 עד 10% מהעיסקה 100% מהצבירה",
-              "Amount": 15.0,
+              "Amount": 20.0,
               "IsAuto": "false",
               "PromoId": "1841",
               "AccumId": 282
@@ -7675,7 +7707,7 @@
             },
             {
               "Description": "מימוש פרטי מתנה - קנה בכמות 2 קבל שווי 20 סהכ שימושים 2 בעיסקה 2",
-              "Amount": 20.0,
+              "Amount": 40.0,
               "IsAuto": "false",
               "PromoId": "1854",
               "AccumId": 286
@@ -7686,6 +7718,20 @@
               "IsAuto": "false",
               "PromoId": "1856",
               "AccumId": 286
+            },
+            {
+              "Description": "מימוש נקודות - קנה בין 200 ל  400 קבל 1:1 על 50% מהעיסקה 100% מהצבירה",
+              "Amount": 100.0,
+              "IsAuto": "false",
+              "PromoId": "1838",
+              "AccumId": 282
+            },
+            {
+              "Description": "מימוש נקודות - קנה בכמות 4 קבל 1:2 על 50% מהעיסקה 100% צבירה",
+              "Amount": 100.0,
+              "IsAuto": "false",
+              "PromoId": "1840",
+              "AccumId": 282
             }
           ]
         },
@@ -7700,7 +7746,7 @@
           },
           {
             "Description": "קנה  קבל - קנה בסכום 10 קבל הנחה כספית 20",
-            "Amount": 60.0,
+            "Amount": 80.0,
             "IsAuto": "false",
             "PromoId": "1830",
             "AllItemsDiscountPercent": 0.0,
@@ -7708,7 +7754,7 @@
           },
           {
             "Description": "קנה קבל - קנה בכמות 2 קבל 10% הנחה",
-            "Amount": 10.0,
+            "Amount": 20.0,
             "IsAuto": "false",
             "PromoId": "1831",
             "AllItemsDiscountPercent": 10.0,
@@ -7733,7 +7779,7 @@
           },
           {
             "Description": "קנה קבל - קנה בסכום 20 קבל 10% על 2 פריטים",
-            "Amount": 15.0,
+            "Amount": 20.0,
             "IsAuto": "false",
             "PromoId": "1834",
             "AllItemsDiscountPercent": 10.0,
@@ -7750,7 +7796,7 @@
           },
           {
             "Description": "קנה קבל - קנה בסכום 20 קבל 10% הנחה",
-            "Amount": 15.0,
+            "Amount": 20.0,
             "IsAuto": "false",
             "PromoId": "1837",
             "AllItemsDiscountPercent": 10.0,
@@ -7764,7 +7810,7 @@
           "Accumulates":[
             {
               "Name":"צבירת נקודות - קנה ב מינ' 100 קבל 10% על פריט 1",
-              "Amount" : 5.0,
+              "Amount" : 10.0,
               "PromoID" : "1820",
               "AccumId": 282
             },
@@ -7791,6 +7837,12 @@
               "Amount" : 5.0,
               "PromoID" : "1851",
               "AccumId": 283
+            },
+            {
+              "Name":"צבירת נקודות - קנה בסכום בין 200 ל 300 קבל מחיר קבוע 100",
+              "Amount" : 100.0,
+              "PromoID" : "1821",
+              "AccumId": 282
             }
           ]
         }

@@ -4,7 +4,6 @@ import BaseClass.BaseAPI;
 import BaseClass.BaseXML;
 import Tests.TestFunctions.TranEndFunctions;
 import Utilities.LogFileHandling;
-import com.sun.org.glassfish.gmbal.*;
 import org.testng.annotations.Test;
 import utilities.MainFunction;
 import utilities.RetryAnalyzer;
@@ -18,15 +17,15 @@ import static BaseClass.BaseAPI.TEST_API_SYSTEM_URI;
 
 public class TranEndTest extends BasePage {
 
-
+//, retryAnalyzer = RetryAnalyzer.class
     @Test(testName = "TrenEnd Test ", retryAnalyzer = RetryAnalyzer.class)
-    @Description("Will run on each of the accumulators  ")
     public void tranEndTest() throws TransformerException, IOException {
         TranEndFunctions tranEndFunctions = new TranEndFunctions();
+        int SFFlag=0;
 
 
 // i <= JSONGetData.getArraySize(TestJSONToSend) - 1
-            for (int i = 0;i<1; i++) {
+            for ( int i = 0;i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++) {
                 try{
                 if (JSONGetData.getDealTypeFlag(TestJSONToSend, i).equals("0")) {
                     ExReAccumReport.info("~~~~~~~~~~~~~~~~~~~~~~ Transaction: " + (i + 1) + " ~~~~~~~~~~~~~~~~~~~~~~");
@@ -51,11 +50,12 @@ public class TranEndTest extends BasePage {
                     System.out.println("subTotalResponse: " + subTotalResponse.body().string());
                     if (!(subTotalResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse_String).equals("0"))) {
                         System.out.println("*ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(subTotalResponse_String) + ")");
-                        ExReAccumReport.fail("ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                        ExReAccumReport.fail("*ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                                 responseHandling.getErrorCodeStatusJson(subTotalResponse_String) + ")");
                         LogFileHandling.createLogFile(baseJSON.getString(baseJSON.JSON_TO_SEND), LOG_FILE_DIRECTORY, "subTotalCall",i+1);
                         LogFileHandling.createLogFile(subTotalResponse_String, LOG_FILE_DIRECTORY, "subTotalResponse",i+1);
                         subTotalResponse.body().close();
+                        MainFunction.onTestFailure("tranEndTest");
                         break;
                     } else {
 
@@ -72,33 +72,37 @@ public class TranEndTest extends BasePage {
                         trenEndResponse = tranEndFunctions.makeDealTrenEnd(i, subTotalResponse_String);
                         // System.out.println(BaseAPI.getResponseTime_OkHttp(trenEndResponse));
                         trenEndResponse_String = MainFunction.convertOkHttpResponseToString(trenEndResponse);
-                        System.out.println("trenEndResponse: " + trenEndResponse.body().string());
+                        System.out.println(MainFunction.BaseLogStringFunc() + trenEndResponse.body().string());
+
                         if (!(trenEndResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(trenEndResponse_String).equals("0"))) {
-                            System.out.println("**ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(trenEndResponse_String) + ")");
-                            ExReAccumReport.fail("ERROR --- status code is not 200" + "(" + trenEndResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                            System.out.println(MainFunction.BaseLogStringFunc() +"**ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(trenEndResponse_String) + ")");
+                            ExReAccumReport.fail("**ERROR --- status code is not 200" + "(" + trenEndResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                                     responseHandling.getErrorCodeStatusJson(trenEndResponse_String) + ")");
                             LogFileHandling.createLogFile(baseJSON.getString(baseJSON.JSON_TO_SEND), LOG_FILE_DIRECTORY, "trenEndCall",i+1);
                             LogFileHandling.createLogFile(trenEndResponse_String, LOG_FILE_DIRECTORY, "trenEndResponse",i+1);
                             trenEndResponse.body().close();
+                            MainFunction.onTestFailure("tranEndTest");
                             break;
                         } else {
                             avgTimeTrenEnd.add( BaseAPI.getResponseTime_OkHttp(trenEndResponse));
                             ExReAccumReport.info("TransactionTimeTrenEnd: "+avgTimeTrenEnd.get(i)+"ms");
-                            System.out.println(avgTimeTrenEnd);
+                            System.out.println(MainFunction.BaseLogStringFunc() +avgTimeTrenEnd);
                         }
 
                         //check for points after the deal
                         userDataResponse = tranEndFunctions.getUserData(i);
                         //System.out.println(BaseAPI.getResponseTime_OkHttp(userDataResponse));
                         userDataResponse_String = MainFunction.convertOkHttpResponseToString(userDataResponse);
+
                         if (!(userDataResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(userDataResponse_String).equals("0"))) {
-                            System.out.println("***ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                            System.out.println(MainFunction.BaseLogStringFunc() +"***ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                                     "                            responseHandling.getErrorCodeStatusJson(userDataResponse)" + ")");
-                            ExReAccumReport.fail("ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                            ExReAccumReport.fail("***ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                                     responseHandling.getErrorCodeStatusJson(userDataResponse_String) + ")");
                             LogFileHandling.createLogFile(baseJSON.getString(baseJSON.MEMBER_JSON_TO_SEND), LOG_FILE_DIRECTORY, "userDatacall",i+1);
                             LogFileHandling.createLogFile(userDataResponse_String, LOG_FILE_DIRECTORY, "userDataResponse",i+1);
                             userDataResponse.body().close();
+                            MainFunction.onTestFailure("tranEndTest");
                             break;
                         }
                         tranEndFunctions.getPostDealVouchers(i, userDataResponse_String);
@@ -111,12 +115,12 @@ public class TranEndTest extends BasePage {
 
                         transactionViewResponse = APIPost.postXMLToGetTransactionView(TEST_API_SYSTEM_URI, BaseXML.GET_TREN_FILE_LOCATION);
                         if (!(transactionViewResponse.getStatusCode() == 200)) {
-                            System.out.println("****ERROR xml--- status code is not 200 ");
-                            ExReAccumReport.fail("ERROR xml--- status code is not 200" + "(" + transactionViewResponse.getStatusCode() + ")");
+                            System.out.println(MainFunction.BaseLogStringFunc() +"****ERROR xml--- status code is not 200 ");
+                            ExReAccumReport.fail("****ERROR xml--- status code is not 200" + "(" + transactionViewResponse.getStatusCode() + ")");
                             LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
                                     LOG_FILE_DIRECTORY, "XmlTransactionViewcall",i+1);
                             LogFileHandling.createLogFile(transactionViewResponse.asString(), LOG_FILE_DIRECTORY, "XmlTransactionViewResponse",i+1);
-
+                            MainFunction.onTestFailure("tranEndTest");
                             break;
 
                         }
@@ -131,10 +135,15 @@ public class TranEndTest extends BasePage {
                         ExReAccumReport.info("sumDealPoints --> " + sumDealPoints.toString());
 
                         // Checks if the amount of points earned, for each of the Accums , is correct and equal to what I expected to receive
-                        tranEndFunctions.earnedChecks(i);
+                        if(!tranEndFunctions.earnedChecks(i)){
+                            SFFlag=1;
+                        }
 
 
-                        tranEndFunctions.totalDealPaidCalculation(responseHandling.getXMLFilePaidTotal(transactionViewResponse.getBody().asString()), i);
+
+                        if (!tranEndFunctions.totalDealPaidCalculation(responseHandling.getXMLFilePaidTotal(transactionViewResponse.getBody().asString()), i)){
+                            MainFunction.onTestFailure("tranEndTest");
+                        }
 
                         trenEndResponse.body().close();
 
@@ -151,20 +160,21 @@ public class TranEndTest extends BasePage {
                         trenEndResponse = tranEndFunctions.makeDealWithUsingPointsTrenEnd(i, subTotalResponse_String);
                         trenEndResponse_String = MainFunction.convertOkHttpResponseToString(trenEndResponse);
                         //System.out.println(BaseAPI.getResponseTime_OkHttp(trenEndResponse));
-                        //System.out.println(trenEndResponse.body().string());
+                        System.out.println(MainFunction.BaseLogStringFunc() +trenEndResponse.body().string());
                         if (!(trenEndResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(trenEndResponse_String).equals("0"))) {
-                            System.out.println("*****ERROR --- status code is not 200" + "(" + trenEndResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                            System.out.println(MainFunction.BaseLogStringFunc() +"*****ERROR --- status code is not 200" + "(" + trenEndResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                                     responseHandling.getErrorCodeStatusJson(trenEndResponse_String) + ")");
-                            ExReAccumReport.fail("ERROR --- status code is not 200" + "(" + trenEndResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                            ExReAccumReport.fail("*****ERROR --- status code is not 200" + "(" + trenEndResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                                     responseHandling.getErrorCodeStatusJson(trenEndResponse_String) + ")");
                             LogFileHandling.createLogFile(baseJSON.JSON_TO_SEND, LOG_FILE_DIRECTORY, "trenEndCall",i+1);
                             LogFileHandling.createLogFile(trenEndResponse_String, LOG_FILE_DIRECTORY, "trenEndResponse",i+1);
                             trenEndResponse.body().close();
+                            MainFunction.onTestFailure("tranEndTest");
                             break;
                         } else {
                             avgTimeTrenEnd.add(BaseAPI.getResponseTime_OkHttp(trenEndResponse));
                             ExReAccumReport.info("DealTimeTrenEnd: "+avgTimeTrenEnd.get(i)+"ms");
-                            System.out.println(avgTimeTrenEnd);
+                            System.out.println(MainFunction.BaseLogStringFunc() +avgTimeTrenEnd);
 
                         }
                         //System.out.println(trenEndResponse.getBody().asString());
@@ -177,13 +187,14 @@ public class TranEndTest extends BasePage {
                         //System.out.println(BaseAPI.getResponseTime_OkHttp(userDataResponse));
 
                         if (!(userDataResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(userDataResponse_String).equals("0"))) {
-                            System.out.println("******ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                            System.out.println(MainFunction.BaseLogStringFunc() +"******ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                                     responseHandling.getErrorCodeStatusJson(userDataResponse_String) + ")");
-                            ExReAccumReport.fail("ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                            ExReAccumReport.fail("******ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                                     responseHandling.getErrorCodeStatusJson(userDataResponse_String) + ")");
                             LogFileHandling.createLogFile(baseJSON.getString(baseJSON.MEMBER_JSON_TO_SEND), LOG_FILE_DIRECTORY, "userDatacall",i+1);
                             LogFileHandling.createLogFile(userDataResponse_String, LOG_FILE_DIRECTORY, "userDataResponse",i+1);
                             userDataResponse.body().close();
+                            MainFunction.onTestFailure("tranEndTest");
                             break;
                         }
                         userDataResponse.body().close();
@@ -196,11 +207,12 @@ public class TranEndTest extends BasePage {
 
                         transactionViewResponse = APIPost.postXMLToGetTransactionView(TEST_API_SYSTEM_URI, BaseXML.GET_TREN_FILE_LOCATION);
                         if (!(transactionViewResponse.getStatusCode() == 200)) {
-                            System.out.println("ERROR xml--- status code is not 200 ");
+                            System.out.println(MainFunction.BaseLogStringFunc() +"ERROR xml--- status code is not 200 ");
                             ExReAccumReport.fail("ERROR xml--- status code is not 200" + "(" + transactionViewResponse.getStatusCode() + ")");
                             LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
                                     LOG_FILE_DIRECTORY, "XmlTransactionViewcall",i+1);
                             LogFileHandling.createLogFile(transactionViewResponse.asString(), LOG_FILE_DIRECTORY, "XmlTransactionViewResponse",i+1);
+                            MainFunction.onTestFailure("tranEndTest");
                             break;
 
                         }
@@ -226,7 +238,9 @@ public class TranEndTest extends BasePage {
                         //  to the one in the TransactionView(XML).
                         ExReAccumReport.info("~~~~~~~ .DiscountConfirmTest - post transaction tests~~~~~~~");
 
-                        tranEndFunctions.DiscountConfirmTest(nodeList, i);
+                        if(!tranEndFunctions.DiscountConfirmTest(nodeList, i)){
+                            SFFlag=1;
+                        }
                         ExReAccumReport.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 
@@ -237,12 +251,17 @@ public class TranEndTest extends BasePage {
 
                     }
 
-                    TranEndFunctions.AccumsNotInUse(userDataResponse_String);
+                    if(!TranEndFunctions.AccumsNotInUse(userDataResponse_String)){
+                        SFFlag=1;
+                    }
 
 
                 }//end of DealTypeFlag "if"
                     }catch (SocketTimeoutException e){
-                    ExReAccumReport.warning("ERROR---- Socket Timeout Exception  ");
+                         ExReAccumReport.warning("ERROR---- Socket Timeout Exception  ");
+                         System.out.println(MainFunction.BaseLogStringFunc()+"ERROR---- Socket Timeout Exception  ");
+                         MainFunction.onTestFailure("tranEndTest");
+                         SFFlag = 0;
 
 
                     }
@@ -250,11 +269,16 @@ public class TranEndTest extends BasePage {
             }//end main for loop
 
 
-        System.out.println(avgTimeSubTotal);
-        System.out.println(avgTimeTrenEnd);
+
+
+        System.out.println(MainFunction.BaseLogStringFunc() +avgTimeSubTotal);
+        System.out.println(MainFunction.BaseLogStringFunc() +avgTimeTrenEnd);
         ExReAccumReport.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
                 .info("avgTimeSubTotal: "+ (MainFunction.getAvgTime(avgTimeSubTotal)+"ms"))
                 .info("avgTimeTrenEnd: "+MainFunction.getAvgTime(avgTimeTrenEnd) +"ms");
+        if(SFFlag == 1){
+            MainFunction.onTestFailure("tranEndTest");
+        }
     }//end ot test
 
 }//class end

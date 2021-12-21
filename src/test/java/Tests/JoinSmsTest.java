@@ -4,7 +4,7 @@ import BaseClass.BaseJSON;
 import JSON.ResponseHandling;
 import Tests.TestFunctions.JoinSmsTeatFunction;
 import Utilities.LogFileHandling;
-import com.sun.org.glassfish.gmbal.Description;
+
 import org.testng.annotations.Test;
 import utilities.MainFunction;
 import utilities.RetryAnalyzer;
@@ -16,8 +16,7 @@ public class JoinSmsTest extends  BasePage{
     JoinSmsTeatFunction joinSmsTeatFunction = new JoinSmsTeatFunction();
     ResponseHandling responseHandling = new ResponseHandling();
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
-    @Description("")
+    @Test(description = "", retryAnalyzer = RetryAnalyzer.class)
     public void JoinSmsTest() throws IOException, InterruptedException {
 
 
@@ -33,6 +32,7 @@ public class JoinSmsTest extends  BasePage{
             LogFileHandling.createLogFile(baseJSON.getString(BaseJSON.SEND_JOIN_SMS_JSON), LOG_FILE_DIRECTORY, "memberAdd",0);
             LogFileHandling.createLogFile(joinSmsResponse_String, LOG_FILE_DIRECTORY, "memberAdd",0);
             joinSmsResponse.body().close();
+            MainFunction.onTestFailure("JoinSmsTest");
 
         }
 
@@ -40,6 +40,11 @@ public class JoinSmsTest extends  BasePage{
         if(responseHandling.getResultCode(joinSmsResponse_String).equals("0")){
             ExReJoinSmsReport.pass(" Send Join SMS --- PASS");
             System.out.println(MainFunction.BaseLogStringFunc()+" Send Join SMS --- PASS");
+        }else{
+            ExReJoinSmsReport.pass(" Send Join SMS --- FAIL");
+            System.out.println(MainFunction.BaseLogStringFunc()+" Send Join SMS --- FAIL");
+            MainFunction.onTestFailure("JoinSmsTest");
+
         }
 
 
@@ -48,7 +53,7 @@ public class JoinSmsTest extends  BasePage{
     }//End JoinSms
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    @Description("")
+
     public void JoinSms2Test() throws IOException, InterruptedException {
         Thread.sleep(10000);
         joinSmsResponse = joinSmsTeatFunction.sendJoinSms2(CELL_PHONE,Equal,"0534320757");
@@ -63,6 +68,7 @@ public class JoinSmsTest extends  BasePage{
             LogFileHandling.createLogFile(baseJSON.getString(BaseJSON.SEND_JOIN_SMS_JSON), LOG_FILE_DIRECTORY, "memberAdd",0);
             LogFileHandling.createLogFile(joinSmsResponse_String, LOG_FILE_DIRECTORY, "memberAdd",0);
             joinSmsResponse.body().close();
+            MainFunction.onTestFailure("JoinSms2Test");
 
         }
 
@@ -70,14 +76,17 @@ public class JoinSmsTest extends  BasePage{
         if(responseHandling.getErrorCodeStatusJson(joinSmsResponse_String).equals("0")){
             ExReJoinSmsReport.pass(" Send Join SMS2 --- PASS");
             System.out.println(MainFunction.BaseLogStringFunc()+" Send Join SMS2 --- PASS");
-
+        }else{
+            ExReJoinSmsReport.pass(" Send Join SMS2 --- FAIL");
+            System.out.println(MainFunction.BaseLogStringFunc()+" Send Join SMS2 --- FAIL");
+            MainFunction.onTestFailure("JoinSms2Test");
 
         }
 
     }//End JoinSms
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    @Description("|")
+
     public void MemberGetDetailsAndCodeTest () throws IOException {
 
         final String numbar = "123456789";
@@ -94,6 +103,7 @@ public class JoinSmsTest extends  BasePage{
             LogFileHandling.createLogFile(baseJSON.getString(BaseJSON.MEMBER_GET_DETAILS_AND_CODE_JSON), LOG_FILE_DIRECTORY, "memberAdd",0);
             LogFileHandling.createLogFile(memberGetDetailsAndCodeResponse_String, LOG_FILE_DIRECTORY, "memberAdd",0);
             memberGetDetailsAndCodeResponse.body().close();
+            MainFunction.onTestFailure("MemberGetDetailsAndCodeTest");
 
         }
 
@@ -107,12 +117,12 @@ public class JoinSmsTest extends  BasePage{
             System.out.println(MainFunction.BaseLogStringFunc()+"Cell phone "+numbar+" NOT found!");
             ExReJoinSmsReport.fail("MemberGetDetailsAndCode Test --- FAIL");
             ExReJoinSmsReport.fail("Cell phone "+numbar+" NOT found!").assignCategory("fail");
+            MainFunction.onTestFailure("MemberGetDetailsAndCodeTest");
         }
 
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
-    @Description("|")
     public void MemberGetDetailsTest() throws IOException {
         baseJSON.ResatMemberGetDetails();
         String num ="0534320757";
@@ -128,6 +138,7 @@ public class JoinSmsTest extends  BasePage{
             LogFileHandling.createLogFile(baseJSON.getString(BaseJSON.MEMBER_GET_DETAILS_JSON), LOG_FILE_DIRECTORY, "memberAdd",0);
             LogFileHandling.createLogFile(memberGetDetailsResponse_String, LOG_FILE_DIRECTORY, "memberAdd",0);
             memberGetDetailsResponse.body().close();
+            MainFunction.onTestFailure("MemberGetDetailsTest");
 
         }
 
@@ -142,6 +153,7 @@ public class JoinSmsTest extends  BasePage{
          }else{
              System.out.println(MainFunction.BaseLogStringFunc()+"MemberGetDetails (flag = true) --- FAIL ");
              ExReJoinSmsReport.pass("MemberGetDetails (flag = true) --- FAIL ").assignCategory("fail");
+             MainFunction.onTestFailure("MemberGetDetailsTest");
 
          }
 
@@ -151,6 +163,7 @@ public class JoinSmsTest extends  BasePage{
          baseJSON.MemberGetDetailsJSONCopy();
          memberGetDetailsResponse = joinSmsTeatFunction.sendMemberGetDetails(CELL_PHONE,num,"false","sendJoinSMS");
          memberGetDetailsResponse_String = MainFunction.convertOkHttpResponseToString(memberGetDetailsResponse);
+
         if(!(memberGetDetailsResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(memberGetDetailsResponse_String).equals("104"))){
             System.out.println(MainFunction.BaseLogStringFunc()+"*ERROR --- status code is not 200" + "(" + memberGetDetailsResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" +
                     responseHandling.getErrorCodeStatusJson(memberGetDetailsResponse_String) + ")");
@@ -159,6 +172,7 @@ public class JoinSmsTest extends  BasePage{
             LogFileHandling.createLogFile(baseJSON.getString(BaseJSON.MEMBER_GET_DETAILS_JSON), LOG_FILE_DIRECTORY, "memberAdd",0);
             LogFileHandling.createLogFile(memberGetDetailsResponse_String, LOG_FILE_DIRECTORY, "memberAdd",0);
             memberGetDetailsResponse.body().close();
+            MainFunction.onTestFailure("MemberGetDetailsTest");
 
         }
          //System.out.println(memberGetDetailsResponse_String);
@@ -172,6 +186,7 @@ public class JoinSmsTest extends  BasePage{
         }else{
             System.out.println(MainFunction.BaseLogStringFunc()+"MemberGetDetails (flag = false) --- FAIL ");
             ExReJoinSmsReport.pass("MemberGetDetails (flag = false) --- FAIL ").assignCategory("fail");
+            MainFunction.onTestFailure("MemberGetDetailsTest");
         }
 
 
