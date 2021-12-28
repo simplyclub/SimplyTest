@@ -32,8 +32,12 @@ public class SubTotalTest extends BasePage {
             ExReApiTestReport.info("~~~~~~~~~~~~~~~~~~~~~~~~ Transaction "+(i+1)+" ~~~~~~~~~~~~~~~~~~~~~~~~");
             System.out.println(MainFunction.BaseLogStringFunc()+"~~~~~~~~~~~~~~~~~~~~~~~~ Deal "+(i+1)+" ~~~~~~~~~~~~~~~~~~~~~~~~");
 
-            updateJSONFile.upDateBaseJSONFile(JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),
-                    JSONGetData.getAccoundID(TestJSONToSend, i), JSONGetData.getTranItems(TestJSONToSend, i),JSONGetData.getCardNumber(TestJSONToSend, i));
+            updateJSONFile.upDateBaseJSONFile(
+                    JSONGetData.getUser(TestJSONToSend, i),
+                    JSONGetData.getPassword(TestJSONToSend, i),
+                    JSONGetData.getAccoundID(TestJSONToSend, i),
+                    JSONGetData.getTranItems(TestJSONToSend, i),
+                    JSONGetData.getCardNumber(TestJSONToSend, i));
             subTotalResponse = APIPost.postSubTotal_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.JSON_TO_SEND);
             subTotalResponse_String = MainFunction.convertOkHttpResponseToString(subTotalResponse);
             System.out.println(MainFunction.BaseLogStringFunc()+subTotalResponse_String);

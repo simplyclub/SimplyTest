@@ -8,6 +8,7 @@ import FunctionsClass.UpdateXMLFile;
 import JSON.JSONGetData;
 import JSON.ResponseHandling;
 
+import Utilities.InfrastructureMainFunction;
 import Utilities.LogFileHandling;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -102,17 +103,18 @@ public  class BasePage {
     public static  ExtentTest ExReStage6And7Report;
 
 
-    public static final String HOME_DIRECTORY ="C:\\Users\\User\\IdeaProjects\\";
+    //public static final String HOME_DIRECTORY ="C:\\Users\\User\\IdeaProjects\\";
+    public static final String HOME_DIRECTORY = InfrastructureMainFunction.GetLocalDir();
 
 
 
     //GLOBALS
-    public static final  String JSON_TEST_FILE = HOME_DIRECTORY+"SimplyTest\\JSONParametersToSend.json";
-    public static final  String JSON_JOIN_RENEW = HOME_DIRECTORY+"SimplyTest\\JoinRenewClubItemsJson.json";
-    public static final  String JSON_STAGE_6_AND_7_DEAL_ITEMS = HOME_DIRECTORY+"SimplyTest\\Stage6And7DealItemsJson.json";
+    public static final  String JSON_TEST_FILE = HOME_DIRECTORY+"\\JSONParametersToSend.json";
+    public static final  String JSON_JOIN_RENEW = HOME_DIRECTORY+"\\JoinRenewClubItemsJson.json";
+    public static final  String JSON_STAGE_6_AND_7_DEAL_ITEMS = HOME_DIRECTORY+"\\Stage6And7ParametersToSendJson.json";
     public static String s = null;
     public static double sumVal = 0.0;
-    public static final String LOG_FILE_DIRECTORY = HOME_DIRECTORY+"SimplyTest\\LogFile";
+    public static final String LOG_FILE_DIRECTORY = HOME_DIRECTORY+"\\LogFile";
 
     //sum
     public static HashMap<String ,Double> sumDealPoints = new HashMap<>();
@@ -220,8 +222,8 @@ public  class BasePage {
         ExReNewMemberTestReport = exReport.createTest(" New Member Tests").assignCategory("NewMember");// give the name of the test title  in the report
         ExReJoinSmsReport = exReport.createTest(" Send Join SMS Test").assignCategory("JoinSms");// give the name of the test title  in the report
         ExReStage6And7Report = exReport.createTest("Stage 6 And 7 Test").assignCategory("Stage6And7Test");// give the name of the test title  in the report
-        LogFileHandling.DeleteFile("EmailLog");
-        LogFileHandling.CreateFile("EmailLog");
+        LogFileHandling.DeleteFile("EmailLog",HOME_DIRECTORY);
+        LogFileHandling.CreateFile("EmailLog",HOME_DIRECTORY);
 
 
     }

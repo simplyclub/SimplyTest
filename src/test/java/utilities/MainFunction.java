@@ -181,107 +181,105 @@ public class MainFunction extends BasePage {
 
     }
 
-
-
     public static void onTestFailure(String str) {
 
         //String str = arg0.getName();
 
         if (str.equals("subTotalTest")) {
             ExReApiTestReport.fail(str + " Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
 
         }
         if (str.equals("tranEndTest")) {
             ExReAccumReport.fail(str + " Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
 
         }
         if (str.equals("tranRefundTest")) {
             ExReTernRefundReport.fail(str + " Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
 
         }
-        if (str.equals("trenEndOnePhaseTest")) {
+        if (str.equals("tranEndOnePhaseTest")) {
             ExReTrenEndOnePhaseReport.fail(str + " Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
 
         }
         if (str.equals("newMemberTests")) {
             ExReNewMemberTestReport.fail(str + " Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("pointsValidityTest")) {
             ExRePointsValiditReport.fail(str + "Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("MemberGetDetailsAndCodeTest")) {
             ExRePointsValiditReport.fail(str + "Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("Stage6Deal1Test")) {
             ExRePointsValiditReport.fail(str + "Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("Stage6Deal2Test")) {
             ExRePointsValiditReport.fail(str + "Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("Stage6Deal3Test")) {
             ExRePointsValiditReport.fail(str + "Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("Stage6Deal4Test")) {
             ExRePointsValiditReport.fail(str + "Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("Stage6Deal5Test")) {
             ExRePointsValiditReport.fail(str + "Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("Stage6Deal6Test")) {
             ExRePointsValiditReport.fail(str + "Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest1")) {
             ExReJoinSmsReport.pass(str + "Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest2")) {
             ExReJoinSmsReport.pass(str + "Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest3")) {
             ExReJoinSmsReport.pass(str + "Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest4")) {
             ExReJoinSmsReport.pass(str + "Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest5")) {
             ExReJoinSmsReport.pass(str + "Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest6")) {
             ExReJoinSmsReport.pass(str + "Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest7")) {
             ExReJoinSmsReport.pass(str + "Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest8")) {
             ExReJoinSmsReport.pass(str + "Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("JoinSms2Test")) {
             ExReJoinSmsReport.pass(str + "Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("JoinSmsTest")) {
             ExReJoinSmsReport.pass(str + "Test fail");
-            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
 
 

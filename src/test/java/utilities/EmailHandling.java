@@ -78,7 +78,7 @@ public class EmailHandling {
             //BodyPart messageBodyPart1_2 = new MimeBodyPart();
 
             // Set the body of email
-            messageBodyPart1.setText(LogFileHandling.ReadFile("EmailLog"));
+            messageBodyPart1.setText(LogFileHandling.ReadFile("EmailLog",HOME_DIRECTORY));
             //messageBodyPart1_2.setText("This is an Run log");
 
             // Create another object to add another content
@@ -86,7 +86,7 @@ public class EmailHandling {
            // MimeBodyPart messageBodyPart2_2 = new MimeBodyPart();
 
             // Mention the file which you want to send
-            String filename = HOME_DIRECTORY+"SimplyTest\\index.html";
+            String filename = HOME_DIRECTORY+"\\index.html";
             //String LogFileName = "C:\\Users\\User\\IdeaProjects\\SimplyTest\\IntelJRunLog\\RunLog.html";
 
             // Create data source and pass the filename
