@@ -1,21 +1,18 @@
 package Tests;
 
-import BaseClass.BaseXML;
 import JSON.ResponseHandling;
 import Tests.TestFunctions.Stage6And7TestFunctions;
 import Utilities.LogFileHandling;
 
+import org.testng.SkipException;
 import org.testng.annotations.Test;
-import org.testng.reporters.jq.Main;
-import utilities.Listeners;
 import utilities.MainFunction;
 import utilities.RetryAnalyzer;
 
 
-import java.io.File;
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 
-import static BaseClass.BaseAPI.TEST_API_SYSTEM_URI;
 import static utilities.MainFunction.BaseLogStringFunc;
 
 
@@ -39,12 +36,14 @@ public class Stage6And7Test extends BasePage {
                     LogFileHandling.createLogFile(trenEndOnePhaseResponse_String, LOG_FILE_DIRECTORY, "Stage6Deal1Test",0));
             trenEndOnePhaseResponse.body().close();
             MainFunction.onTestFailure("Stage6Deal1Test");
+            throw  new SkipException("***ERROR --- status code is not 200" + "(" + trenEndOnePhaseResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                    responseHandling.getErrorCodeStatusJson(trenEndOnePhaseResponse_String) + ")");
         }
         trenEndOnePhaseResponse.body().close();
 
         System.out.println(BaseLogStringFunc()+trenEndOnePhaseResponse_String);
 
-        transactionViewResponse = stage6And7TestFunctions.GetTransactionView(trenEndOnePhaseResponse_String);
+        transactionViewResponse = stage6And7TestFunctions.getTransactionView(trenEndOnePhaseResponse_String);
         System.out.println(BaseLogStringFunc()+transactionViewResponse.body().asString());
 
         if (!(transactionViewResponse.getStatusCode() == 200)) {
@@ -53,6 +52,7 @@ public class Stage6And7Test extends BasePage {
             LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
                     LOG_FILE_DIRECTORY, "XmlTransactionViewcall",0);
             LogFileHandling.createLogFile(transactionViewResponse.asString(), LOG_FILE_DIRECTORY, "XmlTransactionViewResponse",0);
+            throw  new SkipException("ERROR xml--- status code is not 200 ");
 
 
         }
@@ -106,12 +106,14 @@ public class Stage6And7Test extends BasePage {
             ExReStage6And7Report.info(
                     LogFileHandling.createLogFile(trenEndOnePhaseResponse_String, LOG_FILE_DIRECTORY, "Stage6Deal2Test",0));
             trenEndOnePhaseResponse.body().close();
+            throw  new SkipException("***ERROR --- status code is not 200" + "(" + trenEndOnePhaseResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                    responseHandling.getErrorCodeStatusJson(trenEndOnePhaseResponse_String) + ")");
         }
         trenEndOnePhaseResponse.body().close();
 
         System.out.println(BaseLogStringFunc()+trenEndOnePhaseResponse_String);
 
-        transactionViewResponse = stage6And7TestFunctions.GetTransactionView(trenEndOnePhaseResponse_String);
+        transactionViewResponse = stage6And7TestFunctions.getTransactionView(trenEndOnePhaseResponse_String);
         System.out.println(BaseLogStringFunc()+transactionViewResponse.body().asString());
 
         if (!(transactionViewResponse.getStatusCode() == 200)) {
@@ -120,6 +122,7 @@ public class Stage6And7Test extends BasePage {
             LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
                     LOG_FILE_DIRECTORY, "XmlTransactionViewcall",0);
             LogFileHandling.createLogFile(transactionViewResponse.asString(), LOG_FILE_DIRECTORY, "XmlTransactionViewResponse",0);
+            throw  new SkipException("ERROR xml--- status code is not 200 ");
 
 
         }
@@ -158,12 +161,14 @@ public class Stage6And7Test extends BasePage {
             ExReStage6And7Report.info(
                     LogFileHandling.createLogFile(trenEndOnePhaseResponse_String, LOG_FILE_DIRECTORY, "Stage6Deal2Test",0));
             trenEndOnePhaseResponse.body().close();
+            throw  new SkipException("***ERROR --- status code is not 200" + "(" + trenEndOnePhaseResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                    responseHandling.getErrorCodeStatusJson(trenEndOnePhaseResponse_String) + ")");
         }
         trenEndOnePhaseResponse.body().close();
 
         System.out.println(BaseLogStringFunc()+trenEndOnePhaseResponse_String);
 
-        transactionViewResponse = stage6And7TestFunctions.GetTransactionView(trenEndOnePhaseResponse_String);
+        transactionViewResponse = stage6And7TestFunctions.getTransactionView(trenEndOnePhaseResponse_String);
         System.out.println(BaseLogStringFunc()+transactionViewResponse.body().asString());
 
         if (!(transactionViewResponse.getStatusCode() == 200)) {
@@ -172,6 +177,7 @@ public class Stage6And7Test extends BasePage {
             LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
                     LOG_FILE_DIRECTORY, "XmlTransactionViewcall",0);
             LogFileHandling.createLogFile(transactionViewResponse.asString(), LOG_FILE_DIRECTORY, "XmlTransactionViewResponse",0);
+            throw  new SkipException("ERROR xml--- status code is not 200 ");
 
 
         }
@@ -223,13 +229,15 @@ public class Stage6And7Test extends BasePage {
             ExReStage6And7Report.info(
                     LogFileHandling.createLogFile(trenEndOnePhaseResponse_String, LOG_FILE_DIRECTORY, "Stage6Deal4Test",0));
             trenEndOnePhaseResponse.body().close();
+            throw  new SkipException("***ERROR --- status code is not 200" + "(" + trenEndOnePhaseResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                    responseHandling.getErrorCodeStatusJson(trenEndOnePhaseResponse_String) + ")");
         }
 
         trenEndOnePhaseResponse.body().close();
 
         System.out.println(BaseLogStringFunc()+trenEndOnePhaseResponse_String);
 
-        transactionViewResponse = stage6And7TestFunctions.GetTransactionView(trenEndOnePhaseResponse_String);
+        transactionViewResponse = stage6And7TestFunctions.getTransactionView(trenEndOnePhaseResponse_String);
         System.out.println(BaseLogStringFunc()+transactionViewResponse.body().asString());
 
         if (!(transactionViewResponse.getStatusCode() == 200)) {
@@ -238,6 +246,7 @@ public class Stage6And7Test extends BasePage {
             LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
                     LOG_FILE_DIRECTORY, "XmlTransactionViewcall",0);
             LogFileHandling.createLogFile(transactionViewResponse.asString(), LOG_FILE_DIRECTORY, "XmlTransactionViewResponse",0);
+            throw  new SkipException("ERROR xml--- status code is not 200 ");
 
 
         }
@@ -276,12 +285,14 @@ public class Stage6And7Test extends BasePage {
             ExReStage6And7Report.info(
                     LogFileHandling.createLogFile(trenEndOnePhaseResponse_String, LOG_FILE_DIRECTORY, "Stage6Deal5Test",0));
             trenEndOnePhaseResponse.body().close();
+            throw  new SkipException("***ERROR --- status code is not 200" + "(" + trenEndOnePhaseResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                    responseHandling.getErrorCodeStatusJson(trenEndOnePhaseResponse_String) + ")");
         }
         trenEndOnePhaseResponse.body().close();
 
         System.out.println(BaseLogStringFunc()+trenEndOnePhaseResponse_String);
 
-        transactionViewResponse = stage6And7TestFunctions.GetTransactionView(trenEndOnePhaseResponse_String);
+        transactionViewResponse = stage6And7TestFunctions.getTransactionView(trenEndOnePhaseResponse_String);
         System.out.println(BaseLogStringFunc()+transactionViewResponse.body().asString());
 
         if (!(transactionViewResponse.getStatusCode() == 200)) {
@@ -290,6 +301,7 @@ public class Stage6And7Test extends BasePage {
             LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
                     LOG_FILE_DIRECTORY, "XmlTransactionViewcall",0);
             LogFileHandling.createLogFile(transactionViewResponse.asString(), LOG_FILE_DIRECTORY, "XmlTransactionViewResponse",0);
+            throw  new SkipException("ERROR xml--- status code is not 200 ");
 
 
         }
@@ -341,13 +353,16 @@ public class Stage6And7Test extends BasePage {
             ExReStage6And7Report.info(
                     LogFileHandling.createLogFile(trenEndOnePhaseResponse_String, LOG_FILE_DIRECTORY, "Stage6Deal4Test",0));
             trenEndOnePhaseResponse.body().close();
+            throw  new SkipException("***ERROR --- status code is not 200" + "(" + trenEndOnePhaseResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                    responseHandling.getErrorCodeStatusJson(trenEndOnePhaseResponse_String) + ")");
+
         }
 
         trenEndOnePhaseResponse.body().close();
 
         System.out.println(BaseLogStringFunc()+trenEndOnePhaseResponse_String);
 
-        transactionViewResponse = stage6And7TestFunctions.GetTransactionView(trenEndOnePhaseResponse_String);
+        transactionViewResponse = stage6And7TestFunctions.getTransactionView(trenEndOnePhaseResponse_String);
         System.out.println(BaseLogStringFunc()+transactionViewResponse.body().asString());
 
         if (!(transactionViewResponse.getStatusCode() == 200)) {
@@ -356,6 +371,7 @@ public class Stage6And7Test extends BasePage {
             LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
                     LOG_FILE_DIRECTORY, "XmlTransactionViewcall",0);
             LogFileHandling.createLogFile(transactionViewResponse.asString(), LOG_FILE_DIRECTORY, "XmlTransactionViewResponse",0);
+            throw  new SkipException("ERROR xml--- status code is not 200 ");
 
 
         }
@@ -378,15 +394,79 @@ public class Stage6And7Test extends BasePage {
         }//end for loop
 
     }//end test
-/*
-    @Test(retryAnalyzer = RetryAnalyzer.class,description = "")
-    public void Stage7Deal1Test(){
+
+    @Test(retryAnalyzer = RetryAnalyzer.class,description = "make subTotal and check if the promoId is ok")
+    public void Stage7Deal1Test() throws IOException {
+
+        if(stage6And7TestFunctions.subTotalPromoIdCheck()){
+            ExReStage6And7Report.pass("subTotalPromoIdCheck ---- PASS");
+            System.out.println("subTotalPromoIdCheck ---- PASS");
+        }else{
+            ExReStage6And7Report.fail("subTotalPromoIdCheck ---- Fail ");
+            System.out.println("subTotalPromoIdCheck ---- Fail ");
+            ExReStage6And7Report.info("one of the PromoId in the TestJSON is not found in subTotal response");
+            MainFunction.onTestFailure("Stage7Deal1Test");
+
+//            SkipException skipException =  new SkipException("one of the PromoId in the TestJSON is not found in subTotal response");
+//            System.out.println(MainFunction.BaseLogStringFunc()+skipException.getLocalizedMessage());
+
+        }
+
+    }//end test
+
+    @Test(retryAnalyzer = RetryAnalyzer.class,description = "make false subTotal and check if there is nun of the promo")
+    public void Stage7Deal2Test() throws IOException{
+
+
+        if(stage6And7TestFunctions.falseSubTotalCheck()){
+            ExReStage6And7Report.pass("Stage7Deal2Test ---- PASS");
+            System.out.println("Stage7Deal2Test ---- PASS");
+        }else{
+            ExReStage6And7Report.fail("Stage7Deal2Test ---- Fail ");
+            System.out.println("Stage7Deal2Test ---- Fail ");
+            ExReStage6And7Report.info("one of the PromoId in the TestJSON is  found in subTotal response");
+            MainFunction.onTestFailure("Stage7Deal2Test");
+
+            //SkipException skipException =  new SkipException("one of the PromoId in the TestJSON is  found in subTotal response");
+            //System.out.println(MainFunction.BaseLogStringFunc()+skipException.getLocalizedMessage());
+
+        }
+
+    }//end test
+
+    @Test(retryAnalyzer = RetryAnalyzer.class,description = "",enabled = false)
+    public void Stage7Deal3Test() throws IOException{
+        try {
+            subTotalResponse = stage6And7TestFunctions.makeSubTotal(0, 0);
+            subTotalResponse_String = MainFunction.convertOkHttpResponseToString(subTotalResponse);
+        }catch (SocketTimeoutException e){
+        ExReStage6And7Report.warning("ERROR(subTotalResponse)---- Socket Timeout Exception  ");
+        System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(subTotalResponse)---- Socket Timeout Exception  ");
+        throw new SocketTimeoutException();
+
+        } catch ( NullPointerException e) {
+            ExReStage6And7Report.warning("ERROR(subTotalPromoIdCheck)---- Null lPointer Exceptionn  ");
+        System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(subTotalPromoIdCheck)---- Null Pointer Exception  ");
+        throw new NullPointerException();
 
     }
-*/
+        try {
+            trenEndResponse = stage6And7TestFunctions.makeTranEnd(0, subTotalResponse_String, 0);
+            trenEndResponse_String = MainFunction.convertOkHttpResponseToString(trenEndResponse);
+        }catch (SocketTimeoutException e){
+            ExReStage6And7Report.warning("ERROR(trenEndResponse)---- Socket Timeout Exception  ");
+            System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(trenEndResponse)---- Socket Timeout Exception  ");
+            throw new SocketTimeoutException();
+
+        } catch ( NullPointerException e) {
+            ExReStage6And7Report.warning("ERROR(trenEndResponse)---- Null lPointer Exceptionn  ");
+            System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(trenEndResponse)---- Null Pointer Exception  ");
+            throw new NullPointerException();
+
+        }
 
 
-
+    }//end test
 
 
 }//end class

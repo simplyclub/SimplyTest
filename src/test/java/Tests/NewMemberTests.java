@@ -50,6 +50,7 @@ public class NewMemberTests extends NewMemberAPIFunctions {
                 MainFunction.onTestFailure("MemberTest1");
 
             }
+
             System.out.println(MainFunction.BaseLogStringFunc()+memberAddResponse_String);
 
             MEMBER_CARD_NUMBER = responseHandling.getCardNumber(memberAddResponse_String, "memberAddResponse");

@@ -117,6 +117,7 @@ public class TranEndFunctions extends BasePage {
                    // ExReAccumReport.info("preDeal: "+preDeal.get(accID) + " postDeal: "+postDeal.get(accID)).assignCategory("AccumsNotInUse");
                 }else{
                     ExReAccumReport.fail("AccumID: "+ accID +" is  change ").assignCategory("AccumsNotInUse");
+                    ExReAccumReport.info("preDeal.get(accID): "+ preDeal.get(accID) +" postDeal.get(accID) "+postDeal.get(accID));
                     flag = 1;
 
                 }

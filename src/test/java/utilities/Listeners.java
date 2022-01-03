@@ -215,6 +215,7 @@ public class Listeners extends BasePage implements ITestListener  {
 
     @Override
     public void onTestSkipped(ITestResult arg0) {
+        System.out.println("skip");
 
 
 

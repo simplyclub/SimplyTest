@@ -188,7 +188,6 @@ public class MainFunction extends BasePage {
         if (str.equals("subTotalTest")) {
             ExReApiTestReport.fail(str + " Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
-
         }
         if (str.equals("tranEndTest")) {
             ExReAccumReport.fail(str + " Test fail");
@@ -241,6 +240,10 @@ public class MainFunction extends BasePage {
             ExRePointsValiditReport.fail(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
+        if (str.equals("Stage7Deal1Test")) {
+            ExRePointsValiditReport.fail(str + "Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
+        }
         if (str.equals("MemberTest1")) {
             ExReJoinSmsReport.pass(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
@@ -285,6 +288,8 @@ public class MainFunction extends BasePage {
 
 
     }
+
+
 
 
 
