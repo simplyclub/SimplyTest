@@ -25,9 +25,10 @@ public class TrenEndOnePhaseFunctions extends BasePage {
         return APIPost.postUserGetData_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.MEMBER_JSON_TO_SEND);
 
     }
+
     public okhttp3.Response makeTrenEndOnePhase(int i) throws IOException {
         updateJSONFile.upDateTranEndOnePhase(jsonGetData.getAccoundID(TestJSONToSend,i),jsonGetData.getUser(TestJSONToSend,i),jsonGetData.getPassword(TestJSONToSend,i),
-                jsonGetData.getCardNumber(TestJSONToSend,i),jsonGetData.getTranItems(TestJSONToSend,i), baseJSON.tranEndOnePhaseToSend);
+                jsonGetData.getCardNumber(TestJSONToSend,i),jsonGetData.getTranItems(TestJSONToSend,i));
 
 
        return APIPost.postTrenEndOnePhase_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.TREN_END_ONE_PHASE);
@@ -80,7 +81,7 @@ public class TrenEndOnePhaseFunctions extends BasePage {
      * @param i
      */
 
-    public void EarnedChecks(int i){
+    public boolean EarnedChecks(int i){
         for (String key : sumDealPoints.keySet()) {
             for (int q = 0; q < JSONGetData.getArraySizeSumAccum(TestJSONToSend, i); q++) {
                 //System.out.println(q);
@@ -121,13 +122,14 @@ public class TrenEndOnePhaseFunctions extends BasePage {
                                 + "Test Json sumAccum: " + JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
                         ExReTrenEndOnePhaseReport.fail("(postDeal.get(" + key + ") - preDeal.get(" + key + ")): " + d + " NOT equals to "
                                 + "Test Json sumAccum: " + JSONGetData.getSumAccumValue(TestJSONToSend, key, i, q));
+                        return false;
                     }
-                    break;
+                    //break;
                 }
             }
             //break;
         }
-
+        return true;
     }
 
     /**
@@ -143,6 +145,7 @@ public class TrenEndOnePhaseFunctions extends BasePage {
         }
 
     }//func end
+
     public void getPostDealPointsAccums ( int i, String  userDataResponse) throws IOException {
         //first loop run on the size of array, from the response of the user benefit status
         for (int index = 0; index < (ResponseHandling.getAllAccums(userDataResponse)).size(); index++) {
@@ -161,22 +164,6 @@ public class TrenEndOnePhaseFunctions extends BasePage {
 
 
     }//func end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }//end of class

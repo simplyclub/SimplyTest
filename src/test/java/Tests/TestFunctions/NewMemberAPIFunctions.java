@@ -8,6 +8,7 @@ import FunctionsClass.UpdateJSONFile;
 import JSON.JSONGetData;
 import JSON.ResponseHandling;
 import Tests.BasePage;
+import Utilities.LogFileHandling;
 import io.restassured.response.Response;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -87,65 +88,79 @@ public class NewMemberAPIFunctions extends BasePage {
     protected okhttp3.Response makeTrenEndOnePhase(int i, String memberCardNumber) throws IOException {
         updateJSONFile.upDateTranEndOnePhase(jsonGetData.getAccoundID(TestJSONToSend,i),jsonGetData.getUser(TestJSONToSend,i),
                 jsonGetData.getPassword(TestJSONToSend,i),
-                memberCardNumber,jsonGetData.getTranItems(TestJSONToSend,i), baseJSON.jsonToSend);
+                memberCardNumber,jsonGetData.getTranItems(TestJSONToSend,i));
+
+        System.out.println("****"+i+"***"+baseJSON.tranEndOnePhaseToSend.toString());
 
         return APIPost.postTrenEndOnePhase_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.TREN_END_ONE_PHASE);
 
     }//func end
 
-    protected void checkJoinPromoActivition(String userDataResponse) throws IOException {
+    protected boolean checkJoinPromoActivition(String userDataResponse) throws IOException {
         String s = null;
         JSONArray AllAccums =  responseHandling.getAllAccums(userDataResponse);
+        int flag = 0;
         for (int r = 0; r < AllAccums.size(); r++) {
             JSONObject x = (JSONObject) AllAccums.get(r);
 
             switch (x.get("AccID").toString()) {
                 case "282":
                     s=x.get("BenefitValue").toString();
-                    System.out.println(MainFunction.BaseLogStringFunc()+"case 282: "+s);
+                    System.out.println(MainFunction.BaseLogStringFunc()+"checkJoinPromoActivition --- case 282: "+s);
 
 
-                    if (!(s.equals("100.0"))){
-                        //todo : end fail Exreport
+                    if (!(s.equals("100.00"))){
+                        ExReNewMemberTestReport.fail(".checkJoinPromoActivition  case "+x.get("AccID").toString()+" --- Fail");
+                        System.out.println(MainFunction.BaseLogStringFunc()+"BenefitValue = "+s);
+                        flag =1;
 
                     }
                     break;
 
                 case "284":
                     s=x.get("BenefitValue").toString();
-                    System.out.println(MainFunction.BaseLogStringFunc()+"case 284: "+s);
+                    System.out.println(MainFunction.BaseLogStringFunc()+"checkJoinPromoActivition---case 284: "+s);
 
 
-                    if (!(s.equals("50.0"))){
-                        //todo : end fail Exreport
+                    if (!(s.equals("50.00"))){
+                        ExReNewMemberTestReport.fail(".checkJoinPromoActivition  case "+x.get("AccID").toString()+" --- Fail");
+                        System.out.println(MainFunction.BaseLogStringFunc()+"BenefitValue = "+s);
+                        flag =1;
 
                     }
                     break;
                 case "285":
                     s=x.get("BenefitValue").toString();
-                    System.out.println(MainFunction.BaseLogStringFunc()+"case 285: "+s);
+                    System.out.println(MainFunction.BaseLogStringFunc()+"checkJoinPromoActivition --- case 285: "+s);
 
 
-                    if (!(s.equals("25.2"))){
-                        //todo : end fail Exreport
+                    if (!(s.equals("25.20"))){
+                        ExReNewMemberTestReport.fail(".checkJoinPromoActivition  case "+x.get("AccID").toString()+" --- Fail");
+                        flag =1;
 
                     }
                     break;
                 case "286":
                     s=x.get("BenefitValue").toString();
-                    System.out.println(MainFunction.BaseLogStringFunc()+"case 286: "+s);
+                    System.out.println(MainFunction.BaseLogStringFunc()+"checkJoinPromoActivition --- case 286: "+s);
 
 
-                    if (!(s.equals("40.7"))){
-                        //todo : end fail Exreport
+                    if (!(s.equals("40.70"))){
+                        ExReNewMemberTestReport.fail(".checkJoinPromoActivition  case "+x.get("AccID").toString()+" --- Fail");
+                        flag =1;
 
                     }
                     break;
                 default:
-                    //todo : add default fail case
+
                     break;
             }
 
+        }
+        if(flag==1){
+            return false;
+        }else{
+            return true;
         }
 
 
@@ -495,6 +510,7 @@ public class NewMemberAPIFunctions extends BasePage {
             return 1;
         }else{
             ExReNewMemberTestReport.fail("Member Update -- FAIL");
+
             return 0;
         }
 
@@ -508,11 +524,25 @@ public class NewMemberAPIFunctions extends BasePage {
     protected  void makeJoinItemDeal(String memberCardNumber  ) throws IOException {
 
         //System.out.println("tranEndOnePhaseToSend_pre: "+ baseJSON.tranEndOnePhaseToSend.toString());
-        //todo: add Error check if user not found
+
         userDataResponse = getUserData(0,memberCardNumber);
-        System.out.println(baseJSON.memberJsonToSend.toString());
+        //System.out.println(baseJSON.memberJsonToSend.toString());
         userDataResponse_String =MainFunction.convertOkHttpResponseToString(userDataResponse);
-        System.out.println(userDataResponse_String);
+        if (!(userDataResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(userDataResponse_String).equals("0"))) {
+            System.out.println("***ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                    "                            responseHandling.getErrorCodeStatusJson(userDataResponse)" + ")");
+            ExReAccumReport.fail("ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                    responseHandling.getErrorCodeStatusJson(userDataResponse_String) + ")");
+            ExReTrenEndOnePhaseReport.info(
+                    LogFileHandling.createLogFile(baseJSON.memberJsonToSend.toString(), LOG_FILE_DIRECTORY, "userDatacall",1));
+            ExReTrenEndOnePhaseReport.info(
+                    LogFileHandling.createLogFile(userDataResponse_String, LOG_FILE_DIRECTORY, "userDataResponse",1));
+            userDataResponse.body().close();
+            MainFunction.onTestFailure("makeJoinItemDeal");
+
+
+        }
+        //System.out.println(userDataResponse_String);
         String ExpDate_pre = responseHandling.getUserDetailsExpDate(userDataResponse_String);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
@@ -527,7 +557,7 @@ public class NewMemberAPIFunctions extends BasePage {
 
         updateJSONFile.upDateTranEndOnePhase(jsonGetData.getAccoundID(TestJSONToSend,0),jsonGetData.getUser(TestJSONToSend,0),
                 jsonGetData.getPassword(TestJSONToSend,0),
-                memberCardNumber,jsonGetData.getJoinOrRenewItems("JoinItem",JoinRenewClubJSONToSend), baseJSON.tranEndOnePhaseToSend);
+                memberCardNumber,jsonGetData.getJoinOrRenewItems("JoinItem",JoinRenewClubJSONToSend));
 
         System.out.println("tranEndOnePhaseToSend_post: "+baseJSON.tranEndOnePhaseToSend);
         System.out.println("Response: "+(APIPost.postTrenEndOnePhase_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.TREN_END_ONE_PHASE)).body().string());
@@ -545,8 +575,12 @@ public class NewMemberAPIFunctions extends BasePage {
         System.out.println("Mount_post: "+ Mount_post);
         System.out.println("Day_post: "+ Day_post);
 
-        if (Year_pre+1 == Year_post&& Mount_pre == Mount_post&& Day_pre == Day_post){
+        if (Year_pre+1 == Year_post&& Mount_pre == Mount_post&& (Day_pre == Day_post||Day_pre+1 == Day_post)){
             ExReNewMemberTestReport.pass("Member Buy join item -- PASS");
+        }else{
+            ExReNewMemberTestReport.fail("Member Buy join item -- FAIL");
+            MainFunction.onTestFailure("MemberTest5");
+
         }
 
 
@@ -561,10 +595,24 @@ public class NewMemberAPIFunctions extends BasePage {
     protected  void makeRenewItemDeal(String memberCardNumber  ) throws IOException {
 
         //System.out.println("tranEndOnePhaseToSend_pre: "+ baseJSON.tranEndOnePhaseToSend.toString());
-        //todo: add Error check if user not found
+
         userDataResponse = getUserData(0,memberCardNumber);
         //System.out.println(baseJSON.memberJsonToSend.toString());
         userDataResponse_String =MainFunction.convertOkHttpResponseToString(userDataResponse);
+        if (!(userDataResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(userDataResponse_String).equals("0"))) {
+            System.out.println("***ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                    "                            responseHandling.getErrorCodeStatusJson(userDataResponse)" + ")");
+            ExReAccumReport.fail("ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                    responseHandling.getErrorCodeStatusJson(userDataResponse_String) + ")");
+            ExReTrenEndOnePhaseReport.info(
+                    LogFileHandling.createLogFile(baseJSON.memberJsonToSend.toString(), LOG_FILE_DIRECTORY, "userDatacall",1));
+            ExReTrenEndOnePhaseReport.info(
+                    LogFileHandling.createLogFile(userDataResponse_String, LOG_FILE_DIRECTORY, "userDataResponse",1));
+            userDataResponse.body().close();
+            MainFunction.onTestFailure("makeRenewItemDeal");
+
+
+        }
         System.out.println(userDataResponse_String);
         String ExpDate_pre = responseHandling.getUserDetailsExpDate(userDataResponse_String);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
@@ -580,7 +628,7 @@ public class NewMemberAPIFunctions extends BasePage {
 
         updateJSONFile.upDateTranEndOnePhase(jsonGetData.getAccoundID(TestJSONToSend,0),jsonGetData.getUser(TestJSONToSend,0),
                 jsonGetData.getPassword(TestJSONToSend,0),
-                memberCardNumber,jsonGetData.getJoinOrRenewItems("RenewItem",JoinRenewClubJSONToSend), baseJSON.tranEndOnePhaseToSend);
+                memberCardNumber,jsonGetData.getJoinOrRenewItems("RenewItem",JoinRenewClubJSONToSend));
 
         System.out.println("tranEndOnePhaseToSend_post: "+baseJSON.tranEndOnePhaseToSend);
         System.out.println("Response: "+(APIPost.postTrenEndOnePhase_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.TREN_END_ONE_PHASE)).body().string());
@@ -588,6 +636,7 @@ public class NewMemberAPIFunctions extends BasePage {
 
         userDataResponse = getUserData(0,memberCardNumber);
         userDataResponse_String =MainFunction.convertOkHttpResponseToString(userDataResponse);
+
         String ExpDate_post = responseHandling.getUserDetailsExpDate(userDataResponse_String);
 
 
@@ -610,6 +659,8 @@ public class NewMemberAPIFunctions extends BasePage {
             ExReNewMemberTestReport.info("year_post: "+ Year_post);
             ExReNewMemberTestReport.info("Mount_post: "+ Mount_post);
             ExReNewMemberTestReport.info("Day_post: "+ Day_post);
+            MainFunction.onTestFailure("MemberTest5");
+
 
 
         }
@@ -620,17 +671,31 @@ public class NewMemberAPIFunctions extends BasePage {
     }
 
     /**
-     * make deal eith renew item Quantity=1
+     * make deal with renew item Quantity=1
      * @param memberCardNumber
      * @throws IOException
      */
     protected  void makeRenewItem2Deal(String memberCardNumber  ) throws IOException {
 
         //System.out.println("tranEndOnePhaseToSend_pre: "+ baseJSON.tranEndOnePhaseToSend.toString());
-        //todo: add Error check if user not found
+
         userDataResponse = getUserData(0,memberCardNumber);
         //System.out.println(baseJSON.memberJsonToSend.toString());
         userDataResponse_String =MainFunction.convertOkHttpResponseToString(userDataResponse);
+        if (!(userDataResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(userDataResponse_String).equals("0"))) {
+            System.out.println("***ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                    "                            responseHandling.getErrorCodeStatusJson(userDataResponse)" + ")");
+            ExReAccumReport.fail("ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                    responseHandling.getErrorCodeStatusJson(userDataResponse_String) + ")");
+            ExReTrenEndOnePhaseReport.info(
+                    LogFileHandling.createLogFile(baseJSON.memberJsonToSend.toString(), LOG_FILE_DIRECTORY, "userDatacall",1));
+            ExReTrenEndOnePhaseReport.info(
+                    LogFileHandling.createLogFile(userDataResponse_String, LOG_FILE_DIRECTORY, "userDataResponse",1));
+            userDataResponse.body().close();
+            MainFunction.onTestFailure("makeRenewItem2Deal");
+
+
+        }
         System.out.println(userDataResponse_String);
         String ExpDate_pre = responseHandling.getUserDetailsExpDate(userDataResponse_String);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
@@ -646,7 +711,7 @@ public class NewMemberAPIFunctions extends BasePage {
 
         updateJSONFile.upDateTranEndOnePhase(jsonGetData.getAccoundID(TestJSONToSend,0),jsonGetData.getUser(TestJSONToSend,0),
                 jsonGetData.getPassword(TestJSONToSend,0),
-                memberCardNumber,jsonGetData.getJoinOrRenewItems("RenewItem2",JoinRenewClubJSONToSend), baseJSON.tranEndOnePhaseToSend);
+                memberCardNumber,jsonGetData.getJoinOrRenewItems("RenewItem2",JoinRenewClubJSONToSend));
 
         System.out.println("tranEndOnePhaseToSend_post: "+baseJSON.tranEndOnePhaseToSend);
         System.out.println("Response: "+(APIPost.postTrenEndOnePhase_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.TREN_END_ONE_PHASE)).body().string());
@@ -676,6 +741,7 @@ public class NewMemberAPIFunctions extends BasePage {
             ExReNewMemberTestReport.info("year_post: "+ Year_post);
             ExReNewMemberTestReport.info("Mount_post: "+ Mount_post);
             ExReNewMemberTestReport.info("Day_post: "+ Day_post);
+            MainFunction.onTestFailure("MemberTest5");
 
 
         }

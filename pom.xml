@@ -7,7 +7,19 @@
     <groupId>SimplyClub.Tests.SubTotalTest</groupId>
     <artifactId>SimplyTest</artifactId>
     <version>1.0</version>
+
     <dependencies>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.0.0-M4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.0.0</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
@@ -24,7 +36,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.8</version>
+            <version>7.0.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -33,7 +45,7 @@
             <artifactId>SimplyClub</artifactId>
             <scope>system</scope>
             <version>1.0-SNAPSHOT</version>
-            <systemPath>${user.home}/IdeaProjects/SimplyTestInfrastructure/out/artifacts/SimplyTestInfrastructure_jar/SimplyTestInfrastructure.jar</systemPath>
+            <systemPath>${project.basedir}/src/main/resources/SimplyTestInfrastructure.jar</systemPath>
         </dependency>
 
 
@@ -54,6 +66,8 @@
             <artifactId>javax.mail</artifactId>
             <version>1.6.2</version>
         </dependency>
+
+
         <!--        <dependency>-->
         <!--            <groupId>org.apache.maven.plugins</groupId>-->
         <!--            <artifactId>maven-compiler-plugin</artifactId>-->
@@ -69,25 +83,14 @@
 
     </dependencies>
     <properties>
-        <!--        <maven.compiler.source>8</maven.compiler.source>-->
-        <!--        <maven.compiler.target>8</maven.compiler.target>-->
+        <java.version>1.8</java.version>
+        <aspectj.version>1.9.4</aspectj.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!--        <java.version>1.8</java.version>-->
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+
     </properties>
+
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
-                <configuration>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>TestNG.xml</suiteXmlFile>
-                    </suiteXmlFiles>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -96,6 +99,31 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M4</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${suiteXmlFile)</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                    </systemPropertyVariables>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>

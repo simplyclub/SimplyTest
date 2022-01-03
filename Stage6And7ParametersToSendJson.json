@@ -1,0 +1,311 @@
+{
+  "stage_6": [
+    {
+      "deal_1": [
+        {
+          "CategoryCode": "2",
+          "PromoCode": "43",
+          "GrossPrice": 0,
+          "Cost": 0,
+          "ItemDescription": "פריט 3",
+          "Department": "ב",
+          "SuggestedPromoId": 0,
+          "PLUClassificationCode3": "66654",
+          "PLUClassificationCode2": "",
+          "PLUClassificationCode1": "",
+          "TrxID": 1,
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ],
+          "Amount": 1000,
+          "Quantity": 10,
+          "InputFlags": 1,
+          "Vendor": "stark industries",
+          "Code": "0003",
+          "SubDept3": "",
+          "SubDept2": "",
+          "SubDept1": "",
+          "UOM": 0,
+          "SysDiscount": 0,
+          "Price": "100",
+          "ItemBarcode": "",
+          "Manufacture": ""
+        }
+      ]
+    },
+    {
+      "deal_2": [
+        {
+          "CategoryCode": "1",
+          "PromoCode": "43",
+          "GrossPrice": 0,
+          "Cost": 0,
+          "ItemDescription": "פריט 2",
+          "Department": "א",
+          "SuggestedPromoId": 0,
+          "PLUClassificationCode3": "",
+          "PLUClassificationCode2": "1478",
+          "PLUClassificationCode1": "",
+          "TrxID": 1,
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ],
+          "Amount": 600,
+          "Quantity": 10,
+          "InputFlags": 1,
+          "Vendor": "stark industries",
+          "Code": "0002",
+          "SubDept3": "",
+          "SubDept2": "",
+          "SubDept1": "",
+          "UOM": 0,
+          "SysDiscount": 0,
+          "Price": "60",
+          "ItemBarcode": "",
+          "Manufacture": ""
+        }
+      ]
+    },
+    {
+      "deal_3": [
+        {
+          "CategoryCode": "2",
+          "PromoCode": "69",
+          "GrossPrice": 0,
+          "Cost": 0,
+          "ItemDescription": "פריט 4",
+          "Department": "א",
+          "SuggestedPromoId": 0,
+          "PLUClassificationCode3": "66654",
+          "PLUClassificationCode2": "",
+          "PLUClassificationCode1": "",
+          "TrxID": 1,
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ],
+          "Amount": 450,
+          "Quantity": 10,
+          "InputFlags": 2,
+          "Vendor": "wayne enterprises",
+          "Code": "0004",
+          "SubDept3": "",
+          "SubDept2": "",
+          "SubDept1": "",
+          "UOM": 0,
+          "SysDiscount": 0,
+          "Price": "45",
+          "ItemBarcode": "",
+          "Manufacture": ""
+        }
+      ]
+    },
+    {
+      "deal_4": [
+        {
+          "CategoryCode": "1",
+          "PromoCode": "69",
+          "GrossPrice": 0,
+          "Cost": 0,
+          "ItemDescription": "פריט 5",
+          "Department": "ב",
+          "SuggestedPromoId": 0,
+          "PLUClassificationCode3": "",
+          "PLUClassificationCode2": "25896",
+          "PLUClassificationCode1": "",
+          "TrxID": 1,
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ],
+          "Amount": 800,
+          "Quantity": 10,
+          "InputFlags": 2,
+          "Vendor": "wayne enterprises",
+          "Code": "0005",
+          "SubDept3": "",
+          "SubDept2": "",
+          "SubDept1": "",
+          "UOM": 0,
+          "SysDiscount": 0,
+          "Price": "80",
+          "ItemBarcode": "",
+          "Manufacture": ""
+        }
+      ]
+    },
+    {
+      "deal_5": [
+        {
+          "CategoryCode": "2",
+          "PromoCode": "8",
+          "GrossPrice": 0,
+          "Cost": 0,
+          "ItemDescription": "פריט 6",
+          "Department": "ב",
+          "SuggestedPromoId": 0,
+          "PLUClassificationCode3": "",
+          "PLUClassificationCode2": "",
+          "PLUClassificationCode1": "1478",
+          "TrxID": 1,
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ],
+          "Amount": 780,
+          "Quantity": 10,
+          "InputFlags": 3,
+          "Vendor": "wayne enterprises",
+          "Code": "0006",
+          "SubDept3": "",
+          "SubDept2": "",
+          "SubDept1": "",
+          "UOM": 0,
+          "SysDiscount": 0,
+          "Price": "78",
+          "ItemBarcode": "",
+          "Manufacture": ""
+        }
+      ]
+    },
+    {
+      "deal_6": [
+        {
+          "CategoryCode": "1",
+          "PromoCode": "8",
+          "GrossPrice": 0,
+          "Cost": 0,
+          "ItemDescription": "פריט 7",
+          "Department": "ב",
+          "SuggestedPromoId": 0,
+          "PLUClassificationCode3": "66654",
+          "PLUClassificationCode2": "",
+          "PLUClassificationCode1": "",
+          "TrxID": 10,
+          "AdditionalInfo": [
+            {
+              "FieldId": "",
+              "FieldValue": ""
+            }
+          ],
+          "Amount": 706,
+          "Quantity": 10,
+          "InputFlags": 3,
+          "Vendor": "wayne enterprises",
+          "Code": "0007",
+          "SubDept3": "",
+          "SubDept2": "",
+          "SubDept1": "",
+          "UOM": 0,
+          "SysDiscount": 0,
+          "Price": "70.6",
+          "ItemBarcode": "",
+          "Manufacture": ""
+        }
+      ]
+    }
+  ],
+  "stage_7": {
+    "Item": [
+      {
+        "CategoryCode": "1",
+        "PromoCode": "",
+        "GrossPrice": 0,
+        "Cost": 0,
+        "ItemDescription": "פריט לבדיקת שלב 7",
+        "Department": "ב",
+        "SuggestedPromoId": 0,
+        "PLUClassificationCode3": "",
+        "PLUClassificationCode2": "",
+        "PLUClassificationCode1": "",
+        "TrxID": 1,
+        "AdditionalInfo": [
+          {
+            "FieldId": "",
+            "FieldValue": ""
+          }
+        ],
+        "Amount": 30,
+        "Quantity": 3,
+        "InputFlags": 1,
+        "Vendor": "",
+        "Code": "2021",
+        "SubDept3": "",
+        "SubDept2": "",
+        "SubDept1": "",
+        "UOM": 0,
+        "SysDiscount": 0,
+        "Price": "10",
+        "ItemBarcode": "",
+        "Manufacture": ""
+      }
+    ],
+    "Item2": [
+      {
+        "CategoryCode": "1",
+        "PromoCode": "",
+        "GrossPrice": 0,
+        "Cost": 0,
+        "ItemDescription": "פריט לבדיקת שלב 7",
+        "Department": "ב",
+        "SuggestedPromoId": 0,
+        "PLUClassificationCode3": "",
+        "PLUClassificationCode2": "",
+        "PLUClassificationCode1": "",
+        "TrxID": 1,
+        "AdditionalInfo": [
+          {
+            "FieldId": "",
+            "FieldValue": ""
+          }
+        ],
+        "Amount": 10,
+        "Quantity": 1,
+        "InputFlags": 1,
+        "Vendor": "",
+        "Code": "2021",
+        "SubDept3": "",
+        "SubDept2": "",
+        "SubDept1": "",
+        "UOM": 0,
+        "SysDiscount": 0,
+        "Price": "10",
+        "ItemBarcode": "",
+        "Manufacture": ""
+      }
+    ],
+    "promoIdDeals": {
+      "subTotalPromoId": {
+        "TotalDiscounts": [1929],
+        "CashBackDiscounts": [ 1931, 1933, 1932 ]
+      },
+  "tranEndPromoId": [ 1930, 1934 ]
+    },
+    "DealToUse":[
+      {
+        "PromoID": "1932",
+        "Amount" :"15.0",
+        "POSAmount": "",
+        "Quantity" : "1",
+        "DiscountType": "1",
+        "ReferenceCode": "",
+        "AccumId": "282",
+        "Burned": "15",
+        "PToSValue" : "0"
+      }
+    ]
+  }
+}
+

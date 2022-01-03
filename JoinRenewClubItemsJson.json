@@ -1,0 +1,106 @@
+{
+  "array" : [
+    {
+      "RenewItem": [{
+        "CategoryCode": "",
+        "PromoCode": "",
+        "GrossPrice": 0,
+        "Cost": 0,
+        "ItemDescription": "פריט חידוש",
+        "Department": "",
+        "SuggestedPromoId": 0,
+        "PLUClassificationCode3": "",
+        "PLUClassificationCode2": "",
+        "PLUClassificationCode1": "",
+        "TrxID": 1,
+        "AdditionalInfo": [
+          {
+            "FieldId": "",
+            "FieldValue": ""
+          }
+        ],
+        "Amount": 0,
+        "Quantity": 2,
+        "InputFlags":"" ,
+        "Vendor": "",
+        "Code": "852",
+        "SubDept3": "",
+        "SubDept2": "",
+        "SubDept1": "",
+        "UOM": 0,
+        "SysDiscount": 0,
+        "Price": "0",
+        "ItemBarcode": "",
+        "Manufacture": ""
+      }]
+    },
+    {
+      "JoinItem": [{
+        "CategoryCode": "",
+        "PromoCode": "",
+        "GrossPrice": 0,
+        "Cost": 0,
+        "ItemDescription": "פריט הצטרפות",
+        "Department": "",
+        "SuggestedPromoId": 0,
+        "PLUClassificationCode3": "",
+        "PLUClassificationCode2": "",
+        "PLUClassificationCode1": "",
+        "TrxID": 1,
+        "AdditionalInfo": [
+          {
+            "FieldId": "",
+            "FieldValue": ""
+          }
+        ],
+        "Amount": 10,
+        "Quantity": 1,
+        "InputFlags":"" ,
+        "Vendor": "",
+        "Code": "147",
+        "SubDept3": "",
+        "SubDept2": "",
+        "SubDept1": "",
+        "UOM": 0,
+        "SysDiscount": 0,
+        "Price": "10",
+        "ItemBarcode": "",
+        "Manufacture": ""
+      }]
+    },
+    {
+      "RenewItem2": [{
+        "CategoryCode": "",
+        "PromoCode": "",
+        "GrossPrice": 0,
+        "Cost": 0,
+        "ItemDescription": "פריט חידוש",
+        "Department": "",
+        "SuggestedPromoId": 0,
+        "PLUClassificationCode3": "",
+        "PLUClassificationCode2": "",
+        "PLUClassificationCode1": "",
+        "TrxID": 1,
+        "AdditionalInfo": [
+          {
+            "FieldId": "",
+            "FieldValue": ""
+          }
+        ],
+        "Amount": 0,
+        "Quantity": 1,
+        "InputFlags":"" ,
+        "Vendor": "",
+        "Code": "852",
+        "SubDept3": "",
+        "SubDept2": "",
+        "SubDept1": "",
+        "UOM": 0,
+        "SysDiscount": 0,
+        "Price": "0",
+        "ItemBarcode": "",
+        "Manufacture": ""
+      }]
+    }
+  ]
+}

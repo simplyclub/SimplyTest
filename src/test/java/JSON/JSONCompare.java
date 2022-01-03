@@ -16,7 +16,8 @@ public class JSONCompare extends BasePage {
     String TBPromoId = null;
     int  flag1 = 0 ;
 
-    public void responVSTestJson (int arrayIndex, String response) throws IOException {
+    public boolean responVSTestJson (int arrayIndex, String response) throws IOException {
+        int SFFlag=0 ;
 
         // this loop will run on the respone "CashBackDiscounts"
         for (int i=0 ,flag1 = 0 ; i < responseHandling.getCaseBackDiscountsArrSize(response);i++,flag1 = 0){
@@ -43,15 +44,16 @@ public class JSONCompare extends BasePage {
                                 "Test JSON amount: "+JSONGetData.getAmount(TestJSONToSend,arrayIndex,j,"CashBackDiscounts"));
                         ExReApiTestReport.info("CashBackDiscounts: "+ arrayIndex);
                         ExReApiTestReport.info("Response promoID: "+ CBPromoId + "Test JSON promoID: " + temp ).assignCategory("responVSTestJson");
+                        SFFlag = 1;
 
                     }
-
 
 
                     if (!(responseHandling.getDescription(response,"CashBackDiscounts",i).equals(
                             JSONGetData.getDescription(TestJSONToSend,arrayIndex,j,"CashBackDiscounts")))){
                         ExReApiTestReport.fail("response Description: "+responseHandling.getDescription(response,"CashBackDiscounts",i)+"is NOT equals to " +
                                 "Test JSON Description: "+JSONGetData.getDescription(TestJSONToSend,arrayIndex,j,"CashBackDiscounts"));
+                        SFFlag = 1;
 
 
                     }
@@ -61,6 +63,7 @@ public class JSONCompare extends BasePage {
                             JSONGetData.getIsAuto(TestJSONToSend,arrayIndex,j,"CashBackDiscounts")))){
                         ExReApiTestReport.fail("response Description: "+responseHandling.getIsAuto(response,"CashBackDiscounts",i)+"is NOT equals to " +
                                 "Test JSON Description: "+JSONGetData.getIsAuto(TestJSONToSend,arrayIndex,j,"CashBackDiscounts"));
+                        SFFlag = 1;
                     }
 
 
@@ -72,6 +75,7 @@ public class JSONCompare extends BasePage {
             if( flag1 == 0 ){
                 ExReApiTestReport.warning("PromoId: " + CBPromoId + " not found in the \"Test JSON \"").assignCategory("responVSTestJson");
                // ExReApiTestReport.info(response.getBody().asString());
+                SFFlag = 1;
 
 
             }
@@ -99,6 +103,7 @@ public class JSONCompare extends BasePage {
                                 "Test JSON amount: "+JSONGetData.getAmount(TestJSONToSend,arrayIndex,j,"TotalDiscounts"));
                         ExReApiTestReport.info("TotalDiscounts:"+arrayIndex);
                         ExReApiTestReport.info("Response promoID: "+ TBPromoId + "Test JSON promoID: " + temp ).assignCategory("responVSTestJson");
+                        SFFlag = 1;
                     }
 
 
@@ -106,6 +111,7 @@ public class JSONCompare extends BasePage {
                             JSONGetData.getDescription(TestJSONToSend,arrayIndex,j,"TotalDiscounts")))){
                         ExReApiTestReport.fail("response Description: "+responseHandling.getDescription(response,"TotalDiscounts",i)+"is NOT equals to " +
                                 "Test JSON Description: "+JSONGetData.getDescription(TestJSONToSend,arrayIndex,j,"TotalDiscounts"));
+                        SFFlag = 1;
 
                     }
 
@@ -115,7 +121,7 @@ public class JSONCompare extends BasePage {
                             JSONGetData.getAllItemsDiscountPercent(TestJSONToSend,arrayIndex,j,"TotalDiscounts")))){
                         ExReApiTestReport.fail("response ItemsDiscountPercent: "+responseHandling.getAllItemsDiscountPercent(response,i)+"is NOT equals to " +
                                 "Test JSON ItemsDiscountPercent: "+JSONGetData.getAllItemsDiscountPercent(TestJSONToSend,arrayIndex,j,"TotalDiscounts"));
-
+                       SFFlag=1;
                     }
 
 
@@ -123,7 +129,7 @@ public class JSONCompare extends BasePage {
                             JSONGetData.getIsAuto(TestJSONToSend,arrayIndex,j,"TotalDiscounts")))) {
                         ExReApiTestReport.fail("response IsAuto: " + responseHandling.getIsAuto(response, "TotalDiscounts", i) + "is NOT equals to " +
                                 "Test JSON IsAuto: " + JSONGetData.getIsAuto(TestJSONToSend, arrayIndex, j, "TotalDiscounts"));
-
+                        SFFlag = 1;
 
                     }
 
@@ -137,13 +143,18 @@ public class JSONCompare extends BasePage {
                 ExReApiTestReport.warning("12PromoId: " + TBPromoId + " not found in the \"Test JSON \"").assignCategory("responVSTestJson");
                 System.out.println(MainFunction.BaseLogStringFunc()+baseJSON.jsonToSend.toString());
                // ExReApiTestReport.info(response.getBody().asString());
-
+                SFFlag = 1;
             }
 
         }
 
 
-        //return  ;
+
+        if(SFFlag == 1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 
@@ -199,6 +210,7 @@ public class JSONCompare extends BasePage {
 
                 ExReApiTestReport.warning("PromoId: " + TBPromoId + " not found in the response ").assignCategory("TestJSONVSResponse");
                // ExReApiTestReport.info(response.getBody().asString());
+                MainFunction.onTestFailure("subTotalTest");
 
 
             }

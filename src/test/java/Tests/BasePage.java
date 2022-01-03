@@ -8,6 +8,7 @@ import FunctionsClass.UpdateXMLFile;
 import JSON.JSONGetData;
 import JSON.ResponseHandling;
 
+import Utilities.InfrastructureMainFunction;
 import Utilities.LogFileHandling;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -21,8 +22,11 @@ import org.testng.annotations.BeforeTest;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import utilities.EmailHandling;
+import utilities.Listeners;
 import utilities.MainFunction;
 
+
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,12 +35,15 @@ import java.util.HashMap;
 
 public  class BasePage {
 
+
     //declaration
     public BaseJSON baseJSON = new BaseJSON();
     UpdateJSONFile updateJSONFile = new UpdateJSONFile();
     public APIPost APIPost = new APIPost();
     JSONGetData JSONGetData = new JSONGetData();
     BaseXML baseXML = new BaseXML();
+
+
 
 
 
@@ -93,16 +100,21 @@ public  class BasePage {
     public static  ExtentTest ExReTrenEndOnePhaseReport;
     public static  ExtentTest ExReNewMemberTestReport;
     public static  ExtentTest ExReJoinSmsReport;
+    public static  ExtentTest ExReStage6And7Report;
 
+
+    //public static final String HOME_DIRECTORY ="C:\\Users\\User\\IdeaProjects\\";
+    public static final String HOME_DIRECTORY = InfrastructureMainFunction.GetLocalDir();
 
 
 
     //GLOBALS
-    public static final  String JSON_TEST_FILE = "C:\\Users\\User\\IdeaProjects\\SimplyTest\\JSONParametersToSend.json";
-    public static final  String JSON_JOIN_RENEW = "C:\\Users\\User\\IdeaProjects\\SimplyTest\\JoinRenewClubItemsJson.json";
+    public static final  String JSON_TEST_FILE = HOME_DIRECTORY+"\\JSONParametersToSend.json";
+    public static final  String JSON_JOIN_RENEW = HOME_DIRECTORY+"\\JoinRenewClubItemsJson.json";
+    public static final  String JSON_STAGE_6_AND_7_DEAL_ITEMS = HOME_DIRECTORY+"\\Stage6And7ParametersToSendJson.json";
     public static String s = null;
     public static double sumVal = 0.0;
-    public static final String LOG_FILE_DIRECTORY = "C:\\Users\\User\\IdeaProjects\\SimplyTest\\LogFile";
+    public static final String LOG_FILE_DIRECTORY = HOME_DIRECTORY+"\\LogFile";
 
     //sum
     public static HashMap<String ,Double> sumDealPoints = new HashMap<>();
@@ -196,18 +208,10 @@ public  class BasePage {
     public static final String MEMBER_STATUS_ACTIVE = "0";
     public static final String MEMBER_STATUS_NOT_ACTIVE = "1";
 
-
-
-
-
-
-
-
-
-
     @BeforeSuite
     public void init () throws IOException {
         MainFunction.extentReportInit();
+
 
         // Extent report tests titles
         ExReApiTestReport = exReport.createTest("Sub Total Test").assignCategory("Transaction");// give the name of the test title  in the report
@@ -217,8 +221,9 @@ public  class BasePage {
         ExReTrenEndOnePhaseReport = exReport.createTest("Tren End One Phase Test").assignCategory("Transaction");// give the name of the test title  in the report
         ExReNewMemberTestReport = exReport.createTest(" New Member Tests").assignCategory("NewMember");// give the name of the test title  in the report
         ExReJoinSmsReport = exReport.createTest(" Send Join SMS Test").assignCategory("JoinSms");// give the name of the test title  in the report
-        LogFileHandling.DeleteFile("EmailLog");
-        LogFileHandling.CreateFile("EmailLog");
+        ExReStage6And7Report = exReport.createTest("Stage 6 And 7 Test").assignCategory("Stage6And7Test");// give the name of the test title  in the report
+        LogFileHandling.DeleteFile("EmailLog",HOME_DIRECTORY);
+        LogFileHandling.CreateFile("EmailLog",HOME_DIRECTORY);
 
 
     }
@@ -288,18 +293,19 @@ public  class BasePage {
     }
 
     @AfterClass
-    public  void endTest()
-    {
+    public  void endTest() {
 
 
 
     }
+
     @AfterSuite
     public  void endSuite() throws IOException, InterruptedException {
         exReport.flush();
 //        MainFunction.convertFileEncoding(
 //                "C:\\Users\\User\\IdeaProjects\\SimplyTest\\index.html","C:\\Users\\User\\IdeaProjects\\SimplyTest","UTF-8");
-        EmailHandling.sendEnmail();
+//        EmailHandling.sendEnmail();
 
     }
+
 }

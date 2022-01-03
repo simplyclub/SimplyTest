@@ -44,5 +44,10 @@
             <class name="Tests.JoinSmsTest"></class>
         </classes>
     </test>
+    <test name="Stage 6 And 7 Test">
+        <classes>
+            <class name="Tests.Stage6And7Test"></class>
+        </classes>
+    </test>
 
 </suite>
