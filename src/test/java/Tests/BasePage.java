@@ -304,7 +304,7 @@ public  class BasePage {
         exReport.flush();
 //        MainFunction.convertFileEncoding(
 //                "C:\\Users\\User\\IdeaProjects\\SimplyTest\\index.html","C:\\Users\\User\\IdeaProjects\\SimplyTest","UTF-8");
-        EmailHandling.sendEnmail();
+  //      EmailHandling.sendEnmail();
 
     }
 

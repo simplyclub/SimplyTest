@@ -434,7 +434,7 @@ public class Stage6And7Test extends BasePage {
 
     }//end test
 
-    @Test(retryAnalyzer = RetryAnalyzer.class,description = "",enabled = false)
+    @Test(retryAnalyzer = RetryAnalyzer.class,description = "make  full transaction with realization  of dependent promos ")
     public void Stage7Deal3Test() throws IOException{
         try {
             subTotalResponse = stage6And7TestFunctions.makeSubTotal(0, 0);
@@ -451,19 +451,35 @@ public class Stage6And7Test extends BasePage {
 
     }
         try {
-            trenEndResponse = stage6And7TestFunctions.makeTranEnd(0, subTotalResponse_String, 0);
+            trenEndResponse = stage6And7TestFunctions.makeTranEnd(0, subTotalResponse_String, 0,
+                    stage6And7TestFunctions.getDealToUseStage7(baseJSON.getObj(JSON_STAGE_6_AND_7_DEAL_ITEMS)));
+
             trenEndResponse_String = MainFunction.convertOkHttpResponseToString(trenEndResponse);
         }catch (SocketTimeoutException e){
             ExReStage6And7Report.warning("ERROR(trenEndResponse)---- Socket Timeout Exception  ");
             System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(trenEndResponse)---- Socket Timeout Exception  ");
             throw new SocketTimeoutException();
 
-        } catch ( NullPointerException e) {
+        }catch ( NullPointerException e) {
             ExReStage6And7Report.warning("ERROR(trenEndResponse)---- Null lPointer Exceptionn  ");
             System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(trenEndResponse)---- Null Pointer Exception  ");
             throw new NullPointerException();
 
         }
+        if(stage6And7TestFunctions.tranEndPromoIdCheck(trenEndResponse_String)){
+            ExReStage6And7Report.pass("Stage7Deal3Test --- PASS");
+            System.out.println(BaseLogStringFunc()+"Stage7Deal3Test --- PASS");
+
+        }else{
+            ExReStage6And7Report.fail("Stage7Deal3Test --- Fail");
+            System.out.println(BaseLogStringFunc()+"Stage7Deal3Test --- Fail");
+        }
+
+
+
+
+
+
 
 
     }//end test

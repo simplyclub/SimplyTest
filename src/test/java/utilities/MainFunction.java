@@ -47,6 +47,7 @@ public class MainFunction extends BasePage {
 
 
     }
+
     public static void convertFileEncoding(String sourcePath, String targetPath , String targetEncoding) throws IOException, InterruptedException{
 
         // Wait for file to exist - 10 seconds
@@ -82,8 +83,6 @@ public class MainFunction extends BasePage {
 
 
     }
-    //temp
-
 
     public static void RestGlobals(){
         preDeal.clear();
@@ -244,6 +243,14 @@ public class MainFunction extends BasePage {
             ExRePointsValiditReport.fail(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
+        if (str.equals("Stage7Deal2Test ")) {
+            ExRePointsValiditReport.fail(str + "Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
+        }
+        if (str.equals("Stage7Deal3Test ")) {
+            ExRePointsValiditReport.fail(str + "Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
+        }
         if (str.equals("MemberTest1")) {
             ExReJoinSmsReport.pass(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
@@ -284,8 +291,6 @@ public class MainFunction extends BasePage {
             ExReJoinSmsReport.pass(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
-
-
 
     }
 

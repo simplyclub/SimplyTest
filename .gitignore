@@ -6,6 +6,7 @@
 
 # File
 *.txt
+*.html
 
 # Package Files #
 *.war
