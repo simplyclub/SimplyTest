@@ -302,7 +302,29 @@
         "DiscountType": "1",
         "ReferenceCode": "",
         "AccumId": "282",
-        "Burned": "15",
+        "Burned": "0",
+        "PToSValue" : "0"
+      },
+      {
+        "PromoID": "1933",
+        "Amount" :"1.0",
+        "POSAmount": "",
+        "Quantity" : "1",
+        "DiscountType": "1",
+        "ReferenceCode": "",
+        "AccumId": "282",
+        "Burned": "0",
+        "PToSValue" : "0"
+      },
+      {
+        "PromoID": "1929",
+        "Amount" :"10.0",
+        "POSAmount": "",
+        "Quantity" : "1",
+        "DiscountType": "1",
+        "ReferenceCode": "",
+        "AccumId": "282",
+        "Burned": "0",
         "PToSValue" : "0"
       }
     ]

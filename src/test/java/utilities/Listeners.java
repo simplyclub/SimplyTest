@@ -136,14 +136,21 @@ public class Listeners extends BasePage implements ITestListener  {
             ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
         }
+        if (str.equals("Stage7Deal1Test")) {
+            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
+        }
+        if (str.equals("Stage7Deal2Test")) {
+            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
+        }
+        if (str.equals("Stage7Deal3Test")) {
+            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
+        }
 
     }
 
-    @Override
-    public void onTestFailedButWithinSuccessPercentage(ITestResult arg0) {
-
-
-    }
 
     @Override
     public void onTestFailure(ITestResult arg0) {

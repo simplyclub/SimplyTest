@@ -23,6 +23,7 @@ import static java.time.temporal.ChronoUnit.WEEKS;
 
 public class PointsValidityFunctions extends BasePage {
     UpdateJSONFile updateJSONFile = new UpdateJSONFile();
+    BaseJSON baseJSON = new BaseJSON();
 
     ///////
     String startDate = null;
@@ -50,7 +51,7 @@ public class PointsValidityFunctions extends BasePage {
     public okhttp3.Response makeDealSubTotal(int i) throws IOException {
         updateJSONFile.upDateBaseJSONFile(JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),
                 JSONGetData.getAccoundID(TestJSONToSend, i), JSONGetData.getTranItems(TestJSONToSend, i), JSONGetData.getCardNumber(TestJSONToSend, i));
-        return APIPost.postSubTotal_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.JSON_TO_SEND);
+        return APIPost.postSubTotal_OkHttp(BaseAPI.TEST_REST_API_URI, baseJSON.JSON_TO_SEND);
 
     }//func end
 
@@ -78,7 +79,7 @@ public class PointsValidityFunctions extends BasePage {
         updateJSONFile.upDateUserJSONFile(
                 JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),
                 JSONGetData.getFieldId(TestJSONToSend, i),CardNumber);
-        return APIPost.postUserGetData_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.MEMBER_JSON_TO_SEND);
+        return APIPost.postUserGetData_OkHttp(BaseAPI.TEST_REST_API_URI, baseJSON.MEMBER_JSON_TO_SEND);
 
     }
 
@@ -217,7 +218,6 @@ public class PointsValidityFunctions extends BasePage {
     }
 
     public int calcntilEndOfWeek (NodeList nodeList, int NLIndex){
-
 
         endDate = XMLGetData.getXmlMBLEndDate(nodeList, NLIndex);
         dateAfter = LocalDate.parse(endDate, formatter);

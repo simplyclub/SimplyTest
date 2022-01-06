@@ -23,6 +23,7 @@ public class Stage6And7TestFunctions extends BasePage {
     UpdateJSONFile updateJSONFile = new UpdateJSONFile();
     JSON.JSONGetData jsonGetData = new JSONGetData();
     BaseXML baseXML = new BaseXML();
+    BaseJSON baseJSON = new BaseJSON();
     ResponseHandling responseHandling = new ResponseHandling();
 
     public okhttp3.Response makeTrenEndOnePhase(int i, int dealNumber) throws IOException {
@@ -44,7 +45,7 @@ public class Stage6And7TestFunctions extends BasePage {
         return APIPost.postSubTotal_OkHttp(BaseAPI.TEST_REST_API_URI, baseJSON.JSON_TO_SEND);
     }
 
-    public okhttp3.Response makeTranEnd(int i, String subTotalResponse,int itemNum) throws IOException {
+    public okhttp3.Response makeTranEnd(int i, String subTotalResponse,int itemNum,JSONArray dealToUse) throws IOException {
 
         updateJSONFile.upDateTranEndJSON(
                 responseHandling.getServiceTranNumber(subTotalResponse),
@@ -53,15 +54,15 @@ public class Stage6And7TestFunctions extends BasePage {
                 jsonGetData.getPassword(TestJSONToSend,i),
                 jsonGetData.getCardNumber(TestJSONToSend,i),
                 getStage7Item(baseJSON.getObj(JSON_STAGE_6_AND_7_DEAL_ITEMS),itemNum),
-                jsonGetData.getDealsToUse(TestJSONToSend,i),
+                dealToUse,
                 baseJSON.jsonToSend);
 
         return APIPost.postTranEnd_OkHttp(BaseAPI.TEST_REST_API_URI, baseJSON.JSON_TO_SEND);
     }
 
-    public Response getTransactionView(String response) throws IOException {
+    public Response getTransactionView(String tranEndResponse) throws IOException {
         updateXMLFile.updateGetTransactionView(baseXML.xmlToDocGetTransactionView(), "loginKey", updateXMLFile.getSysLogin());
-        updateXMLFile.updateGetTransactionView(baseXML.xmlToDocGetTransactionView(), "tranKey", responseHandling.getTrenEndTranReferenceNumber(response));
+        updateXMLFile.updateGetTransactionView(baseXML.xmlToDocGetTransactionView(), "tranKey", responseHandling.getTrenEndTranReferenceNumber(tranEndResponse));
 
         return APIPost.postXMLToGetTransactionView(TEST_API_SYSTEM_URI, BaseXML.GET_TREN_FILE_LOCATION);
     }
@@ -101,18 +102,30 @@ public class Stage6And7TestFunctions extends BasePage {
     private JSONArray getStage7JsonPromoIdDealsArray(Object obj) {
         JSONObject JSONObj = (JSONObject) obj;
         JSONObject promoIdDeals = (JSONObject) JSONObj.get("stage_7");
-        JSONArray subTotalPromoId = (JSONArray) promoIdDeals.get("tranEndPromoId");
+        //System.out.println(promoIdDeals);
+        JSONObject tranEndPromoId = (JSONObject) promoIdDeals.get("promoIdDeals");
+        JSONArray arr = (JSONArray) tranEndPromoId.get("tranEndPromoId");
+       // System.out.println(arr);
 
-        return subTotalPromoId;
+
+
+        return arr;
 
     }
 
-    /*
-    private JSONArray getDealToUseStage7(){
+
+    public JSONArray getDealToUseStage7(Object obj){
+        JSONObject JSONObj = (JSONObject) obj;
+        JSONObject stage = (JSONObject) JSONObj.get("stage_7");
+        JSONArray dealToUse = (JSONArray) stage.get("DealToUse");
+
+        return dealToUse;
+
+
 
     }
 
-     */
+
 
     private JSONArray getStage7SubTotalTotalDiscountsPromoIdArray(Object obj) {
         JSONObject JSONObj = (JSONObject) obj;
@@ -328,7 +341,7 @@ public class Stage6And7TestFunctions extends BasePage {
                 String promoId = getStage7JsonPromoIdDealsArray(baseJSON.getObj(JSON_STAGE_6_AND_7_DEAL_ITEMS))
                         .get(JIndex)
                         .toString();
-                System.out.println(promoId);
+                //System.out.println(promoId);
 
                 if(ResponseHandling.getXMLResponsePromoID(nodeList, XRIndex).equals(promoId)){
                     flag ++;
