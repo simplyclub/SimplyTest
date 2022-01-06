@@ -23,6 +23,7 @@ public class Stage6And7TestFunctions extends BasePage {
     UpdateJSONFile updateJSONFile = new UpdateJSONFile();
     JSON.JSONGetData jsonGetData = new JSONGetData();
     BaseXML baseXML = new BaseXML();
+    BaseJSON baseJSON = new BaseJSON();
     ResponseHandling responseHandling = new ResponseHandling();
 
     public okhttp3.Response makeTrenEndOnePhase(int i, int dealNumber) throws IOException {
@@ -41,7 +42,7 @@ public class Stage6And7TestFunctions extends BasePage {
     public okhttp3.Response makeSubTotal(int i,int itemNum) throws IOException {
         updateJSONFile.upDateBaseJSONFile(jsonGetData.getUser(TestJSONToSend, i), jsonGetData.getPassword(TestJSONToSend, i),
                 jsonGetData.getAccoundID(TestJSONToSend, i), getStage7Item(baseJSON.getObj(JSON_STAGE_6_AND_7_DEAL_ITEMS),itemNum), jsonGetData.getCardNumber(TestJSONToSend, i));
-        return APIPost.postSubTotal_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.JSON_TO_SEND);
+        return APIPost.postSubTotal_OkHttp(BaseAPI.TEST_REST_API_URI, baseJSON.JSON_TO_SEND);
     }
 
     public okhttp3.Response makeTranEnd(int i, String subTotalResponse,int itemNum,JSONArray dealToUse) throws IOException {

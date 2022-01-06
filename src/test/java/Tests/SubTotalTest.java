@@ -17,10 +17,12 @@ import java.io.IOException;
 public class SubTotalTest extends BasePage {
     JSONCompare JSONCompare = new JSONCompare();
     ResponseHandling responseHandling = new ResponseHandling();
+    BasePage basePage = new BasePage();
 
     @Test(testName = "SubTotalTest",retryAnalyzer = RetryAnalyzer.class)
     public void subTotalTest() throws IOException {
-        BasePage.ExReApiTestReport.info("basic API Test");
+        basePage.ExReApiTestReport.info("basic API Test");
+
         int SFFlag = 0;
 
         // this test check sub total
@@ -47,7 +49,7 @@ public class SubTotalTest extends BasePage {
             if(subTotalResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse_String).equals("0")) {
 
                 ExReApiTestReport.info("subTotalResponse Time : "+BaseAPI.getResponseTime_OkHttp(subTotalResponse) + "ms");
-                BasePage.avgTimeSubTotal.add(BaseAPI.getResponseTime_OkHttp(subTotalResponse));
+                basePage.avgTimeSubTotal.add(BaseAPI.getResponseTime_OkHttp(subTotalResponse));
 
                 if(!JSONCompare.responVSTestJson(i, subTotalResponse_String)){
                     SFFlag = 1 ;
@@ -68,7 +70,7 @@ public class SubTotalTest extends BasePage {
                      SFFlag=1;
                 }else{
                     ExReApiTestReport.info("trenCancelResponse Time : "+ BaseAPI.getResponseTime_OkHttp(trenCancelResponse)+"ms");
-                    BasePage.avgTimeTranRefund.add(BaseAPI.getResponseTime_OkHttp(trenCancelResponse));
+                    basePage.avgTimeTranRefund.add(BaseAPI.getResponseTime_OkHttp(trenCancelResponse));
 
 
 

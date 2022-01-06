@@ -16,6 +16,7 @@ import java.text.DecimalFormat;
 public class TrenEndOnePhaseFunctions extends BasePage {
     UpdateJSONFile updateJSONFile = new UpdateJSONFile();
     JSONGetData jsonGetData = new JSONGetData();
+    BaseJSON baseJSON = new BaseJSON();
 
     public  okhttp3.Response getUserData(int i) throws IOException {
         updateJSONFile.upDateUserJSONFile(
@@ -31,7 +32,7 @@ public class TrenEndOnePhaseFunctions extends BasePage {
                 jsonGetData.getCardNumber(TestJSONToSend,i),jsonGetData.getTranItems(TestJSONToSend,i));
 
 
-       return APIPost.postTrenEndOnePhase_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.TREN_END_ONE_PHASE);
+       return APIPost.postTrenEndOnePhase_OkHttp(BaseAPI.TEST_REST_API_URI, baseJSON.TREN_END_ONE_PHASE);
 
     }
 

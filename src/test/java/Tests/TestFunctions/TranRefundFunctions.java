@@ -17,11 +17,12 @@ public class TranRefundFunctions extends BasePage {
     UpdateJSONFile updateJSONFile = new UpdateJSONFile();
     ResponseHandling responseHandling = new ResponseHandling();
     UserHandling userHandling = new UserHandling();
+    BaseJSON baseJSON  = new BaseJSON();
 
     public okhttp3.Response makeDealSubTotal(int i) throws IOException {
         updateJSONFile.upDateBaseJSONFile(JSON.JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),
                 JSONGetData.getAccoundID(TestJSONToSend, i), JSONGetData.getTranItems(TestJSONToSend, i), JSONGetData.getCardNumber(TestJSONToSend, i));
-        return APIPost.postSubTotal_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.JSON_TO_SEND);
+        return APIPost.postSubTotal_OkHttp(BaseAPI.TEST_REST_API_URI, baseJSON.JSON_TO_SEND);
 
     }//func end
 
@@ -59,7 +60,7 @@ public okhttp3.Response makeTranRefund (int i,String TrenEndResponse ) throws IO
                 JSONGetData.getUser(TestJSONToSend, i), JSONGetData.getPassword(TestJSONToSend, i),
                 JSONGetData.getFieldId(TestJSONToSend, i), JSONGetData.getCardNumber(TestJSONToSend, i)
         );
-        return (APIPost.postUserGetData(BaseAPI.TEST_REST_API_URI, BaseJSON.MEMBER_JSON_TO_SEND)).getBody().asString();
+        return (APIPost.postUserGetData(BaseAPI.TEST_REST_API_URI, baseJSON.MEMBER_JSON_TO_SEND)).getBody().asString();
 
 
     }//func end
