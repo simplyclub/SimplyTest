@@ -122,7 +122,7 @@ public class NewMemberAPIFunctions extends BasePage {
                     System.out.println(MainFunction.BaseLogStringFunc()+"checkJoinPromoActivition---case 284: "+s);
 
 
-                    if (!(s.equals("50.00"))){
+                    if (!(s.equals("51"))){
                         ExReNewMemberTestReport.fail(".checkJoinPromoActivition  case "+x.get("AccID").toString()+" --- Fail");
                         System.out.println(MainFunction.BaseLogStringFunc()+"BenefitValue = "+s);
                         flag =1;
@@ -134,7 +134,7 @@ public class NewMemberAPIFunctions extends BasePage {
                     System.out.println(MainFunction.BaseLogStringFunc()+"checkJoinPromoActivition --- case 285: "+s);
 
 
-                    if (!(s.equals("25.20"))){
+                    if (!(s.equals("25"))){
                         ExReNewMemberTestReport.fail(".checkJoinPromoActivition  case "+x.get("AccID").toString()+" --- Fail");
                         flag =1;
 
