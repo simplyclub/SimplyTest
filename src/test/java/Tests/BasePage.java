@@ -101,6 +101,7 @@ public  class BasePage {
     public static  ExtentTest ExReNewMemberTestReport;
     public static  ExtentTest ExReJoinSmsReport;
     public static  ExtentTest ExReStage6And7Report;
+    public static  ExtentTest ExReGeneralTests;
 
 
     //public static final String HOME_DIRECTORY ="C:\\Users\\User\\IdeaProjects\\";
@@ -222,6 +223,7 @@ public  class BasePage {
         ExReNewMemberTestReport = exReport.createTest(" New Member Tests").assignCategory("NewMember");// give the name of the test title  in the report
         ExReJoinSmsReport = exReport.createTest(" Send Join SMS Test").assignCategory("JoinSms");// give the name of the test title  in the report
         ExReStage6And7Report = exReport.createTest("Stage 6 And 7 Test").assignCategory("Stage6And7Test");// give the name of the test title  in the report
+        ExReGeneralTests =  exReport.createTest("General Tests").assignCategory("Transaction");// give the name of the test title  in the report
         LogFileHandling.DeleteFile("EmailLog",HOME_DIRECTORY);
         LogFileHandling.CreateFile("EmailLog",HOME_DIRECTORY);
 

@@ -399,11 +399,11 @@ public class Stage6And7Test extends BasePage {
     public void Stage7Deal1Test() throws IOException {
 
         if(stage6And7TestFunctions.subTotalPromoIdCheck()){
-            ExReStage6And7Report.pass("subTotalPromoIdCheck ---- PASS");
-            System.out.println("subTotalPromoIdCheck ---- PASS");
+            ExReStage6And7Report.pass("Stage7Deal1Test ---- PASS");
+            System.out.println("Stage7Deal1Test ---- PASS");
         }else{
-            ExReStage6And7Report.fail("subTotalPromoIdCheck ---- Fail ");
-            System.out.println("subTotalPromoIdCheck ---- Fail ");
+            ExReStage6And7Report.fail("Stage7Deal1Test ---- Fail ");
+            System.out.println("Stage7Deal1Test ---- Fail ");
             ExReStage6And7Report.info("one of the PromoId in the TestJSON is not found in subTotal response");
             MainFunction.onTestFailure("Stage7Deal1Test");
 

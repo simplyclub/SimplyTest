@@ -291,6 +291,10 @@ public class MainFunction extends BasePage {
             ExReJoinSmsReport.pass(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
+        if (str.equals("PosTest")) {
+            ExReGeneralTests.pass(str + "Test fail");
+            LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
+        }
 
     }
 

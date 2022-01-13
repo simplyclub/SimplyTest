@@ -148,6 +148,10 @@ public class Listeners extends BasePage implements ITestListener  {
             ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
         }
+        if (str.equals("PosTest")) {
+            ExReGeneralTests.pass(arg0.getName() + "Test passed");
+            LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
+        }
 
     }
 
@@ -157,7 +161,7 @@ public class Listeners extends BasePage implements ITestListener  {
 
         String str = arg0.getName();
 
-        if (str.equals("subTotalTest")) {
+        if (str.equals("SubTotalTest")) {
             ExReApiTestReport.fail(arg0.getName() + " Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+arg0.getName() + " Test fail",HOME_DIRECTORY);
 

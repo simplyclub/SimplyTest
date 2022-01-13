@@ -21,7 +21,9 @@ public class SubTotalTest extends BasePage {
 
     @Test(testName = "SubTotalTest",retryAnalyzer = RetryAnalyzer.class)
     public void subTotalTest() throws IOException {
+
         basePage.ExReApiTestReport.info("basic API Test");
+
 
         int SFFlag = 0;
 
