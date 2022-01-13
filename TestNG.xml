@@ -49,5 +49,10 @@
             <class name="Tests.Stage6And7Test"></class>
         </classes>
     </test>
+    <test name="General Tests">
+        <classes>
+            <class name="Tests.GeneralTests"></class>
+        </classes>
+    </test>
 
 </suite>

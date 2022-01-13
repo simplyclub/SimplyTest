@@ -20,6 +20,7 @@ public class TranEndTest extends BasePage {
 //, retryAnalyzer = RetryAnalyzer.class
     @Test(testName = "TrenEnd Test ", retryAnalyzer = RetryAnalyzer.class)
     public void tranEndTest() throws TransformerException, IOException {
+
         TranEndFunctions tranEndFunctions = new TranEndFunctions();
         int SFFlag=0;
 
@@ -27,6 +28,7 @@ public class TranEndTest extends BasePage {
 // i <= JSONGetData.getArraySize(TestJSONToSend) - 1
             for ( int i = 0;i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++) {
                 try{
+
                 if (JSONGetData.getDealTypeFlag(TestJSONToSend, i).equals("0")) {
                     ExReAccumReport.info("~~~~~~~~~~~~~~~~~~~~~~ Transaction: " + (i + 1) + " ~~~~~~~~~~~~~~~~~~~~~~");
                     System.out.println(MainFunction.BaseLogStringFunc()+"~~~~~~~~~~~~~~~~~~~~~~Deal: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");

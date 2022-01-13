@@ -49,8 +49,10 @@ public class ResponseHandling  {
         //String s = response.body().string();
         //System.out.println(s);
         JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(s);
+        //System.out.println(s);
 
         JSONArray discounts = (JSONArray) responseObj.get(discountsType);
+       // System.out.println(discounts);
 
         JSONObject promoId = (JSONObject) discounts.get(index);
         //System.out.println(promoId.get("PromoId").toString());
