@@ -16,7 +16,7 @@ public class JSONCompare extends BasePage {
     String TBPromoId = null;
     int  flag1 = 0 ;
 
-    public boolean responVSTestJson (int arrayIndex, String response) throws IOException {
+    public boolean responseVSTestJson(int arrayIndex, String response) throws IOException {
         int SFFlag=0 ;
 
         // this loop will run on the respone "CashBackDiscounts"
