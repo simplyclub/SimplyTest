@@ -6,7 +6,7 @@ import JSON.JSONCompare;
 import JSON.ResponseHandling;
 
 
-
+import Tests.TestFunctions.SubTotalFunctions;
 import org.testng.annotations.Test;
 import utilities.MainFunction;
 import utilities.RetryAnalyzer;
@@ -18,8 +18,10 @@ public class SubTotalTest extends BasePage {
     JSONCompare JSONCompare = new JSONCompare();
     ResponseHandling responseHandling = new ResponseHandling();
     BasePage basePage = new BasePage();
+    SubTotalFunctions subTotalFunctions = new SubTotalFunctions();
 
-    @Test(testName = "SubTotalTest",retryAnalyzer = RetryAnalyzer.class)
+    //old test
+    @Test(testName = "SubTotalTest",retryAnalyzer = RetryAnalyzer.class,enabled = false)
     public void subTotalTest() throws IOException {
 
         basePage.ExReApiTestReport.info("basic API Test");
@@ -53,7 +55,7 @@ public class SubTotalTest extends BasePage {
                 ExReApiTestReport.info("subTotalResponse Time : "+BaseAPI.getResponseTime_OkHttp(subTotalResponse) + "ms");
                 basePage.avgTimeSubTotal.add(BaseAPI.getResponseTime_OkHttp(subTotalResponse));
 
-                if(!JSONCompare.responVSTestJson(i, subTotalResponse_String)){
+                if(!JSONCompare.responseVSTestJson(i, subTotalResponse_String)){
                     SFFlag = 1 ;
                 }
                 JSONCompare.TestJSONVSResponse(i, subTotalResponse_String);
@@ -104,6 +106,22 @@ public class SubTotalTest extends BasePage {
 
 
     }
+
+    //new test
+    @Test(testName = "SubTotalTest",retryAnalyzer = RetryAnalyzer.class,enabled = true)
+    public void subTotalTest2() throws IOException {
+
+
+        if(!subTotalFunctions.SubTotalCheck()){
+            MainFunction.onTestFailure("subTotalTest");
+        }
+        ExReApiTestReport.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+                .info("avgTimeSubTotal: "+ (MainFunction.getAvgTime(avgTimeSubTotal)+"ms"))
+                .info("avgTimetrenCancel: "+MainFunction.getAvgTime(avgTimeTranRefund) +"ms");
+
+
+
+    }//end Test
 
 
 
