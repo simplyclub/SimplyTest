@@ -34,7 +34,7 @@ public class SubTotalTest extends BasePage {
 
         //this loop run on the the tests in the "test JSON to send"
         //i <= JSONGetData.getArraySize(TestJSONToSend) - 1
-        for (int i =0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++) {
+        for (int i =0; i <= 1; i++) {
             ExReApiTestReport.info("~~~~~~~~~~~~~~~~~~~~~~~~ Transaction "+(i+1)+" ~~~~~~~~~~~~~~~~~~~~~~~~");
             System.out.println(MainFunction.BaseLogStringFunc()+"~~~~~~~~~~~~~~~~~~~~~~~~ Deal "+(i+1)+" ~~~~~~~~~~~~~~~~~~~~~~~~");
 
@@ -48,6 +48,7 @@ public class SubTotalTest extends BasePage {
             subTotalResponse = APIPost.postSubTotal_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.JSON_TO_SEND);
             subTotalResponse_String = MainFunction.convertOkHttpResponseToString(subTotalResponse);
             System.out.println(MainFunction.BaseLogStringFunc()+subTotalResponse_String);
+            System.out.println(MainFunction.BaseLogStringFunc()+baseJSON.jsonToSend);
 
 
             if(subTotalResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse_String).equals("0")) {
