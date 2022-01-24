@@ -18,6 +18,7 @@ import utilities.MainFunction;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -122,7 +123,7 @@ public class NewMemberAPIFunctions extends BasePage {
                     System.out.println(MainFunction.BaseLogStringFunc()+"checkJoinPromoActivition---case 284: "+s);
 
 
-                    if (!(s.equals("51"))){
+                    if (!(s.equals("10001"))){
                         ExReNewMemberTestReport.fail(".checkJoinPromoActivition  case "+x.get("AccID").toString()+" --- Fail");
                         System.out.println(MainFunction.BaseLogStringFunc()+"BenefitValue = "+s);
                         flag =1;
@@ -134,7 +135,7 @@ public class NewMemberAPIFunctions extends BasePage {
                     System.out.println(MainFunction.BaseLogStringFunc()+"checkJoinPromoActivition --- case 285: "+s);
 
 
-                    if (!(s.equals("25"))){
+                    if (!(s.equals("500"))){
                         ExReNewMemberTestReport.fail(".checkJoinPromoActivition  case "+x.get("AccID").toString()+" --- Fail");
                         flag =1;
 
@@ -524,10 +525,19 @@ public class NewMemberAPIFunctions extends BasePage {
     protected  void makeJoinItemDeal(String memberCardNumber  ) throws IOException {
 
         //System.out.println("tranEndOnePhaseToSend_pre: "+ baseJSON.tranEndOnePhaseToSend.toString());
+        try {
+            userDataResponse = getUserData(0, memberCardNumber);
+            //System.out.println(baseJSON.memberJsonToSend.toString());
+            userDataResponse_String = MainFunction.convertOkHttpResponseToString(userDataResponse);
+        }catch (SocketTimeoutException e){
+            System.out.println("ERROE(MemberTest5)  --- The server is currently busy, please try again later ");
+            ExReNewMemberTestReport.fail("ERROE(MemberTest5)  --- The server is currently busy, please try again later ");
+        }catch (NullPointerException e){
+            System.out.println("ERROE(MemberTest5)  --- NullPointerException ");
+            ExReNewMemberTestReport.fail("ERROE(MemberTest5)  --- NullPointerException ");
 
-        userDataResponse = getUserData(0,memberCardNumber);
-        //System.out.println(baseJSON.memberJsonToSend.toString());
-        userDataResponse_String =MainFunction.convertOkHttpResponseToString(userDataResponse);
+        }
+
         if (!(userDataResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(userDataResponse_String).equals("0"))) {
             System.out.println("***ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                     "                            responseHandling.getErrorCodeStatusJson(userDataResponse)" + ")");
@@ -538,7 +548,7 @@ public class NewMemberAPIFunctions extends BasePage {
             ExReTrenEndOnePhaseReport.info(
                     LogFileHandling.createLogFile(userDataResponse_String, LOG_FILE_DIRECTORY, "userDataResponse",1));
             userDataResponse.body().close();
-            MainFunction.onTestFailure("makeJoinItemDeal");
+            MainFunction.onTestFailure("MemberTest5");
 
 
         }
@@ -562,9 +572,31 @@ public class NewMemberAPIFunctions extends BasePage {
         System.out.println("tranEndOnePhaseToSend_post: "+baseJSON.tranEndOnePhaseToSend);
         System.out.println("Response: "+(APIPost.postTrenEndOnePhase_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.TREN_END_ONE_PHASE)).body().string());
 
+        try {
+            userDataResponse = getUserData(0, memberCardNumber);
+            userDataResponse_String = MainFunction.convertOkHttpResponseToString(userDataResponse);
+        }catch (SocketTimeoutException e){
+            System.out.println("ERROE(MemberTest5)  --- The server is currently busy, please try again later ");
+            ExReNewMemberTestReport.fail("ERROE(MemberTest5)  --- The server is currently busy, please try again later ");
+        }catch (NullPointerException e){
+            System.out.println("ERROE(MemberTest5)  --- NullPointerException ");
+            ExReNewMemberTestReport.fail("ERROE(MemberTest5)  --- NullPointerException ");
 
-        userDataResponse = getUserData(0,memberCardNumber);
-        userDataResponse_String =MainFunction.convertOkHttpResponseToString(userDataResponse);
+        }
+        if (!(userDataResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(userDataResponse_String).equals("0"))) {
+            System.out.println("***ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                    "                            responseHandling.getErrorCodeStatusJson(userDataResponse)" + ")");
+            ExReAccumReport.fail("ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                    responseHandling.getErrorCodeStatusJson(userDataResponse_String) + ")");
+            ExReTrenEndOnePhaseReport.info(
+                    LogFileHandling.createLogFile(baseJSON.memberJsonToSend.toString(), LOG_FILE_DIRECTORY, "userDatacall",1));
+            ExReTrenEndOnePhaseReport.info(
+                    LogFileHandling.createLogFile(userDataResponse_String, LOG_FILE_DIRECTORY, "userDataResponse",1));
+            userDataResponse.body().close();
+            MainFunction.onTestFailure("MemberTest5");
+
+
+        }
         String ExpDate_post = responseHandling.getUserDetailsExpDate(userDataResponse_String);
 
 
@@ -595,10 +627,19 @@ public class NewMemberAPIFunctions extends BasePage {
     protected  void makeRenewItemDeal(String memberCardNumber  ) throws IOException {
 
         //System.out.println("tranEndOnePhaseToSend_pre: "+ baseJSON.tranEndOnePhaseToSend.toString());
+        try {
+            userDataResponse = getUserData(0, memberCardNumber);
+            //System.out.println(baseJSON.memberJsonToSend.toString());
+            userDataResponse_String = MainFunction.convertOkHttpResponseToString(userDataResponse);
+        }catch (SocketTimeoutException e){
+            System.out.println("ERROE(MemberTest5)  --- The server is currently busy, please try again later ");
+            ExReNewMemberTestReport.fail("ERROE(MemberTest5)  --- The server is currently busy, please try again later ");
+        }catch (NullPointerException e){
+            System.out.println("ERROE(MemberTest5)  --- NullPointerException ");
+            ExReNewMemberTestReport.fail("ERROE(MemberTest5)  --- NullPointerException ");
 
-        userDataResponse = getUserData(0,memberCardNumber);
-        //System.out.println(baseJSON.memberJsonToSend.toString());
-        userDataResponse_String =MainFunction.convertOkHttpResponseToString(userDataResponse);
+        }
+
         if (!(userDataResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(userDataResponse_String).equals("0"))) {
             System.out.println("***ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                     "                            responseHandling.getErrorCodeStatusJson(userDataResponse)" + ")");
@@ -609,7 +650,7 @@ public class NewMemberAPIFunctions extends BasePage {
             ExReTrenEndOnePhaseReport.info(
                     LogFileHandling.createLogFile(userDataResponse_String, LOG_FILE_DIRECTORY, "userDataResponse",1));
             userDataResponse.body().close();
-            MainFunction.onTestFailure("makeRenewItemDeal");
+            MainFunction.onTestFailure("MemberTest5");
 
 
         }
@@ -633,10 +674,32 @@ public class NewMemberAPIFunctions extends BasePage {
         System.out.println("tranEndOnePhaseToSend_post: "+baseJSON.tranEndOnePhaseToSend);
         System.out.println("Response: "+(APIPost.postTrenEndOnePhase_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.TREN_END_ONE_PHASE)).body().string());
 
+        try {
+            userDataResponse = getUserData(0, memberCardNumber);
+            userDataResponse_String = MainFunction.convertOkHttpResponseToString(userDataResponse);
+        }catch (SocketTimeoutException e){
+            System.out.println("ERROE(MemberTest5)  --- The server is currently busy, please try again later ");
+            ExReNewMemberTestReport.fail("ERROE(MemberTest5)  --- The server is currently busy, please try again later ");
+        }catch (NullPointerException e){
+            System.out.println("ERROE(MemberTest5)  --- NullPointerException ");
+            ExReNewMemberTestReport.fail("ERROE(MemberTest5)  --- NullPointerException ");
 
-        userDataResponse = getUserData(0,memberCardNumber);
-        userDataResponse_String =MainFunction.convertOkHttpResponseToString(userDataResponse);
+        }
 
+        if (!(userDataResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(userDataResponse_String).equals("0"))) {
+            System.out.println("***ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                    "                            responseHandling.getErrorCodeStatusJson(userDataResponse)" + ")");
+            ExReAccumReport.fail("ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                    responseHandling.getErrorCodeStatusJson(userDataResponse_String) + ")");
+            ExReTrenEndOnePhaseReport.info(
+                    LogFileHandling.createLogFile(baseJSON.memberJsonToSend.toString(), LOG_FILE_DIRECTORY, "userDatacall",1));
+            ExReTrenEndOnePhaseReport.info(
+                    LogFileHandling.createLogFile(userDataResponse_String, LOG_FILE_DIRECTORY, "userDataResponse",1));
+            userDataResponse.body().close();
+            MainFunction.onTestFailure("MemberTest5");
+
+
+        }
         String ExpDate_post = responseHandling.getUserDetailsExpDate(userDataResponse_String);
 
 

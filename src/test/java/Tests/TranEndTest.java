@@ -107,7 +107,7 @@ public class TranEndTest extends BasePage {
                             MainFunction.onTestFailure("tranEndTest");
                             break;
                         }
-                        tranEndFunctions.getPostDealVouchers(i, userDataResponse_String);
+                        tranEndFunctions.getPostDealVouchers( userDataResponse_String);
                         userDataResponse.body().close();
 
 
@@ -201,7 +201,7 @@ public class TranEndTest extends BasePage {
                         }
                         userDataResponse.body().close();
 
-                        tranEndFunctions.getPostDealVouchers(i, userDataResponse_String);
+                        tranEndFunctions.getPostDealVouchers(userDataResponse_String);
 
                         //get Transaction View, with the data of all Discount Data in the end of the deal
                         updateXMLFile.updateGetTransactionView(BaseXML.xmlToDocGetTransactionView(), "loginKey", updateXMLFile.getSysLogin());

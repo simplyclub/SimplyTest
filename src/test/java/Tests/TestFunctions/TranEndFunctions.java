@@ -33,7 +33,7 @@ public class TranEndFunctions extends BasePage {
      *  Checks if the amount of points earned, for each of the Accums , is correct and equal to what I expected to receive
      *  in the TestJSON
      *
-     * @param i
+     * @param i d
      */
     public boolean earnedChecks(int i){
         for (String key : sumDealPoints.keySet()) {
@@ -42,7 +42,7 @@ public class TranEndFunctions extends BasePage {
 
                 //Compares  the Accum from the "sumDealPoints " to the Accum in the Test JSON
                 if (key.equals(JSONGetData.getSumAccumKey(TestJSONToSend, i, q))) {
-                    String dx = null;
+                    String dx ;
                     DecimalFormat df = new DecimalFormat("#.##");
                     double d = 0.0 ;
 
@@ -509,7 +509,7 @@ public class TranEndFunctions extends BasePage {
 
         }//func end
 
-        public void getPostDealVouchers ( int i, String userDataResponse) throws IOException {
+        public void getPostDealVouchers ( String userDataResponse) throws IOException {
             //this function will add all the post deal vouchers value to the post deal HaseMap
             for (int index = 0; index < (ResponseHandling.getAllAccums(userDataResponse)).size(); index++) {
                 s = UserHandling.getVoucher(ResponseHandling.getAllAccums(userDataResponse), "AccID", index);

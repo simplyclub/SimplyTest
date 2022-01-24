@@ -22,8 +22,21 @@ public class Stage6And7Test extends BasePage {
     @Test(description = "inputFlug=1,Including a cash register sale")
     public void Stage6Deal1Test() throws IOException {
 
-        trenEndOnePhaseResponse = stage6And7TestFunctions.makeTrenEndOnePhase(0,1);
-        trenEndOnePhaseResponse_String = MainFunction.convertOkHttpResponseToString(trenEndOnePhaseResponse);
+        try {
+            trenEndOnePhaseResponse = stage6And7TestFunctions.makeTrenEndOnePhase(0, 1);
+            trenEndOnePhaseResponse_String = MainFunction.convertOkHttpResponseToString(trenEndOnePhaseResponse);
+        }catch (SocketTimeoutException e) {
+            ExReGeneralTests.warning("ERROR(trenEndOnePhaseResponse)---- Socket Timeout Exception  ");
+            System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(trenEndOnePhaseResponse)---- Socket Timeout Exception  ");
+
+            throw new SocketTimeoutException();
+
+        } catch (NullPointerException e) {
+            ExReGeneralTests.warning("ERROR(trenEndOnePhaseResponse)---- Null lPointer Exceptionn  ");
+            System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(trenEndOnePhaseResponse)---- Null Pointer Exception  ");
+            throw new NullPointerException();
+
+        }
 
         if (!(trenEndOnePhaseResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(trenEndOnePhaseResponse_String).equals("0"))) {
             System.out.println("***ERROR --- status code is not 200" + "(" + trenEndOnePhaseResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
@@ -132,8 +145,8 @@ public class Stage6And7Test extends BasePage {
         for (int XRIndex = 0; XRIndex < (nodeList.getLength()); XRIndex++) {
 
             if (!(ResponseHandling.getXMLResponsePromoID(nodeList, XRIndex).equals("1906"))){
-                ExReStage6And7Report.pass("Stage6Deal1Test --- PASS");
-                System.out.println(BaseLogStringFunc()+"Stage6Deal1Test --- PASS");
+                ExReStage6And7Report.pass("Stage6Deal2Test --- PASS");
+                System.out.println(BaseLogStringFunc()+"Stage6Deal2Test --- PASS");
                 break;
                 }else {
                     ExReStage6And7Report.fail("Stage6Deal2Test(PromoId) --- Fail");

@@ -225,10 +225,31 @@ public class NewMemberTests extends NewMemberAPIFunctions {
     description = "This test will, check if the joining benefits have been activated")
     public void MemberTest3 () throws IOException {
         //NEW_MEMBER_CARD_NUMBER="1000070";
-        userDataResponse =  getUserData(0,NEW_MEMBER_CARD_NUMBER);
+        try {
+            userDataResponse = getUserData(0, NEW_MEMBER_CARD_NUMBER);
+            userDataResponse_String = MainFunction.convertOkHttpResponseToString(userDataResponse);
+        }catch (SocketTimeoutException e){
+            System.out.println("ERROE(MemberTest3)  --- The server is currently busy, please try again later ");
+            ExReNewMemberTestReport.fail("ERROE(MemberTest3)  --- The server is currently busy, please try again later ");
+        }catch (NullPointerException e){
+            System.out.println("ERROE(MemberTest3)  --- NullPointerException ");
+            ExReNewMemberTestReport.fail("ERROE(MemberTest3)  --- NullPointerException ");
+
+        }
+        if(!(userDataResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(userDataResponse_String).equals("0"))){
+            System.out.println("*ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" +
+                    responseHandling.getErrorCodeStatusJson(userDataResponse_String) + ")");
+            ExReNewMemberTestReport.fail("ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                    responseHandling.getErrorCodeStatusJson(userDataResponse_String) + ")");
+            LogFileHandling.createLogFile(baseJSON.getString(BaseJSON.MEMBER_UPDATE_JSON), LOG_FILE_DIRECTORY, "memberSearch",0);
+            LogFileHandling.createLogFile(userDataResponse_String, LOG_FILE_DIRECTORY, "userDataResponse",0);
+            userDataResponse.body().close();
+            MainFunction.onTestFailure("MemberTest3");
+
+        }
         System.out.println(MainFunction.BaseLogStringFunc()+baseJSON.memberJsonToSend);
         System.out.println(MainFunction.BaseLogStringFunc()+NEW_MEMBER_CARD_NUMBER);
-        userDataResponse_String = MainFunction.convertOkHttpResponseToString(userDataResponse);
+
         System.out.println(MainFunction.BaseLogStringFunc()+userDataResponse_String);
 
         if(!checkJoinPromoActivition(userDataResponse_String)){
@@ -366,10 +387,31 @@ public class NewMemberTests extends NewMemberAPIFunctions {
 
     @Test(priority = 6,retryAnalyzer = RetryAnalyzer.class,description = "this test will, change the member stats from active to nun active")
     public void MemberTest6 () throws IOException {
-        memberSwitchStatusResponse =  changeMemberStatus(0,NEW_MEMBER_CARD_NUMBER,MEMBER_STATUS_NOT_ACTIVE);
-        memberSwitchStatusResponse_String = MainFunction.convertOkHttpResponseToString(memberSwitchStatusResponse);
-        System.out.println(baseJSON.memberSwitchStatusJsonToSend);
-        System.out.println(memberSwitchStatusResponse_String);
+        try {
+            memberSwitchStatusResponse = changeMemberStatus(0, NEW_MEMBER_CARD_NUMBER, MEMBER_STATUS_NOT_ACTIVE);
+            memberSwitchStatusResponse_String = MainFunction.convertOkHttpResponseToString(memberSwitchStatusResponse);
+        }catch (SocketTimeoutException e){
+            System.out.println(MainFunction.BaseLogStringFunc()+"ERROE(MemberTest6)  --- The server is currently busy, please try again later ");
+            ExReNewMemberTestReport.fail("ERROE(MemberTest6)  --- The server is currently busy, please try again later ");
+        }catch (NullPointerException e){
+            System.out.println(MainFunction.BaseLogStringFunc()+"ERROE(MemberTest6)  --- NullPointerException ");
+            ExReNewMemberTestReport.fail("ERROE(MemberTest6)  --- NullPointerException ");
+
+        }
+        System.out.println(MainFunction.BaseLogStringFunc()+baseJSON.memberSwitchStatusJsonToSend);
+        System.out.println(MainFunction.BaseLogStringFunc()+memberSwitchStatusResponse_String);
+
+        if(!(memberSwitchStatusResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(memberUpdateResponse_String).equals("0"))){
+            System.out.println(MainFunction.BaseLogStringFunc()+"*ERROR --- status code is not 200" + "(" + memberSwitchStatusResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" +
+                    responseHandling.getErrorCodeStatusJson(memberUpdateResponse_String) + ")");
+            ExReNewMemberTestReport.fail("ERROR --- status code is not 200" + "(" + memberSwitchStatusResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                    responseHandling.getErrorCodeStatusJson(memberUpdateResponse_String) + ")");
+            LogFileHandling.createLogFile(baseJSON.getString(BaseJSON.MEMBER_SWITCH_STATUS_JSON), LOG_FILE_DIRECTORY, "memberSearch",0);
+            LogFileHandling.createLogFile(memberUpdateResponse_String, LOG_FILE_DIRECTORY, "memberSwitchStatusResponse",0);
+            memberSwitchStatusResponse.body().close();
+            MainFunction.onTestFailure("MemberTest6");
+
+        }
 
 
         if(responseHandling.getMemberStatus(memberSwitchStatusResponse_String).equals(MEMBER_STATUS_NOT_ACTIVE)){
@@ -391,25 +433,35 @@ public class NewMemberTests extends NewMemberAPIFunctions {
     public void MemberTest7() throws IOException {
 
         MANUAL_CARD_NUMBER= makeManualMemberCard();
-        System.out.println("MANUAL_CARD_NUMBER: "+ MANUAL_CARD_NUMBER);
+        System.out.println(MainFunction.BaseLogStringFunc()+"MANUAL_CARD_NUMBER: "+ MANUAL_CARD_NUMBER);
 
         if((MANUAL_CARD_NUMBER!= null)){
             ID_RANDOM_NUMBER= MainFunction.RandomNumber();
             INT_RANDOM_NUMBER = MainFunction.RandomNumber();
-            memberAddResponse = MemberAdd(0,INT_RANDOM_NUMBER,ID_RANDOM_NUMBER,MANUAL_CARD_NUMBER);
-            memberAddResponse_String = MainFunction.convertOkHttpResponseToString(memberAddResponse);
-            System.out.println(memberAddResponse_String);
+            try {
+                memberAddResponse = MemberAdd(0, INT_RANDOM_NUMBER, ID_RANDOM_NUMBER, MANUAL_CARD_NUMBER);
+                memberAddResponse_String = MainFunction.convertOkHttpResponseToString(memberAddResponse);
+            }catch (SocketTimeoutException e){
+                System.out.println(MainFunction.BaseLogStringFunc()+"ERROE(MemberTest7)  --- The server is currently busy, please try again later ");
+                ExReNewMemberTestReport.fail("ERROE(MemberTest7)  --- The server is currently busy, please try again later ");
+            }catch (NullPointerException e){
+                System.out.println(MainFunction.BaseLogStringFunc()+"ERROE(MemberTest7)  --- NullPointerException ");
+                ExReNewMemberTestReport.fail("ERROE(MemberTest7)  --- NullPointerException ");
+
+            }
+
+            System.out.println(MainFunction.BaseLogStringFunc()+memberAddResponse_String);
 
             if((memberAddResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(memberAddResponse_String).equals("0"))){
 
                 memberSwitchStatusResponse =  changeMemberStatus(0,MANUAL_CARD_NUMBER,MEMBER_STATUS_NOT_ACTIVE);
                 memberSwitchStatusResponse_String = MainFunction.convertOkHttpResponseToString(memberSwitchStatusResponse);
-                System.out.println(baseJSON.memberSwitchStatusJsonToSend);
-                System.out.println(memberSwitchStatusResponse_String);
+                System.out.println(MainFunction.BaseLogStringFunc()+baseJSON.memberSwitchStatusJsonToSend);
+                System.out.println(MainFunction.BaseLogStringFunc()+memberSwitchStatusResponse_String);
 
 
                 if(responseHandling.getMemberStatus(memberSwitchStatusResponse_String).equals(MEMBER_STATUS_NOT_ACTIVE)){
-                    System.out.println("111");
+                    //System.out.println("111");
                     ExReNewMemberTestReport.pass("Member manual cardID -- PASS");
 
 
@@ -438,21 +490,41 @@ public class NewMemberTests extends NewMemberAPIFunctions {
     }//End Test 7
 
     @Test(priority = 8,retryAnalyzer = RetryAnalyzer.class,
-            description ="This test will do a fail test, will search for  a member that is  does not exist " )
+            description ="This test will do a failed test, will search for  a member that is  does not exist " )
     public void MemberTest8() throws IOException {
 
-        memberSearchResponse = MemberSearch("1234",0,CARD_FIELD);
-        System.out.println(baseJSON.memberSerachJsonToSend.toString());
-        memberSearchResponse_String= MainFunction.convertOkHttpResponseToString(memberSearchResponse);
-        System.out.println(memberSearchResponse_String);
+        try {
+            memberSearchResponse = MemberSearch("1234", 0, CARD_FIELD);
+            System.out.println(baseJSON.memberSerachJsonToSend.toString());
+            memberSearchResponse_String = MainFunction.convertOkHttpResponseToString(memberSearchResponse);
+            System.out.println(MainFunction.BaseLogStringFunc()+memberSearchResponse_String);
+        }catch (SocketTimeoutException e){
+            System.out.println(MainFunction.BaseLogStringFunc()+"ERROE(MemberTest8)  --- The server is currently busy, please try again later ");
+            ExReNewMemberTestReport.fail("ERROE(MemberTest8)  --- The server is currently busy, please try again later ");
+        }catch (NullPointerException e){
+            System.out.println(MainFunction.BaseLogStringFunc()+"ERROE(MemberTest8)  --- NullPointerException ");
+            ExReNewMemberTestReport.fail("ERROE(MemberTest8)  --- NullPointerException ");
+
+        }
+        if(!(memberUpdateResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(memberUpdateResponse_String).equals("0"))){
+            System.out.println("*ERROR --- status code is not 200" + "(" + memberUpdateResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" +
+                    responseHandling.getErrorCodeStatusJson(memberUpdateResponse_String) + ")");
+            ExReNewMemberTestReport.fail("ERROR --- status code is not 200" + "(" + memberUpdateResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                    responseHandling.getErrorCodeStatusJson(memberUpdateResponse_String) + ")");
+            LogFileHandling.createLogFile(baseJSON.getString(BaseJSON.MEMBER_UPDATE_JSON), LOG_FILE_DIRECTORY, "memberSearch",0);
+            LogFileHandling.createLogFile(memberUpdateResponse_String, LOG_FILE_DIRECTORY, "memberSearchResponse",0);
+            memberUpdateResponse.body().close();
+            MainFunction.onTestFailure("MemberTest8");
+
+        }
 
         if(responseHandling.getMembersArraySize(memberSearchResponse_String)== 0){
             System.out.println(responseHandling.getErrorCodeStatusJson(memberSearchResponse_String));
-            ExReNewMemberTestReport.pass("Member fail search  -- PASS");
+            ExReNewMemberTestReport.pass("Member failed search  -- PASS");
             memberAddResponse.body().close();
 
         }else{
-            ExReNewMemberTestReport.fail("Member fail search  -- FAIL");
+            ExReNewMemberTestReport.fail("Member failed search  -- FAIL");
             memberAddResponse.body().close();
             MainFunction.onTestFailure("MemberTest8");
 

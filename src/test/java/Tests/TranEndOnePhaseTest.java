@@ -23,12 +23,12 @@ public class TranEndOnePhaseTest extends BasePage {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void tranEndOnePhaseTest() throws IOException {
         //i <=jsonGetData.getArraySize(TestJSONToSend) - 1
-       for (int i = 0; i <=0; i++) {
+       for (int i = 0; i <=jsonGetData.getArraySize(TestJSONToSend) - 1; i++) {
            ExReTrenEndOnePhaseReport.info("~~~~~~~~~~~~~~~~~~~~~~Transaction: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
-           System.out.println("~~~~~~~~~~~~~~~~~~~~~~Transaction: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
+           System.out.println(MainFunction.BaseLogStringFunc()+"~~~~~~~~~~~~~~~~~~~~~~Transaction: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
            MainFunction.RestGlobals();
 
-           System.out.println(MainFunction.BaseLogStringFunc()+"i: " + i);
+
 
 
 //get the pre deal points
@@ -64,7 +64,7 @@ public class TranEndOnePhaseTest extends BasePage {
                if (!(userDataResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(userDataResponse_String).equals("0"))) {
                    System.out.println("***ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                            responseHandling.getErrorCodeStatusJson(userDataResponse_String) + ")");
-                   ExReAccumReport.fail("ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                   ExReTrenEndOnePhaseReport.fail("ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                            responseHandling.getErrorCodeStatusJson(userDataResponse_String) + ")");
                    ExReTrenEndOnePhaseReport.info(
                            LogFileHandling.createLogFile(baseJSON.memberJsonToSend.toString(), LOG_FILE_DIRECTORY, "userDatacall",i+1));
@@ -98,6 +98,8 @@ public class TranEndOnePhaseTest extends BasePage {
                     MainFunction.onTestFailure("tranEndOnePhaseTest");
                     continue;
 
+                }catch (NullPointerException e){
+
                 }
                 //response null check
                 if(trenEndOnePhaseResponse == null){
@@ -109,7 +111,7 @@ public class TranEndOnePhaseTest extends BasePage {
                     if (!(trenEndOnePhaseResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(trenEndOnePhaseResponse_String).equals("0"))) {
                         System.out.println("***ERROR --- status code is not 200" + "(" + trenEndOnePhaseResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                                 "                            responseHandling.getErrorCodeStatusJson(userDataResponse)" + ")");
-                        ExReAccumReport.fail("ERROR --- status code is not 200" + "(" + trenEndOnePhaseResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                        ExReTrenEndOnePhaseReport.fail("ERROR --- status code is not 200" + "(" + trenEndOnePhaseResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                                 responseHandling.getErrorCodeStatusJson(trenEndOnePhaseResponse_String) + ")");
                         ExReTrenEndOnePhaseReport.info(
                                 LogFileHandling.createLogFile(baseJSON.tranEndOnePhaseToSend.toString(), LOG_FILE_DIRECTORY, "trenEndOnePhasecall",i+1));
@@ -154,7 +156,7 @@ public class TranEndOnePhaseTest extends BasePage {
                    if (!(userDataResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(userDataResponse_String).equals("0"))) {
                        System.out.println("***ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                                "                            responseHandling.getErrorCodeStatusJson(userDataResponse)" + ")");
-                       ExReAccumReport.fail("ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                       ExReTrenEndOnePhaseReport.fail("ERROR --- status code is not 200" + "(" + userDataResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                                responseHandling.getErrorCodeStatusJson(userDataResponse_String) + ")");
                        ExReTrenEndOnePhaseReport.info(
                                LogFileHandling.createLogFile(baseJSON.memberJsonToSend.toString(), LOG_FILE_DIRECTORY, "userDatacall",i+1));
@@ -173,17 +175,41 @@ public class TranEndOnePhaseTest extends BasePage {
                ////////////
            try {
                updateXMLFile.updateGetTransactionView(BaseXML.xmlToDocGetTransactionView(), "loginKey", updateXMLFile.getSysLogin());
-           }catch (NullPointerException e){
-               System.out.println("1234");
-           }try {
-               updateXMLFile.updateGetTransactionView(BaseXML.xmlToDocGetTransactionView(), "tranKey", responseHandling.getTrenEndTranReferenceNumber(trenEndOnePhaseResponse_String));
-           }catch (NullPointerException e){
-               System.out.println("4321");
+           } catch ( NullPointerException e) {
+               ExReTrenEndOnePhaseReport.warning("ERROR(updateGetTransactionView)---- Null lPointer Exception  ");
+               System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(updateGetTransactionView)---- Null Pointer Exception  ");
+               MainFunction.onTestFailure("tranEndOnePhaseTest");
+               throw new NullPointerException();
+
            }
+
+           try {
+               updateXMLFile.updateGetTransactionView(BaseXML.xmlToDocGetTransactionView(), "tranKey", responseHandling.getTrenEndTranReferenceNumber(trenEndOnePhaseResponse_String));
+           }catch (SocketTimeoutException e){
+               ExReTrenEndOnePhaseReport.warning("ERROR(updateGetTransactionView)---- Socket Timeout Exception  ");
+               System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(updateGetTransactionView)---- Socket Timeout Exception  ");
+               MainFunction.onTestFailure("tranEndOnePhaseTest");
+               throw new SocketTimeoutException();
+
+           }catch ( NullPointerException e) {
+               ExReTrenEndOnePhaseReport.warning("ERROR(updateGetTransactionView)---- Null lPointer Exception  ");
+               System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(updateGetTransactionView)---- Null Pointer Exception  ");
+               MainFunction.onTestFailure("tranEndOnePhaseTest");
+               throw new NullPointerException();
+
+           }
+           try {
                transactionViewResponse = APIPost.postXMLToGetTransactionView(TEST_API_SYSTEM_URI, BaseXML.GET_TREN_FILE_LOCATION);
+           }catch ( NullPointerException e) {
+               ExReTrenEndOnePhaseReport.warning("ERROR(transactionViewResponse)---- Null lPointer Exception  ");
+               System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(transactionViewResponse)---- Null Pointer Exception  ");
+               MainFunction.onTestFailure("tranEndOnePhaseTest");
+               throw new NullPointerException();
+
+           }
                if (!(transactionViewResponse.getStatusCode() == 200)) {
                    System.out.println("****ERROR xml--- status code is not 200 ");
-                   ExReAccumReport.fail("ERROR xml(transactionViewResponse)--- status code is not 200" + "(" + transactionViewResponse.getStatusCode() + ")");
+                   ExReTrenEndOnePhaseReport.fail("ERROR xml(transactionViewResponse)--- status code is not 200" + "(" + transactionViewResponse.getStatusCode() + ")");
                    ExReTrenEndOnePhaseReport.info(
                            LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
                            LOG_FILE_DIRECTORY, "XmlTransactionViewcall",i+1));
