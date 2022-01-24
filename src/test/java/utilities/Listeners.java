@@ -66,19 +66,19 @@ public class Listeners extends BasePage implements ITestListener  {
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest1")) {
-            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            ExReNewMemberTestReport.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest2")) {
-            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            ExReNewMemberTestReport.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest3")) {
-            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            ExReNewMemberTestReport.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest4")) {
-            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            ExReNewMemberTestReport.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
             LogFileHandling.WriteToFile("EmailLog","    avgTimeSubTotal NewMember: "+ MainFunction.getAvgTime(avgTimeSubTotal),HOME_DIRECTORY);
             LogFileHandling.WriteToFile("EmailLog","    avgTimeTrenEnd NewMember: "+ MainFunction.getAvgTime(avgTimeTrenEnd),HOME_DIRECTORY);
@@ -86,19 +86,19 @@ public class Listeners extends BasePage implements ITestListener  {
 
         }
         if (str.equals("MemberTest5")) {
-            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            ExReNewMemberTestReport.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest6")) {
-            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            ExReNewMemberTestReport.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest7")) {
-            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            ExReNewMemberTestReport.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest8")) {
-            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            ExReNewMemberTestReport.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
         }
         if (str.equals("JoinSms2Test")) {
@@ -118,39 +118,39 @@ public class Listeners extends BasePage implements ITestListener  {
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
         }
         if (str.equals("Stage6Deal1Test")) {
-            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            ExReStage6And7Report.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
         }
         if (str.equals("Stage6Deal2Test")) {
-            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            ExReStage6And7Report.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
         }
         if (str.equals("Stage6Deal3Test")) {
-            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            ExReStage6And7Report.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
         }
         if (str.equals("Stage6Deal4Test")) {
-            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            ExReStage6And7Report.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
         }
         if (str.equals("Stage6Deal5Test")) {
-            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            ExReStage6And7Report.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
         }
         if (str.equals("Stage6Deal6Test")) {
-            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            ExReStage6And7Report.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
         }
         if (str.equals("Stage7Deal1Test")) {
-            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            ExReStage6And7Report.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
         }
         if (str.equals("Stage7Deal2Test")) {
-            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            ExReStage6And7Report.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
         }
         if (str.equals("Stage7Deal3Test")) {
-            ExReJoinSmsReport.pass(arg0.getName() + "Test passed");
+            ExReStage6And7Report.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
         }
         if (str.equals("PosTest")) {

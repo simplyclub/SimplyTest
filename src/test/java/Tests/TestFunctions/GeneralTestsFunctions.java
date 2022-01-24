@@ -7,6 +7,7 @@ import FunctionsClass.UpdateJSONFile;
 import JSON.JSONGetData;
 import JSON.ResponseHandling;
 import Tests.BasePage;
+import Utilities.LogFileHandling;
 import io.restassured.response.Response;
 import org.json.simple.JSONArray;
 import utilities.MainFunction;
@@ -65,6 +66,18 @@ public class GeneralTestsFunctions extends BasePage {
         }
 
 
+        if (!(subTotalResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse_String).equals("0"))) {
+            System.out.println("ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(subTotalResponse_String) + ")");
+            ExReStage6And7Report.fail("ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
+                    responseHandling.getErrorCodeStatusJson(subTotalResponse_String) + ")");
+            LogFileHandling.createLogFile(baseJSON.getString(baseJSON.JSON_TO_SEND), LOG_FILE_DIRECTORY, "subTotalCall", 0 + 1);
+            LogFileHandling.createLogFile(subTotalResponse_String, LOG_FILE_DIRECTORY, "subTotalResponse", 0 + 1);
+            subTotalResponse.body().close();
+            return false;
+        }
+        System.out.println(MainFunction.BaseLogStringFunc()+subTotalResponse_String);
+
+
         for (int q = 0;q < responseHandling.getCaseBackDiscountsArrSize(subTotalResponse_String) ;q++){
 
             System.out.println(responseHandling.getCaseBackDiscountsArrSize(subTotalResponse_String));
@@ -96,9 +109,13 @@ public class GeneralTestsFunctions extends BasePage {
 
                 if(flag == 2){
                     return true;
+                }else {
+                    return false;
                 }
             }
-        }
+        }//end for loop
+        System.out.println(MainFunction.BaseLogStringFunc()+"CaseBackDiscountsArrSize is 0");
+        ExReGeneralTests.warning("CaseBackDiscountsArrSize from the response is 0");
         return false;
     }
 

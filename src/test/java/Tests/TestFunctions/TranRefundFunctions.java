@@ -69,8 +69,6 @@ public okhttp3.Response makeTranRefund (int i,String TrenEndResponse ) throws IO
     public void fillPreAllAccumsPoints (int i) throws IOException {
         String  userData = getUserData(i);
         JSONArray arr = responseHandling.getAllAccums(userData);
-
-        //System.out.println(arr);
         preAllAccumsPointsfill(arr);
 
     }
@@ -97,6 +95,8 @@ public okhttp3.Response makeTranRefund (int i,String TrenEndResponse ) throws IO
 
             postAllAccumsPoints.put(userHandling.getVoucher(arr ,"AccID", l),
                     Double.valueOf(userHandling.getVoucher(arr,"BenefitValue",l)));
+            System.out.println(MainFunction.BaseLogStringFunc()+"postAllAccumsPoints "+Double.valueOf(userHandling.getVoucher(arr,"BenefitValue",l)));
+
 
         }
     }
@@ -111,7 +111,7 @@ public okhttp3.Response makeTranRefund (int i,String TrenEndResponse ) throws IO
                 System.out.println(MainFunction.BaseLogStringFunc()+"preAllAccumsPoints is NOT equal to postAllAccumsPoints ");
                 ExReTernRefundReport.fail("preAllAccumsPoints is NOT equal to postAllAccumsPoints");
                 ExReTernRefundReport.info("preAllAccumsPoints: "+ preAllAccumsPoints).info("postAllAccumsPoints: "+ postAllAccumsPoints);
-
+                MainFunction.onTestFailure("tranRefundTest");
             }
 
 
@@ -119,6 +119,7 @@ public okhttp3.Response makeTranRefund (int i,String TrenEndResponse ) throws IO
             System.out.println(MainFunction.BaseLogStringFunc()+"preAllAccumsPoints size is not equal to postAllAccumsPoints size");
             ExReTernRefundReport.fail("preAllAccumsPoints size is not equal to postAllAccumsPoints size");
             ExReTernRefundReport.info("postAllAccumsPoints size: "+ postAllAccumsPoints.size()).info("preAllAccumsPoints size: "+ preAllAccumsPoints.size());
+            MainFunction.onTestFailure("tranRefundTest");
 
         }
 

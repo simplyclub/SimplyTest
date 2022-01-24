@@ -26,9 +26,10 @@ public class TranRefundTest extends BasePage {
 
             if(JSONGetData.GetIfToCancelFlag(TestJSONToSend,i).equals("1")){
                 ExReTernRefundReport.info("~~~~~~~~~~~~~~~~~~~~~~~~ Transaction "+(i+1)+" ~~~~~~~~~~~~~~~~~~~~~~~~");
+                System.out.println(MainFunction.BaseLogStringFunc()+"~~~~~~~~~~~~~~~~~~~~~~~~ Transaction "+(i+1)+" ~~~~~~~~~~~~~~~~~~~~~~~~");
 
                 tranRefundFunctions.fillPreAllAccumsPoints(i);
-                System.out.println(MainFunction.BaseLogStringFunc()+preAllAccumsPoints);
+                System.out.println(MainFunction.BaseLogStringFunc()+"preAllAccumsPoints: "+preAllAccumsPoints);
 
                 try {
                 subTotalResponse = tranRefundFunctions.makeDealSubTotal(i);
@@ -113,7 +114,7 @@ public class TranRefundTest extends BasePage {
 
 
                 tranRefundFunctions.fillPostAllAccumsPoints(i);
-                System.out.println(postAllAccumsPoints);
+                System.out.println(MainFunction.BaseLogStringFunc()+"postAllAccumsPoints: "+postAllAccumsPoints);
 
                 tranRefundFunctions.prePostCompere();
 
