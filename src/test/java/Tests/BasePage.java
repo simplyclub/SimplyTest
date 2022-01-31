@@ -28,6 +28,9 @@ import utilities.MainFunction;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -224,8 +227,26 @@ public  class BasePage {
         ExReJoinSmsReport = exReport.createTest(" Send Join SMS Test").assignCategory("JoinSms");// give the name of the test title  in the report
         ExReStage6And7Report = exReport.createTest("Stage 6 And 7 Test").assignCategory("Stage6And7Test");// give the name of the test title  in the report
         ExReGeneralTests =  exReport.createTest("General Tests").assignCategory("Transaction");// give the name of the test title  in the report
+
+        Path path = Paths.get(HOME_DIRECTORY+"\\LogFile");
+        if(!Files.exists(path)){
+            File file = new File(HOME_DIRECTORY+"\\LogFile");
+
+            // true if the directory was created, false otherwise
+            if (file.mkdirs()) {
+                System.out.println("Directory is created!");
+            } else {
+                System.out.println("Failed to create directory!");
+            }
+
+        }
+
         LogFileHandling.DeleteFile("EmailLog",HOME_DIRECTORY);
         LogFileHandling.CreateFile("EmailLog",HOME_DIRECTORY);
+
+
+
+
 
 
     }
