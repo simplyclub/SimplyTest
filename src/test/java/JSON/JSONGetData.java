@@ -13,7 +13,7 @@ public class JSONGetData  {
     //this class is for gating data from the "JSON_TEST_FILE" for comparing
 
     /**
-     * Thos function returns the size of  the TestJson
+     * This function returns the size of  the TestJson
      * @param obj TestJSONToSend
      * @return
      */
@@ -28,6 +28,7 @@ public class JSONGetData  {
         return null;
 
     }
+
     public Integer getArraySizeCashBackDiscounts (JSONObject obj){
         JSONObject JSONObj =  obj ;
         JSONArray tests = (JSONArray) JSONObj.get("CashBackDiscounts");
@@ -96,9 +97,8 @@ public class JSONGetData  {
         JSONArray  tests = (JSONArray) JSONObj.get("array");
         JSONObject  testNameJSONObj = (JSONObject) tests.get(index);
         return  testNameJSONObj.get("TestName").toString();
-
-
     }
+
     public static JSONObject getCashBackDiscounts(Object obj, int index){
         JSONObject JSONObj = (JSONObject) obj ;
         JSONArray  tests = (JSONArray) JSONObj.get("array");
@@ -346,6 +346,7 @@ public class JSONGetData  {
         String str2 =str1.replace("]","");
         return str2;
     }
+
     public static String getSumAccumValue(Object obj, String key, int index, int Aindex){
         JSONObject JsonObj = (JSONObject) obj ;
         JSONArray  tests = (JSONArray) JsonObj.get("array");
@@ -379,7 +380,8 @@ public class JSONGetData  {
         JSONObject d = (JSONObject) dealToUse.get(DealIndex);
         return d.get("AccumId").toString();
 
-    }public String getDealsToUseBurned(Object obj,int index,int DealIndex){
+    }
+    public String getDealsToUseBurned(Object obj,int index,int DealIndex){
         JSONObject JsonObj = (JSONObject) obj ;
         JSONArray  tests = (JSONArray) JsonObj.get("array");
         JSONObject x =  (JSONObject) tests.get(index);
@@ -387,7 +389,8 @@ public class JSONGetData  {
         JSONObject d = (JSONObject) dealToUse.get(DealIndex);
         return d.get("Burned").toString();
 
-    }public static String getDealsToUseDiscountType(Object obj, int index, int DealIndex){
+    }
+    public static String getDealsToUseDiscountType(Object obj, int index, int DealIndex){
         JSONObject JsonObj = (JSONObject) obj ;
         JSONArray  tests = (JSONArray) JsonObj.get("array");
         JSONObject x =  (JSONObject) tests.get(index);

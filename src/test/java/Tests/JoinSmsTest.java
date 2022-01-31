@@ -29,8 +29,8 @@ public class JoinSmsTest extends  BasePage{
                     responseHandling.getErrorCodeStatusJson(joinSmsResponse_String) + ")");
             ExReNewMemberTestReport.fail("ERROR --- status code is not 200" + "(" + joinSmsResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                     responseHandling.getErrorCodeStatusJson(joinSmsResponse_String) + ")");
-            LogFileHandling.createLogFile(baseJSON.getString(BaseJSON.SEND_JOIN_SMS_JSON), LOG_FILE_DIRECTORY, "memberAdd",0);
-            LogFileHandling.createLogFile(joinSmsResponse_String, LOG_FILE_DIRECTORY, "memberAdd",0);
+            LogFileHandling.createLogFile(baseJSON.getString(baseJSON.SEND_JOIN_SMS_JSON), LOG_FILE_DIRECTORY, "JoinSmsTest",0);
+            LogFileHandling.createLogFile(joinSmsResponse_String, LOG_FILE_DIRECTORY, "joinSmsTestResponse",0);
             joinSmsResponse.body().close();
             MainFunction.onTestFailure("JoinSmsTest");
 
@@ -65,8 +65,8 @@ public class JoinSmsTest extends  BasePage{
                     responseHandling.getErrorCodeStatusJson(joinSmsResponse_String) + ")");
             ExReNewMemberTestReport.fail("ERROR --- status code is not 200" + "(" + joinSmsResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                     responseHandling.getErrorCodeStatusJson(joinSmsResponse_String) + ")");
-            LogFileHandling.createLogFile(baseJSON.getString(BaseJSON.SEND_JOIN_SMS_JSON), LOG_FILE_DIRECTORY, "memberAdd",0);
-            LogFileHandling.createLogFile(joinSmsResponse_String, LOG_FILE_DIRECTORY, "memberAdd",0);
+            LogFileHandling.createLogFile(baseJSON.getString(baseJSON.SEND_JOIN_SMS_JSON), LOG_FILE_DIRECTORY, "joinSms",0);
+            LogFileHandling.createLogFile(joinSmsResponse_String, LOG_FILE_DIRECTORY, "joinSmsResponse",0);
             joinSmsResponse.body().close();
             MainFunction.onTestFailure("JoinSms2Test");
 
@@ -100,8 +100,8 @@ public class JoinSmsTest extends  BasePage{
                     responseHandling.getErrorCodeStatusJson(memberGetDetailsAndCodeResponse_String) + ")");
             ExReNewMemberTestReport.fail("ERROR --- status code is not 200" + "(" + memberGetDetailsAndCodeResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                     responseHandling.getErrorCodeStatusJson(memberGetDetailsAndCodeResponse_String) + ")");
-            LogFileHandling.createLogFile(baseJSON.getString(BaseJSON.MEMBER_GET_DETAILS_AND_CODE_JSON), LOG_FILE_DIRECTORY, "memberAdd",0);
-            LogFileHandling.createLogFile(memberGetDetailsAndCodeResponse_String, LOG_FILE_DIRECTORY, "memberAdd",0);
+            LogFileHandling.createLogFile(baseJSON.getString(baseJSON.MEMBER_GET_DETAILS_AND_CODE_JSON), LOG_FILE_DIRECTORY, "MemberGetDetailsAndCodeTest",0);
+            LogFileHandling.createLogFile(memberGetDetailsAndCodeResponse_String, LOG_FILE_DIRECTORY, "memberGetDetailsAndCodeResponse",0);
             memberGetDetailsAndCodeResponse.body().close();
             MainFunction.onTestFailure("MemberGetDetailsAndCodeTest");
 
@@ -135,8 +135,8 @@ public class JoinSmsTest extends  BasePage{
                     responseHandling.getErrorCodeStatusJson(memberGetDetailsResponse_String) + ")");
             ExReNewMemberTestReport.fail("ERROR --- status code is not 200" + "(" + memberGetDetailsResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                     responseHandling.getErrorCodeStatusJson(memberGetDetailsResponse_String) + ")");
-            LogFileHandling.createLogFile(baseJSON.getString(BaseJSON.MEMBER_GET_DETAILS_JSON), LOG_FILE_DIRECTORY, "memberAdd",0);
-            LogFileHandling.createLogFile(memberGetDetailsResponse_String, LOG_FILE_DIRECTORY, "memberAdd",0);
+            LogFileHandling.createLogFile(baseJSON.getString(baseJSON.MEMBER_GET_DETAILS_JSON), LOG_FILE_DIRECTORY, "MemberGetDetailsTest_flag=true",0);
+            LogFileHandling.createLogFile(memberGetDetailsResponse_String, LOG_FILE_DIRECTORY, "MemberGetDetailsTestResponse_flag=true",0);
             memberGetDetailsResponse.body().close();
             MainFunction.onTestFailure("MemberGetDetailsTest");
 
@@ -169,8 +169,8 @@ public class JoinSmsTest extends  BasePage{
                     responseHandling.getErrorCodeStatusJson(memberGetDetailsResponse_String) + ")");
             ExReNewMemberTestReport.fail("ERROR --- status code is not 200" + "(" + memberGetDetailsResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                     responseHandling.getErrorCodeStatusJson(memberGetDetailsResponse_String) + ")");
-            LogFileHandling.createLogFile(baseJSON.getString(BaseJSON.MEMBER_GET_DETAILS_JSON), LOG_FILE_DIRECTORY, "memberAdd",0);
-            LogFileHandling.createLogFile(memberGetDetailsResponse_String, LOG_FILE_DIRECTORY, "memberAdd",0);
+            LogFileHandling.createLogFile(baseJSON.getString(baseJSON.MEMBER_GET_DETAILS_JSON), LOG_FILE_DIRECTORY, "MemberGetDetailsTest_flag=false",0);
+            LogFileHandling.createLogFile(memberGetDetailsResponse_String, LOG_FILE_DIRECTORY, "memberGetDetailsResponse_flag=false",0);
             memberGetDetailsResponse.body().close();
             MainFunction.onTestFailure("MemberGetDetailsTest");
 
