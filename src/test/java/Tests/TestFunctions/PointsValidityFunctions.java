@@ -182,7 +182,7 @@ public class PointsValidityFunctions extends BasePage {
 
         month = dateAfter.getMonthValue();
         day = dateAfter.getDayOfMonth();
-        //System.out.println(month);
+        System.out.println(month);
         //System.out.println(day);
 
         if (month == dateBefore.getMonthValue()) {
@@ -204,7 +204,7 @@ public class PointsValidityFunctions extends BasePage {
                         return 0;
                     }
                 } else {
-                    if (month == 2 && day == 29) {
+                    if (month == 2 && day == 28) {
                         System.out.println(3);
                         return 1;
                     } else {
