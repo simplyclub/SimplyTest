@@ -14,16 +14,13 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.restassured.response.Response;
-import org.testng.TestNG ;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import utilities.EmailHandling;
-import utilities.Listeners;
-import utilities.MainFunction;
+import utilities.MainFunctions;
 
 
 import java.io.File;
@@ -31,9 +28,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 public  class BasePage {
@@ -214,7 +209,7 @@ public  class BasePage {
 
     @BeforeSuite
     public void init () throws IOException {
-        MainFunction.extentReportInit();
+        MainFunctions.extentReportInit();
 
 
         // Extent report tests titles

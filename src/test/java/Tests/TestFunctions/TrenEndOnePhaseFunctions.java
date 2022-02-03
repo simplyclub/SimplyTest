@@ -8,7 +8,7 @@ import JSON.ResponseHandling;
 import JSON.UserHandling;
 import Tests.BasePage;
 import org.w3c.dom.NodeList;
-import utilities.MainFunction;
+import utilities.MainFunctions;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -44,7 +44,7 @@ public class TrenEndOnePhaseFunctions extends BasePage {
                 if (ResponseHandling.getXMLResponsePromoID(nodeList, XRIndex).equals(JSONGetData.getPromoId(TestJSONToSend, i, TJIndex, "Accumulates"))) {
 
                     //this if check if the amount of the points that received from the specific ofer (by promoID) is equal to the a mount in the test JSON
-                    if (MainFunction.converToDoubleAsString(ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)).equals(
+                    if (MainFunctions.converToDoubleAsString(ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)).equals(
                             JSONGetData.getAmount(TestJSONToSend, i, TJIndex, "Accumulates"))) {
 
 
@@ -86,7 +86,7 @@ public class TrenEndOnePhaseFunctions extends BasePage {
         for (String key : sumDealPoints.keySet()) {
             for (int q = 0; q < JSONGetData.getArraySizeSumAccum(TestJSONToSend, i); q++) {
                 //System.out.println(q);
-                System.out.println(MainFunction.BaseLogStringFunc()+sumDealPoints);
+                System.out.println(MainFunctions.BaseLogStringFunc()+sumDealPoints);
 
 
                 //Compares  the Accum from the "sumDealPoints " to the Accum in the Test JSON
@@ -96,8 +96,8 @@ public class TrenEndOnePhaseFunctions extends BasePage {
                     double d = 0.0 ;
 
 
-                    System.out.println(MainFunction.BaseLogStringFunc()+postDeal.get(key));
-                    System.out.println(MainFunction.BaseLogStringFunc()+preDeal.get(key));
+                    System.out.println(MainFunctions.BaseLogStringFunc()+postDeal.get(key));
+                    System.out.println(MainFunctions.BaseLogStringFunc()+preDeal.get(key));
                     d = (postDeal.get(key) - preDeal.get(key) );
                     dx = df.format(d);
                     d = Double.valueOf(dx);

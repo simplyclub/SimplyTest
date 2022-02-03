@@ -2,7 +2,7 @@ package Tests;
 
 import Tests.TestFunctions.GeneralTestsFunctions;
 import org.testng.annotations.Test;
-import utilities.MainFunction;
+import utilities.MainFunctions;
 import utilities.RetryAnalyzer;
 
 import java.io.IOException;
@@ -18,12 +18,12 @@ public class GeneralTests extends BasePage {
             if(!generalTestsFunctions.tranEndCheck()){
                 System.out.println("PosTest(tranEndCheck) --- fail");
                 ExReGeneralTests.fail("PosTest(tranEndCheck) --- fail");
-                MainFunction.onTestFailure("PosTest");
+                MainFunctions.onTestFailure("PosTest");
             }
         }else{
             System.out.println("PosTest(subTotalCheck) --- fail");
             ExReGeneralTests.fail("PosTest(subTotalCheck) --- fail");
-            MainFunction.onTestFailure("PosTest");
+            MainFunctions.onTestFailure("PosTest");
         }
 
 

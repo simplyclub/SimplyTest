@@ -9,7 +9,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-import utilities.MainFunction;
+import utilities.MainFunctions;
 
 
 import javax.xml.parsers.DocumentBuilder;
@@ -159,7 +159,7 @@ public class ResponseHandling  {
      * @return CardNumber
      */
     public String getCardNumber (String s,String ApiCAllType){
-        System.out.println(MainFunction.BaseLogStringFunc() +ApiCAllType+": "+s);
+        System.out.println(MainFunctions.BaseLogStringFunc() +ApiCAllType+": "+s);
         JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(s);
 
         if(ApiCAllType.equals("memberAddResponse")){
@@ -224,8 +224,8 @@ public class ResponseHandling  {
 
 
             if (field.equals(fildeId.get("FieldId"))){
-                System.out.println(MainFunction.BaseLogStringFunc()+"FieldId: "+fildeId.get("FieldId"));
-                System.out.println(MainFunction.BaseLogStringFunc()+"FieldValue: "+fildeId.get("FieldValue"));
+                System.out.println(MainFunctions.BaseLogStringFunc()+"FieldId: "+fildeId.get("FieldId"));
+                System.out.println(MainFunctions.BaseLogStringFunc()+"FieldValue: "+fildeId.get("FieldValue"));
                 return fildeId.get("FieldValue").toString();
             }
 
@@ -249,7 +249,7 @@ public class ResponseHandling  {
      */
     public String getCode(String response){
         JSONObject responseObj = (JSONObject) baseJSON.convertStringToJSONObj(response);
-        System.out.println(MainFunction.BaseLogStringFunc()+"responseObj: " + responseObj);
+        System.out.println(MainFunctions.BaseLogStringFunc()+"responseObj: " + responseObj);
 
         return responseObj.get("Code").toString();
 

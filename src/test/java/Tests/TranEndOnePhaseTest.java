@@ -6,7 +6,7 @@ import JSON.JSONGetData;
 import Tests.TestFunctions.TrenEndOnePhaseFunctions;
 import Utilities.LogFileHandling;
 import org.testng.annotations.Test;
-import utilities.MainFunction;
+import utilities.MainFunctions;
 import utilities.RetryAnalyzer;
 
 import java.io.IOException;
@@ -25,8 +25,8 @@ public class TranEndOnePhaseTest extends BasePage {
         //i <=jsonGetData.getArraySize(TestJSONToSend) - 1
        for (int i = 0; i <=jsonGetData.getArraySize(TestJSONToSend) - 1; i++) {
            ExReTrenEndOnePhaseReport.info("~~~~~~~~~~~~~~~~~~~~~~Transaction: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
-           System.out.println(MainFunction.BaseLogStringFunc()+"~~~~~~~~~~~~~~~~~~~~~~Transaction: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
-           MainFunction.RestGlobals();
+           System.out.println(MainFunctions.BaseLogStringFunc()+"~~~~~~~~~~~~~~~~~~~~~~Transaction: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
+           MainFunctions.RestGlobals();
 
 
 
@@ -35,7 +35,7 @@ public class TranEndOnePhaseTest extends BasePage {
                 try {
                     //System.out.println("pre userDataResponse");
                     userDataResponse = trenEndOnePhaseFunctions.getUserData(i);
-                    userDataResponse_String = MainFunction.convertOkHttpResponseToString(userDataResponse);
+                    userDataResponse_String = MainFunctions.convertOkHttpResponseToString(userDataResponse);
                     userDataResponse.body().close();
                     trenEndOnePhaseFunctions.getPreDealPointsAccums(i, userDataResponse_String);
                     //System.out.println(preDeal);
@@ -48,14 +48,14 @@ public class TranEndOnePhaseTest extends BasePage {
                     ExReTrenEndOnePhaseReport.info(
                             LogFileHandling.createLogFile(baseJSON.memberJsonToSend.toString(),LOG_FILE_DIRECTORY,"userDataPost",i+1));
                     userDataResponse.body().close();
-                    MainFunction.onTestFailure("tranEndOnePhaseTest");
+                    MainFunctions.onTestFailure("tranEndOnePhaseTest");
                     continue;
 
 
                 }
            if(userDataResponse == null){
                ExReTrenEndOnePhaseReport.fail("ERROR -- post userDataResponse is NULL");
-               MainFunction.onTestFailure("tranEndOnePhaseTest");
+               MainFunctions.onTestFailure("tranEndOnePhaseTest");
 
                continue;
 
@@ -71,7 +71,7 @@ public class TranEndOnePhaseTest extends BasePage {
                    ExReTrenEndOnePhaseReport.info(
                            LogFileHandling.createLogFile(userDataResponse_String, LOG_FILE_DIRECTORY, "userDataResponse",i+1));
                    userDataResponse.body().close();
-                   MainFunction.onTestFailure("tranEndOnePhaseTest");
+                   MainFunctions.onTestFailure("tranEndOnePhaseTest");
                    continue;
 
 
@@ -82,9 +82,9 @@ public class TranEndOnePhaseTest extends BasePage {
                 try{
                     //System.out.println("makeTrenEndOnePhase");
                     trenEndOnePhaseResponse = trenEndOnePhaseFunctions.makeTrenEndOnePhase(i);
-                    trenEndOnePhaseResponse_String = MainFunction.convertOkHttpResponseToString(trenEndOnePhaseResponse);
+                    trenEndOnePhaseResponse_String = MainFunctions.convertOkHttpResponseToString(trenEndOnePhaseResponse);
                     avgTimeTrenEndOnePhase.add(BaseAPI.getResponseTime_OkHttp(trenEndOnePhaseResponse));
-                    System.out.println(MainFunction.BaseLogStringFunc()+trenEndOnePhaseResponse_String);
+                    System.out.println(MainFunctions.BaseLogStringFunc()+trenEndOnePhaseResponse_String);
                     trenEndOnePhaseResponse.body().close();
 
 
@@ -95,7 +95,7 @@ public class TranEndOnePhaseTest extends BasePage {
                     ExReTrenEndOnePhaseReport.info(
                             LogFileHandling.createLogFile(baseJSON.tranEndOnePhaseToSend.toString(),LOG_FILE_DIRECTORY,"trenEndOnePhasePost",i+1));
                     trenEndOnePhaseResponse.close();
-                    MainFunction.onTestFailure("tranEndOnePhaseTest");
+                    MainFunctions.onTestFailure("tranEndOnePhaseTest");
                     continue;
 
                 }catch (NullPointerException e){
@@ -104,7 +104,7 @@ public class TranEndOnePhaseTest extends BasePage {
                 //response null check
                 if(trenEndOnePhaseResponse == null){
                     ExReTrenEndOnePhaseReport.fail("ERROR -- trenEndOnePhaseResponse is NULL");
-                    MainFunction.onTestFailure("tranEndOnePhaseTest");
+                    MainFunctions.onTestFailure("tranEndOnePhaseTest");
                     continue;
 
                 }else {
@@ -118,7 +118,7 @@ public class TranEndOnePhaseTest extends BasePage {
                         ExReTrenEndOnePhaseReport.info(
                                 LogFileHandling.createLogFile(trenEndOnePhaseResponse_String, LOG_FILE_DIRECTORY, "trenEndOnePhaseResponse",i+1));
                         userDataResponse.body().close();
-                        MainFunction.onTestFailure("tranEndOnePhaseTest");
+                        MainFunctions.onTestFailure("tranEndOnePhaseTest");
                         continue;
 
                     }
@@ -131,7 +131,7 @@ public class TranEndOnePhaseTest extends BasePage {
                try {
                    //System.out.println(" post userDataResponse");
                    userDataResponse = trenEndOnePhaseFunctions.getUserData(i);
-                   userDataResponse_String = MainFunction.convertOkHttpResponseToString(userDataResponse);
+                   userDataResponse_String = MainFunctions.convertOkHttpResponseToString(userDataResponse);
                    userDataResponse.body().close();
                    trenEndOnePhaseFunctions.getPostDealPointsAccums(i, userDataResponse_String);
                    //System.out.println(preDeal);
@@ -143,14 +143,14 @@ public class TranEndOnePhaseTest extends BasePage {
                            LogFileHandling.createLogFile(userDataResponse_String,LOG_FILE_DIRECTORY,"userDataResponse",i+1));
                    ExReTrenEndOnePhaseReport.info(
                            LogFileHandling.createLogFile(baseJSON.memberJsonToSend.toString(),LOG_FILE_DIRECTORY,"userDataPost",i+1));
-                   MainFunction.onTestFailure("tranEndOnePhaseTest");
+                   MainFunctions.onTestFailure("tranEndOnePhaseTest");
 
 
                }
                //response Null check
                if(userDataResponse == null){
                    ExReTrenEndOnePhaseReport.fail("ERROR -- post userDataResponse is NULL");
-                   MainFunction.onTestFailure("tranEndOnePhaseTest");
+                   MainFunctions.onTestFailure("tranEndOnePhaseTest");
 
                }else {
                    if (!(userDataResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(userDataResponse_String).equals("0"))) {
@@ -163,7 +163,7 @@ public class TranEndOnePhaseTest extends BasePage {
                        ExReTrenEndOnePhaseReport.info(
                                LogFileHandling.createLogFile(userDataResponse_String, LOG_FILE_DIRECTORY, "userDataResponse",i+1));
                        userDataResponse.body().close();
-                       MainFunction.onTestFailure("tranEndOnePhaseTest");
+                       MainFunctions.onTestFailure("tranEndOnePhaseTest");
 
 
                    }
@@ -177,8 +177,8 @@ public class TranEndOnePhaseTest extends BasePage {
                updateXMLFile.updateGetTransactionView(BaseXML.xmlToDocGetTransactionView(), "loginKey", updateXMLFile.getSysLogin());
            } catch ( NullPointerException e) {
                ExReTrenEndOnePhaseReport.warning("ERROR(updateGetTransactionView)---- Null lPointer Exception  ");
-               System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(updateGetTransactionView)---- Null Pointer Exception  ");
-               MainFunction.onTestFailure("tranEndOnePhaseTest");
+               System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(updateGetTransactionView)---- Null Pointer Exception  ");
+               MainFunctions.onTestFailure("tranEndOnePhaseTest");
                throw new NullPointerException();
 
            }
@@ -187,14 +187,14 @@ public class TranEndOnePhaseTest extends BasePage {
                updateXMLFile.updateGetTransactionView(BaseXML.xmlToDocGetTransactionView(), "tranKey", responseHandling.getTrenEndTranReferenceNumber(trenEndOnePhaseResponse_String));
            }catch (SocketTimeoutException e){
                ExReTrenEndOnePhaseReport.warning("ERROR(updateGetTransactionView)---- Socket Timeout Exception  ");
-               System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(updateGetTransactionView)---- Socket Timeout Exception  ");
-               MainFunction.onTestFailure("tranEndOnePhaseTest");
+               System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(updateGetTransactionView)---- Socket Timeout Exception  ");
+               MainFunctions.onTestFailure("tranEndOnePhaseTest");
                throw new SocketTimeoutException();
 
            }catch ( NullPointerException e) {
                ExReTrenEndOnePhaseReport.warning("ERROR(updateGetTransactionView)---- Null lPointer Exception  ");
-               System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(updateGetTransactionView)---- Null Pointer Exception  ");
-               MainFunction.onTestFailure("tranEndOnePhaseTest");
+               System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(updateGetTransactionView)---- Null Pointer Exception  ");
+               MainFunctions.onTestFailure("tranEndOnePhaseTest");
                throw new NullPointerException();
 
            }
@@ -202,8 +202,8 @@ public class TranEndOnePhaseTest extends BasePage {
                transactionViewResponse = APIPost.postXMLToGetTransactionView(TEST_API_SYSTEM_URI, BaseXML.GET_TREN_FILE_LOCATION);
            }catch ( NullPointerException e) {
                ExReTrenEndOnePhaseReport.warning("ERROR(transactionViewResponse)---- Null lPointer Exception  ");
-               System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(transactionViewResponse)---- Null Pointer Exception  ");
-               MainFunction.onTestFailure("tranEndOnePhaseTest");
+               System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(transactionViewResponse)---- Null Pointer Exception  ");
+               MainFunctions.onTestFailure("tranEndOnePhaseTest");
                throw new NullPointerException();
 
            }
@@ -215,11 +215,11 @@ public class TranEndOnePhaseTest extends BasePage {
                            LOG_FILE_DIRECTORY, "XmlTransactionViewcall",i+1));
                    ExReTrenEndOnePhaseReport.info(
                            LogFileHandling.createLogFile(transactionViewResponse.asString(), LOG_FILE_DIRECTORY, "XmlTransactionViewResponse",i+1));
-                   MainFunction.onTestFailure("tranEndOnePhaseTest");
+                   MainFunctions.onTestFailure("tranEndOnePhaseTest");
 
 
                }
-               System.out.println(MainFunction.BaseLogStringFunc()+transactionViewResponse.getBody().asString());
+               System.out.println(MainFunctions.BaseLogStringFunc()+transactionViewResponse.getBody().asString());
 
                // "nodeList" is for using in discountLoop
                nodeList = responseHandling.getXMLFileTranViewDiscountData(transactionViewResponse.getBody().asString());
@@ -230,7 +230,7 @@ public class TranEndOnePhaseTest extends BasePage {
 
 
                if(!trenEndOnePhaseFunctions.EarnedChecks(i)){
-                   MainFunction.onTestFailure("tranEndOnePhaseTest");
+                   MainFunctions.onTestFailure("tranEndOnePhaseTest");
                }
 
 
@@ -238,7 +238,7 @@ public class TranEndOnePhaseTest extends BasePage {
 
        }//end of for loop
         if(!(avgTimeTrenEndOnePhase.size() == 0) ) {
-            ExReTrenEndOnePhaseReport.info("avgTimeTrenEndOnePhase: " + MainFunction.getAvgTime(avgTimeTrenEndOnePhase) + "ms");
+            ExReTrenEndOnePhaseReport.info("avgTimeTrenEndOnePhase: " + MainFunctions.getAvgTime(avgTimeTrenEndOnePhase) + "ms");
             ExReTrenEndOnePhaseReport.info("TimeTrenEndOnePhase: " + avgTimeTrenEndOnePhase + "ms");
 
         }

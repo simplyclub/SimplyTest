@@ -7,7 +7,7 @@ import JSON.JSONGetData;
 import JSON.ResponseHandling;
 import Tests.BasePage;
 import Utilities.LogFileHandling;
-import utilities.MainFunction;
+import utilities.MainFunctions;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -165,9 +165,10 @@ public class SubTotalFunctions extends BasePage {
                 }
 
             }
+
             if( flag1 == 0 ){
                 ExReApiTestReport.warning("12PromoId: " + TBPromoId + " not found in the \"Test JSON \"").assignCategory("responVSTestJson");
-                System.out.println(MainFunction.BaseLogStringFunc()+baseJSON.jsonToSend.toString());
+                System.out.println(MainFunctions.BaseLogStringFunc()+baseJSON.jsonToSend.toString());
                 // ExReApiTestReport.info(response.getBody().asString());
                 SFFlag = 1;
             }
@@ -234,7 +235,7 @@ public class SubTotalFunctions extends BasePage {
 
                 ExReApiTestReport.warning("PromoId: " + TBPromoId + " not found in the response ").assignCategory("TestJSONVSResponse");
                 // ExReApiTestReport.info(response.getBody().asString());
-                MainFunction.onTestFailure("subTotalTest");
+                MainFunctions.onTestFailure("subTotalTest");
                 return false;
 
 
@@ -254,35 +255,35 @@ public class SubTotalFunctions extends BasePage {
         //i <= JSONGetData.getArraySize(TestJSONToSend) - 1
         for (int i = 0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++) {
             ExReApiTestReport.info("~~~~~~~~~~~~~~~~~~~~~~~~ Transaction " + (i + 1) + " ~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.println(MainFunction.BaseLogStringFunc() + "~~~~~~~~~~~~~~~~~~~~~~~~ Deal " + (i + 1) + " ~~~~~~~~~~~~~~~~~~~~~~~~");
+            System.out.println(MainFunctions.BaseLogStringFunc() + "~~~~~~~~~~~~~~~~~~~~~~~~ Deal " + (i + 1) + " ~~~~~~~~~~~~~~~~~~~~~~~~");
 
             try {
                 subTotalResponse = makeSubTotal(i);
-                subTotalResponse_String = MainFunction.convertOkHttpResponseToString(subTotalResponse);
+                subTotalResponse_String = MainFunctions.convertOkHttpResponseToString(subTotalResponse);
 
             } catch (SocketTimeoutException e) {
                 ExReGeneralTests.warning("ERROR(subTotalResponse)---- Socket Timeout Exception  ");
-                System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(subTotalResponse)---- Socket Timeout Exception  ");
+                System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(subTotalResponse)---- Socket Timeout Exception  ");
                 throw new SocketTimeoutException();
 
             } catch (NullPointerException e) {
                 ExReGeneralTests.warning("ERROR(subTotalResponse)---- Null lPointer Exceptionn  ");
-                System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(subTotalResponse)---- Null Pointer Exception  ");
+                System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(subTotalResponse)---- Null Pointer Exception  ");
                 throw new NullPointerException();
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println(MainFunction.BaseLogStringFunc() + subTotalResponse_String);
+            System.out.println(MainFunctions.BaseLogStringFunc() + subTotalResponse_String);
 
             if (!(subTotalResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse_String).equals("0"))) {
-                System.out.println(MainFunction.BaseLogStringFunc() + "*ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(subTotalResponse_String) + ")");
+                System.out.println(MainFunctions.BaseLogStringFunc() + "*ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(subTotalResponse_String) + ")");
                 ExReApiTestReport.fail("ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                         responseHandling.getErrorCodeStatusJson(subTotalResponse_String) + ")");
                 LogFileHandling.createLogFile(baseJSON.getString(baseJSON.JSON_TO_SEND), LOG_FILE_DIRECTORY, "subTotalCall", i + 1);
                 LogFileHandling.createLogFile(subTotalResponse.toString(), LOG_FILE_DIRECTORY, "subTotalResponse", i + 1);
                 subTotalResponse.body().close();
-                MainFunction.onTestFailure("pointsValidityTest");
+                MainFunctions.onTestFailure("pointsValidityTest");
                 return false;
             }
 
@@ -302,15 +303,15 @@ public class SubTotalFunctions extends BasePage {
 
             try {
                 trenCancelResponse = makeTranCancel(i);
-                trenCancelResponse_string = MainFunction.convertOkHttpResponseToString(trenCancelResponse);
+                trenCancelResponse_string = MainFunctions.convertOkHttpResponseToString(trenCancelResponse);
             } catch (SocketTimeoutException e) {
                 ExReGeneralTests.warning("ERROR(trenCancelResponse)---- Socket Timeout Exception  ");
-                System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(trenCancelResponse)---- Socket Timeout Exception  ");
+                System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(trenCancelResponse)---- Socket Timeout Exception  ");
                 throw new SocketTimeoutException();
 
             } catch (NullPointerException e) {
                 ExReGeneralTests.warning("ERROR(trenCancelResponse)---- Null lPointer Exceptionn  ");
-                System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(trenCancelResponse)---- Null Pointer Exception  ");
+                System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(trenCancelResponse)---- Null Pointer Exception  ");
                 throw new NullPointerException();
 
             } catch (IOException e) {
@@ -318,7 +319,7 @@ public class SubTotalFunctions extends BasePage {
             }
 
             if (trenCancelResponse.code() != 200 && !(responseHandling.getErrorCodeStatusJson(trenCancelResponse_string).equals("0"))) {
-                System.out.println(MainFunction.BaseLogStringFunc() + "ERROR --- the Transaction " + responseHandling.getServiceTranNumber(trenCancelResponse_string) + " did not cancel");
+                System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR --- the Transaction " + responseHandling.getServiceTranNumber(trenCancelResponse_string) + " did not cancel");
                 ExReApiTestReport.warning("ERROR --- the Transaction " + responseHandling.getServiceTranNumber(trenCancelResponse_string) + " did not cancel").assignCategory("warning");
                 SFFlag = 1;
             } else {

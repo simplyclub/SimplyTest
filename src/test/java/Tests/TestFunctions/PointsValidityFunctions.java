@@ -10,7 +10,7 @@ import Tests.BasePage;
 import XML.XMLGetData;
 import io.restassured.response.Response;
 import org.w3c.dom.NodeList;
-import utilities.MainFunction;
+import utilities.MainFunctions;
 
 import java.io.IOException;
 import java.time.DayOfWeek;
@@ -100,7 +100,7 @@ public class PointsValidityFunctions extends BasePage {
         if (((int) daysBetween - Integer.parseInt(JSON.JSONGetData.getDaysToEnd(TestJSONToSend, i))) <= 1) {
             return 1;
         } else {
-            System.out.println(MainFunction.BaseLogStringFunc()+"daysToEnd: " + daysBetween);
+            System.out.println(MainFunctions.BaseLogStringFunc()+"daysToEnd: " + daysBetween);
             return 0;
         }
 
@@ -182,14 +182,14 @@ public class PointsValidityFunctions extends BasePage {
 
         month = dateAfter.getMonthValue();
         day = dateAfter.getDayOfMonth();
-        System.out.println(month);
+        //System.out.println(month);
         //System.out.println(day);
 
         if (month == dateBefore.getMonthValue()) {
             //31 days in a month
             if (month == 1 || month == 3 || month == 4 || month == 7 || month == 8 || month == 10 || month == 12) {
                 if (day == 31) {
-                    System.out.println(1);
+                   // System.out.println(1);
                     return 1;
                 } else {
                     return 0;
@@ -198,14 +198,14 @@ public class PointsValidityFunctions extends BasePage {
                 //30 days in a month
                 if (month == 4 || month == 6 || month == 9 || month == 11) {
                     if (day == 30) {
-                        System.out.println(2);
+                       // System.out.println(2);
                         return 1;
                     } else {
                         return 0;
                     }
                 } else {
                     if (month == 2 && day == 28) {
-                        System.out.println(3);
+                       // System.out.println(3);
                         return 1;
                     } else {
                         return 0;
@@ -231,10 +231,10 @@ public class PointsValidityFunctions extends BasePage {
         //System.out.println(day);
 
         if(day.getValue()==6){
-            System.out.println("return 1");
+            //System.out.println("return 1");
             return 1;
         }else {
-            System.out.println("return 0");
+            //System.out.println("return 0");
             return 0;
         }
 

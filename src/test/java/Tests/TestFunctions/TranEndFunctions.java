@@ -1,6 +1,5 @@
 package Tests.TestFunctions;
 
-import APIHandling.APIPost;
 import BaseClass.BaseAPI;
 import BaseClass.BaseJSON;
 import FunctionsClass.UpdateJSONFile;
@@ -9,13 +8,12 @@ import JSON.ResponseHandling;
 import JSON.UserHandling;
 import Tests.BasePage;
 
-import io.restassured.response.Response;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import utilities.MainFunction;
+import utilities.MainFunctions;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -433,7 +431,7 @@ public class TranEndFunctions extends BasePage {
                     if (ResponseHandling.getXMLResponsePromoID(nodeList, XRIndex).equals(JSONGetData.getPromoId(TestJSONToSend, i, TJIndex, "Accumulates"))) {
 
                         //this if check if the amount of the points that received from the specific ofer (by promoID) is equal to the a mount in the test JSON
-                        if (MainFunction.converToDoubleAsString(ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)).equals(
+                        if (MainFunctions.converToDoubleAsString(ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)).equals(
                                 JSONGetData.getAmount(TestJSONToSend, i, TJIndex, "Accumulates"))) {
 
 

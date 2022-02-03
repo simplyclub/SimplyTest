@@ -8,7 +8,7 @@ import JSON.ResponseHandling;
 
 import Tests.TestFunctions.SubTotalFunctions;
 import org.testng.annotations.Test;
-import utilities.MainFunction;
+import utilities.MainFunctions;
 import utilities.RetryAnalyzer;
 
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class SubTotalTest extends BasePage {
         //i <= JSONGetData.getArraySize(TestJSONToSend) - 1
         for (int i =0; i <= 1; i++) {
             ExReApiTestReport.info("~~~~~~~~~~~~~~~~~~~~~~~~ Transaction "+(i+1)+" ~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.println(MainFunction.BaseLogStringFunc()+"~~~~~~~~~~~~~~~~~~~~~~~~ Deal "+(i+1)+" ~~~~~~~~~~~~~~~~~~~~~~~~");
+            System.out.println(MainFunctions.BaseLogStringFunc()+"~~~~~~~~~~~~~~~~~~~~~~~~ Deal "+(i+1)+" ~~~~~~~~~~~~~~~~~~~~~~~~");
 
             updateJSONFile.upDateBaseJSONFile(
                     JSONGetData.getUser(TestJSONToSend, i),
@@ -46,9 +46,9 @@ public class SubTotalTest extends BasePage {
                     JSONGetData.getCardNumber(TestJSONToSend, i));
 
             subTotalResponse = APIPost.postSubTotal_OkHttp(BaseAPI.TEST_REST_API_URI, BaseJSON.JSON_TO_SEND);
-            subTotalResponse_String = MainFunction.convertOkHttpResponseToString(subTotalResponse);
-            System.out.println(MainFunction.BaseLogStringFunc()+subTotalResponse_String);
-            System.out.println(MainFunction.BaseLogStringFunc()+baseJSON.jsonToSend);
+            subTotalResponse_String = MainFunctions.convertOkHttpResponseToString(subTotalResponse);
+            System.out.println(MainFunctions.BaseLogStringFunc()+subTotalResponse_String);
+            System.out.println(MainFunctions.BaseLogStringFunc()+baseJSON.jsonToSend);
 
 
             if(subTotalResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse_String).equals("0")) {
@@ -66,11 +66,11 @@ public class SubTotalTest extends BasePage {
                         responseHandling.getServiceTranNumber(subTotalResponse_String));
                 //System.out.println(x.toString());
                 trenCancelResponse = APIPost.postTrenCancel_OkHttp(BaseAPI.TEST_REST_API_URI,BaseJSON.TREN_CONCEL_JSON);
-                String trenCancelResponse_string = MainFunction.convertOkHttpResponseToString(trenCancelResponse);
+                String trenCancelResponse_string = MainFunctions.convertOkHttpResponseToString(trenCancelResponse);
                 //System.out.println(trenCancelResponse.getBody().asString());
 
                 if (trenCancelResponse.code()!= 200 && !(responseHandling.getErrorCodeStatusJson(trenCancelResponse_string).equals("0"))){
-                    System.out.println(MainFunction.BaseLogStringFunc()+"ERROR --- the Transaction "+responseHandling.getServiceTranNumber(trenCancelResponse_string)+ " did not cancel");
+                    System.out.println(MainFunctions.BaseLogStringFunc()+"ERROR --- the Transaction "+responseHandling.getServiceTranNumber(trenCancelResponse_string)+ " did not cancel");
                     ExReApiTestReport.warning("ERROR --- the Transaction "+responseHandling.getServiceTranNumber(trenCancelResponse_string)+ " did not cancel").assignCategory("warning");
                      SFFlag=1;
                 }else{
@@ -84,7 +84,7 @@ public class SubTotalTest extends BasePage {
 
 
             }else{
-                System.out.println(MainFunction.BaseLogStringFunc()+"ERROR --- status code is not 200 or ErrorCodeStatus is not 0 ");
+                System.out.println(MainFunctions.BaseLogStringFunc()+"ERROR --- status code is not 200 or ErrorCodeStatus is not 0 ");
                 ExReApiTestReport.fail("ERROR --- status code is not 200"+"("+subTotalResponse.code()+")" +" or ErrorCodeStatus is not 0 "+"("+
                         responseHandling.getErrorCodeStatusJson(subTotalResponse_String)+")");
                  SFFlag=1;
@@ -94,16 +94,16 @@ public class SubTotalTest extends BasePage {
             subTotalResponse.body().close();
             trenCancelResponse.body().close();
         }//end main for loop
-        System.out.println(MainFunction.BaseLogStringFunc()+avgTimeSubTotal);
-        System.out.println(MainFunction.BaseLogStringFunc()+ avgTimeTranRefund);
-        System.out.println(MainFunction.BaseLogStringFunc()+MainFunction.getAvgTime(avgTimeSubTotal));
-        System.out.println(MainFunction.BaseLogStringFunc()+MainFunction.getAvgTime(avgTimeTranRefund));
+        System.out.println(MainFunctions.BaseLogStringFunc()+avgTimeSubTotal);
+        System.out.println(MainFunctions.BaseLogStringFunc()+ avgTimeTranRefund);
+        System.out.println(MainFunctions.BaseLogStringFunc()+ MainFunctions.getAvgTime(avgTimeSubTotal));
+        System.out.println(MainFunctions.BaseLogStringFunc()+ MainFunctions.getAvgTime(avgTimeTranRefund));
         if(SFFlag == 1) {
-            MainFunction.onTestFailure("subTotalTest");
+            MainFunctions.onTestFailure("subTotalTest");
         }
         ExReApiTestReport.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-                .info("avgTimeSubTotal: "+ (MainFunction.getAvgTime(avgTimeSubTotal)+"ms"))
-                .info("avgTimetrenCancel: "+MainFunction.getAvgTime(avgTimeTranRefund) +"ms");
+                .info("avgTimeSubTotal: "+ (MainFunctions.getAvgTime(avgTimeSubTotal)+"ms"))
+                .info("avgTimetrenCancel: "+ MainFunctions.getAvgTime(avgTimeTranRefund) +"ms");
 
 
     }
@@ -114,11 +114,11 @@ public class SubTotalTest extends BasePage {
 
 
         if(!subTotalFunctions.SubTotalCheck()){
-            MainFunction.onTestFailure("subTotalTest");
+            MainFunctions.onTestFailure("subTotalTest");
         }
         ExReApiTestReport.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-                .info("avgTimeSubTotal: "+ (MainFunction.getAvgTime(avgTimeSubTotal)+"ms"))
-                .info("avgTimetrenCancel: "+MainFunction.getAvgTime(avgTimeTranRefund) +"ms");
+                .info("avgTimeSubTotal: "+ (MainFunctions.getAvgTime(avgTimeSubTotal)+"ms"))
+                .info("avgTimetrenCancel: "+ MainFunctions.getAvgTime(avgTimeTranRefund) +"ms");
 
 
 

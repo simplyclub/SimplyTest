@@ -9,8 +9,7 @@ import JSON.ResponseHandling;
 import Tests.BasePage;
 import Utilities.LogFileHandling;
 import io.restassured.response.Response;
-import org.json.simple.JSONArray;
-import utilities.MainFunction;
+import utilities.MainFunctions;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -52,15 +51,15 @@ public class GeneralTestsFunctions extends BasePage {
         int flag = 0;
         try{
             subTotalResponse= makeSubTotal(0,"pos2","2pos");
-            subTotalResponse_String = MainFunction.convertOkHttpResponseToString(subTotalResponse);
+            subTotalResponse_String = MainFunctions.convertOkHttpResponseToString(subTotalResponse);
         }catch (SocketTimeoutException e){
             ExReGeneralTests.warning("ERROR(subTotalResponse)---- Socket Timeout Exception  ");
-            System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(subTotalResponse)---- Socket Timeout Exception  ");
+            System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(subTotalResponse)---- Socket Timeout Exception  ");
             throw new SocketTimeoutException();
 
         }catch ( NullPointerException e) {
             ExReGeneralTests.warning("ERROR(subTotalResponse)---- Null lPointer Exceptionn  ");
-            System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(subTotalResponse)---- Null Pointer Exception  ");
+            System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(subTotalResponse)---- Null Pointer Exception  ");
             throw new NullPointerException();
 
         }
@@ -75,7 +74,7 @@ public class GeneralTestsFunctions extends BasePage {
             subTotalResponse.body().close();
             return false;
         }
-        System.out.println(MainFunction.BaseLogStringFunc()+subTotalResponse_String);
+        System.out.println(MainFunctions.BaseLogStringFunc()+subTotalResponse_String);
 
 
         for (int q = 0;q < responseHandling.getCaseBackDiscountsArrSize(subTotalResponse_String) ;q++){
@@ -114,7 +113,7 @@ public class GeneralTestsFunctions extends BasePage {
                 }
             }
         }//end for loop
-        System.out.println(MainFunction.BaseLogStringFunc()+"CaseBackDiscountsArrSize is 0");
+        System.out.println(MainFunctions.BaseLogStringFunc()+"CaseBackDiscountsArrSize is 0");
         ExReGeneralTests.warning("CaseBackDiscountsArrSize from the response is 0");
         return false;
     }
@@ -124,16 +123,16 @@ public class GeneralTestsFunctions extends BasePage {
         int flag =0;
         try {
             trenEndResponse = makeTranEnd(0,subTotalResponse_String,"pos2", "2pos");
-            trenEndResponse_String = MainFunction.convertOkHttpResponseToString(trenEndResponse);
+            trenEndResponse_String = MainFunctions.convertOkHttpResponseToString(trenEndResponse);
 
         }catch (SocketTimeoutException e){
             ExReGeneralTests.warning("ERROR(trenEndResponse)---- Socket Timeout Exception  ");
-            System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(trenEndResponse)---- Socket Timeout Exception  ");
+            System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(trenEndResponse)---- Socket Timeout Exception  ");
             throw new SocketTimeoutException();
 
         }catch ( NullPointerException e) {
             ExReGeneralTests.warning("ERROR(trenEndResponse)---- Null lPointer Exceptionn  ");
-            System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(trenEndResponse)---- Null Pointer Exception  ");
+            System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(trenEndResponse)---- Null Pointer Exception  ");
             throw new NullPointerException();
 
         }
@@ -143,12 +142,12 @@ public class GeneralTestsFunctions extends BasePage {
 
         }catch (SocketTimeoutException e){
             ExReStage6And7Report.warning("ERROR(transactionViewResponse)---- Socket Timeout Exception  ");
-            System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(transactionViewResponse)---- Socket Timeout Exception  ");
+            System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(transactionViewResponse)---- Socket Timeout Exception  ");
             throw new SocketTimeoutException();
 
         }catch ( NullPointerException e) {
             ExReStage6And7Report.warning("ERROR(transactionViewResponse)---- Null lPointer Exceptionn  ");
-            System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(transactionViewResponse)---- Null Pointer Exception  ");
+            System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(transactionViewResponse)---- Null Pointer Exception  ");
             throw new NullPointerException();
 
         }

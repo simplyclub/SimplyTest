@@ -121,7 +121,7 @@ public class EmailHandling {
             Transport.send(message);
             //Transport.send(message2);
 
-            System.out.println(MainFunction.BaseLogStringFunc()+"=====Email Sent=====");
+            System.out.println(MainFunctions.BaseLogStringFunc()+"=====Email Sent=====");
 
         } catch (MessagingException e) {
 

@@ -11,13 +11,13 @@ import Utilities.LogFileHandling;
 import io.restassured.response.Response;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import utilities.MainFunction;
+import utilities.MainFunctions;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 
 import static BaseClass.BaseAPI.TEST_API_SYSTEM_URI;
-import static utilities.MainFunction.BaseLogStringFunc;
+import static utilities.MainFunctions.BaseLogStringFunc;
 
 public class Stage6And7TestFunctions extends BasePage {
     UpdateJSONFile updateJSONFile = new UpdateJSONFile();
@@ -158,16 +158,16 @@ public class Stage6And7TestFunctions extends BasePage {
 
         try {
             subTotalResponse = makeSubTotal(0,0);
-            subTotalResponse_String = MainFunction.convertOkHttpResponseToString(subTotalResponse);
+            subTotalResponse_String = MainFunctions.convertOkHttpResponseToString(subTotalResponse);
 
         } catch (SocketTimeoutException e) {
             ExReStage6And7Report.warning("ERROR(subTotalPromoIdCheck)---- Socket Timeout Exception  ");
-            System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(subTotalPromoIdCheck)---- Socket Timeout Exception  ");
+            System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(subTotalPromoIdCheck)---- Socket Timeout Exception  ");
             return false;
 
         } catch (NullPointerException e) {
             ExReStage6And7Report.warning("ERROR(subTotalPromoIdCheck)---- Nul lPointer Exceptionn  ");
-            System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(subTotalPromoIdCheck)---- Null Pointer Exception  ");
+            System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(subTotalPromoIdCheck)---- Null Pointer Exception  ");
             return false;
 
 
@@ -194,8 +194,8 @@ public class Stage6And7TestFunctions extends BasePage {
                 String ResponseCBPromoId = responseHandling.getPromoId(subTotalResponse_String, "CashBackDiscounts", j);
 
                 if (JsonPromoId.equals(ResponseCBPromoId)) {
-                    System.out.println(MainFunction.BaseLogStringFunc()+"JsonPromoId: " + JsonPromoId);
-                    System.out.println(MainFunction.BaseLogStringFunc()+"RespnseCBPromoId: " + ResponseCBPromoId);
+                    System.out.println(MainFunctions.BaseLogStringFunc()+"JsonPromoId: " + JsonPromoId);
+                    System.out.println(MainFunctions.BaseLogStringFunc()+"RespnseCBPromoId: " + ResponseCBPromoId);
                     CBFlag++;
                     break;
                 }
@@ -215,8 +215,8 @@ public class Stage6And7TestFunctions extends BasePage {
                 String ResponseTDPromoId = responseHandling.getPromoId(subTotalResponse_String, "TotalDiscounts", j);
 
                 if (JsonPromoId.equals(ResponseTDPromoId)) {
-                    System.out.println(MainFunction.BaseLogStringFunc()+"JsonPromoId: " + JsonPromoId);
-                    System.out.println(MainFunction.BaseLogStringFunc()+"RespnseTDPromoId: " + ResponseTDPromoId);
+                    System.out.println(MainFunctions.BaseLogStringFunc()+"JsonPromoId: " + JsonPromoId);
+                    System.out.println(MainFunctions.BaseLogStringFunc()+"RespnseTDPromoId: " + ResponseTDPromoId);
                     TDFlag++;
                     break;
                 }
@@ -242,16 +242,16 @@ public class Stage6And7TestFunctions extends BasePage {
     public Boolean falseSubTotalCheck() throws IOException {
         try {
             subTotalResponse = makeSubTotal(0,1);
-            subTotalResponse_String = MainFunction.convertOkHttpResponseToString(subTotalResponse);
+            subTotalResponse_String = MainFunctions.convertOkHttpResponseToString(subTotalResponse);
 
         } catch (SocketTimeoutException e) {
             ExReStage6And7Report.warning("ERROR(subTotalPromoIdCheck)---- Socket Timeout Exception  ");
-            System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(subTotalPromoIdCheck)---- Socket Timeout Exception  ");
+            System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(subTotalPromoIdCheck)---- Socket Timeout Exception  ");
             return false;
 
         } catch (NullPointerException e) {
             ExReStage6And7Report.warning("ERROR(subTotalPromoIdCheck)---- Nul lPointer Exceptionn  ");
-            System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(subTotalPromoIdCheck)---- Null Pointer Exception  ");
+            System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(subTotalPromoIdCheck)---- Null Pointer Exception  ");
             return false;
 
 
@@ -312,12 +312,12 @@ public class Stage6And7TestFunctions extends BasePage {
 
         }catch  (SocketTimeoutException e){
             ExReStage6And7Report.warning("ERROR(tranEndPromoIdCheck)---- Socket Timeout Exception  ");
-            System.out.println(MainFunction.BaseLogStringFunc()+"ERROR(tranEndPromoIdCheck)---- Socket Timeout Exception  ");
+            System.out.println(MainFunctions.BaseLogStringFunc()+"ERROR(tranEndPromoIdCheck)---- Socket Timeout Exception  ");
             return false;
 
         }catch (NullPointerException e){
             ExReStage6And7Report.warning("ERROR(transactionViewResponse)---- Nul lPointer Exceptionn  ");
-            System.out.println(MainFunction.BaseLogStringFunc()+"ERROR(transactionViewResponse)---- Null Pointer Exception  ");
+            System.out.println(MainFunctions.BaseLogStringFunc()+"ERROR(transactionViewResponse)---- Null Pointer Exception  ");
             return false;
 
 

@@ -1,20 +1,23 @@
 package Tests.TestFunctions;
 
 import org.w3c.dom.NodeList;
-import utilities.MainFunction;
+import utilities.MainFunctions;
 
 public class PointsValidityCases extends PointsValidityFunctions {
     PointsValidityFunctions pointsValidityFunctions = new PointsValidityFunctions();
 
-    public void pointsValidityCases(NodeList nodeList , int NLIndex, int x ,int i  ) {
+    public boolean pointsValidityCases(NodeList nodeList , int NLIndex, int x ,int i  ) {
+
+        boolean flag =false;
 
         switch (x) {
             case 36 :
                 //from: Immediately , Until: Several days
-                System.out.println(MainFunction.BaseLogStringFunc()+"from: Immediately , Until: Several days");
+                System.out.println(MainFunctions.BaseLogStringFunc()+"from: Immediately , Until: Several days");
                 if(pointsValidityFunctions.calcDaysUntilEnd(nodeList,NLIndex,i) == 1){
                     ExRePointsValiditReport.pass("Transaction : "+(i+1)+" case "+ x +" pass");
                     ExRePointsValiditReport.info("from: Immediately , Until: Several days");
+                    flag = true;
                 }else{
                     ExRePointsValiditReport.fail("Transaction :"+(i+1)+" case "+ x +" fail");
                     ExRePointsValiditReport.info("from: Immediately , Until: Several days");
@@ -24,10 +27,11 @@ public class PointsValidityCases extends PointsValidityFunctions {
 
             case 2 :
                 //from: Several days  , Until: Unlimited
-                System.out.println(MainFunction.BaseLogStringFunc()+"from: Several days  , Until: Unlimited");
+                System.out.println(MainFunctions.BaseLogStringFunc()+"from: Several days  , Until: Unlimited");
                 if (pointsValidityFunctions.calcDaysUntilStart(nodeList,NLIndex,i) == 1){
                     ExRePointsValiditReport.pass("Transaction : "+(i+1)+" case "+ x +" pass");
                     ExRePointsValiditReport.info("from: Several days  , Until: Unlimited");
+                    flag = true;
                 }else{
                     ExRePointsValiditReport.fail("Transaction :"+(i+1)+" case "+ x +" fail");
                     ExRePointsValiditReport.info("from: Several days  , Until: Unlimited");
@@ -43,6 +47,7 @@ public class PointsValidityCases extends PointsValidityFunctions {
                     ExRePointsValiditReport.info("~~~DaysUntilStart");
                     ExRePointsValiditReport.pass("Transaction : "+(i+1)+" case "+ x +" pass");
                     ExRePointsValiditReport.info("from: Several days  , Until: Several days");
+                    flag = true;
                 }else{
                     ExRePointsValiditReport.fail("Transaction :"+(i+1)+" case "+ x +" fail");
                     ExRePointsValiditReport.info("from: Several days  , Until: Several days");
@@ -53,6 +58,7 @@ public class PointsValidityCases extends PointsValidityFunctions {
                     ExRePointsValiditReport.info("~~~DaysUntilEnd");
                     ExRePointsValiditReport.pass("Transaction : "+(i+1)+" case "+ x +" pass");
                     ExRePointsValiditReport.info("from: Several days  , Until: Several days");
+                    flag = true;
                 }else{
                     ExRePointsValiditReport.fail("Transaction :"+(i+1)+" case "+ x +" fail");
                     ExRePointsValiditReport.info("from: Several days  , Until: Several days");
@@ -68,6 +74,7 @@ public class PointsValidityCases extends PointsValidityFunctions {
                    ExRePointsValiditReport.info("~~~DaysUntilStart");
                    ExRePointsValiditReport.pass("Transaction : "+(i+1)+" case "+ x +" pass");
                    ExRePointsValiditReport.info("from: Next Transaction , Until: Several months");
+                   flag = true;
                }else{
                    ExRePointsValiditReport.fail("Transaction :"+(i+1)+" case "+ x +" fail");
                    ExRePointsValiditReport.info("from: Next Transaction , Until: Several months");
@@ -77,6 +84,7 @@ public class PointsValidityCases extends PointsValidityFunctions {
                    ExRePointsValiditReport.info("~~~DaysUntilEnd");
                    ExRePointsValiditReport.pass("Transaction : "+(i+1)+" case "+ x +" pass");
                    ExRePointsValiditReport.info("from: Next Transaction , Until: Several months");
+                   flag = true;
                }else{
                    ExRePointsValiditReport.fail("Transaction :"+(i+1)+" case "+ x +" fail");
                    ExRePointsValiditReport.info("from: Next Transaction , Until: Several months");
@@ -92,6 +100,7 @@ public class PointsValidityCases extends PointsValidityFunctions {
                 if(pointsValidityFunctions.calcWeeksUntilEnd(nodeList,NLIndex,i)==1){
                     ExRePointsValiditReport.pass("Transaction : "+(i+1)+" case "+ x +" pass");
                     ExRePointsValiditReport.info("from: Next business day , Until: Several weeks");
+                    flag = true;
                 }else{
 
                     ExRePointsValiditReport.fail("Transaction :"+(i+1)+" case "+ x +" fail");
@@ -111,6 +120,7 @@ public class PointsValidityCases extends PointsValidityFunctions {
                 if(pointsValidityFunctions.calcUntilEndOfYear(nodeList,NLIndex)==1){
                     ExRePointsValiditReport.pass("Transaction : "+(i+1)+"case "+ x +" pass");
                     ExRePointsValiditReport.info("from: Immediately   , Until: End of the year");
+                    flag = true;
                 }else{
                     ExRePointsValiditReport.fail("Transaction :"+(i+1)+" case "+ x +" fail");
                     ExRePointsValiditReport.info("from: Immediately   , Until: End of the year");
@@ -123,6 +133,7 @@ public class PointsValidityCases extends PointsValidityFunctions {
                 if (pointsValidityFunctions.calcUntilEndOfMonth(nodeList,NLIndex) == 1){
                     ExRePointsValiditReport.pass("Transaction : "+(i+1)+"case "+ x +" pass");
                     ExRePointsValiditReport.info("from: Immediately   , Until: End of mount");
+                    flag = true;
                 }else{
                     ExRePointsValiditReport.fail("Transaction :"+(i+1)+" case "+ x +" fail");
                     ExRePointsValiditReport.info("from: Immediately   , Until: End of mount");
@@ -135,6 +146,7 @@ public class PointsValidityCases extends PointsValidityFunctions {
                 if (pointsValidityFunctions.calcntilEndOfWeek(nodeList,NLIndex) == 1){
                     ExRePointsValiditReport.pass("Transaction : "+(i+1)+"case "+ x +" pass");
                     ExRePointsValiditReport.info("from: Immediately   , Until: End of week");
+                    flag = true;
                 }else{
                     ExRePointsValiditReport.fail("Transaction :"+(i+1)+" case "+ x +" fail");
                     ExRePointsValiditReport.info("from: Immediately   , Until: End of week");
@@ -145,6 +157,12 @@ public class PointsValidityCases extends PointsValidityFunctions {
 
 
             default:
+        }
+
+        if (flag){
+            return true;
+        }else{
+            return false;
         }
 
 

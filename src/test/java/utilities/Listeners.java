@@ -12,7 +12,7 @@ public class Listeners extends BasePage implements ITestListener  {
 
     @Override
     public void onFinish(ITestContext arg0) {
-        MainFunction.RestGlobals();
+        MainFunctions.RestGlobals();
 
 
     }
@@ -80,9 +80,9 @@ public class Listeners extends BasePage implements ITestListener  {
         if (str.equals("MemberTest4")) {
             ExReNewMemberTestReport.pass(arg0.getName() + "Test passed");
             LogFileHandling.WriteToFile("EmailLog","V-"+arg0.getName() + " Test passed",HOME_DIRECTORY);
-            LogFileHandling.WriteToFile("EmailLog","    avgTimeSubTotal NewMember: "+ MainFunction.getAvgTime(avgTimeSubTotal),HOME_DIRECTORY);
-            LogFileHandling.WriteToFile("EmailLog","    avgTimeTrenEnd NewMember: "+ MainFunction.getAvgTime(avgTimeTrenEnd),HOME_DIRECTORY);
-            LogFileHandling.WriteToFile("EmailLog","    avgTimeTrenEndOnePhase NewMember: "+ MainFunction.getAvgTime(avgTimeTrenEndOnePhase),HOME_DIRECTORY);
+            LogFileHandling.WriteToFile("EmailLog","    avgTimeSubTotal NewMember: "+ MainFunctions.getAvgTime(avgTimeSubTotal),HOME_DIRECTORY);
+            LogFileHandling.WriteToFile("EmailLog","    avgTimeTrenEnd NewMember: "+ MainFunctions.getAvgTime(avgTimeTrenEnd),HOME_DIRECTORY);
+            LogFileHandling.WriteToFile("EmailLog","    avgTimeTrenEndOnePhase NewMember: "+ MainFunctions.getAvgTime(avgTimeTrenEndOnePhase),HOME_DIRECTORY);
 
         }
         if (str.equals("MemberTest5")) {

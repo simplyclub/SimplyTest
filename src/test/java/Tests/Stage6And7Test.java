@@ -6,14 +6,14 @@ import Utilities.LogFileHandling;
 
 import org.testng.SkipException;
 import org.testng.annotations.Test;
-import utilities.MainFunction;
+import utilities.MainFunctions;
 import utilities.RetryAnalyzer;
 
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 
-import static utilities.MainFunction.BaseLogStringFunc;
+import static utilities.MainFunctions.BaseLogStringFunc;
 
 
 public class Stage6And7Test extends BasePage {
@@ -24,16 +24,16 @@ public class Stage6And7Test extends BasePage {
 
         try {
             trenEndOnePhaseResponse = stage6And7TestFunctions.makeTrenEndOnePhase(0, 1);
-            trenEndOnePhaseResponse_String = MainFunction.convertOkHttpResponseToString(trenEndOnePhaseResponse);
+            trenEndOnePhaseResponse_String = MainFunctions.convertOkHttpResponseToString(trenEndOnePhaseResponse);
         }catch (SocketTimeoutException e) {
             ExReGeneralTests.warning("ERROR(trenEndOnePhaseResponse)---- Socket Timeout Exception  ");
-            System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(trenEndOnePhaseResponse)---- Socket Timeout Exception  ");
+            System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(trenEndOnePhaseResponse)---- Socket Timeout Exception  ");
 
             throw new SocketTimeoutException();
 
         } catch (NullPointerException e) {
             ExReGeneralTests.warning("ERROR(trenEndOnePhaseResponse)---- Null lPointer Exceptionn  ");
-            System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(trenEndOnePhaseResponse)---- Null Pointer Exception  ");
+            System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(trenEndOnePhaseResponse)---- Null Pointer Exception  ");
             throw new NullPointerException();
 
         }
@@ -48,7 +48,7 @@ public class Stage6And7Test extends BasePage {
             ExReStage6And7Report.info(
                     LogFileHandling.createLogFile(trenEndOnePhaseResponse_String, LOG_FILE_DIRECTORY, "Stage6Deal1Test",0));
             trenEndOnePhaseResponse.body().close();
-            MainFunction.onTestFailure("Stage6Deal1Test");
+            MainFunctions.onTestFailure("Stage6Deal1Test");
             throw  new SkipException("***ERROR --- status code is not 200" + "(" + trenEndOnePhaseResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                     responseHandling.getErrorCodeStatusJson(trenEndOnePhaseResponse_String) + ")");
         }
@@ -77,7 +77,7 @@ public class Stage6And7Test extends BasePage {
 
             if (ResponseHandling.getXMLResponsePromoID(nodeList, XRIndex).equals("1905")){
                 flag = 1;
-                if(MainFunction.converToDoubleAsString(ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)).equals("980.0")){
+                if(MainFunctions.converToDoubleAsString(ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)).equals("980.0")){
                     ExReStage6And7Report.pass("Stage6Deal1Test --- PASS");
                     System.out.println(BaseLogStringFunc()+"Stage6Deal1Test --- PASS");
                     break;
@@ -86,7 +86,7 @@ public class Stage6And7Test extends BasePage {
                     ExReStage6And7Report.info("Amount 980 is not equal to transactionViewResponse promoId 1905 amount( "
                             +ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)+" )");
                     System.out.println(BaseLogStringFunc()+"Stage6Deal1Test(Amount) --- Fail");
-                    MainFunction.onTestFailure("Stage6Deal1Test");
+                    MainFunctions.onTestFailure("Stage6Deal1Test");
                 }
 
             }
@@ -99,7 +99,7 @@ public class Stage6And7Test extends BasePage {
             ExReStage6And7Report.fail("Stage6Deal1Test(PromoId) --- Fail");
             ExReStage6And7Report.info("promoID 1905 for promotion check, not found in transactionViewResponse");
             System.out.println(BaseLogStringFunc()+"Stage6Deal1Test(PromoId) --- Fail");
-            MainFunction.onTestFailure("Stage6Deal1Test");
+            MainFunctions.onTestFailure("Stage6Deal1Test");
         }
 
     }//end test
@@ -107,7 +107,7 @@ public class Stage6And7Test extends BasePage {
     @Test(retryAnalyzer = RetryAnalyzer.class,description = "inputFlug=1,NOT Including a cash register sale")
     public void Stage6Deal2Test() throws IOException {
         trenEndOnePhaseResponse = stage6And7TestFunctions.makeTrenEndOnePhase(0,2);
-        trenEndOnePhaseResponse_String = MainFunction.convertOkHttpResponseToString(trenEndOnePhaseResponse);
+        trenEndOnePhaseResponse_String = MainFunctions.convertOkHttpResponseToString(trenEndOnePhaseResponse);
 
         if (!(trenEndOnePhaseResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(trenEndOnePhaseResponse_String).equals("0"))) {
             System.out.println("***ERROR --- status code is not 200" + "(" + trenEndOnePhaseResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
@@ -152,7 +152,7 @@ public class Stage6And7Test extends BasePage {
                     ExReStage6And7Report.fail("Stage6Deal2Test(PromoId) --- Fail");
                     ExReStage6And7Report.info("promoID 1906 for promotion check,  found in transactionViewResponse");
                     System.out.println(BaseLogStringFunc() + "Stage6Deal2Test(PromoId) --- Fail");
-                    MainFunction.onTestFailure("Stage6Deal2Test");
+                    MainFunctions.onTestFailure("Stage6Deal2Test");
 
                  }
         }//end for loop
@@ -162,7 +162,7 @@ public class Stage6And7Test extends BasePage {
     @Test(retryAnalyzer = RetryAnalyzer.class,description = "inputFlug=2,Including a POS deposit")
     public void Stage6Deal3Test() throws IOException {
         trenEndOnePhaseResponse = stage6And7TestFunctions.makeTrenEndOnePhase(0,3);
-        trenEndOnePhaseResponse_String = MainFunction.convertOkHttpResponseToString(trenEndOnePhaseResponse);
+        trenEndOnePhaseResponse_String = MainFunctions.convertOkHttpResponseToString(trenEndOnePhaseResponse);
 
         if (!(trenEndOnePhaseResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(trenEndOnePhaseResponse_String).equals("0"))) {
             System.out.println("***ERROR --- status code is not 200" + "(" + trenEndOnePhaseResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
@@ -202,7 +202,7 @@ public class Stage6And7Test extends BasePage {
 
             if (ResponseHandling.getXMLResponsePromoID(nodeList, XRIndex).equals("1907")){
                 flag = 1;
-                if(MainFunction.converToDoubleAsString(ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)).equals("430.0")){
+                if(MainFunctions.converToDoubleAsString(ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)).equals("430.0")){
                     ExReStage6And7Report.pass("Stage6Deal3Test --- PASS");
                     System.out.println(BaseLogStringFunc()+"Stage6Deal3Test --- PASS");
                     break;
@@ -211,7 +211,7 @@ public class Stage6And7Test extends BasePage {
                     ExReStage6And7Report.info("Amount 430 is not equal to transactionViewResponse promoId 1907 amount( "
                             +ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)+" )");
                     System.out.println(BaseLogStringFunc()+"Stage6Deal3Test(Amount) --- Fail");
-                    MainFunction.onTestFailure("Stage6Deal3Test");
+                    MainFunctions.onTestFailure("Stage6Deal3Test");
                 }
 
             }
@@ -222,7 +222,7 @@ public class Stage6And7Test extends BasePage {
             ExReStage6And7Report.fail("Stage6Deal3Test(PromoId) --- Fail");
             ExReStage6And7Report.info("promoID 1907 for promotion check, not found in transactionViewResponse");
             System.out.println(BaseLogStringFunc()+"Stage6Deal3Test(PromoId) --- Fail");
-            MainFunction.onTestFailure("Stage6Deal3Test");
+            MainFunctions.onTestFailure("Stage6Deal3Test");
         }
 
     }//end test
@@ -230,7 +230,7 @@ public class Stage6And7Test extends BasePage {
     @Test(retryAnalyzer = RetryAnalyzer.class,description = "inputFlug=2,NOT Including a POS deposit")
     public void Stage6Deal4Test() throws IOException {
         trenEndOnePhaseResponse = stage6And7TestFunctions.makeTrenEndOnePhase(0,4);
-        trenEndOnePhaseResponse_String = MainFunction.convertOkHttpResponseToString(trenEndOnePhaseResponse);
+        trenEndOnePhaseResponse_String = MainFunctions.convertOkHttpResponseToString(trenEndOnePhaseResponse);
 
         if (!(trenEndOnePhaseResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(trenEndOnePhaseResponse_String).equals("0"))) {
             System.out.println("***ERROR --- status code is not 200" + "(" + trenEndOnePhaseResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
@@ -276,7 +276,7 @@ public class Stage6And7Test extends BasePage {
                 ExReStage6And7Report.fail("Stage6Deal4Test(PromoId) --- Fail");
                 ExReStage6And7Report.info("promoID 1908 for promotion check,  found in transactionViewResponse");
                 System.out.println(BaseLogStringFunc() + "Stage6Deal4Test(PromoId) --- Fail");
-                MainFunction.onTestFailure("Stage6Deal4Test");
+                MainFunctions.onTestFailure("Stage6Deal4Test");
 
             }
         }//end for loop
@@ -286,7 +286,7 @@ public class Stage6And7Test extends BasePage {
     @Test(retryAnalyzer = RetryAnalyzer.class,description = "inputFlug=3,Including a POS deposit + a cash register sale")
     public void Stage6Deal5Test() throws IOException {
         trenEndOnePhaseResponse = stage6And7TestFunctions.makeTrenEndOnePhase(0,5);
-        trenEndOnePhaseResponse_String = MainFunction.convertOkHttpResponseToString(trenEndOnePhaseResponse);
+        trenEndOnePhaseResponse_String = MainFunctions.convertOkHttpResponseToString(trenEndOnePhaseResponse);
 
         if (!(trenEndOnePhaseResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(trenEndOnePhaseResponse_String).equals("0"))) {
             System.out.println("***ERROR --- status code is not 200" + "(" + trenEndOnePhaseResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
@@ -326,7 +326,7 @@ public class Stage6And7Test extends BasePage {
 
             if (ResponseHandling.getXMLResponsePromoID(nodeList, XRIndex).equals("1910")){
                 flag = 1;
-                if(MainFunction.converToDoubleAsString(ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)).equals("760.0")){
+                if(MainFunctions.converToDoubleAsString(ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)).equals("760.0")){
                     ExReStage6And7Report.pass("Stage6Deal5Test --- PASS");
                     System.out.println(BaseLogStringFunc()+"Stage6Deal5Test --- PASS");
                     break;
@@ -335,7 +335,7 @@ public class Stage6And7Test extends BasePage {
                     ExReStage6And7Report.info("Amount 760 is not equal to transactionViewResponse promoId 1910 amount( "
                             +ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)+" )");
                     System.out.println(BaseLogStringFunc()+"Stage6Deal5Test(Amount) --- Fail");
-                    MainFunction.onTestFailure("Stage6Deal5Test");
+                    MainFunctions.onTestFailure("Stage6Deal5Test");
                 }
 
             }
@@ -346,7 +346,7 @@ public class Stage6And7Test extends BasePage {
             ExReStage6And7Report.fail("Stage6Deal5Test(PromoId) --- Fail");
             ExReStage6And7Report.info("promoID 1907 for promotion check, not found in transactionViewResponse");
             System.out.println(BaseLogStringFunc()+"Stage6Deal3Test(PromoId) --- Fail");
-            MainFunction.onTestFailure("Stage6Deal3Test");
+            MainFunctions.onTestFailure("Stage6Deal3Test");
         }
 
     }//end test
@@ -354,7 +354,7 @@ public class Stage6And7Test extends BasePage {
     @Test(retryAnalyzer = RetryAnalyzer.class,description = "inputFlug=3,NOT Including a POS deposit + a cash register sale")
     public void Stage6Deal6Test() throws IOException {
         trenEndOnePhaseResponse = stage6And7TestFunctions.makeTrenEndOnePhase(0,6);
-        trenEndOnePhaseResponse_String = MainFunction.convertOkHttpResponseToString(trenEndOnePhaseResponse);
+        trenEndOnePhaseResponse_String = MainFunctions.convertOkHttpResponseToString(trenEndOnePhaseResponse);
 
         if (!(trenEndOnePhaseResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(trenEndOnePhaseResponse_String).equals("0"))) {
             System.out.println("***ERROR --- status code is not 200" + "(" + trenEndOnePhaseResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
@@ -401,7 +401,7 @@ public class Stage6And7Test extends BasePage {
                 ExReStage6And7Report.fail("Stage6Deal6Test(PromoId) --- Fail");
                 ExReStage6And7Report.info("promoID 1911 for promotion check,  found in transactionViewResponse");
                 System.out.println(BaseLogStringFunc() + "Stage6Deal6Test(PromoId) --- Fail");
-                MainFunction.onTestFailure("Stage6Deal6Test");
+                MainFunctions.onTestFailure("Stage6Deal6Test");
 
             }
         }//end for loop
@@ -418,7 +418,7 @@ public class Stage6And7Test extends BasePage {
             ExReStage6And7Report.fail("Stage7Deal1Test ---- Fail ");
             System.out.println("Stage7Deal1Test ---- Fail ");
             ExReStage6And7Report.info("one of the PromoId in the TestJSON is not found in subTotal response");
-            MainFunction.onTestFailure("Stage7Deal1Test");
+            MainFunctions.onTestFailure("Stage7Deal1Test");
 
 //            SkipException skipException =  new SkipException("one of the PromoId in the TestJSON is not found in subTotal response");
 //            System.out.println(MainFunction.BaseLogStringFunc()+skipException.getLocalizedMessage());
@@ -438,7 +438,7 @@ public class Stage6And7Test extends BasePage {
             ExReStage6And7Report.fail("Stage7Deal2Test ---- Fail ");
             System.out.println("Stage7Deal2Test ---- Fail ");
             ExReStage6And7Report.info("one of the PromoId in the TestJSON is  found in subTotal response");
-            MainFunction.onTestFailure("Stage7Deal2Test");
+            MainFunctions.onTestFailure("Stage7Deal2Test");
 
             //SkipException skipException =  new SkipException("one of the PromoId in the TestJSON is  found in subTotal response");
             //System.out.println(MainFunction.BaseLogStringFunc()+skipException.getLocalizedMessage());
@@ -451,15 +451,15 @@ public class Stage6And7Test extends BasePage {
     public void Stage7Deal3Test() throws IOException{
         try {
             subTotalResponse = stage6And7TestFunctions.makeSubTotal(0, 0);
-            subTotalResponse_String = MainFunction.convertOkHttpResponseToString(subTotalResponse);
+            subTotalResponse_String = MainFunctions.convertOkHttpResponseToString(subTotalResponse);
         }catch (SocketTimeoutException e){
         ExReStage6And7Report.warning("ERROR(subTotalResponse)---- Socket Timeout Exception  ");
-        System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(subTotalResponse)---- Socket Timeout Exception  ");
+        System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(subTotalResponse)---- Socket Timeout Exception  ");
         throw new SocketTimeoutException();
 
         } catch ( NullPointerException e) {
             ExReStage6And7Report.warning("ERROR(subTotalPromoIdCheck)---- Null lPointer Exceptionn  ");
-        System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(subTotalPromoIdCheck)---- Null Pointer Exception  ");
+        System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(subTotalPromoIdCheck)---- Null Pointer Exception  ");
         throw new NullPointerException();
 
     }
@@ -467,15 +467,15 @@ public class Stage6And7Test extends BasePage {
             trenEndResponse = stage6And7TestFunctions.makeTranEnd(0, subTotalResponse_String, 0,
                     stage6And7TestFunctions.getDealToUseStage7(baseJSON.getObj(JSON_STAGE_6_AND_7_DEAL_ITEMS)));
 
-            trenEndResponse_String = MainFunction.convertOkHttpResponseToString(trenEndResponse);
+            trenEndResponse_String = MainFunctions.convertOkHttpResponseToString(trenEndResponse);
         }catch (SocketTimeoutException e){
             ExReStage6And7Report.warning("ERROR(trenEndResponse)---- Socket Timeout Exception  ");
-            System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(trenEndResponse)---- Socket Timeout Exception  ");
+            System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(trenEndResponse)---- Socket Timeout Exception  ");
             throw new SocketTimeoutException();
 
         }catch ( NullPointerException e) {
             ExReStage6And7Report.warning("ERROR(trenEndResponse)---- Null lPointer Exceptionn  ");
-            System.out.println(MainFunction.BaseLogStringFunc() + "ERROR(trenEndResponse)---- Null Pointer Exception  ");
+            System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR(trenEndResponse)---- Null Pointer Exception  ");
             throw new NullPointerException();
 
         }

@@ -25,7 +25,7 @@ public class RetryAnalyzer implements IRetryAnalyzer {
 
         if (counter < retryLimit) {
 
-            System.out.println(MainFunction.BaseLogStringFunc()+ "------- RETRY NUM "+counter);
+            System.out.println(MainFunctions.BaseLogStringFunc()+ "------- RETRY NUM "+counter);
             counter++;
             return true;
         }

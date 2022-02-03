@@ -7,9 +7,8 @@ import JSON.JSONGetData;
 import JSON.ResponseHandling;
 import JSON.UserHandling;
 import Tests.BasePage;
-import io.restassured.response.Response;
 import org.json.simple.JSONArray;
-import utilities.MainFunction;
+import utilities.MainFunctions;
 
 import java.io.IOException;
 
@@ -95,7 +94,7 @@ public okhttp3.Response makeTranRefund (int i,String TrenEndResponse ) throws IO
 
             postAllAccumsPoints.put(userHandling.getVoucher(arr ,"AccID", l),
                     Double.valueOf(userHandling.getVoucher(arr,"BenefitValue",l)));
-            System.out.println(MainFunction.BaseLogStringFunc()+"postAllAccumsPoints "+Double.valueOf(userHandling.getVoucher(arr,"BenefitValue",l)));
+            System.out.println(MainFunctions.BaseLogStringFunc()+"postAllAccumsPoints "+Double.valueOf(userHandling.getVoucher(arr,"BenefitValue",l)));
 
 
         }
@@ -105,21 +104,21 @@ public okhttp3.Response makeTranRefund (int i,String TrenEndResponse ) throws IO
         if(postAllAccumsPoints.size() == preAllAccumsPoints.size()){
 
             if (preAllAccumsPoints.equals(postAllAccumsPoints)){
-                System.out.println(MainFunction.BaseLogStringFunc()+"preAllAccumsPoints is equal to postAllAccumsPoints ");
+                System.out.println(MainFunctions.BaseLogStringFunc()+"preAllAccumsPoints is equal to postAllAccumsPoints ");
                 ExReTernRefundReport.pass("preAllAccumsPoints is equal to postAllAccumsPoints");
             }else{
-                System.out.println(MainFunction.BaseLogStringFunc()+"preAllAccumsPoints is NOT equal to postAllAccumsPoints ");
+                System.out.println(MainFunctions.BaseLogStringFunc()+"preAllAccumsPoints is NOT equal to postAllAccumsPoints ");
                 ExReTernRefundReport.fail("preAllAccumsPoints is NOT equal to postAllAccumsPoints");
                 ExReTernRefundReport.info("preAllAccumsPoints: "+ preAllAccumsPoints).info("postAllAccumsPoints: "+ postAllAccumsPoints);
-                MainFunction.onTestFailure("tranRefundTest");
+                MainFunctions.onTestFailure("tranRefundTest");
             }
 
 
         }else {
-            System.out.println(MainFunction.BaseLogStringFunc()+"preAllAccumsPoints size is not equal to postAllAccumsPoints size");
+            System.out.println(MainFunctions.BaseLogStringFunc()+"preAllAccumsPoints size is not equal to postAllAccumsPoints size");
             ExReTernRefundReport.fail("preAllAccumsPoints size is not equal to postAllAccumsPoints size");
             ExReTernRefundReport.info("postAllAccumsPoints size: "+ postAllAccumsPoints.size()).info("preAllAccumsPoints size: "+ preAllAccumsPoints.size());
-            MainFunction.onTestFailure("tranRefundTest");
+            MainFunctions.onTestFailure("tranRefundTest");
 
         }
 

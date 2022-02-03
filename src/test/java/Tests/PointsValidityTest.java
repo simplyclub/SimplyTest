@@ -6,7 +6,7 @@ import Tests.TestFunctions.PointsValidityFunctions;
 import Utilities.LogFileHandling;
 import XML.XMLGetData;
 import org.testng.annotations.Test;
-import utilities.MainFunction;
+import utilities.MainFunctions;
 import utilities.RetryAnalyzer;
 
 import java.io.IOException;
@@ -22,13 +22,13 @@ public class PointsValidityTest extends BasePage {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void pointsValidityTest() throws IOException {
         for (int i = 0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++) {
-            MainFunction.RestGlobals();
+            MainFunctions.RestGlobals();
             // this if  check for deal type flag = 1
             if (JSONGetData.getDealTypeFlag(TestJSONToSend, i).equals("1")) {
                 //make a deal subtotal + tranEnd not using points
                 ExRePointsValiditReport.info("~~~~~~~~~~~~~~~~~~~~~~Transaction: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
-                System.out.println(MainFunction.BaseLogStringFunc() + "~~~~~~~~~~~~~~~~~~~~~~Deal: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
-                MainFunction.RestGlobals();
+                System.out.println(MainFunctions.BaseLogStringFunc() + "~~~~~~~~~~~~~~~~~~~~~~Deal: " + (i + 1) + "~~~~~~~~~~~~~~~~~~~~~~");
+                MainFunctions.RestGlobals();
 
                 // resat the base json  that i send in the infrastructure
                 baseJSON.BaseJSONCopy();
@@ -36,50 +36,50 @@ public class PointsValidityTest extends BasePage {
                 //make a deal subTotal
                 try {
                     subTotalResponse = pointsValidityFunctions.makeDealSubTotal(i);
-                    subTotalResponse_String = MainFunction.convertOkHttpResponseToString(subTotalResponse);
+                    subTotalResponse_String = MainFunctions.convertOkHttpResponseToString(subTotalResponse);
                     if (!(subTotalResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse_String).equals("0"))) {
-                        System.out.println(MainFunction.BaseLogStringFunc() + "*ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(subTotalResponse_String) + ")");
+                        System.out.println(MainFunctions.BaseLogStringFunc() + "*ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(subTotalResponse_String) + ")");
                         ExRePointsValiditReport.fail("ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                                 responseHandling.getErrorCodeStatusJson(subTotalResponse_String) + ")");
                         LogFileHandling.createLogFile(baseJSON.getString(baseJSON.JSON_TO_SEND), LOG_FILE_DIRECTORY, "subTotalCall", i + 1);
                         LogFileHandling.createLogFile(subTotalResponse.toString(), LOG_FILE_DIRECTORY, "subTotalResponse", i + 1);
                         subTotalResponse.body().close();
-                        MainFunction.onTestFailure("pointsValidityTest");
+                        MainFunctions.onTestFailure("pointsValidityTest");
                         continue;
                     } else {
                         avgTimeSubTotal.add(BaseAPI.getResponseTime_OkHttp(subTotalResponse));
 
                     }
                 } catch (NullPointerException e) {
-                    System.out.println(MainFunction.BaseLogStringFunc() + "ERROE (subTotalResponse) --- The server is currently busy, please try again later ");
+                    System.out.println(MainFunctions.BaseLogStringFunc() + "ERROE (subTotalResponse) --- The server is currently busy, please try again later ");
                 }
 
                 //make trenEnd deal
                 try {
                     trenEndResponse = pointsValidityFunctions.makeDealTrenEnd(i, subTotalResponse_String);
-                    trenEndResponse_String = MainFunction.convertOkHttpResponseToString(trenEndResponse);
+                    trenEndResponse_String = MainFunctions.convertOkHttpResponseToString(trenEndResponse);
                     if (!(trenEndResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(trenEndResponse_String).equals("0"))) {
-                        System.out.println(MainFunction.BaseLogStringFunc() + "**ERROR" +
+                        System.out.println(MainFunctions.BaseLogStringFunc() + "**ERROR" +
                                 "  --- status code is not 200" + "(" + trenEndResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(trenEndResponse_String) + ")");
                         ExRePointsValiditReport.fail("ERROR --- status code is not 200" + "(" + trenEndResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                                 responseHandling.getErrorCodeStatusJson(trenEndResponse_String) + ")");
                         LogFileHandling.createLogFile(baseJSON.getString(baseJSON.JSON_TO_SEND), LOG_FILE_DIRECTORY, "trenEndCall", i + 1);
                         LogFileHandling.createLogFile(trenEndResponse.toString(), LOG_FILE_DIRECTORY, "trenEndResponse", i + 1);
                         trenEndResponse.body().close();
-                        MainFunction.onTestFailure("pointsValidityTest");
+                        MainFunctions.onTestFailure("pointsValidityTest");
                         continue;
                     } else {
                         avgTimeTrenEnd.add(BaseAPI.getResponseTime_OkHttp(trenEndResponse));
 
                     }
                 } catch (NullPointerException e) {
-                    System.out.println(MainFunction.BaseLogStringFunc() + "ERROE (trenEndResponse) --- The server is currently busy, please try again later ");
+                    System.out.println(MainFunctions.BaseLogStringFunc() + "ERROE (trenEndResponse) --- The server is currently busy, please try again later ");
                 }
                 try {
                     userDataResponse = pointsValidityFunctions.getUserData(i, JSONGetData.getCardNumber(TestJSONToSend, i));
-                    userDataResponse_String = MainFunction.convertOkHttpResponseToString(userDataResponse);
+                    userDataResponse_String = MainFunctions.convertOkHttpResponseToString(userDataResponse);
                 } catch (Exception e) {
-                    System.out.println(MainFunction.BaseLogStringFunc() + "ERROR ---  userDataResponse Exception");
+                    System.out.println(MainFunctions.BaseLogStringFunc() + "ERROR ---  userDataResponse Exception");
 
                 }
 
@@ -87,12 +87,12 @@ public class PointsValidityTest extends BasePage {
                 getMemberBenefitListResponse = pointsValidityFunctions.getMemberBenefitList(responseHandling.getSysId(userDataResponse_String));
 
                 if (!(getMemberBenefitListResponse.getStatusCode() == 200)) {
-                    System.out.println(MainFunction.BaseLogStringFunc() + "****ERROR xml--- status code is not 200 ");
+                    System.out.println(MainFunctions.BaseLogStringFunc() + "****ERROR xml--- status code is not 200 ");
                     ExRePointsValiditReport.fail("ERROR xml--- status code is not 200" + "(" + getMemberBenefitListResponse.getStatusCode() + ")");
                     LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
                             LOG_FILE_DIRECTORY, "XmlMemberBenefitListcall", i + 1);
                     LogFileHandling.createLogFile(getMemberBenefitListResponse.asString(), LOG_FILE_DIRECTORY, "XmlMemberBenefitListResponse", i + 1);
-                    MainFunction.onTestFailure("pointsValidityTest");
+                    MainFunctions.onTestFailure("pointsValidityTest");
                     continue;
 
                 }
@@ -100,15 +100,15 @@ public class PointsValidityTest extends BasePage {
                 //System.out.println(getMemberBenefitListResponse.getBody().asString());
 
                 nodeList = responseHandling.getXMLFileTranViewMemberBenefitData(getMemberBenefitListResponse.getBody().asString());
-                System.out.println(MainFunction.BaseLogStringFunc() + nodeList.getLength());
+                System.out.println(MainFunctions.BaseLogStringFunc() + nodeList.getLength());
 
                 //this for loop run on the response array from the getMemberBenefitListResponse
                 for (int NLIndex = 0, flag = 0; NLIndex < nodeList.getLength(); NLIndex++) {
                     if (flag == 0){
 
                         // 1st "if" : check for the TrxNumber = TrenEndTranReferenceNumber
-                        System.out.println(MainFunction.BaseLogStringFunc() + responseHandling.getTrenEndTranReferenceNumber(trenEndResponse_String));
-                    System.out.println(MainFunction.BaseLogStringFunc() + XMLGetData.getXmlMBLSysTrxNumber(nodeList, NLIndex));
+                        System.out.println(MainFunctions.BaseLogStringFunc() + responseHandling.getTrenEndTranReferenceNumber(trenEndResponse_String));
+                    System.out.println(MainFunctions.BaseLogStringFunc() + XMLGetData.getXmlMBLSysTrxNumber(nodeList, NLIndex));
                     if (responseHandling.getTrenEndTranReferenceNumber(trenEndResponse_String).equals(XMLGetData.getXmlMBLSysTrxNumber(nodeList, NLIndex))) {
 
                         //2nd "if" : check for promoId in the XML response vs TestJsonToSend
@@ -119,17 +119,24 @@ public class PointsValidityTest extends BasePage {
 
 
                                 //3rd "if" : check for the amount
-                                String xmlMBLViewAmount = MainFunction.converToDoubleAsString(XMLGetData.getXmlMBLViewAmount(nodeList, NLIndex));
-                                String testJsonAmount = MainFunction.converToDoubleAsString(XMLGetData.getXmlMBLViewAmount(nodeList, NLIndex));
+                                String xmlMBLViewAmount = MainFunctions.converToDoubleAsString(XMLGetData.getXmlMBLViewAmount(nodeList, NLIndex));
+                                String testJsonAmount = MainFunctions.converToDoubleAsString(XMLGetData.getXmlMBLViewAmount(nodeList, NLIndex));
 
                                 if (xmlMBLViewAmount.equals(testJsonAmount)) {
                                     //System.out.println("2");
-                                    pointsValidityCases.pointsValidityCases(nodeList, NLIndex, Integer.parseInt(JSONGetData.getPVFlag(TestJSONToSend, i)), i);
-                                    flag=1;
-                                    break;
+                                    if(pointsValidityCases.pointsValidityCases(nodeList, NLIndex, Integer.parseInt(JSONGetData.getPVFlag(TestJSONToSend, i)), i)){
+                                        flag=1;
+                                        break;
+                                    }else {
+                                        MainFunctions.onTestFailure("pointsValidityTest");
+                                        flag =0 ;
+                                    }
+
+
                                 } else {
-                                    System.out.println(MainFunction.BaseLogStringFunc() + "xmlMBLViewAmount: " + xmlMBLViewAmount + " is not equal to testJsonAmount: " + testJsonAmount);
+                                    System.out.println(MainFunctions.BaseLogStringFunc() + "xmlMBLViewAmount: " + xmlMBLViewAmount + " is not equal to testJsonAmount: " + testJsonAmount);
                                     ExRePointsValiditReport.fail("xmlMBLViewAmount: " + xmlMBLViewAmount + " is not equal to testJsonAmount: " + testJsonAmount);
+                                    MainFunctions.onTestFailure("pointsValidityTest");
                                     flag=1;
                                     break;
                                 }
@@ -148,8 +155,8 @@ public class PointsValidityTest extends BasePage {
 
 
                     } else {
-                        System.out.println(MainFunction.BaseLogStringFunc() + "NLIndex: " + NLIndex);
-                        System.out.println(MainFunction.BaseLogStringFunc() + "TrenEndTranReferenceNumber: " + responseHandling.getTrenEndTranReferenceNumber(trenEndResponse_String)
+                        System.out.println(MainFunctions.BaseLogStringFunc() + "NLIndex: " + NLIndex);
+                        System.out.println(MainFunctions.BaseLogStringFunc() + "TrenEndTranReferenceNumber: " + responseHandling.getTrenEndTranReferenceNumber(trenEndResponse_String)
                                 + " is not equal to XmlMBLSysTrxNumber: " + XMLGetData.getXmlMBLSysTrxNumber(nodeList, NLIndex));
                         ExRePointsValiditReport.fail("TrenEndTranReferenceNumber: " + responseHandling.getTrenEndTranReferenceNumber(trenEndResponse_String)
                                 + " is not equal to XmlMBLSysTrxNumber: " + XMLGetData.getXmlMBLSysTrxNumber(nodeList, NLIndex));
@@ -171,11 +178,11 @@ public class PointsValidityTest extends BasePage {
             //subTotalResponse.close();
             //trenEndResponse.close();
         }//end main for loop
-        System.out.println(MainFunction.BaseLogStringFunc()+"avgTimeSubTotal: "+avgTimeSubTotal);
-        System.out.println(MainFunction.BaseLogStringFunc()+"avgTimeTrenEnd: "+avgTimeTrenEnd);
+        System.out.println(MainFunctions.BaseLogStringFunc()+"avgTimeSubTotal: "+avgTimeSubTotal);
+        System.out.println(MainFunctions.BaseLogStringFunc()+"avgTimeTrenEnd: "+avgTimeTrenEnd);
         ExRePointsValiditReport.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-                .info("avgTimeSubTotal: "+ (MainFunction.getAvgTime(avgTimeSubTotal)+"ms"))
-                .info("avgTimeTrenEnd: "+MainFunction.getAvgTime(avgTimeTrenEnd) +"ms");
+                .info("avgTimeSubTotal: "+ (MainFunctions.getAvgTime(avgTimeSubTotal)+"ms"))
+                .info("avgTimeTrenEnd: "+ MainFunctions.getAvgTime(avgTimeTrenEnd) +"ms");
 
     }//end of test
 

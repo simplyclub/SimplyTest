@@ -2,9 +2,7 @@ package JSON;
 import Tests.BasePage;
 
 
-
-import io.restassured.response.Response;
-import utilities.MainFunction;
+import utilities.MainFunctions;
 
 import java.io.IOException;
 
@@ -141,7 +139,7 @@ public class JSONCompare extends BasePage {
             }
             if( flag1 == 0 ){
                 ExReApiTestReport.warning("12PromoId: " + TBPromoId + " not found in the \"Test JSON \"").assignCategory("responVSTestJson");
-                System.out.println(MainFunction.BaseLogStringFunc()+baseJSON.jsonToSend.toString());
+                System.out.println(MainFunctions.BaseLogStringFunc()+baseJSON.jsonToSend.toString());
                // ExReApiTestReport.info(response.getBody().asString());
                 SFFlag = 1;
             }
@@ -210,7 +208,7 @@ public class JSONCompare extends BasePage {
 
                 ExReApiTestReport.warning("PromoId: " + TBPromoId + " not found in the response ").assignCategory("TestJSONVSResponse");
                // ExReApiTestReport.info(response.getBody().asString());
-                MainFunction.onTestFailure("subTotalTest");
+                MainFunctions.onTestFailure("subTotalTest");
 
 
             }

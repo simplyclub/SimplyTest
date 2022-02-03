@@ -25,7 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
-public class MainFunction extends BasePage {
+public class MainFunctions extends BasePage {
 
     public static void openReport() {
         ChromeOptions options = new ChromeOptions();
