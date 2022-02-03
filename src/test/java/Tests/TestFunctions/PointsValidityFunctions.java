@@ -205,7 +205,6 @@ public class PointsValidityFunctions extends BasePage {
                     }
                 } else {
                     if (month == 2 && day == 28) {
-                       // System.out.println(3);
                         return 1;
                     } else {
                         return 0;
