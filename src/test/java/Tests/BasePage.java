@@ -20,6 +20,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import utilities.EmailHandling;
 import utilities.MainFunctions;
 
 
@@ -322,7 +323,7 @@ public  class BasePage {
         exReport.flush();
 //        MainFunction.convertFileEncoding(
 //                "C:\\Users\\User\\IdeaProjects\\SimplyTest\\index.html","C:\\Users\\User\\IdeaProjects\\SimplyTest","UTF-8");
-  //      EmailHandling.sendEnmail();
+        EmailHandling.sendEnmail();
 
     }
 
