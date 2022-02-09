@@ -21,6 +21,8 @@ public class TranRefundTest extends BasePage {
 
     @Test(testName = "TranRefundTest",retryAnalyzer = RetryAnalyzer.class)
     public void tranRefundTest () throws IOException {
+        avgTimeTranRefund.clear();
+
         for(int i = 0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++){
 
 
@@ -72,10 +74,10 @@ public class TranRefundTest extends BasePage {
                         continue;
                     }
                 }catch (NullPointerException e){
-                    System.out.println("ERROR (trenEndResponse) --- The server is currently busy, please try again later ");
+                    System.out.println(MainFunctions.BaseLogStringFunc()+"ERROR (trenEndResponse) --- The server is currently busy, please try again later ");
                     continue;
                 }catch (SocketTimeoutException e){
-                    System.out.println("ERROR (trenEndResponse) --- timeout ");
+                    System.out.println(MainFunctions.BaseLogStringFunc()+"ERROR (trenEndResponse) --- timeout ");
                     continue;
 
                 }
@@ -97,17 +99,17 @@ public class TranRefundTest extends BasePage {
 
                     }
                 }catch (NullPointerException e){
-                    System.out.println("ERROR (trenRefundResponse) --- The server is currently busy, please try again later ");
+                    System.out.println(MainFunctions.BaseLogStringFunc()+"ERROR (trenRefundResponse) --- The server is currently busy, please try again later ");
                     continue;
                 }catch (SocketTimeoutException e){
-                    System.out.println("ERROR (trenRefundResponse) --- timeout ");
+                    System.out.println(MainFunctions.BaseLogStringFunc()+"ERROR (trenRefundResponse) --- timeout ");
                     continue;
 
                 }
                 try {
                     System.out.println(BaseAPI.getResponseTime_OkHttp(trenRefundResponse));
                 }catch (NullPointerException e){
-                    System.out.println("ERROR (trenRefundResponse) --- The server is currently busy, please try again later ");
+                    System.out.println(MainFunctions.BaseLogStringFunc()+"ERROR (trenRefundResponse) --- The server is currently busy, please try again later ");
                     continue;
 
                 }
@@ -129,6 +131,7 @@ public class TranRefundTest extends BasePage {
 
         }//main for loop end
         ExReTernRefundReport.info("avgTimetrenRedund: "+ MainFunctions.getAvgTime(avgTimeTranRefund)+"ms");
+        System.out.println(MainFunctions.BaseLogStringFunc()+"TimeTranRefund: "+avgTimeTranRefund);
 
     }//test end
 
