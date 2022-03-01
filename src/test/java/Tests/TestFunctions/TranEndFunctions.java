@@ -431,7 +431,7 @@ public class TranEndFunctions extends BasePage {
                     if (ResponseHandling.getXMLResponsePromoID(nodeList, XRIndex).equals(JSONGetData.getPromoId(TestJSONToSend, i, TJIndex, "Accumulates"))) {
 
                         //this if check if the amount of the points that received from the specific ofer (by promoID) is equal to the a mount in the test JSON
-                        if (MainFunctions.converToDoubleAsString(ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)).equals(
+                        if (MainFunctions.convertToDoubleAsString(ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)).equals(
                                 JSONGetData.getAmount(TestJSONToSend, i, TJIndex, "Accumulates"))) {
 
 

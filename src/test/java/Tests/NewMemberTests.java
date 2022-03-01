@@ -17,7 +17,6 @@ import java.net.SocketTimeoutException;
 public class NewMemberTests extends NewMemberAPIFunctions {
 
     private static String MEMBER_CARD_NUMBER = null;
-    private static String NEW_MEMBER_CARD_NUMBER = null;
     private static String INT_RANDOM_NUMBER = null;
     protected static String ID_RANDOM_NUMBER = null;
     protected static String ID_RANDOM_NUMBER_2 = null;
@@ -192,9 +191,9 @@ public class NewMemberTests extends NewMemberAPIFunctions {
         //MEMBER_CARD_NUMBER="1000067";
         ///
 
-        System.out.println("MEMBER_CARD_NUMBER: "+MEMBER_CARD_NUMBER);
+        System.out.println(MainFunctions.BaseLogStringFunc()+"MEMBER_CARD_NUMBER: "+MEMBER_CARD_NUMBER);
         NEW_MEMBER_CARD_NUMBER=Integer.toString(Integer.parseInt(MEMBER_CARD_NUMBER)+1);
-        System.out.println("NEW_MEMBER_CARD_NUMBER: "+NEW_MEMBER_CARD_NUMBER);
+        System.out.println(MainFunctions.BaseLogStringFunc()+"NEW_MEMBER_CARD_NUMBER: "+NEW_MEMBER_CARD_NUMBER);
 
         memberSwitchRecognitionResponse = MemberSwitchRecognition(0,MEMBER_CARD_NUMBER,NEW_MEMBER_CARD_NUMBER);
         memberSwitchRecognitionResponse_String = MainFunctions.convertOkHttpResponseToString(memberSwitchRecognitionResponse);
@@ -281,8 +280,8 @@ public class NewMemberTests extends NewMemberAPIFunctions {
                 LogFileHandling.createLogFile(baseJSON.getString(baseJSON.JSON_TO_SEND), LOG_FILE_DIRECTORY, "subTotalCall", i + 1);
                 LogFileHandling.createLogFile(subTotalResponse_String, LOG_FILE_DIRECTORY, "subTotalResponse", i + 1);
                 subTotalResponse.body().close();
-                System.out.println(baseJSON.jsonToSend);
-                System.out.println(subTotalResponse_String);
+                System.out.println(MainFunctions.BaseLogStringFunc()+baseJSON.jsonToSend);
+                System.out.println(MainFunctions.BaseLogStringFunc()+subTotalResponse_String);
                 MainFunctions.onTestFailure("MemberTest4");
             }
 
@@ -454,27 +453,32 @@ public class NewMemberTests extends NewMemberAPIFunctions {
 
             System.out.println(MainFunctions.BaseLogStringFunc()+memberAddResponse_String);
 
-            if((memberAddResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(memberAddResponse_String).equals("0"))){
 
-                memberSwitchStatusResponse =  changeMemberStatus(0,MANUAL_CARD_NUMBER,MEMBER_STATUS_NOT_ACTIVE);
-                memberSwitchStatusResponse_String = MainFunctions.convertOkHttpResponseToString(memberSwitchStatusResponse);
-                System.out.println(MainFunctions.BaseLogStringFunc()+baseJSON.memberSwitchStatusJsonToSend);
-                System.out.println(MainFunctions.BaseLogStringFunc()+memberSwitchStatusResponse_String);
+            ////*****************************************************
+            //Disabled due to transfer to end of project testing run 06/02/22
+            //*****************************************************
 
-
-                if(responseHandling.getMemberStatus(memberSwitchStatusResponse_String).equals(MEMBER_STATUS_NOT_ACTIVE)){
-                    //System.out.println("111");
-                    ExReNewMemberTestReport.pass("Member manual cardID -- PASS");
-
-
-                }else{
-                    ExReNewMemberTestReport.fail("Member manual cardID -- FAIL");
-                    ExReNewMemberTestReport.info("Member status is --> "+responseHandling.getMemberStatus(memberSwitchStatusResponse_String)+"/n"
-                            +" and NOT -->"+MEMBER_STATUS_NOT_ACTIVE);
-                    MainFunctions.onTestFailure("MemberTest7");
-                }
-
-            }
+//            if((memberAddResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(memberAddResponse_String).equals("0"))){
+//
+//                memberSwitchStatusResponse =  changeMemberStatus(0,MANUAL_CARD_NUMBER,MEMBER_STATUS_NOT_ACTIVE);
+//                memberSwitchStatusResponse_String = MainFunctions.convertOkHttpResponseToString(memberSwitchStatusResponse);
+//                System.out.println(MainFunctions.BaseLogStringFunc()+baseJSON.memberSwitchStatusJsonToSend);
+//                System.out.println(MainFunctions.BaseLogStringFunc()+memberSwitchStatusResponse_String);
+//
+//
+//                if(responseHandling.getMemberStatus(memberSwitchStatusResponse_String).equals(MEMBER_STATUS_NOT_ACTIVE)){
+//                    //System.out.println("111");
+//                    ExReNewMemberTestReport.pass("Member manual cardID -- PASS");
+//
+//
+//                }else{
+//                    ExReNewMemberTestReport.fail("Member manual cardID -- FAIL");
+//                    ExReNewMemberTestReport.info("Member status is --> "+responseHandling.getMemberStatus(memberSwitchStatusResponse_String)+"/n"
+//                            +" and NOT -->"+MEMBER_STATUS_NOT_ACTIVE);
+//                    MainFunctions.onTestFailure("MemberTest7");
+//                }
+//
+//            }
 
 
 

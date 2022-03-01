@@ -8,6 +8,8 @@ import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okio.Utf8;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -111,7 +113,7 @@ public class MainFunctions extends BasePage {
         return copy;
     }
 
-    public static String converToDoubleAsString(String str ){
+    public static String convertToDoubleAsString(String str ){
 
         double d = Double.parseDouble(str);
         DecimalFormat df = new DecimalFormat("#.##");
@@ -185,116 +187,161 @@ public class MainFunctions extends BasePage {
         //String str = arg0.getName();
 
         if (str.equals("subTotalTest")) {
+
             ExReApiTestReport.fail(str + " Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("tranEndTest")) {
+            System.out.println(str+" ---- fail");
             ExReAccumReport.fail(str + " Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
 
         }
         if (str.equals("tranRefundTest")) {
+            System.out.println(str+" ---- fail");
             ExReTernRefundReport.fail(str + " Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
 
         }
         if (str.equals("tranEndOnePhaseTest")) {
+            System.out.println(str+" ---- fail");
             ExReTrenEndOnePhaseReport.fail(str + " Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
 
         }
         if (str.equals("newMemberTests")) {
+            System.out.println(str+" ---- fail");
             ExReNewMemberTestReport.fail(str + " Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("pointsValidityTest")) {
+            System.out.println(str+" ---- fail");
             ExRePointsValiditReport.fail(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("MemberGetDetailsAndCodeTest")) {
+            System.out.println(str+" ---- fail");
             ExRePointsValiditReport.fail(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("Stage6Deal1Test")) {
+            System.out.println(str+" ---- fail");
             ExReStage6And7Report.fail(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("Stage6Deal2Test")) {
+            System.out.println(str+" ---- fail");
             ExReStage6And7Report.fail(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("Stage6Deal3Test")) {
+            System.out.println(str+" ---- fail");
             ExReStage6And7Report.fail(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("Stage6Deal4Test")) {
+            System.out.println(str+" ---- fail");
             ExReStage6And7Report.fail(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("Stage6Deal5Test")) {
+            System.out.println(str+" ---- fail");
             ExReStage6And7Report.fail(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("Stage6Deal6Test")) {
+            System.out.println(str+" ---- fail");
             ExReStage6And7Report.fail(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("Stage7Deal1Test")) {
+            System.out.println(str+" ---- fail");
             ExReStage6And7Report.fail(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("Stage7Deal2Test ")) {
+            System.out.println(str+" ---- fail");
             ExReStage6And7Report.fail(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("Stage7Deal3Test ")) {
+            System.out.println(str+" ---- fail");
             ExReStage6And7Report.fail(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest1")) {
+            System.out.println(str+" ---- fail");
             ExReNewMemberTestReport.pass(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest2")) {
+            System.out.println(str+" ---- fail");
             ExReNewMemberTestReport.pass(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest3")) {
+            System.out.println(str+" ---- fail");
             ExReNewMemberTestReport.pass(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest4")) {
+            System.out.println(str+" ---- fail");
             ExReNewMemberTestReport.pass(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest5")) {
+            System.out.println(str+" ---- fail");
             ExReNewMemberTestReport.pass(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest6")) {
+            System.out.println(str+" ---- fail");
             ExReNewMemberTestReport.pass(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest7")) {
+            System.out.println(str+" ---- fail");
             ExReNewMemberTestReport.pass(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("MemberTest8")) {
+            System.out.println(str+" ---- fail");
             ExReNewMemberTestReport.pass(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("JoinSms2Test")) {
+            System.out.println(str+" ---- fail");
             ExReJoinSmsReport.pass(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("JoinSmsTest")) {
+            System.out.println(str+" ---- fail");
             ExReJoinSmsReport.pass(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
         if (str.equals("PosTest")) {
+            System.out.println(str+" ---- fail");
             ExReGeneralTests.pass(str + "Test fail");
             LogFileHandling.WriteToFile("EmailLog","X-"+str + " Test fail",HOME_DIRECTORY);
         }
+
+    }
+
+    public static void updateCardNumberInTestJsonToSend(Object obj ){
+        JSONObject JSONObj = (JSONObject) obj ;
+        JSONArray tests = (JSONArray) JSONObj.get("array");
+        for (int n = 0; n <tests.size() ; n++) {
+            JSONObject  DealAmountJSONObj = (JSONObject) tests.get(n);
+            JSONObject cardNumber =(JSONObject) DealAmountJSONObj.get("CardNumber");
+            cardNumber.put("CardNumber",NEW_MEMBER_CARD_NUMBER);
+
+        }
+
+
+
+
+
+
 
     }
 

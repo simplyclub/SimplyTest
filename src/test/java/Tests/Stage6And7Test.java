@@ -77,7 +77,7 @@ public class Stage6And7Test extends BasePage {
 
             if (ResponseHandling.getXMLResponsePromoID(nodeList, XRIndex).equals("1905")){
                 flag = 1;
-                if(MainFunctions.converToDoubleAsString(ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)).equals("980.0")){
+                if(MainFunctions.convertToDoubleAsString(ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)).equals("980.0")){
                     ExReStage6And7Report.pass("Stage6Deal1Test --- PASS");
                     System.out.println(BaseLogStringFunc()+"Stage6Deal1Test --- PASS");
                     break;
@@ -202,7 +202,7 @@ public class Stage6And7Test extends BasePage {
 
             if (ResponseHandling.getXMLResponsePromoID(nodeList, XRIndex).equals("1907")){
                 flag = 1;
-                if(MainFunctions.converToDoubleAsString(ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)).equals("430.0")){
+                if(MainFunctions.convertToDoubleAsString(ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)).equals("430.0")){
                     ExReStage6And7Report.pass("Stage6Deal3Test --- PASS");
                     System.out.println(BaseLogStringFunc()+"Stage6Deal3Test --- PASS");
                     break;
@@ -326,7 +326,7 @@ public class Stage6And7Test extends BasePage {
 
             if (ResponseHandling.getXMLResponsePromoID(nodeList, XRIndex).equals("1910")){
                 flag = 1;
-                if(MainFunctions.converToDoubleAsString(ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)).equals("760.0")){
+                if(MainFunctions.convertToDoubleAsString(ResponseHandling.getXMLResponseAmount(nodeList, XRIndex)).equals("760.0")){
                     ExReStage6And7Report.pass("Stage6Deal5Test --- PASS");
                     System.out.println(BaseLogStringFunc()+"Stage6Deal5Test --- PASS");
                     break;

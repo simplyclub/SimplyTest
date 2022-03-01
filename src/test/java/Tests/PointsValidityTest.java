@@ -119,8 +119,8 @@ public class PointsValidityTest extends BasePage {
 
 
                                 //3rd "if" : check for the amount
-                                String xmlMBLViewAmount = MainFunctions.converToDoubleAsString(XMLGetData.getXmlMBLViewAmount(nodeList, NLIndex));
-                                String testJsonAmount = MainFunctions.converToDoubleAsString(XMLGetData.getXmlMBLViewAmount(nodeList, NLIndex));
+                                String xmlMBLViewAmount = MainFunctions.convertToDoubleAsString(XMLGetData.getXmlMBLViewAmount(nodeList, NLIndex));
+                                String testJsonAmount = MainFunctions.convertToDoubleAsString(XMLGetData.getXmlMBLViewAmount(nodeList, NLIndex));
 
                                 if (xmlMBLViewAmount.equals(testJsonAmount)) {
                                     //System.out.println("2");

@@ -49,7 +49,9 @@ public class TranEndOnePhaseTest extends BasePage {
                             LogFileHandling.createLogFile(baseJSON.memberJsonToSend.toString(),LOG_FILE_DIRECTORY,"userDataPost",i+1));
                     userDataResponse.body().close();
                     MainFunctions.onTestFailure("tranEndOnePhaseTest");
-                    continue;
+
+                    throw new SocketTimeoutException() ;
+                    //continue;
 
 
                 }
@@ -96,7 +98,8 @@ public class TranEndOnePhaseTest extends BasePage {
                             LogFileHandling.createLogFile(baseJSON.tranEndOnePhaseToSend.toString(),LOG_FILE_DIRECTORY,"trenEndOnePhasePost",i+1));
                     trenEndOnePhaseResponse.close();
                     MainFunctions.onTestFailure("tranEndOnePhaseTest");
-                    continue;
+                    throw new SocketTimeoutException() ;
+                    //continue;
 
                 }catch (NullPointerException e){
 
@@ -144,6 +147,7 @@ public class TranEndOnePhaseTest extends BasePage {
                    ExReTrenEndOnePhaseReport.info(
                            LogFileHandling.createLogFile(baseJSON.memberJsonToSend.toString(),LOG_FILE_DIRECTORY,"userDataPost",i+1));
                    MainFunctions.onTestFailure("tranEndOnePhaseTest");
+                   throw new SocketTimeoutException() ;
 
 
                }

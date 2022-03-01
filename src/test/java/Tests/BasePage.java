@@ -115,6 +115,7 @@ public  class BasePage {
     public static String s = null;
     public static double sumVal = 0.0;
     public static final String LOG_FILE_DIRECTORY = HOME_DIRECTORY+"\\LogFile";
+    public static String NEW_MEMBER_CARD_NUMBER = null;
 
     //sum
     public static HashMap<String ,Double> sumDealPoints = new HashMap<>();
@@ -323,7 +324,7 @@ public  class BasePage {
         exReport.flush();
 //        MainFunction.convertFileEncoding(
 //                "C:\\Users\\User\\IdeaProjects\\SimplyTest\\index.html","C:\\Users\\User\\IdeaProjects\\SimplyTest","UTF-8");
-        EmailHandling.sendEnmail();
+        //EmailHandling.sendEnmail();
 
     }
 

@@ -23,6 +23,8 @@ public class RetryAnalyzer implements IRetryAnalyzer {
     @Override
     public boolean retry(ITestResult result) {
 
+
+
         if (counter < retryLimit) {
 
             System.out.println(MainFunctions.BaseLogStringFunc()+ "------- RETRY NUM "+counter);
