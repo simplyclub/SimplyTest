@@ -243,6 +243,7 @@ public class TranEndFunctions extends BasePage {
                     ExReAccumReport.info(" preDeal: " + preDeal.get(key) +
                             " sumDealToUsePoints: " + sumDealToUsePoints.get(key) +
                             " postDeal: " + postDeal.get(key));
+                    MainFunctions.onTestFailure("tranEndTest");
 
                 }
             }//end of DiscountType = 1
@@ -270,7 +271,6 @@ public class TranEndFunctions extends BasePage {
 
                                     //System.out.println(postDeal);
                                     if (postDeal.get(key) == d) {
-                                        // System.out.println("ok2");
                                         ExReAccumReport.pass("AccumID: " + key + " pass Accumulation Test - Using Points").assignCategory("Using Points");
                                         //ExReAccumReport.info("AccumID: " + key + "DiscountType = cashBack Discount(1) , coupon");
 
@@ -279,6 +279,8 @@ public class TranEndFunctions extends BasePage {
                                         ExReAccumReport.info(" coupon: preDeal: " + preDeal.get(key) +
                                                 " sumDealToUsePoints: " + sumDealToUsePoints.get(key) +
                                                 " postDeal: " + postDeal.get(key));
+                                        MainFunctions.onTestFailure("tranEndTest");
+
 
 
                                     }
@@ -305,6 +307,7 @@ public class TranEndFunctions extends BasePage {
                                         " sumDealToUsePoints: " + sumDealToUsePoints.get(key) +
                                         " Burned: " + Double.valueOf(getBurned(key, i)) +
                                         " postDeal: " + postDeal.get(key));
+                                MainFunctions.onTestFailure("tranEndTest");
 
                             }
                         }
