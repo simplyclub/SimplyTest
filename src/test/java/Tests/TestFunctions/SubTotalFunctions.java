@@ -274,7 +274,7 @@ public class SubTotalFunctions extends BasePage {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println(MainFunctions.BaseLogStringFunc() + subTotalResponse_String);
+            //System.out.println(MainFunctions.BaseLogStringFunc() + subTotalResponse_String);
 
             if (!(subTotalResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse_String).equals("0"))) {
                 System.out.println(MainFunctions.BaseLogStringFunc() + "*ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(subTotalResponse_String) + ")");

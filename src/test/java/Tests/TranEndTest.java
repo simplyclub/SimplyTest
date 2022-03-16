@@ -49,7 +49,7 @@ public class TranEndTest extends BasePage {
                     //make a deal subTotal
                     subTotalResponse = tranEndFunctions.makeDealSubTotal(i);
                     subTotalResponse_String = MainFunctions.convertOkHttpResponseToString(subTotalResponse);
-                    System.out.println("subTotalResponse: " + subTotalResponse.body().string());
+                    //System.out.println("subTotalResponse: " + subTotalResponse.body().string());
                     if (!(subTotalResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(subTotalResponse_String).equals("0"))) {
                         System.out.println("*ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(subTotalResponse_String) + ")");
                         ExReAccumReport.fail("*ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
@@ -74,7 +74,7 @@ public class TranEndTest extends BasePage {
                         trenEndResponse = tranEndFunctions.makeDealTrenEnd(i, subTotalResponse_String);
                         // System.out.println(BaseAPI.getResponseTime_OkHttp(trenEndResponse));
                         trenEndResponse_String = MainFunctions.convertOkHttpResponseToString(trenEndResponse);
-                        System.out.println(MainFunctions.BaseLogStringFunc() + trenEndResponse.body().string());
+                       // System.out.println(MainFunctions.BaseLogStringFunc() + trenEndResponse.body().string());
 
                         if (!(trenEndResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(trenEndResponse_String).equals("0"))) {
                             System.out.println(MainFunctions.BaseLogStringFunc() +"**ERROR --- status code is not 200" + "(" + subTotalResponse.code() + ")" + "or ErrorCodeStatus is not 0" + "(" + responseHandling.getErrorCodeStatusJson(trenEndResponse_String) + ")");
@@ -162,7 +162,7 @@ public class TranEndTest extends BasePage {
                         trenEndResponse = tranEndFunctions.makeDealWithUsingPointsTrenEnd(i, subTotalResponse_String);
                         trenEndResponse_String = MainFunctions.convertOkHttpResponseToString(trenEndResponse);
                         //System.out.println(BaseAPI.getResponseTime_OkHttp(trenEndResponse));
-                        System.out.println(MainFunctions.BaseLogStringFunc() +trenEndResponse.body().string());
+                        //System.out.println(MainFunctions.BaseLogStringFunc() +trenEndResponse.body().string());
                         if (!(trenEndResponse.code() == 200 && responseHandling.getErrorCodeStatusJson(trenEndResponse_String).equals("0"))) {
                             System.out.println(MainFunctions.BaseLogStringFunc() +"*****ERROR --- status code is not 200" + "(" + trenEndResponse.code() + ")" + " or ErrorCodeStatus is not 0 " + "(" +
                                     responseHandling.getErrorCodeStatusJson(trenEndResponse_String) + ")");
