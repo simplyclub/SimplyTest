@@ -21,6 +21,8 @@ public class PointsValidityTest extends BasePage {
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void pointsValidityTest() throws IOException {
+
+        boolean refChaeckFlag = true ;
         for (int i = 0; i <= JSONGetData.getArraySize(TestJSONToSend) - 1; i++) {
             MainFunctions.RestGlobals();
             // this if  check for deal type flag = 1
@@ -103,13 +105,17 @@ public class PointsValidityTest extends BasePage {
                 System.out.println(MainFunctions.BaseLogStringFunc() + nodeList.getLength());
 
                 //this for loop run on the response array from the getMemberBenefitListResponse
-                for (int NLIndex = 0, flag = 0; NLIndex < nodeList.getLength(); NLIndex++) {
+                int NLIndex ;
+                int flag ;
+                for ( NLIndex= 0, flag = 0; NLIndex < nodeList.getLength(); NLIndex++) {
                     if (flag == 0){
 
                         // 1st "if" : check for the TrxNumber = TrenEndTranReferenceNumber
                         System.out.println(MainFunctions.BaseLogStringFunc() + responseHandling.getTrenEndTranReferenceNumber(trenEndResponse_String));
                     System.out.println(MainFunctions.BaseLogStringFunc() + XMLGetData.getXmlMBLSysTrxNumber(nodeList, NLIndex));
                     if (responseHandling.getTrenEndTranReferenceNumber(trenEndResponse_String).equals(XMLGetData.getXmlMBLSysTrxNumber(nodeList, NLIndex))) {
+
+                        refChaeckFlag = true ;
 
                         //2nd "if" : check for promoId in the XML response vs TestJsonToSend
                         for (int accumulatIndex = 0; accumulatIndex < JSONGetData.getArraySizeAccumulates(TestJSONToSend, i); accumulatIndex++) {
@@ -156,16 +162,35 @@ public class PointsValidityTest extends BasePage {
 
                     } else {
                         System.out.println(MainFunctions.BaseLogStringFunc() + "NLIndex: " + NLIndex);
-                        System.out.println(MainFunctions.BaseLogStringFunc() + "TrenEndTranReferenceNumber: " + responseHandling.getTrenEndTranReferenceNumber(trenEndResponse_String)
-                                + " is not equal to XmlMBLSysTrxNumber: " + XMLGetData.getXmlMBLSysTrxNumber(nodeList, NLIndex));
-                        ExRePointsValiditReport.fail("TrenEndTranReferenceNumber: " + responseHandling.getTrenEndTranReferenceNumber(trenEndResponse_String)
-                                + " is not equal to XmlMBLSysTrxNumber: " + XMLGetData.getXmlMBLSysTrxNumber(nodeList, NLIndex));
-                        break;
+
+                        refChaeckFlag = false ;
+//                        System.out.println(MainFunctions.BaseLogStringFunc() + "TrenEndTranReferenceNumber: " + responseHandling.getTrenEndTranReferenceNumber(trenEndResponse_String)
+//                                + " is not equal to XmlMBLSysTrxNumber: " + XMLGetData.getXmlMBLSysTrxNumber(nodeList, NLIndex));
+
+
+//                        ExRePointsValiditReport.fail("TrenEndTranReferenceNumber: " + responseHandling.getTrenEndTranReferenceNumber(trenEndResponse_String)
+//                                + " is not equal to XmlMBLSysTrxNumber: " + XMLGetData.getXmlMBLSysTrxNumber(nodeList, NLIndex));
+//                        MainFunctions.onTestFailure("pointsValidityTest");
+//                        //System.out.println(MainFunctions.BaseLogStringFunc()+getMemberBenefitListResponse.getBody().asString());
+//                        //System.out.println(MainFunctions.BaseLogStringFunc()+trenEndResponse_String);
+//
+//
+//                        break;
                     }
 
                 }else{
                   break;
                     }
+                }
+                if (!refChaeckFlag){
+                    System.out.println(MainFunctions.BaseLogStringFunc() + "TrenEndTranReferenceNumber: " + responseHandling.getTrenEndTranReferenceNumber(trenEndResponse_String)
+                                + " is not equal to XmlMBLSysTrxNumber: " + XMLGetData.getXmlMBLSysTrxNumber(nodeList, NLIndex));
+
+
+                        ExRePointsValiditReport.fail("TrenEndTranReferenceNumber: " + responseHandling.getTrenEndTranReferenceNumber(trenEndResponse_String)
+                                + " is not equal to XmlMBLSysTrxNumber: " + XMLGetData.getXmlMBLSysTrxNumber(nodeList, NLIndex));
+                        MainFunctions.onTestFailure("pointsValidityTest");
+
                 }
 
 
