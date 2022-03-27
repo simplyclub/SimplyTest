@@ -91,7 +91,7 @@ public class PointsValidityTest extends BasePage {
                 if (!(getMemberBenefitListResponse.getStatusCode() == 200)) {
                     System.out.println(MainFunctions.BaseLogStringFunc() + "****ERROR xml--- status code is not 200 ");
                     ExRePointsValiditReport.fail("ERROR xml--- status code is not 200" + "(" + getMemberBenefitListResponse.getStatusCode() + ")");
-                    LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
+                    LogFileHandling.createLogFile(String.valueOf((baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION))),
                             LOG_FILE_DIRECTORY, "XmlMemberBenefitListcall", i + 1);
                     LogFileHandling.createLogFile(getMemberBenefitListResponse.asString(), LOG_FILE_DIRECTORY, "XmlMemberBenefitListResponse", i + 1);
                     MainFunctions.onTestFailure("pointsValidityTest");

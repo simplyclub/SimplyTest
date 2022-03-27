@@ -62,7 +62,7 @@ public class Stage6And7Test extends BasePage {
         if (!(transactionViewResponse.getStatusCode() == 200)) {
             System.out.println("ERROR xml--- status code is not 200 ");
             ExReStage6And7Report.fail("ERROR xml--- status code is not 200" + "(" + transactionViewResponse.getStatusCode() + ")");
-            LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
+            LogFileHandling.createLogFile(String.valueOf((baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION))),
                     LOG_FILE_DIRECTORY, "XmlTransactionViewcall",0);
             LogFileHandling.createLogFile(transactionViewResponse.asString(), LOG_FILE_DIRECTORY, "XmlTransactionViewResponse",0);
             throw  new SkipException("ERROR xml--- status code is not 200 ");
@@ -132,7 +132,7 @@ public class Stage6And7Test extends BasePage {
         if (!(transactionViewResponse.getStatusCode() == 200)) {
             System.out.println("ERROR xml--- status code is not 200 ");
             ExReStage6And7Report.fail("ERROR xml--- status code is not 200" + "(" + transactionViewResponse.getStatusCode() + ")");
-            LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
+            LogFileHandling.createLogFile(String.valueOf((baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION))),
                     LOG_FILE_DIRECTORY, "XmlTransactionViewcall",0);
             LogFileHandling.createLogFile(transactionViewResponse.asString(), LOG_FILE_DIRECTORY, "XmlTransactionViewResponse",0);
             throw  new SkipException("ERROR xml--- status code is not 200 ");
@@ -187,7 +187,7 @@ public class Stage6And7Test extends BasePage {
         if (!(transactionViewResponse.getStatusCode() == 200)) {
             System.out.println("ERROR xml--- status code is not 200 ");
             ExReStage6And7Report.fail("ERROR xml--- status code is not 200" + "(" + transactionViewResponse.getStatusCode() + ")");
-            LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
+            LogFileHandling.createLogFile(String.valueOf((baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION))),
                     LOG_FILE_DIRECTORY, "XmlTransactionViewcall",0);
             LogFileHandling.createLogFile(transactionViewResponse.asString(), LOG_FILE_DIRECTORY, "XmlTransactionViewResponse",0);
             throw  new SkipException("ERROR xml--- status code is not 200 ");
@@ -256,7 +256,7 @@ public class Stage6And7Test extends BasePage {
         if (!(transactionViewResponse.getStatusCode() == 200)) {
             System.out.println("ERROR xml--- status code is not 200 ");
             ExReStage6And7Report.fail("ERROR xml--- status code is not 200" + "(" + transactionViewResponse.getStatusCode() + ")");
-            LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
+            LogFileHandling.createLogFile(String.valueOf((baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION))),
                     LOG_FILE_DIRECTORY, "XmlTransactionViewcall",0);
             LogFileHandling.createLogFile(transactionViewResponse.asString(), LOG_FILE_DIRECTORY, "XmlTransactionViewResponse",0);
             throw  new SkipException("ERROR xml--- status code is not 200 ");
@@ -311,7 +311,7 @@ public class Stage6And7Test extends BasePage {
         if (!(transactionViewResponse.getStatusCode() == 200)) {
             System.out.println("ERROR xml--- status code is not 200 ");
             ExReStage6And7Report.fail("ERROR xml--- status code is not 200" + "(" + transactionViewResponse.getStatusCode() + ")");
-            LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
+            LogFileHandling.createLogFile(String.valueOf((baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION))),
                     LOG_FILE_DIRECTORY, "XmlTransactionViewcall",0);
             LogFileHandling.createLogFile(transactionViewResponse.asString(), LOG_FILE_DIRECTORY, "XmlTransactionViewResponse",0);
             throw  new SkipException("ERROR xml--- status code is not 200 ");
@@ -381,7 +381,7 @@ public class Stage6And7Test extends BasePage {
         if (!(transactionViewResponse.getStatusCode() == 200)) {
             System.out.println("ERROR xml--- status code is not 200 ");
             ExReStage6And7Report.fail("ERROR xml--- status code is not 200" + "(" + transactionViewResponse.getStatusCode() + ")");
-            LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
+            LogFileHandling.createLogFile(String.valueOf((baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION))),
                     LOG_FILE_DIRECTORY, "XmlTransactionViewcall",0);
             LogFileHandling.createLogFile(transactionViewResponse.asString(), LOG_FILE_DIRECTORY, "XmlTransactionViewResponse",0);
             throw  new SkipException("ERROR xml--- status code is not 200 ");

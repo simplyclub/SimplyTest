@@ -215,7 +215,7 @@ public class TranEndOnePhaseTest extends BasePage {
                    System.out.println("****ERROR xml--- status code is not 200 ");
                    ExReTrenEndOnePhaseReport.fail("ERROR xml(transactionViewResponse)--- status code is not 200" + "(" + transactionViewResponse.getStatusCode() + ")");
                    ExReTrenEndOnePhaseReport.info(
-                           LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
+                           LogFileHandling.createLogFile(String.valueOf((baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION))),
                            LOG_FILE_DIRECTORY, "XmlTransactionViewcall",i+1));
                    ExReTrenEndOnePhaseReport.info(
                            LogFileHandling.createLogFile(transactionViewResponse.asString(), LOG_FILE_DIRECTORY, "XmlTransactionViewResponse",i+1));

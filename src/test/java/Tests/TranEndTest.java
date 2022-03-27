@@ -119,7 +119,7 @@ public class TranEndTest extends BasePage {
                         if (!(transactionViewResponse.getStatusCode() == 200)) {
                             System.out.println(MainFunctions.BaseLogStringFunc() +"****ERROR xml--- status code is not 200 ");
                             ExReAccumReport.fail("****ERROR xml--- status code is not 200" + "(" + transactionViewResponse.getStatusCode() + ")");
-                            LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
+                            LogFileHandling.createLogFile(String.valueOf((baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION))),
                                     LOG_FILE_DIRECTORY, "XmlTransactionViewcall",i+1);
                             LogFileHandling.createLogFile(transactionViewResponse.asString(), LOG_FILE_DIRECTORY, "XmlTransactionViewResponse",i+1);
                             MainFunctions.onTestFailure("tranEndTest");
@@ -211,7 +211,7 @@ public class TranEndTest extends BasePage {
                         if (!(transactionViewResponse.getStatusCode() == 200)) {
                             System.out.println(MainFunctions.BaseLogStringFunc() +"ERROR xml--- status code is not 200 ");
                             ExReAccumReport.fail("ERROR xml--- status code is not 200" + "(" + transactionViewResponse.getStatusCode() + ")");
-                            LogFileHandling.createLogFile(baseXML.convertXMLToString(baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION)),
+                            LogFileHandling.createLogFile(String.valueOf((baseXML.convertXMLFileToXMLDocument(baseXML.GET_TREN_FILE_LOCATION))),
                                     LOG_FILE_DIRECTORY, "XmlTransactionViewcall",i+1);
                             LogFileHandling.createLogFile(transactionViewResponse.asString(), LOG_FILE_DIRECTORY, "XmlTransactionViewResponse",i+1);
                             MainFunctions.onTestFailure("tranEndTest");
