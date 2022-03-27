@@ -23,6 +23,7 @@ import static java.time.temporal.ChronoUnit.WEEKS;
 
 public class PointsValidityFunctions extends BasePage {
     UpdateJSONFile updateJSONFile = new UpdateJSONFile();
+
     BaseJSON baseJSON = new BaseJSON();
 
     ///////

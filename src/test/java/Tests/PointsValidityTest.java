@@ -86,6 +86,7 @@ public class PointsValidityTest extends BasePage {
                 }
 
                 // post to API and get a response with Member benefit list
+
                 getMemberBenefitListResponse = pointsValidityFunctions.getMemberBenefitList(responseHandling.getSysId(userDataResponse_String));
 
                 if (!(getMemberBenefitListResponse.getStatusCode() == 200)) {

@@ -822,7 +822,7 @@ public class NewMemberAPIFunctions extends BasePage {
         String totalUsed = null ;
         updateXMLFile.updateXMLGetMemberRecognizeList(baseXML.xmlToDocGetMemberRecognizeList(),"loginKey",updateXMLFile.getSysLoginBuisness2828());
         Response x = APIPost.postXMLToMemberRecognizeList(TEST_API_SYSTEM_URI);
-        Document doc =  BaseXML.convertStringToXMLDocument(x);
+        Document doc =  BaseXML.convertStringToXMLDocument(x.getBody().asString());
         for (int index = 0; index < doc.getElementsByTagName("MemberRecognizeData").getLength(); index++) {
 
             String str =  ReadXMLFile.getStringValueFromXML("Description", doc.getDocumentElement(), index);
